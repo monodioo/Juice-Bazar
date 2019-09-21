@@ -114,12 +114,31 @@ body {
   border: 0;
 }
 
-.nav-icon-group .nav-icon {
+.nav-icon {
   font-size: 1.3rem;
   text-decoration: none;
   color: #494949;
   margin-right: 0.8rem;
   margin-top: 0.4rem;
+}
+
+.search-input-wrap > .form-control {
+  border-radius: 100px;
+  border: 0;
+  width: 80px !important;
+  font-size: 0.8rem;
+}
+.search-input-wrap > .form-control:focus {
+  box-shadow: none;
+}
+
+.search-input-wrap > .form-control::placeholder {
+  color: lightgray;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+.search-input-wrap > .btn:focus {
+  box-shadow: none;
 }
 
 .site-mobile-menu {
