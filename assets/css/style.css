@@ -518,3 +518,7 @@ body {
 .newsletter-input-wrap .btn:focus {
   box-shadow: none;
 }
+
+.footer-title {
+  font-weight: 700;
+}
