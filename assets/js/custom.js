@@ -111,4 +111,19 @@ jQuery(document).ready(function($) {
     });
   };
   sitePlusMinus();
+
+  $(".navbar-nav").on("click", e => {
+    $(".navbar-nav")
+      .find(".nav-link")
+      .removeClass("nav-hover-active");
+    console.log($(`#${e.target.id}`));
+    $(`#${e.target.id}`).addClass("nav-hover-active");
+  });
+
+  $(".shop-nav").on("click", e => {
+    $(".shop-nav")
+      .find(".nav-link")
+      .removeClass("nav-hover-active");
+    $(`#${e.target.id}`).addClass("nav-hover-active");
+  });
 });
