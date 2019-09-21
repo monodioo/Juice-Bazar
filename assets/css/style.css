@@ -258,9 +258,9 @@ body {
   width: 0.5rem;
 }
 
-.page-section {
+/* .page-section {
   width: 100vw;
-}
+} */
 
 .section-title {
   font-weight: bold;
@@ -349,7 +349,7 @@ body {
     padding-top: 3rem;
     padding-left: 68px;
     max-width: 40%;
-    font-size: 1.3vw;
+    font-size: 1.2vw;
   }
 }
 
