@@ -16,8 +16,8 @@ body {
 @media only screen and (min-width: 600px) {
   .site-wrap > .row,
   .newsletter-text {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 34px;
+    padding-right: 34px;
   }
 }
 
@@ -117,6 +117,12 @@ body {
   background-color: #ffc634;
   border-radius: 100px;
   border: 0;
+  font-weight: bold;
+  color: white;
+}
+
+.btn-cart:hover {
+  color: white;
 }
 
 .nav-icon {
@@ -539,6 +545,10 @@ body {
   box-shadow: none;
 }
 
+.footer {
+  background-color: #f9f9f9;
+}
+
 .footer-title {
   font-weight: 700;
 }
@@ -659,4 +669,19 @@ body {
     max-width: 55%;
     font-size: 1rem;
   }
+}
+
+/* CART CSS */
+.cart-delete-btn:hover,
+.cart-delete-btn {
+  color: #ffc634;
+  text-decoration: none;
+}
+
+.cart-juice-thumbnail {
+  width: 32px;
+}
+
+.cart-juice-name {
+  font-weight: bold;
 }
