@@ -484,6 +484,10 @@ body {
 .js-btn-plus:active {
   color: #ffc634;
 }
+.js-btn-minus:hover,
+.js-btn-plus:hover {
+  color: #ffc634;
+}
 
 .juice-qty-input {
   border: 0 !important;
@@ -500,6 +504,7 @@ body {
   background-color: #ffc634;
   color: white;
   border-radius: 100px;
+  height: 40px;
 }
 .juice-modal-cart:active,
 .juice-modal-cart:hover {
@@ -528,6 +533,7 @@ body {
 .newsletter-input-wrap .form-control::placeholder {
   color: lightgray;
   font-style: italic;
+  font-size: 0.8rem;
 }
 .newsletter-input-wrap .btn:focus {
   box-shadow: none;
@@ -535,6 +541,12 @@ body {
 
 .footer-title {
   font-weight: 700;
+}
+
+.footer-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-weight: normal;
 }
 
 /* SHOP CSS */
@@ -587,7 +599,7 @@ body {
     background: linear-gradient(
       to right,
       #efeff1 0%,
-      #efeff1 60%,
+      #efeff1 50%,
       rgba(239, 239, 241, 0) 100%
     );
   }
