@@ -685,3 +685,9 @@ body {
 .cart-juice-name {
   font-weight: bold;
 }
+
+.font-aboutus {
+  font-size: 16px;
+  font-family: Montserrat;
+  font-style: Regular;
+}
