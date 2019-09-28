@@ -3,6 +3,15 @@ body {
   background-color: #e5e5e5;
 }
 
+a {
+  color: #ffc634 !important;
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
 /* Extra small devices (phones, 576 and down) */
 @media only screen and (max-width: 576) {
   .site-wrap > .row,
@@ -690,11 +699,8 @@ body {
   font-weight: bold;
 }
 
-.breadcrumb a {
-  color: #ffc634 !important;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  font-weight: bold;
+.breadcrumb-item + .breadcrumb-item::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0da";
 }
