@@ -282,6 +282,10 @@ body {
   width: 0.5rem;
 }
 
+.main-section {
+  padding-top: 5rem;
+}
+
 .section-title {
   font-weight: bold;
   font-size: 1.5rem;
@@ -289,7 +293,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   color: #ffc634;
-  padding-top: 5rem;
+  /* padding-top: 5rem; */
   padding-bottom: 3rem;
 }
 
@@ -683,5 +687,14 @@ body {
 }
 
 .cart-juice-name {
+  font-weight: bold;
+}
+
+.breadcrumb a {
+  color: #ffc634 !important;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
   font-weight: bold;
 }
