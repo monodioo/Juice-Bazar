@@ -10,6 +10,7 @@ a {
 
 a:hover {
   font-weight: bold;
+  text-decoration: none;
 }
 
 /* Extra small devices (phones, 576 and down) */

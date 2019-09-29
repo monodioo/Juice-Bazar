@@ -136,7 +136,7 @@
             ></a>
             <a
               href="cart.html"
-              class="d-flex justify-content-center align-items-center btn-cart text-decoration-none px-3 py-2"
+              class="d-flex justify-content-center align-items-center btn-cart text-decoration-none px-3 py-2 text-white"
             >
               <span class="cart-sum d-none d-lg-block mr-2"
                 >40.000₫</span
@@ -235,15 +235,12 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12">
-                  <label class="text-black h4" for="coupon">Mã khuyến mại</label>
-                  <p>Nhập mã khuyến mại của bạn:</p>
-                </div>
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <input type="text" class="form-control py-3" id="coupon" placeholder="Mã khuyến mại">
-                </div>
-                <div class="col-md-6">
-                  <button class="btn btn-outline-warning btn-sm">Áp dụng Mã</button>
+                <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
+                <div class="input-group w-75">
+                  <input type="text" class="form-control" id="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2">Áp dụng</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -252,29 +249,29 @@
                 <div class="col">
                   <div class="row">
                     <div class="col-md-12 text-right border-bottom mb-3 mb-md-5">
-                      <h3 class="text-black h4 text-uppercase">Tổng đơn hàng</h3>
+                      <h3 class=" h4 text-uppercase">Tổng đơn hàng</h3>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-6">
-                      <span class="text-black">Tổng giá sản phẩm</span>
+                      <span class="">Tổng giá sản phẩm</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="text-black">40.000₫</strong>
+                      <strong class="">40.000₫</strong>
                     </div>
                   </div>
                   <div class="row mb-5">
                     <div class="col-md-6">
-                      <span class="text-black">Tổng tiền</span>
+                      <span class="">Tổng tiền</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="text-black">40.000₫</strong>
+                      <strong class="">40.000₫</strong>
                     </div>
                   </div>
     
                   <div class="row">
                     <div class="col-md-12">
-                      <a class="btn btn-cart btn-block text-decoration-none font-weight-normal px-3" href="checkout.html">Thanh toán</a>
+                      <a class="btn btn-cart btn-block text-decoration-none text-white font-weight-normal p-3" href="checkout.html">Thanh toán</a>
                     </div>
                   </div>
                 </div>
