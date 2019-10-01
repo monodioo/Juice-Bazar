@@ -3,6 +3,10 @@ body {
   background-color: #e5e5e5;
 }
 
+.textBazar {
+  color: #ffc634;
+}
+
 a {
   color: #ffc634 !important;
   text-decoration: none;
@@ -704,4 +708,16 @@ a:hover {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f0da";
+}
+
+/* LOG IN */
+
+label.error {
+  color: red;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+input.error {
+  border: 1px solid red;
 }

@@ -184,4 +184,61 @@ jQuery(document).ready(function($) {
       $(`#shopAll`).addClass("nav-hover-active");
       break;
   }
+
+  $("#loginForm").validate({
+    rules: {
+      emailLogin: {
+        required: true,
+        email: true
+      },
+      passwordLogin: {
+        required: true,
+        minlength: 6
+      }
+    },
+    messages: {
+      emailLogin: {
+        required: "Xin điền địa chỉ email",
+        email: "Xin điền đúng định dạng email"
+      },
+      passwordLogin: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự"
+      }
+    }
+  });
+
+  $("#signupForm").validate({
+    rules: {
+      emailSignup: {
+        required: true,
+        email: true
+      },
+      passwordSignup: {
+        required: true,
+        minlength: 6
+      },
+      password2Signup: {
+        required: true,
+        minlength: 6,
+        equalTo: passwordSignup
+      },
+      genderSignup: "required",
+      birthdaySignup: "required",
+      addSignup: "required",
+      distSignup: "required",
+      telSignup: "required"
+    },
+    messages: {
+      emailSignup: {
+        required: "Xin điền địa chỉ email",
+        email: "Xin điền đúng định dạng email"
+      },
+      passwordSignup: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự",
+        equalTo: "Mật khẩu không trùng"
+      }
+    }
+  });
 });

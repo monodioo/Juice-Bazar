@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
-      href="../assets/css/bootstrap.min.css"      
+      href="../assets/css/bootstrap.min.css"
       crossorigin="anonymous"
     />
     <!-- google font -->
@@ -20,9 +20,13 @@
       rel="stylesheet"
     />
     <!--  font awesome -->
-    <link href="../assets/css/all.min.css" rel="stylesheet" /> 
+    <link href="../assets/css/all.min.css" rel="stylesheet" />
     <!-- favicon -->
-    <link href="../assets/image/favicon.png" sizes="32x32" rel="shortcut icon">
+    <link
+      href="../assets/image/favicon.png"
+      sizes="32x32"
+      rel="shortcut icon"
+    />
     <!-- Custom CSS -->
     <link href="../assets/css/style.css" rel="stylesheet" />
 
@@ -33,28 +37,41 @@
       <nav class="navbar navbar-expand-lg sticky-top row">
         <div class="col-4 px-0 pt-2">
           <i
-          class="fas fa-bars btn-nav js-menu-toggle d-sm-block d-lg-none"
+            class="fas fa-bars btn-nav js-menu-toggle d-sm-block d-lg-none"
             style="color: #ffc634; cursor: pointer"
           ></i>
           <div class=" d-none d-lg-block">
             <ul class="navbar-nav js-clone-nav">
               <li class="nav-item">
-                <a class="nav-link nav-hover nav-hover-active mr-lg-3" href="shop.html?section=shopAll" id="navShop"
+                <a
+                  class="nav-link nav-hover nav-hover-active mr-lg-3"
+                  href="shop.html?section=shopAll"
+                  id="navShop"
                   >Shop <span class="sr-only">(current)</span></a
                 >
               </li>
 
               <li class="nav-item">
-                <a class="nav-link nav-hover mr-lg-3" href="blog.html?section=blogAll" id="navBlog">Blog</a>
+                <a
+                  class="nav-link nav-hover mr-lg-3"
+                  href="blog.html?section=blogAll"
+                  id="navBlog"
+                  >Blog</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link nav-hover" href="aboutus.html" id="navAbout">Về chúng tôi</a>
+                <a class="nav-link nav-hover" href="aboutus.html" id="navAbout"
+                  >Về chúng tôi</a
+                >
               </li>
             </ul>
           </div>
         </div>
         <div class="col-4 text-center">
-          <a class="text-center js-logo-clone text-decoration-none" href="home.html">
+          <a
+            class="text-center js-logo-clone text-decoration-none"
+            href="home.html"
+          >
             <svg
               width="128"
               height="32"
@@ -128,8 +145,16 @@
             class="float-right nav-icon-group d-flex flex-row align-items-center justify-content-end"
           >
             <form class="search-input-wrap d-flex flex-row align-items-center ">
-              <input type="text" class="form-control pb-0 px-0 d-none d-lg-block" name="search" id="searchInput" placeholder="Search">
-              <button type="submit" class="btn pb-0 px-0 d-none d-lg-block"><i class="fas fa-search nav-icon" aria-hidden="true"></i></button>
+              <input
+                type="text"
+                class="form-control pb-0 px-0 d-none d-lg-block"
+                name="search"
+                id="searchInput"
+                placeholder="Search"
+              />
+              <button type="submit" class="btn pb-0 px-0 d-none d-lg-block">
+                <i class="fas fa-search nav-icon" aria-hidden="true"></i>
+              </button>
             </form>
             <a href="profile.html" class="text-decoration-none"
               ><i class="far fa-user-circle  nav-icon  d-none d-lg-block"></i
@@ -138,9 +163,7 @@
               href="cart.html"
               class="d-flex justify-content-center align-items-center btn-cart text-decoration-none px-3 py-2 text-white"
             >
-              <span class="cart-sum d-none d-lg-block mr-2"
-                >40.000₫</span
-              >
+              <span class="cart-sum d-none d-lg-block mr-2">40.000₫</span>
               <span>
                 <svg
                   class="cart-icon mr-2"
@@ -162,246 +185,228 @@
           </div>
         </div>
       </nav>
-      
-      <div class="row my-4" aria-label="breadcrumb">
+
+      <!-- <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
           <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
-          <li class="breadcrumb-item"><a href="cart.html">Giỏ hàng</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+          <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
         </ol>
-      </div>
-      
-      <div class="row ">
-        <form class="page-section card col-12 py-5 px-5" method="post">
-          <div class="container">
-            <div class="row mb-5">
-              <div class="col">
-                <div class="border border-warning p-4 rounded" role="alert">
-                  Bạn đã có tài khoản? <a href="#">Bấm vào đây</a> để đăng nhập
-                </div>
-              </div>
-            </div>
-            <div class="row row-eq-height">
-              <div class="col-md-6 mb-5 mb-md-0">
-                <h2 class="h3 mb-3 ">Thông tin Thanh toán</h2>
-                <div class="p-3 p-lg-5 border">
-                 
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_name" class="" >Họ và Tên<span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_name" name="c_name" placeholder="Họ và Tên">
-                    </div>
-                  </div>
-                     
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_address" class="">Địa chỉ <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Số nhà, Tên đường">
-                    </div>
-                  </div>
+      </div> -->
 
-                  <div class="form-group row">
-                    <div class="col-md-6">
-                      <label for="c_ward" class="">Xã / Phường <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_ward" name="c_ward">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="c_district" class="">Quận<span class="text-danger">*</span></label>
-                    <select id="c_district" class="form-control">
-                      <option value="0">Chọn Quận</option>    
-                      <option value="1">Ba Đình</option>    
-                      <option value="2">Bắc Từ Liêm</option>    
-                      <option value="3">Cầu Giấy</option>    
-                      <option value="4">Đống Đa</option>    
-                      <option value="5">Hà Đông</option>    
-                      <option value="6">Hai Bà Trưng</option>    
-                      <option value="7">Hoàn Kiếm</option>    
-                      <option value="8">Hoàng Mai</option>     
-                      <option value="9">Long Biên</option>    
-                      <option value="10">Nam Từ Liêm</option>    
-                      <option value="11">Thanh Xuân</option>    
+      <div class="row mt-5 ">
+        <div class="page-section card col-12">
+          <div class="row">
+            <div class="col-6 border-right p-5">
+              <div class="h3 mb-1 textBazar">Đăng nhập</div>
+              <div class="mb-3">
+                Nếu bạn đã có tài khoản, xin đăng nhập ở đây.
+              </div>
+              <br />
+              <form method="post" id="loginForm">
+                <div class="form-group">
+                  <label for="emailLogin">Email: </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emailLogin"
+                    name="emailLogin"
+                    aria-describedby="emailInput"
+                    placeholder="Email tài khoản"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="passwordLogin">Mật khẩu: </label>
+                  <a href="#" class="text-right" style="float:right"
+                    >Quên mật khẩu?</a
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="passwordLogin"
+                    id="passwordLogin"
+                    placeholder="Mật khẩu"
+                  />
+                </div>
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="rememberCheckLogin"
+                  />
+                  <label class="form-check-label" for="rememberCheckLogin"
+                    >Lưu thông tin đăng nhập</label
+                  >
+                </div>
+                <button type="submit" id="loginBtn" class="btn btn-cart">
+                  Đăng nhập
+                </button>
+              </form>
+            </div>
+            <div class="col-6 bg-light p-5">
+              <div class="h3 mb-1 textBazar">Đăng ký</div>
+              <div class="mb-3">
+                Bạn có thể dễ dàng đăng ký tài khoản trên Juice Bazar để nhận
+                được thêm nhiều khuyến mãi của chúng tôi!
+              </div>
+              <form method="post" id="signupForm">
+                <div class="form-group">
+                  <label for="emailSignup"
+                    >Email<span class="text-danger"> * </span>:
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emailSignup"
+                    name="emailSignup"
+                    aria-describedby="emailInput"
+                    placeholder="Email đăng ký"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="passwordSignup"
+                    >Mật khẩu<span class="text-danger"> * </span>:
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="passwordSignup"
+                    id="passwordSignup"
+                    placeholder="Mật khẩu"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password2Signup"
+                    >Nhập lại Mật khẩu<span class="text-danger"> * </span>:
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password2Signup"
+                    id="password2Signup"
+                    placeholder="Nhập lại Mật khẩu"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="mr-2"
+                    >Giới tính <span class="text-danger"> * </span>:
+                  </label>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genderSignup"
+                      id="radioGender1"
+                      value="male"
+                    />
+                    <label class="form-check-label" for="radioGender1"
+                      >Nam</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genderSignup"
+                      id="radioGender2"
+                      value="female"
+                    />
+                    <label class="form-check-label" for="radioGender2"
+                      >Nữ</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genderSignup"
+                      id="radioGender3"
+                      value="other"
+                    />
+                    <label class="form-check-label" for="radioGender3"
+                      >Khác</label
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputName" class=""
+                    >Sinh nhật<span class="text-danger"> * </span>:</label
+                  >
+                  <input
+                    type="date"
+                    name="birthdaySignup"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="addSignup" class=""
+                      >Địa chỉ <span class="text-danger"> * </span>:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="addSignup"
+                      name="addSignup"
+                      placeholder="Số nhà, Tên đường"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <label for="wardSignup" class=""
+                      >Xã / Phường <span class="text-danger"> </span>:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="wardSignup"
+                      name="wardSignup"
+                      placeholder="Xã / Phường"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="distSignup" class=""
+                      >Quận<span class="text-danger"> * </span>:</label
+                    >
+                    <select id="distSignup" class="form-control" name="distSignup">
+                      <option value="0">Chọn Quận</option>
+                      <option value="1">Ba Đình</option>
+                      <option value="2">Bắc Từ Liêm</option>
+                      <option value="3">Cầu Giấy</option>
+                      <option value="4">Đống Đa</option>
+                      <option value="5">Hà Đông</option>
+                      <option value="6">Hai Bà Trưng</option>
+                      <option value="7">Hoàn Kiếm</option>
+                      <option value="8">Hoàng Mai</option>
+                      <option value="9">Long Biên</option>
+                      <option value="10">Nam Từ Liêm</option>
+                      <option value="11">Thanh Xuân</option>
                       <option value="12">Tây Hồ</option>
                     </select>
-                    </div>
                   </div>
-   
-                  <div class="form-group row mb-5">
-                    <div class="col-md-6">
-                      <label for="c_email_address" class="">Email <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_email_address" name="c_email_address">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="c_phone" class="">Điện thoại <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_phone" name="c_phone" placeholder="Số điện thoại">
-                    </div>
-                  </div>
-    
-                  <div class="form-group">
-                    <label for="c_create_account" class="" data-toggle="collapse" href="#create_an_account" role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1" id="c_create_account"> Tạo tài khoản mới?</label>
-                    <div class="collapse" id="create_an_account">
-                      <div class="py-2">
-                        <p class="mb-3">Bạn có thể tạo tài khoản mới sau khi nhập thông tin dưới đây. Nếu bạn đã có tài khoản xin đăng nhập phía trên.</p>
-                        <div class="form-group">
-                          <label for="c_account_password" class="">Mật khẩu cho tài khoản mới</label>
-                          <input type="email" class="form-control" id="c_account_password" name="c_account_password" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="form-group">
-                    <label for="c_ship_different_address" class="" data-toggle="collapse" href="#ship_different_address" role="button" aria-expanded="false" aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address"> Bạn muốn nhận sản phẩm tại địa chỉ khác?</label>
-                    <div class="collapse" id="ship_different_address">
-                      <div class="py-2">
-                        
-                        <div class="form-group row">
-                          <div class="col-md-12">
-                            <label for="c_diff_name" class="" >Họ và Tên<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_name" name="c_name" placeholder="Họ và Tên">
-                          </div>
-                        </div>
-                           
-                        <div class="form-group row">
-                          <div class="col-md-12">
-                            <label for="c_diff_address" class="">Địa chỉ <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_address" name="c_address" placeholder="Số nhà, Tên đường">
-                          </div>
-                        </div>
-          
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Địa chỉ phụ">
-                        </div>
-      
-                        <div class="form-group row">
-                          <div class="col-md-6">
-                            <label for="c_diff_ward" class="">Xã / Phường <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_ward" name="c_diff_ward">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="c_diff_district" class="">Quận<span class="text-danger">*</span></label>
-                          <select id="c_diff_district" class="form-control">
-                            <option value="0">Chọn Quận</option>    
-                            <option value="1">Ba Đình</option>    
-                            <option value="2">Bắc Từ Liêm</option>    
-                            <option value="3">Cầu Giấy</option>    
-                            <option value="4">Đống Đa</option>    
-                            <option value="5">Hà Đông</option>    
-                            <option value="6">Hai Bà Trưng</option>    
-                            <option value="7">Hoàn Kiếm</option>    
-                            <option value="8">Hoàng Mai</option>     
-                            <option value="9">Long Biên</option>    
-                            <option value="10">Nam Từ Liêm</option>    
-                            <option value="11">Thanh Xuân</option>    
-                            <option value="12">Tây Hồ</option>
-                          </select>
-                          </div>
-                        </div>
-         
-                        <div class="form-group row mb-5">
-                          <div class="col-md-6">
-                            <label for="c_diff_email_address" class="">Email <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_email_address" name="c_diff_email_address">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="c_diff_phone" class="">Điện thoại <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_phone" name="c_diff_phone" placeholder="Số điện thoại">
-                          </div>
-                        </div>
-                       
-    
-                      </div>
-    
-                    </div>
-                  </div>
-    
-                  <div class="form-group">
-                    <label for="c_order_notes" class="">Ghi chú</label>
-                    <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Bạn muốn nhắn gì cho chúng tôi?"></textarea>
-                  </div>
+                </div>
 
+                <div class="form-group">
+                  <label for="telSignup" class=""
+                    >Số điện thoại<span class="text-danger"> * </span>:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="telSignup"
+                    name="telSignup"
+                    placeholder=""
+                  />
                 </div>
-              </div>
-              <div class="col-md-6">
-    
-                <div class="row mb-5">
-                  <div class="col-md-12">
-                    <h2 class="h3 mb-3 ">Mã giảm giá</h2>
-                    <div class="p-3 p-lg-5 border">
-                      
-                      <label for="c_code" class=" mb-3">Nhập mã khuyến mại của bạn</label>
-                      <div class="input-group w-75">
-                        <input type="text" class="form-control" id="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-warning btn-sm" type="button" id="button-addon2">Áp dụng</button>
-                        </div>
-                      </div>
-    
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="row">
-                  <div class="col-md-12">
-                    <h2 class="h3 mb-3">Đơn hàng của bạn</h2>
-                    <div class="p-3 p-lg-5 border">
-                      <table class="table site-block-order-table mb-4">
-                        <thead>
-                          <th>Sản phẩm</th>
-                          <th class="text-right">Tổng</th>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Nước dưa hấu<strong class="mx-2"> x </strong>1</td>
-                            <td class="text-right">40.000₫</td>
-                          </tr>
-                          <tr>
-                            <td class="font-weight-bold"><strong>Tổng giá sản phẩm</strong></td>
-                            <td class="text-right">40.000₫</td>
-                          </tr>
-                          <tr>
-                            <td class="font-weight-bold"><strong>Giảm giá</strong></td>
-                            <td class="text-right">0₫</td>
-                          </tr>
-                          <tr>
-                            <td class="font-weight-bold"><strong>Tổng tiền</strong></td>
-                            <td class="font-weight-bold text-right" ><strong>40.000₫</strong></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      
-                      <div class="mb-4">
-                        <div class="font-weight-bold mb-2">
-                          Hình thức thanh toán
-                        </div>
-                        <div class="form-check mb-2">
-                          <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_cash" value="cash" checked>
-                          <label class="form-check-label" for="paymentMethod_cash">
-                            Thanh toán khi nhận hàng
-                          </label>
-                        </div>
-                        <div class="form-check mb-2">
-                          <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_baokim" value="baokim">
-                          <label class="form-check-label" for="paymentMethod_baokim">
-                            Thanh toán qua cổng Bảo Kim
-                          </label>
-                        </div>
-                      </div>
-
-    
-                      <div class="form-group">
-                        <button class="btn btn-cart btn-block text-decoration-none text-white font-weight-bold p-3" onclick="window.location='thankyou.html'">Đặt hàng</button>
-                      </div>
-    
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <button class="btn btn-cart text-danger mt-1">Đăng ký</button>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
-      
-     
+
       <!-- end of row -->
       <div class="row px-0 ">
         <div class="page-section newsletter-section col py-3 mt-5">
@@ -429,13 +434,12 @@
                   aria-describedby="sendEmailBtn"
                 />
                 <button
-                  class="btn"
+                  class="btn textBazar"
                   type="button"
                   id="sendEmailBtn"
                   style="
                   position:  relative;
                   right:  30px;
-                  color:  #ffc634;
               "
                 >
                   <i class="fas fa-paper-plane" aria-hidden="true"></i>
@@ -453,45 +457,79 @@
               <div class="row">
                 <div class="col-12 col-lg-3">
                   <div class="footer-title pl-0 mb-0">
-                    <a href="shop.html?section=shopAll" class="text-decoration-none text-dark"
+                    <a
+                      href="shop.html?section=shopAll"
+                      class="text-decoration-none text-dark"
                       >Cửa hàng</a
                     >
-                    </div>
-                    <ul class="footer-list">
-                    <li><a href="shop.html?section=shopFruits" class="text-decoration-none text-dark"
-                      >Fruits</a
-                    ></li>
-                    <li><a href="shop.html?section=shopGreen" class="text-decoration-none text-dark"
-                      >Green</a
-                    ></li>
-                    <li><a href="shop.html?section=shopCombo" class="text-decoration-none text-dark"
-                      >Combo</a
-                    ></li>
+                  </div>
+                  <ul class="footer-list">
+                    <li>
+                      <a
+                        href="shop.html?section=shopFruits"
+                        class="text-decoration-none text-dark"
+                        >Fruits</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="shop.html?section=shopGreen"
+                        class="text-decoration-none text-dark"
+                        >Green</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="shop.html?section=shopCombo"
+                        class="text-decoration-none text-dark"
+                        >Combo</a
+                      >
+                    </li>
                   </ul>
                 </div>
                 <div class="col-12 col-lg-3">
                   <div class="footer-title">
-                      <a href="blog.html?section=blogAll" class="text-decoration-none text-dark"
+                    <a
+                      href="blog.html?section=blogAll"
+                      class="text-decoration-none text-dark"
                       >Blog</a
                     >
-                    </div>
-                    <ul class="footer-list d-none d-lg-block">
-                    <li><a href="blog.html?section=blogEatDrink" class="text-decoration-none text-dark"
-                      >Ăn & Uống</a
-                    ></li>
-                    <li><a href="blog.html?section=blogLifestyle" class="text-decoration-none text-dark"
-                      >Lối sống</a
-                    ></li>
-                    <li><a href="blog.html?section=blogBeauty" class="text-decoration-none text-dark"
-                      >Làm đẹp</a
-                    ></li>
-                    <li><a href="blog.html?section=blogEvent" class="text-decoration-none text-dark"
-                      >Sự kiện</a
-                    ></li>
+                  </div>
+                  <ul class="footer-list d-none d-lg-block">
+                    <li>
+                      <a
+                        href="blog.html?section=blogEatDrink"
+                        class="text-decoration-none text-dark"
+                        >Ăn & Uống</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="blog.html?section=blogLifestyle"
+                        class="text-decoration-none text-dark"
+                        >Lối sống</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="blog.html?section=blogBeauty"
+                        class="text-decoration-none text-dark"
+                        >Làm đẹp</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="blog.html?section=blogEvent"
+                        class="text-decoration-none text-dark"
+                        >Sự kiện</a
+                      >
+                    </li>
                   </ul>
                 </div>
                 <div class="col-12 col-lg-3">
-                  <a href="#!" class="footer-title text-decoration-none text-dark"
+                  <a
+                    href="#!"
+                    class="footer-title text-decoration-none text-dark"
                     >Về chúng tôi</a
                   >
                 </div>
@@ -591,14 +629,16 @@
       <!-- end of row -->
     </div>
 
-
     <script src="../assets/js/jquery-3.4.1.min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Font awesome  -->
     <script src="../assets/js/all.min.js"></script>
-    
+
+    <!-- jQuery Validate -->
+    <script src="../assets/js/jquery.validate.min.js"></script>
+
     <!-- custom script -->
     <script src="../assets/js/custom.js"></script>
   </body>
