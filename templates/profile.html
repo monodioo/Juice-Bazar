@@ -186,242 +186,232 @@
         </div>
       </nav>
 
-      <!-- <div class="row my-4" aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
-          <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
-        </ol>
-      </div> -->
-
-      <div class="row mt-5 ">
-        <div class="page-section card col-12">
-          <div class="row">
-            <div class="col-6 border-right p-5">
-              <div class="h3 mb-1 textBazar">Đăng nhập</div>
-              <div class="mb-3">
-                Nếu bạn đã có tài khoản, xin đăng nhập ở đây.
+      <div class="row my-5">
+        <div class="page-section card col-12 p-5">
+          <div class="section-title">Quản lý tài khoản</div>
+          <div class="h4 mb-3 textBazar">Thông tin tài khoản</div>
+          <div class="row mb-4">
+            <div class="col-12 col-md-6">
+              <div class="mb-1">
+                <span>Họ tên:&nbsp;</span>
+                <span class="font-weight-bold">Huỳnh Trung Nghĩa</span>
               </div>
-              <br />
-              <form method="post" id="loginForm">
-                <div class="form-group">
-                  <label for="emailLogin">Email: </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emailLogin"
-                    name="emailLogin"
-                    aria-describedby="emailInput"
-                    placeholder="Email tài khoản"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordLogin">Mật khẩu: </label>
-                  <a href="#" class="text-right" style="float:right"
-                    >Quên mật khẩu?</a
-                  >
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="passwordLogin"
-                    id="passwordLogin"
-                    placeholder="Mật khẩu"
-                  />
-                </div>
-                <div class="form-group form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="rememberCheckLogin"
-                  />
-                  <label class="form-check-label" for="rememberCheckLogin"
-                    >Lưu thông tin đăng nhập</label
-                  >
-                </div>
-                <button type="submit" id="loginBtn" class="btn btn-cart">
-                  Đăng nhập
-                </button>
-              </form>
+              <div class="mb-1">
+                <span>Email:&nbsp;</span>
+                <span class="font-weight-bold">user@domain.com</span>
+              </div>
+              <div class="mb-1">
+                <span>Mật khẩu:&nbsp;</span>
+                <span class="font-weight-bold">******</span>
+              </div>
+              <!-- <div class="mb-1">
+                <span>Giới tính:&nbsp;</span>
+                <span class="font-weight-bold">Nam</span>
+              </div>
+              <div class="mb-1">
+                <span>Ngày sinh:&nbsp;</span>
+                <span class="font-weight-bold">31/12/1990 </span>
+              </div> -->
+              <div class="mb-1">
+                <span>Số điện thoại:&nbsp;</span>
+                <span class="font-weight-bold">0912345678</span>
+              </div>
+              <div class="mb-1">
+                <span>Địa chỉ:&nbsp;</span>
+                <span class="font-weight-bold">15 Tống Duy Tân, Hoàn Kiếm</span>
+              </div>
             </div>
-            <div class="col-6 bg-light p-5">
-              <div class="h3 mb-1 textBazar">Đăng ký</div>
-              <div class="mb-3">
-                Bạn có thể dễ dàng đăng ký tài khoản trên Juice Bazar để nhận
-                được thêm nhiều khuyến mãi của chúng tôi!
+            <div class="col-12 col-md-6 align-top">
+              <button type="button" class="btn btn-cart text-white mt-3 mt-md-0" data-toggle="modal" data-target="#changeProfile">
+                Thay đổi thông tin
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="changeProfile" tabindex="-1" role="dialog" aria-labelledby="changeProfileTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="changeProfileTitle">Thay đổi thông tin tài khoản</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" id="changeForm">
+                        <div class="form-group">
+                          <label for="fnameChange"
+                            >Họ tên<span class="text-danger"> * </span>:
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="fnameChange"
+                            name="fnameChange"
+                            aria-describedby="fnameChange"
+                            placeholder="Họ tên"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="passwordChange"
+                            >Mật khẩu<span class="text-danger"> * </span>:
+                          </label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            name="passwordChange"
+                            id="passwordChange"
+                            placeholder="Mật khẩu mới"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="password2Change"
+                            >Nhập lại Mật khẩu<span class="text-danger"> * </span>:
+                          </label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            name="password2Change"
+                            id="password2Change"
+                            placeholder="Nhập lại Mật khẩu mới"
+                          />
+                        </div>
+                        <!-- <div class="form-group">
+                          <label class="mr-2">Giới tính: </label>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="genderChange"
+                              id="radioGender1"
+                              value="male"
+                            />
+                            <label class="form-check-label" for="radioGender1"
+                              >Nam</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="genderChange"
+                              id="radioGender2"
+                              value="female"
+                            />
+                            <label class="form-check-label" for="radioGender2"
+                              >Nữ</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="genderChange"
+                              id="radioGender3"
+                              value="other"
+                            />
+                            <label class="form-check-label" for="radioGender3"
+                              >Khác</label
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="birthdayChange" class="">Ngày sinh:</label>
+                          <input
+                            type="date"
+                            name="birthdayChange"
+                            class="form-control"
+                          />
+                        </div> -->
+        
+                        <div class="form-group">
+                          <label for="telChange" class="">Số điện thoại<span class="text-danger"> * </span>:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="telChange"
+                            name="telChange"
+                            placeholder=""
+                          />
+                        </div>
+        
+                        <div class="form-group row">
+                          <div class="col-md-12">
+                            <label for="addChange" class="">Địa chỉ:</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="addSignup"
+                              name="addSignup"
+                              placeholder="Số nhà, Tên đường, Xã / Phường, Quận"
+                            />
+                          </div>
+                        </div>
+        
+                        <button class="btn btn-cart mt-1">Thay đổi</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <form method="post" id="signupForm">
-                <div class="form-group">
-                  <label for="emailSignup"
-                    >Email<span class="text-danger"> * </span>:
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emailSignup"
-                    name="emailSignup"
-                    aria-describedby="emailSignup"
-                    placeholder="Email đăng ký"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="fnameSignup"
-                    >Họ tên<span class="text-danger"> * </span>:
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="fnameSignup"
-                    name="fnameSignup"
-                    aria-describedby="fnameSignup"
-                    placeholder="Họ tên"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordSignup"
-                    >Mật khẩu<span class="text-danger"> * </span>:
-                  </label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="passwordSignup"
-                    id="passwordSignup"
-                    placeholder="Mật khẩu"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="password2Signup"
-                    >Nhập lại Mật khẩu<span class="text-danger"> * </span>:
-                  </label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password2Signup"
-                    id="password2Signup"
-                    placeholder="Nhập lại Mật khẩu"
-                  />
-                </div>
-                <!-- <div class="form-group">
-                  <label class="mr-2">Giới tính: </label>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender1"
-                      value="male"
-                    />
-                    <label class="form-check-label" for="radioGender1"
-                      >Nam</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender2"
-                      value="female"
-                    />
-                    <label class="form-check-label" for="radioGender2"
-                      >Nữ</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender3"
-                      value="other"
-                    />
-                    <label class="form-check-label" for="radioGender3"
-                      >Khác</label
-                    >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="birthdaySignup" class="">Ngày sinh:</label>
-                  <input
-                    type="date"
-                    name="birthdaySignup"
-                    class="form-control"
-                  />
-                </div> -->
-
-                <div class="form-group">
-                  <label for="telSignup" class=""
-                    >Số điện thoại<span class="text-danger"> * </span>:</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="telSignup"
-                    name="telSignup"
-                    placeholder=""
-                  />
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="addSignup" class="">Địa chỉ:</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="addSignup"
-                      name="addSignup"
-                      placeholder="Số nhà, Tên đường, Xã / Phường, Quận"
-                    />
-                  </div>
-                </div>
-
-                <button class="btn btn-cart text-danger mt-1">Đăng ký</button>
-              </form>
+              <!-- End of modal -->
             </div>
           </div>
+          
+          <div class="">
+            <div class="h4 textBazar mb-3">Quản lý đơn hàng</div>
+            <table class="table table-hover table-responsive-md text-center mb-0">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col" style="width: 30%">Sản phẩm</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Tình trạng đơn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">01/09/2019</th>
+                    <td>123FR001</td>
+                    <td>Dưa hấu x 1</td>
+                    <td>40.000đ</td>
+                    <td>Thành công</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">01/09/2019</th>
+                    <td>123456789</td>
+                    <td>Dưa hấu x 1</td>
+                    <td>40.000đ</td>
+                    <td>Thành công</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">01/09/2019</th>
+                    <td>123456789</td>
+                    <td>Dưa hấu x 1</td>
+                    <td>40.000đ</td>
+                    <td>Thành công</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">01/09/2019</th>
+                    <td>123456789</td>
+                    <td>Dưa hấu x 1</td>
+                    <td>40.000đ</td>
+                    <td>Thành công</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">01/09/2019</th>
+                    <td>123456789</td>
+                    <td>Dưa hấu x 1</td>
+                    <td>40.000đ</td>
+                    <td>Thành công</td>
+                  </tr>
+                  
+                </tbody>
+            </table>
+          </div>
+          
         </div>
       </div>
 
-      <!-- end of row -->
-      <div class="row px-0 ">
-        <div class="page-section newsletter-section col py-3 mt-5">
-          <div class="section-body row row-eq-height newsletter-text">
-            <div
-              class="col-12 col-md-7 d-flex flex-column justify-content-center pl-3 pl-lg-0"
-            >
-              <h5 class="text-uppercase font-weight-bold">
-                Cập nhật thông tin từ Juice Bazar
-              </h5>
-              <p class="mb-0 w-75">
-                Đăng ký nhận các thông báo mới nhất về dinh dưỡng và khuyến mãi
-                từ chúng tôi!
-              </p>
-            </div>
-            <div
-              class="col-12 col-md-5 d-flex flex-column justify-content-center mt-3 mt-lg-0"
-            >
-              <form class="newsletter-input-wrap d-flex flex-row">
-                <input
-                  type="text"
-                  class="form-control py-1 mr-n4"
-                  placeholder="email@domain.com"
-                  aria-label="Newsletter email"
-                  aria-describedby="sendEmailBtn"
-                />
-                <button
-                  class="btn textBazar"
-                  type="button"
-                  id="sendEmailBtn"
-                  style="
-                  position:  relative;
-                  right:  30px;
-              "
-                >
-                  <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- end of row -->
       <div class="row footer">
         <div class="page-section col pt-5 px-3 px-md-2 px-lg-0 mb-4">
@@ -608,9 +598,6 @@
 
     <!-- Font awesome  -->
     <script src="../assets/js/all.min.js"></script>
-
-    <!-- jQuery Validate -->
-    <script src="../assets/js/jquery.validate.min.js"></script>
 
     <!-- custom script -->
     <script src="../assets/js/custom.js"></script>
