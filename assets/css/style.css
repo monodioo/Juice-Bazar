@@ -386,7 +386,7 @@ a:hover {
     position: absolute;
     padding-top: 3rem;
     padding-left: 68px;
-    max-width: 40%;
+    max-width: 50%;
     font-size: 1.2vw;
   }
 }
@@ -419,6 +419,8 @@ a:hover {
     font-size: 1.2vw;
   }
 }
+
+/* Hyper large devices (large laptops and desktops, 1440px and up) */
 @media only screen and (min-width: 1440px) {
   .base-gradient {
     position: absolute;
@@ -427,7 +429,7 @@ a:hover {
     background: linear-gradient(
       to right,
       #efeff1 0%,
-      #efeff1 73%,
+      #efeff1 70%,
       rgba(239, 239, 241, 0) 100%
     );
   }
@@ -693,7 +695,8 @@ a:hover {
 .cart-delete-btn:hover,
 .cart-delete-btn {
   color: #ffc634;
-  text-decoration: none;
+  text-decoration: none !important;
+  font-size: 20px;
 }
 
 .cart-juice-thumbnail {
