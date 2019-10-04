@@ -721,3 +721,11 @@ label.error {
 input.error {
   border: 1px solid red;
 }
+
+/* BLOG */
+.blog-banner-text {
+  position: relative;
+  bottom: 140px;
+  left: 30px;
+  min-width: 40%;
+}
