@@ -184,4 +184,129 @@ jQuery(document).ready(function($) {
       $(`#shopAll`).addClass("nav-hover-active");
       break;
   }
+
+  $("#loginForm").validate({
+    rules: {
+      emailLogin: {
+        required: true,
+        email: true
+      },
+      passwordLogin: {
+        required: true,
+        minlength: 6
+      }
+    },
+    messages: {
+      emailLogin: {
+        required: "Xin điền địa chỉ email",
+        email: "Xin điền đúng định dạng email"
+      },
+      passwordLogin: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự"
+      }
+    }
+  });
+
+  $("#signupForm").validate({
+    rules: {
+      emailSignup: {
+        required: true,
+        email: true
+      },
+      passwordSignup: {
+        required: true,
+        minlength: 6
+      },
+      password2Signup: {
+        required: true,
+        minlength: 6,
+        equalTo: passwordSignup
+      },
+      fnameSignup: {
+        required: true,
+        minlength: 2
+      },
+      telSignup: {
+        required: true,
+        minlength: 10
+      },
+      addSignup: {
+        minlength: 10
+      }
+    },
+    messages: {
+      emailSignup: {
+        required: "Xin điền địa chỉ email",
+        email: "Xin điền đúng định dạng email"
+      },
+      passwordSignup: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự"
+      },
+      password2Signup: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự",
+        equalTo: "Mật khẩu không trùng"
+      },
+      fnameSignup: {
+        required: "Xin điền tên của bạn",
+        minlength: "Xin điền tên dài hơn"
+      },
+      telSignup: {
+        required: "Xin điền số điện thoại của bạn",
+        minlength: "Số điện thoại phải có 10 số"
+      },
+      addSignup: {
+        minlength: "Xin nhập đúng địa chỉ"
+      }
+    }
+  });
+
+  $("#changeForm").validate({
+    rules: {
+      passwordChange: {
+        required: true,
+        minlength: 6
+      },
+      password2Change: {
+        required: true,
+        minlength: 6,
+        equalTo: passwordChange
+      },
+      fnameChange: {
+        required: true,
+        minlength: 2
+      },
+      telChange: {
+        required: true,
+        minlength: 10
+      },
+      addChange: {
+        minlength: 10
+      }
+    },
+    messages: {
+      passwordChange: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự"
+      },
+      password2Change: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 6 ký tự",
+        equalTo: "Mật khẩu không trùng"
+      },
+      fnameChange: {
+        required: "Xin điền tên của bạn",
+        minlength: "Xin điền tên dài hơn"
+      },
+      telChange: {
+        required: "Xin điền số điện thoại của bạn",
+        minlength: "Số điện thoại phải có 10 số"
+      },
+      addChange: {
+        minlength: "Xin nhập đúng địa chỉ"
+      }
+    }
+  });
 });

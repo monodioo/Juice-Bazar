@@ -3,6 +3,20 @@ body {
   background-color: #e5e5e5;
 }
 
+.textBazar {
+  color: #ffc634;
+}
+
+a {
+  color: #ffc634 !important;
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+  text-decoration: none;
+}
+
 /* Extra small devices (phones, 576 and down) */
 @media only screen and (max-width: 576) {
   .site-wrap > .row,
@@ -282,6 +296,10 @@ body {
   width: 0.5rem;
 }
 
+.main-section {
+  padding-top: 5rem;
+}
+
 .section-title {
   font-weight: bold;
   font-size: 1.5rem;
@@ -289,7 +307,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   color: #ffc634;
-  padding-top: 5rem;
+  /* padding-top: 5rem; */
   padding-bottom: 3rem;
 }
 
@@ -368,7 +386,7 @@ body {
     position: absolute;
     padding-top: 3rem;
     padding-left: 68px;
-    max-width: 40%;
+    max-width: 50%;
     font-size: 1.2vw;
   }
 }
@@ -401,6 +419,8 @@ body {
     font-size: 1.2vw;
   }
 }
+
+/* Hyper large devices (large laptops and desktops, 1440px and up) */
 @media only screen and (min-width: 1440px) {
   .base-gradient {
     position: absolute;
@@ -409,7 +429,7 @@ body {
     background: linear-gradient(
       to right,
       #efeff1 0%,
-      #efeff1 73%,
+      #efeff1 70%,
       rgba(239, 239, 241, 0) 100%
     );
   }
@@ -675,7 +695,8 @@ body {
 .cart-delete-btn:hover,
 .cart-delete-btn {
   color: #ffc634;
-  text-decoration: none;
+  text-decoration: none !important;
+  font-size: 20px;
 }
 
 .cart-juice-thumbnail {
@@ -684,4 +705,22 @@ body {
 
 .cart-juice-name {
   font-weight: bold;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0da";
+}
+
+/* LOG IN */
+
+label.error {
+  color: red;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+input.error {
+  border: 1px solid red;
 }
