@@ -447,7 +447,7 @@ a:hover {
   box-sizing: border-box;
   border-radius: 100px;
   color: #ffc634;
-  font-size: 0.8vw;
+  font-size: 14px;
 }
 
 .juice-modal * {
