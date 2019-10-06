@@ -2,16 +2,16 @@
         <div class="page-section">
           <ul class="nav shop-nav mt-2 mt-lg-5 mw-100">
             <li class="nav-item">
-              <a class="nav-link nav-hover" id="shopAll" href="?section=shopAll">Toàn bộ</a>
+              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='0') echo 'nav-hover-active'; ?>" id="shopAll" href="?section=shop&typeid=0">Toàn bộ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-hover" id="shopFruits" href="?section=shopFruits">Fruits</a>
+              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='1') echo 'nav-hover-active'; ?>" id="shopFruits" href="?section=shop&typeid=1">Fruits</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-hover" id="shopGreen" href="?section=shopGreen">Green</a>
+              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='3') echo 'nav-hover-active'; ?>" id="shopGreen" href="?section=shop&typeid=3">Green</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-hover" id="shopCombo" href="?section=shopCombo">Combo</a>
+              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='8') echo 'nav-hover-active'; ?>" id="shopCombo" href="?section=shop&typeid=8">Combo</a>
             </li>
           </ul>
         </div>
@@ -178,31 +178,8 @@
               </div>
             </div>
             <!-- END OF MODAL -->
-              <?php
-                $sql = "SELECT * FROM Product WHERE Status = 1 ORDER BY Name";
-                $result = mysqli_query($con,$sql);
-                while ($row = mysqli_fetch_array($result))
-	    			{
-              ?>
-              <div class="col-6 col-md-4 col-lg-2">
-	    		<div class="card juice-card px-1 px-xl-4 pt-3 mt-4" data-toggle="modal" data-target="#exampleModal" >
-                    <img
-                    src="<?php echo $row['Image']?>"
-                    class="card-img-top"
-                    alt="..."
-                    />
-                  <div class="card-body">
-                    <h6 class="card-title text-center"><?php echo $row['Name']?></h6>
-                    <p
-                        class="juice-card-price py-1 text-center font-weight-bold mb-0"
-                    >
-                        40.000₫
-                    </p>
-                  </div>
-                </div>
-              </div>
-	    	  <?php } 
-              ?>
+            
+            <?php include "templates/scripts/showProduct.php";?>
 
           </div>
         </div>

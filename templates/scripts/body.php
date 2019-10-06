@@ -3,39 +3,30 @@
 	{
 		switch ($_REQUEST["section"])
 		{
-            case 'shopAll':
-                include "includes/shopAll.php";
+            case 'shop':
+                include "templates/include/shop.html.php";
                 break;
-            case 'shopFruits':
-                include "includes/shopFruits.php";
-                break;
-            case 'shopGreen': 
-                include "includes/shopGreen.php"; 
-                break;
-            case 'shopCombo': 
-                include "includes/shopCombo.php"; 
-                break;
-            case 'blogAll':
-				include "includes/blogAll.php";
-                break;
-            case 'blogEatDrink':
-				include "includes/blogEatDrink.php";
-                break;
-            case 'blogLifestyle':
-				include "includes/blogLifestyle.php";
-                break;
-            case 'blogBeauty':
-                include "includes/blogBeauty.php";
-                break;
-            case 'blogEvent':
-                include "includes/blogEvent.php";
+            case 'blog':
+				include "templates/include/blog.html.php";
                 break;
 			case 'aboutus':
-				include "includes/aboutus.php";
-				break;
-            default:
-                include "includes/home.php";
+				include "templates/include/aboutus.html.php";
+                break;
+            case 'cart':
+                include "templates/include/cart.html.php";
+                break;
+            case 'login':
+                include "templates/include/login.html.php";
+                break;
+            case 'checkout':
+                include "templates/include/checkout.html.php";
+                break;
+            case 'profile':
+                include "templates/include/profile.html.php";
+                break;
+            case 'home':
+                include "templates/include/home.html.php";
 		}
 	}
-	else include "includes/home.php";
+	else include "templates/include/home.html.php";
  ?>
