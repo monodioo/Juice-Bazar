@@ -24,7 +24,7 @@
             case 'profile':
                 include "templates/include/profile.html.php";
                 break;
-            case 'home':
+            default:
                 include "templates/include/home.html.php";
 		}
 	}

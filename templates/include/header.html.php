@@ -131,7 +131,7 @@
               <input type="text" class="form-control pb-0 px-0 d-none d-lg-block" name="search" id="searchInput" placeholder="Search">
               <button type="submit" class="btn pb-0 px-0 d-none d-lg-block"><i class="fas fa-search nav-icon" aria-hidden="true"></i></button>
             </form>
-            <a href="?section=profile" class="text-decoration-none"
+            <a href="?section=login" class="text-decoration-none"
               ><i class="far fa-user-circle  nav-icon  d-none d-lg-block"></i
             ></a>
             <a

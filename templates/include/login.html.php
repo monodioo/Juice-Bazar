@@ -1,3 +1,5 @@
+<?php include "templates/scripts/testForm.php";?>      
+      
       <!-- <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
           <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
@@ -14,7 +16,7 @@
                 Nếu bạn đã có tài khoản, xin đăng nhập ở đây.
               </div>
               <br />
-              <form method="post" id="loginForm">
+              <form method="post" id="loginForm" name="loginForm" action="">
                 <div class="form-group">
                   <label for="emailLogin">Email: </label>
                   <input
@@ -24,6 +26,7 @@
                     name="emailLogin"
                     aria-describedby="emailInput"
                     placeholder="Email tài khoản"
+                    value='<?php if (isset($_POST["emailLogin"])) echo $_POST["emailLogin"];?>'
                   />
                 </div>
                 <div class="form-group">
@@ -37,6 +40,7 @@
                     name="passwordLogin"
                     id="passwordLogin"
                     placeholder="Mật khẩu"
+                    value='<?php if (isset($_POST["passwordLogin"])) echo $_POST["passwordLogin"];?>'
                   />
                 </div>
                 <div class="form-group form-check">
@@ -49,7 +53,7 @@
                     >Lưu thông tin đăng nhập</label
                   >
                 </div>
-                <button type="submit" id="loginBtn" class="btn btn-cart">
+                <button type="submit" id="loginBtn" name="loginBtn" class="btn btn-cart">
                   Đăng nhập
                 </button>
               </form>
@@ -60,7 +64,7 @@
                 Bạn có thể dễ dàng đăng ký tài khoản trên Juice Bazar để nhận
                 được thêm nhiều khuyến mãi của chúng tôi!
               </div>
-              <form method="post" id="signupForm">
+              <form method="post" id="signupForm" name="signupForm" action="">
                 <div class="form-group">
                   <label for="emailSignup"
                     >Email<span class="text-danger"> * </span>:
@@ -72,6 +76,7 @@
                     name="emailSignup"
                     aria-describedby="emailSignup"
                     placeholder="Email đăng ký"
+                    value='<?php if (isset($_POST["emailSignup"])) echo $_POST["emailSignup"];?>'
                   />
                 </div>
                 <div class="form-group">
@@ -85,6 +90,7 @@
                     name="fnameSignup"
                     aria-describedby="fnameSignup"
                     placeholder="Họ tên"
+                    value='<?php if (isset($_POST["fnameSignup"])) echo $_POST["fnameSignup"];?>'
                   />
                 </div>
                 <div class="form-group">
@@ -97,6 +103,7 @@
                     name="passwordSignup"
                     id="passwordSignup"
                     placeholder="Mật khẩu"
+                    value='<?php if (isset($_POST["passwordSignup"])) echo $_POST["passwordSignup"];?>'
                   />
                 </div>
                 <div class="form-group">
@@ -109,6 +116,7 @@
                     name="password2Signup"
                     id="password2Signup"
                     placeholder="Nhập lại Mật khẩu"
+                    value='<?php if (isset($_POST["password2Signup"])) echo $_POST["password2Signup"];?>'
                   />
                 </div>
                 <!-- <div class="form-group">
@@ -169,6 +177,7 @@
                     id="telSignup"
                     name="telSignup"
                     placeholder=""
+                    value='<?php if (isset($_POST["telSignup"])) echo $_POST["telSignup"];?>'
                   />
                 </div>
 
@@ -185,7 +194,7 @@
                   </div>
                 </div>
 
-                <button class="btn btn-cart text-danger mt-1">Đăng ký</button>
+                <button class="btn btn-cart text-danger mt-1" type="submit" name="signupBtn">Đăng ký</button>
               </form>
             </div>
           </div>
