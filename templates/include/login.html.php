@@ -190,6 +190,7 @@
                       id="addSignup"
                       name="addSignup"
                       placeholder="Số nhà, Tên đường, Xã / Phường, Quận"
+                      value='<?php if (isset($_POST["telSignup"])) echo $_POST["telSignup"];?>'
                     />
                   </div>
                 </div>

@@ -29,7 +29,7 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
 
         if (isset($_POST["signupBtn"])) {
             $signup = validation();
-            if (!$signup) {
+            if ($signup) {
                 $sqlMember = "SELECT * FROM Member WHERE Email = '".$_POST["emailSignup"]."'";
                 $resultMember = mysqli_query($con,$sqlMember);
                 if (mysqli_num_rows($resultMember)) {
@@ -40,8 +40,9 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
                     $fnameSignup = test_input($_POST["fnameSignup"]);
                     $passwordSignup = test_input($_POST["passwordSignup"]);
                     $telSignup = test_input($_POST["telSignup"]);
+                    $addSignup = test_input($_POST["addSignup"]);
                     $fnameSignup = standardizedData($fnameSignup);
-                    $insertSQL = "INSERT INTO Member(Email,Pass,NameMem,Phone) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup')";
+                    $insertSQL = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
                     if (mysqli_query($con,$insertSQL)) {
                         echo "<script>alert('Bạn đã đăng ký thành công!');</script>";
                     }
@@ -125,5 +126,6 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
                 return false;
             }
         }
+        return true;
     }
 ?>

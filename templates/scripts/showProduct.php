@@ -1,12 +1,14 @@
 <?php
     if ($_REQUEST["typeid"]=='0')
     {
-        $sql = "SELECT * FROM Product WHERE Status = 1 ORDER BY Name";
+        $sql = "SELECT * FROM Product JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+                WHERE CapacityId = 1 AND Status = 1";
     }
     else
     {
         $typeid = $_REQUEST['typeid'];
-        $sql = "SELECT * FROM Product WHERE TypeId = CONVERT('".$typeid."', unsigned) AND Status = 1";
+        $sql = "SELECT * FROM Product  JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+        WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
     }
     $result = mysqli_query($con,$sql);
     while ($row = mysqli_fetch_array($result))
@@ -25,7 +27,7 @@
         <p
             class="juice-card-price py-1 text-center font-weight-bold mb-0"
         >
-            40.000₫
+            <?php echo $row['Price']/1000?>.000₫
         </p>
         </div>
     </div>
