@@ -8,8 +8,7 @@ if (!empty($_SESSION['admin'])) {
 
     $title = "Juice Bazar - Admin - Products";
 
-
-
+    $products = getProducts($pdo);
 
     ob_start();
 

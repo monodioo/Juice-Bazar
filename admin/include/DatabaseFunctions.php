@@ -53,7 +53,39 @@ function adminLogin($pdo, $adminName, $adminPass)
 
 function getProducts($pdo)
 {
-    $sql = 'SELECT p.`Name`, p.`Image`, p.`Description`, p.`Nutrition`, p.`Status` FROM `product` p JOIN `pricebycapacity` pc ON p.`ProductId` = pc.`ProductId` JOIN `orderdetail` od ON p.`ProductId` = od.`ProductId` JOIN `orders` o ON od.`OrderId` = o.`OrderId` WHERE p.`TypeId` IN (1,2,3) AND o.`Status` = 1 ';
+    $sql = 'SELECT DISTINCT p.`ProductId`, p.`Name`, p.`Image`, p.`Description`, p.`Nutrition`, p.`Status`, p.`TypeId` FROM `product` p WHERE p.`TypeId` IN (1,2,3) ORDER BY p.`Name`';
     $query = query($pdo, $sql);
-    return $query->fetchAll();
+    $results = $query->fetchAll();
+    $products = [];
+    foreach ($results as $result) {
+        $capacity = findCapacity($pdo, $result['ProductId']);
+
+        $products[] = [
+            'Name' => $result['Name'],
+            'Image' => $result['Image'],
+            'Description' => $result['Description'],
+            'Nutrition' => $result['Nutrition'],
+            'Status' => $result['Status'],
+            'Price1' => $capacity[0]['Price'],
+            'Price2' => $capacity[1]['Price'],
+            'Total1' => $capacity[0]['Quantity'],
+            'Total2' => $capacity[1]['Quantity'],
+            'Total' => ($capacity[0]['Quantity'] + $capacity[1]['Quantity']),
+        ];
+    }
+    return $products;
+}
+
+function findCapacity($pdo, $ProductId)
+{
+    $sql = 'SELECT pc.`CapacityId`, pc.`Price`, pc.`Quantity` FROM `pricebycapacity` pc JOIN `product` p ON pc.`ProductId` = p.`ProductId` WHERE pc.`ProductId` = :ProductId ORDER BY pc.`CapacityId`';
+    $parameters = [':ProductId' => $ProductId];
+    return query($pdo, $sql, $parameters)->fetchAll();
+}
+
+function findOrder($pdo, $ProductId)
+{
+    $sql = 'SELECT * FROM `product` p JOIN `orderdetail` od ON p.`ProductId` = od.`ProductId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`= 2 AND p.`ProductId`= :ProductId GROUP BY od.`CapacityId` ORDER BY od.`CapacityId`'; // STatus = 2 for concluded orders
+    $parameters = [':ProductId' => $ProductId];
+    return query($pdo, $sql, $parameters)->fetchAll();
 }

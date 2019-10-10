@@ -66,25 +66,28 @@
 
         <div class="row my-5">
             <div class="col-auto"></div>
-
             <?= $output ?>
             <div class="col-auto"></div>
         </div>
     </div>
 
-    <script src="../../assets/js/jquery-3.4.1.min.js"></script>
-    <script src="../../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- Font awesome  -->
-    <script src="../../assets/js/all.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/all.min.js"></script>
 
 
     <!-- jQuery Validate -->
-    <script src="../../assets/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.validate.min.js"></script>
+
+    <!-- jQuery TableSorter -->
+    <script type="text/javascript" src="../../assets/js/jquery.tablesorter.js"></script>
 
     <!-- custom script -->
     <script src="../../assets/js/custom.js"></script>
+    <script src="../../assets/js/admin.js"></script>
 </body>
 
 </html>
