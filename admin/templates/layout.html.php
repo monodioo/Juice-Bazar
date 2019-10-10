@@ -17,14 +17,14 @@
     <!-- Custom CSS -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
 
-    <title>Juice Bazar</title>
+    <title><?= $title ?></title>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row px-0 py-3 bg-white sticky-top">
             <div class="col-12 col-md-6 text-center">
-                <a class="text-center js-logo-clone text-decoration-none" href="admin-home.html">
+                <a class="text-center js-logo-clone text-decoration-none" href="index.php">
                     <svg width="128" height="32" viewBox="0 0 128 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="img-fluid">
                         <path d="M47.5408 31.5455C46.5768 31.5455 45.748 30.7787 45.748 29.8039V5.90383C45.748 4.95637 46.5768 4.16226 47.5408 4.16226C48.5443 4.16226 49.3336 4.96185 49.3336 5.90383V29.8039C49.3392 30.7787 48.5499 31.5455 47.5408 31.5455Z" fill="#FFC634" />
                         <path d="M8.02672 31.9288C6.94993 31.9288 6.01409 31.8248 5.12334 31.6167C2.93595 31.0909 1.2503 29.9463 0.246803 28.3416C-0.254946 27.5092 0.0325729 26.4631 0.889491 25.9429C1.71258 25.4554 2.82883 25.7293 3.32494 26.5672C3.82669 27.3339 4.68925 27.8925 5.90697 28.2102C6.48201 28.3471 7.27128 28.4457 7.98726 28.4457C9.63908 28.4457 10.8568 28.0733 11.6066 27.3011C12.6157 26.2222 12.5425 24.6887 12.5425 24.6504V5.90383C12.5425 4.92899 13.3317 4.16226 14.3352 4.16226C15.3049 4.16226 16.128 4.92899 16.128 5.90383V24.4751C16.128 25.0337 16.1618 27.6078 14.2281 29.6286C13.546 30.357 12.6834 30.9211 11.7194 31.3045C10.6426 31.7152 9.38539 31.9288 8.02672 31.9288Z" fill="#FFC634" />
@@ -47,97 +47,28 @@
 
             <div class="col-12 col-md-6">
                 <nav class="nav">
-                    <a href="admin-products.html" class="nav-link active textBazar">Products</a>
-                    <a href="admin-orders.html" class="nav-link ">Orders</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Products
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="productDropdown">
+                        <a class="dropdown-item text-dark" href="admin-products.php">All Products</a>
+                        <a class="dropdown-item text-dark" href="#">Add Product</a>
+                    </div>
+                    <a href="admin-orders.html" class="nav-link">Orders</a>
                     <a href="admin-customers.html" class="nav-link ">Customers</a>
                     <a href="admin-blogs.html" class="nav-link ">Blogs</a>
                     <a href="admin-profile.html" class="nav-link">Profile</a>
                     <a href="admin-logout.html" class="nav-link ">Log Out</a>
                 </nav>
             </div>
-            <!-- <div class="col-4 px-0 pt-2"></div> -->
+
         </div>
 
         <div class="row my-5">
-            <div class="page-section card col-12 p-5">
-                <div class="section-title">Kết quả doanh thu</div>
-                <div>
-                    <form>
-                        <div class="form-group form-inline">
-                            <label for="inputMonthReport">Tháng</label>
-                            <select class="mx-2 form-control" id="inputMonthReport">
-                                <option value="0">Cả năm</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                            <label for="inputYearReport">Năm</label>
-                            <select class="mx-2 form-control" id="inputYearReport">
-                                <option value="0">2019</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div>
-                    <table class="table table-sm table-responsive-sm table-hover text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Thời gian</th>
-                                <th scope="col">Số đơn hàng</th>
-                                <th scope="col">Doanh thu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Tháng 1 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Tháng 2 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Tháng 3 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Tháng 4 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Tháng 5 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Tháng 6 / 2019</td>
-                                <td>10</td>
-                                <td>500.000<span>₫</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="col-auto"></div>
+
+            <?= $output ?>
+            <div class="col-auto"></div>
         </div>
     </div>
 
@@ -147,6 +78,10 @@
 
     <!-- Font awesome  -->
     <script src="../../assets/js/all.min.js"></script>
+
+
+    <!-- jQuery Validate -->
+    <script src="../../assets/js/jquery.validate.min.js"></script>
 
     <!-- custom script -->
     <script src="../../assets/js/custom.js"></script>
