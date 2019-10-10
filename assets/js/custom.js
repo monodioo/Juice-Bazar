@@ -221,7 +221,7 @@ jQuery(document).ready(function($) {
       password2Signup: {
         required: true,
         minlength: 6,
-        equalTo: passwordSignup
+        equalTo: "#passwordSignup"
       },
       fnameSignup: {
         required: true,
@@ -272,7 +272,7 @@ jQuery(document).ready(function($) {
       password2Change: {
         required: true,
         minlength: 6,
-        equalTo: passwordChange
+        equalTo: "#passwordChange"
       },
       fnameChange: {
         required: true,
@@ -306,6 +306,29 @@ jQuery(document).ready(function($) {
       },
       addChange: {
         minlength: "Xin nhập đúng địa chỉ"
+      }
+    }
+  });
+
+  $("#adminLoginForm").validate({
+    rules: {
+      adminId: {
+        required: true,
+        minlength: 4
+      },
+      adminPass: {
+        required: true,
+        minlength: 4
+      }
+    },
+    messages: {
+      adminId: {
+        required: "Xin điền lại tên đăng nhập",
+        minlength: "Mật khẩu có tối thiểu 4 ký tự"
+      },
+      adminPass: {
+        required: "Xin điền lại mật khẩu",
+        minlength: "Mật khẩu có tối thiểu 4 ký tự"
       }
     }
   });

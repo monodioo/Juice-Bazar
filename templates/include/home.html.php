@@ -25,7 +25,7 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                src="../assets/image/home_carousel_01.png"
+                src="assets/image/home_carousel_01.png"
                 class="d-block w-100"
                 alt="Carousel Image 01"
               />
@@ -38,7 +38,7 @@
             </div>
             <div class="carousel-item">
               <img
-                src="../assets/image/home_carousel_02.png"
+                src="assets/image/home_carousel_02.png"
                 class="d-block w-100"
                 alt="Carousel Image 02"
               />
@@ -51,7 +51,7 @@
             </div>
             <div class="carousel-item">
               <img
-                src="../assets/image/home_carousel_03.png"
+                src="assets/image/home_carousel_03.png"
                 class="d-block w-100"
                 alt="Carousel Image 03"
               />
@@ -94,7 +94,7 @@
                 class="img-wrap d-flex flex-row align-items-center justify-content-center rounded"
               >
                 <img
-                  src="../assets/image/home_fruit.png"
+                  src="assets/image/home_fruit.png"
                   class="w-100 rounded"
                   alt=".."
                 />
@@ -108,7 +108,7 @@
                 href="?section=shopGreen"
                 class="img-wrap d-flex flex-row align-items-center justify-content-center rounded"
                 ><img
-                  src="../assets/image/home_green.png"
+                  src="assets/image/home_green.png"
                   class="w-100 rounded"
                   alt=".."
                 />
@@ -122,7 +122,7 @@
                 href="?section=shopCombo"
                 class="img-wrap d-flex flex-row align-items-center justify-content-center rounded"
                 ><img
-                  src="../assets/image/home_combo.png"
+                  src="assets/image/home_combo.png"
                   class="w-100 rounded"
                   alt=".."
                 />
@@ -140,7 +140,7 @@
           <div class="section-body">
             <div class="gradient-wrap">
               <img
-                src="../assets/image/home_aboutus.png"
+                src="assets/image/home_aboutus.png"
                 alt="JB Team"
                 class="img-gradient float-right img-fluid"
               />
@@ -198,7 +198,7 @@
                       <div class="row">
                         <div class="col-4">
                           <img
-                            src="../assets/image/juice/btl-00.png"
+                            src="assets/image/juice/btl-00.png"
                             alt="bottle"
                             class="w-100"
                           />
@@ -314,7 +314,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -335,7 +335,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -356,7 +356,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -377,7 +377,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -398,7 +398,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -419,7 +419,7 @@
                 data-target="#exampleModal"
               >
                 <img
-                  src="../assets/image/juice/btl-00.png"
+                  src="assets/image/juice/btl-00.png"
                   class="card-img-top"
                   alt="..."
                 />
@@ -444,7 +444,7 @@
             <div class="col-6 pl-0">
               <div class="card w-100 h-100">
                 <img
-                  src="../assets/image/home_locat1.png"
+                  src="assets/image/home_locat1.png"
                   class="card-img-top"
                   alt="jB Tong Duy Tan"
                 />
@@ -457,7 +457,7 @@
             <div class="col-6 pr-0">
               <div class="card w-100 h-100">
                 <img
-                  src="../assets/image/home_locat2.png"
+                  src="assets/image/home_locat2.png"
                   class="card-img-top"
                   alt="jB Lotte"
                 />
