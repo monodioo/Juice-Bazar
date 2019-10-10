@@ -1,7 +1,7 @@
 <div class="page-section card col-12 p-5">
     <div class="section-title">Quản lý sản phẩm</div>
     <div>
-        <table class="table table-hover table-striped tablesorter" id='prodTable'>
+        <table class="table table-hover table-striped table-responsive tablesorter " id='prodTable'>
             <thead>
                 <tr>
                     <th scope="col" rowspan="2">#</th>
@@ -46,20 +46,28 @@
                         <td><?= number_format($product['Price2'], 0, '', '.'); ?>₫</td>
                         <td><?= $product['Total1']; ?></td>
                         <td><?= $product['Total2']; ?></td>
-                        <td><?= $product['Total']; ?></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="font-weight-bold"><?= $product['Total']; ?></td>
+                        <td><?= $product['Sold1']; ?></td>
+                        <td><?= $product['Sold2']; ?></td>
+                        <td class="font-weight-bold"><?= $product['Sold']; ?></td>
+                        <td><?= $product['Total1'] - $product['Sold1'] ?></td>
+                        <td><?= $product['Total2'] - $product['Sold2'] ?></td>
+                        <td class="font-weight-bold"><?= $product['Total'] - $product['Sold'] ?></td>
                         <td><?php if ($product['Status'] == 0) {
                                     echo 'Disabled';
                                 } else {
                                     echo 'Enabled';
                                 } ?></td>
-
-                        <td><button class="btn btn-warning mb-1">Edit</button><br><button class="btn btn-danger" disabled>Delete</button></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm mb-1">Edit</button>
+                            <br>
+                            <button class="btn btn-secondary btn-sm mb-1" action="disable.php?productId=<?= $product['ProductId'] ?>">Disable</button>
+                            <br>
+                            <button class="btn btn-danger btn-sm" action="delete.php?productId=<?= $product['ProductId'] ?>" <?php if ($product['Sold'] + $product['Status'] > 0) {
+                                                                                                                                        echo 'disabled';
+                                                                                                                                    } else {
+                                                                                                                                        echo '';
+                                                                                                                                    }; ?>>Delete</button></td>
                     </tr>
 
                 <?php endforeach; ?>

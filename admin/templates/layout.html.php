@@ -83,7 +83,7 @@
     <script type="text/javascript" src="../../assets/js/jquery.validate.min.js"></script>
 
     <!-- jQuery TableSorter -->
-    <script type="text/javascript" src="../../assets/js/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.tablesorter.combined.min.js"></script>
 
     <!-- custom script -->
     <script src="../../assets/js/custom.js"></script>
