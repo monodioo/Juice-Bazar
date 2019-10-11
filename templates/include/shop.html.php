@@ -2,10 +2,10 @@
         <div class="page-section">
           <ul class="nav shop-nav mt-2 mt-lg-5 mw-100">
             <li class="nav-item">
-              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='0') echo 'nav-hover-active'; ?>" id="shopAll" href="?section=shop&typeid=0">Toàn bộ</a>
+              <a class="nav-link nav-hover <?php if ($_REQUEST['typeid'] == '0') echo 'nav-hover-active'; ?>" id="shopAll" href="?section=shop&typeid=0">Toàn bộ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='1') echo 'nav-hover-active'; ?>" id="shopFruits" href="?section=shop&typeid=1">Fruits</a>
+              <a class="nav-link nav-hover <?php if ($_REQUEST['typeid'] == '1') echo 'nav-hover-active'; ?>" id="shopFruits" href="?section=shop&typeid=1">Fruits</a>
             </li>
             <li class="nav-item">
               <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='2') echo 'nav-hover-active'; ?>" id="shopGreen" href="?section=shop&typeid=2">Green</a>
@@ -36,17 +36,15 @@
                   tôi tập trung vào dịch vụ cung cấp nước ép tại nhà, đặc biệt
                   cho các gia đình trẻ hiện nay.
                 </p>
-                <a
-                  href="#!"
-                  class="text-decoration-none text-dark font-weight-bold"
-                  ><h5 style="color: #ffc634">Chi tiết</h5></a
-                >
+                <a href="#!" class="text-decoration-none text-dark font-weight-bold">
+                  <h5 style="color: #ffc634">Chi tiết</h5>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-        <!-- End of row -->
+      <!-- End of row -->
       <div class="row">
         <div class="page-section px-0 col">
           <div class="section-body row">
