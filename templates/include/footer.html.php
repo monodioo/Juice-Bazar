@@ -192,6 +192,8 @@
     
     <!-- Font awesome  -->
     <script src="assets/js/all.min.js"></script>
+    <!-- jQuery Validate -->
+    <script src="assets/js/jquery.validate.min.js"></script>
     
     <!-- custom script -->
     <script src="assets/js/custom.js"></script>
