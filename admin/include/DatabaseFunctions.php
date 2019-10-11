@@ -91,7 +91,7 @@ function findCapacity($pdo, $ProductId)
 
 function findSold($pdo, $ProductId)
 {
-    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`IN(2) AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 2 for concluded orders
+    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status` = 2 AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 2 for concluded orders
 
     $parameters = [':ProductId' => $ProductId];
     return query($pdo, $sql, $parameters)->fetchAll();
@@ -99,7 +99,7 @@ function findSold($pdo, $ProductId)
 
 function findPending($pdo, $ProductId)
 {
-    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`IN(1) AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 1for pending orders
+    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`= 1 AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 1for pending orders
 
     $parameters = [':ProductId' => $ProductId];
     return query($pdo, $sql, $parameters)->fetchAll();

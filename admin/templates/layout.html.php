@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
     <!--  font awesome -->
     <link href="../../assets/css/all.min.css" rel="stylesheet" />
+    <!--  TablerSorter Pager CSS-->
+    <link href="../../assets/css/jquery.tablesorter.pager.min.css" rel="stylesheet" />
+    <link href="../../assets/css/theme.bootstrap_4.min.css" rel="stylesheet" />
     <!-- favicon -->
     <link href="../../assets/image/favicon.png" sizes="32x32" rel="shortcut icon" />
     <!-- Custom CSS -->
@@ -84,6 +87,7 @@
 
     <!-- jQuery TableSorter -->
     <script type="text/javascript" src="../../assets/js/jquery.tablesorter.combined.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.tablesorter.pager.min.js"></script>
 
     <!-- custom script -->
     <script src="../../assets/js/custom.js"></script>

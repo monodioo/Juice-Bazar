@@ -6,30 +6,31 @@
                 <tr>
                     <th scope="col" rowspan="2">#</th>
                     <th scope="col" rowspan="2" style="width:5%"><span onclick='sortTable("Name");'>Name</span></th>
-                    <th scope="col" rowspan="2" style="width:6%" class="sorter-false">Image</th>
+                    <th scope="col" rowspan="2" style="width:6%" class="sorter-false filter-false">Image</th>
                     <th scope="col" rowspan="2" style="width:10%">Description</th>
                     <th scope="col" rowspan="2" style="width:10%">Nutrition</th>
-                    <th scope="col" colspan="2" class="sorter-false">Price</th>
-                    <th scope="col" colspan="3" class="sorter-false">Total Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false">Sold Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false">Avail. Qty.</th>
-                    <th scope="col" rowspan="2">Status</th>
-                    <th scope="col" rowspan="2" class="sorter-false">Action</th>
+                    <th scope="col" colspan="2" class="sorter-false filter-false">Price</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Total Qty.</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Sold Qty.</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Avail. Qty.</th>
+                    <th scope="col" rowspan="2" class="filter-select filter-exact" data-placeholder="Pick a Status">Status</th>
+                    <th scope="col" rowspan="2" class="sorter-false filter-false">Action</th>
                 </tr>
                 <tr>
-                    <th scope="col">250ml</th>
-                    <th scope="col">330ml</th>
-                    <th scope="col">250ml</th>
-                    <th scope="col">330ml</th>
-                    <th scope="col">Both</th>
-                    <th scope="col">250ml</th>
-                    <th scope="col">330ml</th>
-                    <th scope="col">Both</th>
-                    <th scope="col">250ml</th>
-                    <th scope="col">330ml</th>
-                    <th scope="col">Both</th>
+                    <th scope="col" class="filter-false">250ml</th>
+                    <th scope="col" class="filter-false">330ml</th>
+                    <th scope="col" class="filter-false">250ml</th>
+                    <th scope="col" class="filter-false">330ml</th>
+                    <th scope="col" class="filter-false">Both</th>
+                    <th scope="col" class="filter-false">250ml</th>
+                    <th scope="col" class="filter-false">330ml</th>
+                    <th scope="col" class="filter-false">Both</th>
+                    <th scope="col" class="filter-false">250ml</th>
+                    <th scope="col" class="filter-false">330ml</th>
+                    <th scope="col" class="filter-false">Both</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php $count = 0; ?>
                 <?php foreach ($products as $product) : ?>
@@ -63,15 +64,35 @@
                             <br>
                             <button class="btn btn-secondary btn-sm mb-1" action="disable.php?productId=<?= $product['ProductId'] ?>">Disable</button>
                             <br>
-                            <button class="btn btn-danger btn-sm" action="delete.php?productId=<?= $product['ProductId'] ?>" <?php if ($product['Sold'] + $product['Status'] > 0) {
-                                                                                                                                        echo 'disabled';
-                                                                                                                                    } else {
-                                                                                                                                        echo '';
-                                                                                                                                    }; ?>>Delete</button></td>
+                            <button class="btn btn-danger btn-sm" action="delete.php?productId=<?= $product['ProductId'] ?>" <?= ($product['Sold'] + $product['Pending'] > 0) ? 'disabled' : ''; ?> <?= $product['Sold'] ?> <?= $product['Pending']; ?>>Delete</button></td>
                     </tr>
 
                 <?php endforeach; ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="18" class="ts-pager">
+                        <div class="form-inline">
+                            <div class="btn-group btn-group-sm mx-1" role="group">
+                                <button type="button" class="btn btn-secondary first" title="first">⇤</button>
+                                <button type="button" class="btn btn-secondary prev" title="previous">←</button>
+                            </div>
+                            <span class="pagedisplay"></span>
+                            <div class="btn-group btn-group-sm mx-1" role="group">
+                                <button type="button" class="btn btn-secondary next" title="next">→</button>
+                                <button type="button" class="btn btn-secondary last" title="last">⇥</button>
+                            </div>
+                            <select class="form-control-sm custom-select px-1 pagesize" title="Select page size">
+                                <option selected="selected" value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="all">All Rows</option>
+                            </select>
+                            <select class="form-control-sm custom-select px-4 mx-1 pagenum" title="Select page number"></select>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
