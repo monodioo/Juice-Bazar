@@ -17,6 +17,10 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
                     }
                     else {
                         $_SESSION["nameMember"] = $rowMember['Name'];
+                        if (isset($_POST['rememberCheckLogin'])) {
+                            setcookie('emailLogin',$_POST['emailLogin'],time()+(86400*30,'/'));
+                            setcookie('passwordLogin',$_POST['passwordLogin'],time()+(86400*30,'/'));
+                        }
                         echo "<script>alert('Đăng nhập thành công!');</script>";
                         echo "<script>location='?'</script>";
                     }
@@ -42,9 +46,10 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
                     $telSignup = test_input($_POST["telSignup"]);
                     $addSignup = test_input($_POST["addSignup"]);
                     $fnameSignup = standardizedData($fnameSignup);
-                    $insertSQL = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
-                    if (mysqli_query($con,$insertSQL)) {
+                    $insertMemberSQL = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
+                    if (mysqli_query($con,$insertMemberSQL)) {
                         echo "<script>alert('Bạn đã đăng ký thành công!');</script>";
+                        
                     }
                     else echo "<script>alert('Đăng ký thất bại!');</script>";
                 }

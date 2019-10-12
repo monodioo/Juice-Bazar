@@ -1,17 +1,17 @@
 <?php
     if ($_REQUEST["typeid"]=='0')
     {
-        $sql = "SELECT * FROM Product JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+        $sqlShowProduct = "SELECT * FROM Product JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
                 WHERE CapacityId = 1 AND Status = 1";
     }
     else
     {
         $typeid = $_REQUEST['typeid'];
-        $sql = "SELECT * FROM Product  JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+        $sqlShowProduct = "SELECT * FROM Product  JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
         WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
     }
-    $result = mysqli_query($con,$sql);
-    while ($row = mysqli_fetch_array($result))
+    $tableProduct = mysqli_query($con,$sqlShowProduct);
+    while ($row = mysqli_fetch_array($tableProduct))
         {
 ?>
 
@@ -52,7 +52,12 @@
                 ></i>
                 </button>
                 <div class="juice-modal-title"><?php echo $row['Name'];?></div>
-                <div class="juice-modal-price mb-3"><?php echo $row['Price']/1000?>.000₫</div>
+                <div class="juice-modal-price mb-3" id="modalPrice250ml">
+                    <?php echo $row['Price']/1000;?>.000₫
+                </div>
+                <div class="juice-modal-price mb-3" id="modalPrice330ml" style="display:none">
+                    <?php echo $row['Price']/1000;?>.₫
+                </div>
                 <div class="juice-modal-description">
                 <div
                     data-toggle="collapse"
@@ -89,15 +94,16 @@
                     Bà Trưng, Ba Đình, Đống Đa.
                 </div>
                 </div>
-                <form class="juice-modal-options mt-3 pl-3 py-0">
+                <form class="juice-modal-options mt-3 pl-3 py-0" name="formModal" method="post">
                 <div class="row">
+                    <input type="hidden" name="productid" value="<?php echo $row['ProductId']?>">
                     <div class="btn-group btn-group-toggle col-12 col-lg-auto px-0 mr-2" data-toggle="buttons">
                     <label class="btn juice-volume-btn active">
-                        <input type="radio" name="volume" id="220ml" value="220ml" autocomplete="off">
-                        <div class="py-0">220ml</div>
+                        <input type="radio" name="capacity" id="250ml" value="250" autocomplete="off" checked>
+                        <div class="py-0">250ml</div>
                     </label>
                     <label class="btn juice-volume-btn">
-                        <input type="radio" name="volume" id="330ml" value="330ml" autocomplete="off" checked>
+                        <input type="radio" name="capacity" id="330ml" value="330" autocomplete="off">
                         <div class="py-0">330ml</div>
                     </label>
                     </div>
@@ -119,7 +125,7 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <button type="submit" class="btn juice-modal-cart py-0 px-3 mt-3 d-flex align-items-center">
+                    <button type="submit" class="btn juice-modal-cart py-0 px-3 mt-3 d-flex align-items-center" name="addCartBtn">
                         <div class="font-weight-bold mr-2 py-1">Thêm vào giỏ</div>
                         <svg class="cart-icon mr-2" width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M26.04 15.6718L29.5424 5.18898C29.7181 4.68503 29.5851 4.38209 29.4433 4.18206C29.0802 3.67035 28.3335 3.66549 28.1888 3.66549L8.39518 3.66161L7.86696 1.15548C7.72423 0.564146 7.30282 0 6.4532 0H0.890398C0.31363 0 0 0.269936 0 0.808836V2.25561C0 2.77704 0.312659 2.91297 0.910789 2.91297H5.60747L9.20207 18.1741C8.63113 18.779 8.32041 19.6606 8.32041 20.4831C8.32041 22.293 9.76136 23.9612 11.6024 23.9612C13.3404 23.9612 14.6435 22.3328 14.8552 21.3618H21.856C22.0677 22.3328 23.1232 24 25.1079 24C26.9168 24 28.3879 22.4328 28.3879 20.6258C28.3879 18.8285 27.2955 17.2351 25.1263 17.2351C24.2243 17.2351 23.1542 17.7206 22.6571 18.4488H14.0551C13.4307 17.4778 12.5782 17.1768 11.716 17.1429L11.5965 16.5069H24.6845C25.671 16.5069 25.8652 16.1476 26.04 15.6718ZM25.1321 19.3528C25.8128 19.3528 26.3653 19.9053 26.3653 20.586C26.3653 21.2667 25.8128 21.8192 25.1321 21.8192C24.4515 21.8192 23.898 21.2676 23.898 20.586C23.899 19.9053 24.4515 19.3528 25.1321 19.3528ZM12.8219 20.586C12.8219 21.2744 12.2626 21.8347 11.5761 21.8347C10.8877 21.8327 10.3274 21.2744 10.3274 20.586C10.3274 19.8976 10.8877 19.3373 11.5761 19.3373C12.2626 19.3373 12.8219 19.8976 12.8219 20.586Z" fill="white"></path>
@@ -137,7 +143,7 @@
 <!-- END OF MODAL -->
 
 <div class="col-6 col-md-4 col-lg-2">
-    <div class="card juice-card px-1 px-xl-4 pt-3 mt-4" data-toggle="modal" data-target="<?php echo '#a'.$row['ProcductId'];?>" >
+    <div class="card juice-card px-1 px-xl-4 pt-3 mt-4" data-toggle="modal" data-target="<?php echo '#a'.$row['ProductId'];?>" >
         <img
         src="<?php echo $row['Image']?>"
         class="card-img-top"
@@ -153,4 +159,33 @@
         </div>
     </div>
 </div>
-<?php   } ?>
+<?php   }
+//Them sp vao gio hang
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_REQUEST['quantity'] > 0) {
+        $indexCart = 'p'.$_REQUEST['productid'].'c'.$_REQUEST['capacity'];
+        $_SESSION['cart'][$indexCart]['productid'] = $_REQUEST['productid'];
+        $_SESSION['cart'][$indexCart]['capacity'] = $_REQUEST['capacity'];
+        if (isset($_SESSION['cart'][$indexCart]['quantity'] ))
+            $_SESSION['cart'][$indexCart]['quantity'] += $_REQUEST['quantity'];
+        else 
+            $_SESSION['cart'][$indexCart]['quantity'] = $_REQUEST['quantity'];
+
+        //Cap nhat gia tien don hang ngay lap tuc.
+        $sqlNewProduct = "SELECT * FROM Product
+                                    JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+                                    JOIN Capacity        ON PriceByCapacity.CapacityId = Capacity.CapacityId
+                            WHERE Product.ProductId =".$_REQUEST['productid']." AND Capacity = ".$_REQUEST['capacity'];
+        $resultNewProduct = mysqli_query($con,$sqlNewProduct);
+        $rowNewProduct = mysqli_fetch_array($resultNewProduct);
+
+        if (isset($_SESSION['sumOrder']))
+            $_SESSION['sumOrder'] += $rowNewProduct['Price']*$_REQUEST['quantity'];
+        else
+            $_SESSION['sumOrder'] = $rowNewProduct['Price']*$_REQUEST['quantity'];
+    }
+    
+    // Quay lai mua hang.
+    echo "<script>location='?section=shop&typeid=".$_REQUEST["typeid"]."'</script>";
+}
+?>

@@ -21,7 +21,16 @@
           <div class="section-body">
             <div class="shop-gradient-wrap">
               <img
-                src="assets/image/shop-banner-blank.png"
+                src="
+                <?php
+                  switch($_REQUEST['typeid'])
+                  {
+                    case '0': echo 'assets/image/shop-banner-all.png'; break;
+                    case '1': echo 'assets/image/shop-banner-fruit.png'; break;
+                    case '2': echo 'assets/image/shop-banner-green.png'; break;
+                    case '3': echo 'assets/image/shop-banner-combo.png';
+                  }
+                ?>"
                 alt="shop banner"
                 class="shop-img-gradient float-right img-fluid"
               />

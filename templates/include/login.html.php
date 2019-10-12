@@ -1,4 +1,4 @@
-<!-- <?php include "templates/scripts/testForm.php";?>       -->
+<?php include "templates/scripts/testForm.php";?>
       
       <!-- <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
@@ -26,7 +26,9 @@
                     name="emailLogin"
                     aria-describedby="emailInput"
                     placeholder="Email tài khoản"
-                    value='<?php if (isset($_POST["emailLogin"])) echo $_POST["emailLogin"];?>'
+                    value='<?php if (isset($_POST["emailLogin"])) echo $_POST["emailLogin"];
+                                  else if (isset($_COOKIE["emailLogin"])) echo $_COOKIE["emailLogin"];
+                            ?>'
                   />
                 </div>
                 <div class="form-group">
@@ -40,7 +42,9 @@
                     name="passwordLogin"
                     id="passwordLogin"
                     placeholder="Mật khẩu"
-                    value='<?php if (isset($_POST["passwordLogin"])) echo $_POST["passwordLogin"];?>'
+                    value='<?php if (isset($_POST["passwordLogin"])) echo $_POST["passwordLogin"];
+                                  else if (isset($_COOKIE["passwordLogin"])) echo $_COOKIE["passwordLogin"];
+                            ?>'
                   />
                 </div>
                 <div class="form-group form-check">
@@ -48,6 +52,7 @@
                     type="checkbox"
                     class="form-check-input"
                     id="rememberCheckLogin"
+                    name="rememberCheckLogin"
                   />
                   <label class="form-check-label" for="rememberCheckLogin"
                     >Lưu thông tin đăng nhập</label
