@@ -6,33 +6,54 @@ jQuery(document).ready(function($) {
     O: "\u1ED4"
   });
 
-  var $prodTable = $("#prodTable"),
-    pagerOptions = {
-      // target the pager markup - see the HTML block below
-      container: $(".pager"),
-      // output string - default is '{page}/{totalPages}';
-      // possible variables: {size}, {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
-      // also {page:input} & {startRow:input} will add a modifiable input in place of the value
-      output: "{startRow} - {endRow} / {filteredRows} ({totalRows})",
-      // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
-      // table row set to a height to compensate; default is false
-      fixedHeight: true,
-      // remove rows from the table to speed up the sort of large tables.
-      // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
-      removeRows: false,
-      // go to page selector - select dropdown that sets the current page
-      cssGoto: ".gotoPage"
-    };
+  var $prodTable = $("#prodTable");
 
   $prodTable
     .tablesorter({
-      theme: "blue",
+      theme: "bootstrap",
       sortLocaleCompare: true,
       sortTable: true,
       ignoreCase: true,
       headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
-      //   widthFixed: true,
-      widgets: ["filter"]
+      widthFixed: false,
+      widgets: ["filter"],
+      widgetOptions: {
+        // extra css class name (string or array) added to the filter element (input or select)
+        filter_cssFilter: [
+          "form-control",
+          "form-control",
+          "form-control", // select needs custom class names :(
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control custom-select",
+          "form-control"
+        ]
+      }
     })
-    .tablesorterPager(pagerOptions);
+    .tablesorterPager({
+      // target the pager markup - see the HTML block below
+      container: $(".ts-pager"),
+
+      // target the pager page select dropdown - choose a page
+      cssGoto: ".pagenum",
+
+      // remove rows from the table to speed up the sort of large tables.
+      // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+      removeRows: false,
+
+      // output string - default is '{page}/{totalPages}';
+      // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+      output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
+    });
 });
