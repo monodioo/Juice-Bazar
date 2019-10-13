@@ -51,11 +51,19 @@ function adminLogin($pdo, $adminName, $adminPass)
     }
 }
 
-function getProducts($pdo)
+function getProducts($pdo, $id = '')
 {
-    $sql = 'SELECT DISTINCT p.`ProductId`, p.`Name`, p.`Image`, p.`Description`, p.`Nutrition`, p.`Status`, p.`TypeId` FROM `product` p WHERE p.`TypeId` IN (1,2,3) ORDER BY p.`Name`';
-    $query = query($pdo, $sql);
-    $results = $query->fetchAll();
+    if ($id == '') {
+        $sql = 'SELECT * FROM `product` p WHERE p.`TypeId` IN (1,2,3) ORDER BY p.`Name`';
+        $query = query($pdo, $sql);
+        $results = $query->fetchAll();
+    } else {
+        $sql = $sql = 'SELECT * FROM `product` p WHERE p.`TypeId` IN (1,2,3) AND p.`ProductId` = :ProductId';
+        $parameters = [':ProductId' => $id];
+        $query = query($pdo, $sql, $parameters);
+        $results = $query->fetchAll();
+    }
+
     $products = [];
     foreach ($results as $result) {
         $capacity = findCapacity($pdo, $result['ProductId']);
@@ -63,6 +71,7 @@ function getProducts($pdo)
         $pending = findPending($pdo, $result['ProductId']);
         $products[] = [
             'ProductId' => $result['ProductId'],
+            'TypeId' => $result['TypeId'],
             'Name' => $result['Name'],
             'Image' => $result['Image'],
             'Description' => $result['Description'],
@@ -103,4 +112,161 @@ function findPending($pdo, $ProductId)
 
     $parameters = [':ProductId' => $ProductId];
     return query($pdo, $sql, $parameters)->fetchAll();
+}
+
+// function findByID($pdo, $sql, $id)
+// {
+//     $parameters = [':ProductId' => $id];
+//     $query = query($pdo, $sql, $parameters);
+//     $results = $query->fetch();
+//     return $results[0];
+// }
+
+// function findProductById($pdo, $id)
+// {
+
+
+function saveElement($pdo, $table, $primaryKey, $record)
+{
+    $recordElement = [
+        'ProductId' => $record['ProductId'],
+        'TypeId' => $record['TypeId'],
+        'Name' => $record['Name'],
+        'Image' => $record['Image'],
+        'Description' => $record['Description'],
+        'Nutrition' => $record['Nutrition'],
+        'Status' => $record['Status'],
+    ];
+    $recordPrice1 =  [
+        'ProductId' => $record['ProductId'],
+        'CapacityId' => 1,
+        'Price' => $record['Price1']
+    ];
+    $recordPrice2 =  [
+        'ProductId' => $record['ProductId'],
+        'CapacityId' => 2,
+        'Price' => $record['Price2'],
+    ];
+
+
+    if ($recordElement['ProductId'] == '') {
+        $recordElement['ProductId'] = null;
+        insertElement($pdo, $table, $recordElement, $recordPrice1, $recordPrice2);
+    } else {
+
+        updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1, $recordPrice2);
+    }
+}
+
+function insertElement($pdo, $table, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
+{
+
+    //insert new Item into $Table
+    $sql = 'INSERT INTO `' . $table . '` (';
+
+    foreach ($recordElement as $key => $value) {
+        $sql .= '`' . $key . '`,';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ') VALUES (';
+
+    foreach ($recordElement as $key => $value) {
+        $sql .= ':' . $key . ',';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ')';
+
+    query($pdo, $sql, $recordElement);
+
+    //find the newly inserted element 
+    $query = query($pdo, 'SELECT MAX(`ProductId`) FROM `product`');
+    $query = $query->fetch();
+    $newId = $query[0];
+
+
+    if (!empty($recordPrice1) && !empty($recordPrice2)) {
+        $recordPrice1['ProductId'] = $newId;
+        $recordPrice2['ProductId'] = $newId;
+        //insert into Table Pricebycapacity for CapacityId = 1 (250ml)
+        $sqlPrice1 = 'INSERT INTO `pricebycapacity` (';
+
+        foreach ($recordPrice1 as $key => $value) {
+            $sqlPrice1 .= '`' . $key . '`,';
+        }
+
+        $sqlPrice1 = rtrim($sqlPrice1, ',');
+
+        $sqlPrice1 .= ') VALUES (';
+
+        foreach ($recordPrice1 as $key => $value) {
+            $sqlPrice1 .= ':' . $key . ',';
+        }
+
+        $sqlPrice1 = rtrim($sqlPrice1, ',');
+
+        $sqlPrice1 .= ')';
+
+        query($pdo, $sqlPrice1, $recordPrice1);
+
+        //insert into Table Pricebycapacity for CapacityId = 2 (330ml)
+        $sqlPrice2 = 'INSERT INTO `pricebycapacity` (';
+
+        foreach ($recordPrice2 as $key => $value) {
+            $sqlPrice2 .= '`' . $key . '`,';
+        }
+
+        $sqlPrice2 = rtrim($sqlPrice2, ',');
+
+        $sqlPrice2 .= ') VALUES (';
+
+        foreach ($recordPrice2 as $key => $value) {
+            $sqlPrice2 .= ':' . $key . ',';
+        }
+
+        $sqlPrice2 = rtrim($sqlPrice2, ',');
+
+        $sqlPrice2 .= ')';
+
+        query($pdo, $sqlPrice2, $recordPrice2);
+    }
+}
+
+function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
+{
+    // update element in $table
+    $sqlElement = ' UPDATE `' . $table . '` SET ';
+
+    foreach ($recordElement as $key => $value) {
+        $sqlElement .= '`' . $key . '` = :' . $key . ',';
+    }
+
+    $sqlElement = rtrim($sqlElement, ',');
+
+    $sqlElement .= ' WHERE `' . $primaryKey . '` = :ProductId';
+
+    query($pdo, $sqlElement, $recordElement);
+
+    if (!empty($recordPrice1) && !empty($recordPrice2)) {
+        $sqlPrice1 = 'UPDATE `pricebycapacity` SET `Price` = :Price WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+        query($pdo, $sqlPrice1, $recordPrice1);
+
+        $sqlPrice2 = 'UPDATE `pricebycapacity` SET `Price` = :Price WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+        query($pdo, $sqlPrice2, $recordPrice2);
+    }
+}
+
+
+function deleteElement($pdo, $id)
+{
+
+    $sqlPrice = 'DELETE FROM `pricebycapacity` WHERE `ProductId` = :primaryKey';
+    $parameters = [':primaryKey' => $id];
+    query($pdo, $sqlPrice, $parameters);
+
+    $sql = 'DELETE FROM `product` WHERE `ProductId` = :primaryKey';
+    query($pdo, $sql, $parameters);
 }

@@ -15,6 +15,8 @@ if (!empty($_SESSION['admin'])) {
     include __DIR__ . '/../templates/admin-products.html.php';
 
     $output = ob_get_clean();
+} else {
+    header('location: index.php');
 }
 
 

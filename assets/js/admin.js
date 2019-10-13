@@ -22,7 +22,8 @@ jQuery(document).ready(function($) {
         filter_cssFilter: [
           "form-control",
           "form-control",
-          "form-control", // select needs custom class names :(
+          "form-control",
+          "form-control custom-select",
           "form-control",
           "form-control",
           "form-control",
@@ -56,4 +57,21 @@ jQuery(document).ready(function($) {
       // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
       output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
     });
+
+  // Table sorter plugin on products edit table
+  $("#prodEditTable").tablesorter({
+    // theme: "bootstrap",
+    ignoreCase: true,
+    widthFixed: false
+  });
+
+  //Delete modal
+  $("#deleteModal").on("show.bs.modal", function(event) {
+    var button = $(event.relatedTarget);
+    var productId = button.data("product-id");
+    var productName = button.data("product-name");
+    var modal = $(this);
+    modal.find("input#deleteProduct").val(productId);
+    modal.find(".modal-text").text(productName);
+  });
 });

@@ -1,9 +1,8 @@
 <?php
-include('config.php');
-$session_uid = '';
-$_SESSION['uid'] = '';
-if (empty($session_uid) && empty($_SESSION['uid'])) {
-    $url = BASE_URL . 'index.php';
-    header("Location: $url");
-    //echo "<script>window.location='$url'</script>";
-}
+	session_start();
+	unset($_SESSION['admin']);
+ 
+	if(session_destroy())
+	{
+		header("Location: index.php");
+	}
