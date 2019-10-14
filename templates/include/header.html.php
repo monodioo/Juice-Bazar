@@ -139,7 +139,7 @@
               class="d-flex justify-content-center align-items-center btn-cart text-decoration-none px-3 py-2 text-white"
             >
               <span class="cart-sum d-none d-lg-block mr-2"
-                ><?=$_SESSION['sumOrder']/1000?>.000₫</span
+                ><?php if(isset($_SESSION['sumOrder'])) echo number_format($_SESSION['sumOrder'],0,'.','.'); else echo '0'?> ₫</span
               >
               <span>
                 <svg
@@ -157,7 +157,7 @@
                   />
                 </svg>
               </span>
-              <span class="cart-count"><?=count($_SESSION['cart'])?></span>
+              <span class="cart-count"><?php if(isset($_SESSION['sumOrder'])) echo count($_SESSION['cart'])?></span>
             </a>
           </div>
         </div>
