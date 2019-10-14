@@ -1,4 +1,7 @@
-<?php include "templates/scripts/checkCoupon.php";?>
+<?php
+include "templates/scripts/cartCheckCoupon.php";
+include "templates/scripts/cartDelete.php";
+?>
 <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
           <li class="breadcrumb-item"><a href="?section=home">Trang chủ</a></li>
@@ -7,7 +10,7 @@
       </div>
       
       <div class="row ">
-        <form class="page-section card col-12 py-5 px-5" method="post">
+        <div class="page-section card col-12 py-5 px-5">
           <div class="row">
             <div class="section-title col-12 pt-0">Giỏ hàng</div>
           </div>
@@ -25,7 +28,7 @@
                 </div>
               </div>
             </div>
-            <?php include "templates/scripts/showListInCart.php"?>
+            <?php include "templates/scripts/cartShowList.php"?>
 
           <!-- <div class="row">
             <table class="table table-responsive-md cart-table mx-3">
@@ -153,5 +156,5 @@
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>

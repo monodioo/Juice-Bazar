@@ -17,9 +17,10 @@ $emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = 
                     }
                     else {
                         $_SESSION["nameMember"] = $rowMember['Name'];
+                        $_SESSION["memberId"] = $rowMember["MemberId"];
                         if (isset($_POST['rememberCheckLogin'])) {
-                            setcookie('emailLogin',$_POST['emailLogin'],time()+(86400*30,'/'));
-                            setcookie('passwordLogin',$_POST['passwordLogin'],time()+(86400*30,'/'));
+                            setcookie('emailLogin',$_POST['emailLogin'],time()+(86400*30),'/','',0,0);
+                            setcookie('passwordLogin',$_POST['passwordLogin'],time()+(86400*30),'/','',0,0);
                         }
                         echo "<script>alert('Đăng nhập thành công!');</script>";
                         echo "<script>location='?'</script>";

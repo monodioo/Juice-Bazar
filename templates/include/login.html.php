@@ -1,4 +1,6 @@
-<?php include "templates/scripts/testForm.php";?>
+<?php include "templates/scripts/testForm.php";
+if (isset($_COOKIE['emailLogin'])) echo "<script>alert('cookie is set');</script>";
+?>
       
       <!-- <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
@@ -53,6 +55,8 @@
                     class="form-check-input"
                     id="rememberCheckLogin"
                     name="rememberCheckLogin"
+                    <?php if (isset($_COOKIE["emailLogin"])) echo 'checked'?>
+
                   />
                   <label class="form-check-label" for="rememberCheckLogin"
                     >Lưu thông tin đăng nhập</label

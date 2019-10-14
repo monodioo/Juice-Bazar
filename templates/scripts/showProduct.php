@@ -1,15 +1,26 @@
 <?php
+if ($_REQUEST["section"]=='home') {
+    $hotProductId = "SELECT ProductId FROM OrderDetail
+                        GROUP BY ProductId
+                        ORDER BY SUM(Quantity) DESC
+                        LIMIT 6";
+    $sqlShowProduct = "SELECT * FROM Product  JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
+                        WHERE CapacityId = 1 AND Status = 1 AND ProductId IN($hotProductId)"; 
+}
+else if ($_REQUEST["section"]=='shop'){
     if ($_REQUEST["typeid"]=='0')
     {
         $sqlShowProduct = "SELECT * FROM Product JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
-                WHERE CapacityId = 1 AND Status = 1";
+                            WHERE CapacityId = 1 AND Status = 1";
     }
     else
     {
         $typeid = $_REQUEST['typeid'];
         $sqlShowProduct = "SELECT * FROM Product  JOIN PriceByCapacity ON Product.ProductId = PriceByCapacity.ProductId
-        WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
+                            WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
     }
+}
+    
     $tableProduct = mysqli_query($con,$sqlShowProduct);
     while ($row = mysqli_fetch_array($tableProduct))
         {

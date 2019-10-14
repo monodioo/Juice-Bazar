@@ -1,18 +1,9 @@
       <div class="row">
         <div class="page-section">
           <ul class="nav shop-nav mt-2 mt-lg-5 mw-100">
-            <li class="nav-item">
-              <a class="nav-link nav-hover <?php if ($_REQUEST['typeid'] == '0') echo 'nav-hover-active'; ?>" id="shopAll" href="?section=shop&typeid=0">Toàn bộ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-hover <?php if ($_REQUEST['typeid'] == '1') echo 'nav-hover-active'; ?>" id="shopFruits" href="?section=shop&typeid=1">Fruits</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='2') echo 'nav-hover-active'; ?>" id="shopGreen" href="?section=shop&typeid=2">Green</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-hover <?php if($_REQUEST['typeid']=='3') echo 'nav-hover-active'; ?>" id="shopCombo" href="?section=shop&typeid=3">Combo</a>
-            </li>
+
+            <?php include "templates/scripts/shopShowTypeProduct.php";?>
+
           </ul>
         </div>
       </div>
