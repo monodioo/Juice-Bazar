@@ -127,63 +127,63 @@ jQuery(document).ready(function($) {
     // $(`#${e.target.id}`).addClass("nav-hover-active");
   });
 
-  let $query = $(location)
-    .attr("search")
-    .slice(9);
+  // let $query = $(location)
+  //   .attr("search")
+  //   .slice(9);
 
-  switch ($query) {
-    case "shopAll":
-      $(".shop-img-gradient").attr(
-        "src",
-        "../assets/image/shop-banner-all.png"
-      );
-      $(".shop-gradient-caption p").text(
-        "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
-      );
+  // switch ($query) {
+  //   case "shop":
+  //     $(".shop-img-gradient").attr(
+  //       "src",
+  //       "assets/image/shop-banner-all.png"
+  //     );
+  //     $(".shop-gradient-caption p").text(
+  //       "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
+  //     );
 
-      $(`#${$query}`).addClass("nav-hover-active");
-      break;
-    case "shopFruits":
-      $(".shop-img-gradient").attr(
-        "src",
-        "../assets/image/shop-banner-fruit.png"
-      );
-      $(".shop-gradient-caption p").text(
-        "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
-      );
-      $(`#${$query}`).addClass("nav-hover-active");
-      break;
-    case "shopGreen":
-      $(".shop-img-gradient").attr(
-        "src",
-        "../assets/image/shop-banner-green.png"
-      );
-      $(".shop-gradient-caption p").text(
-        "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
-      );
-      $(`#${$query}`).addClass("nav-hover-active");
-      break;
-    case "shopCombo":
-      $(".shop-img-gradient").attr(
-        "src",
-        "../assets/image/shop-banner-combo.png"
-      );
-      $(".shop-gradient-caption p").text(
-        "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
-      );
-      $(`#${$query}`).addClass("nav-hover-active");
-      break;
-    default:
-      $(".shop-img-gradient").attr(
-        "src",
-        "../assets/image/shop-banner-all.png"
-      );
-      $(".shop-gradient-caption p").text(
-        "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
-      );
-      $(`#shopAll`).addClass("nav-hover-active");
-      break;
-  }
+  //     $(`#${$query}`).addClass("nav-hover-active");
+  //     break;
+  //   case "shopFruits":
+  //     $(".shop-img-gradient").attr(
+  //       "src",
+  //       "assets/image/shop-banner-fruit.png"
+  //     );
+  //     $(".shop-gradient-caption p").text(
+  //       "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
+  //     );
+  //     $(`#${$query}`).addClass("nav-hover-active");
+  //     break;
+  //   case "shopGreen":
+  //     $(".shop-img-gradient").attr(
+  //       "src",
+  //       "assets/image/shop-banner-green.png"
+  //     );
+  //     $(".shop-gradient-caption p").text(
+  //       "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
+  //     );
+  //     $(`#${$query}`).addClass("nav-hover-active");
+  //     break;
+  //   case "shopCombo":
+  //     $(".shop-img-gradient").attr(
+  //       "src",
+  //       "../assets/image/shop-banner-combo.png"
+  //     );
+  //     $(".shop-gradient-caption p").text(
+  //       "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
+  //     );
+  //     $(`#${$query}`).addClass("nav-hover-active");
+  //     break;
+  //   default:
+  //     $(".shop-img-gradient").attr(
+  //       "src",
+  //       "../assets/image/shop-banner-all.png"
+  //     );
+  //     $(".shop-gradient-caption p").text(
+  //       "Juice Bazar là thương hiệu nước ép trái cây sử dụng công nghệ Cold-Pressed. Không chỉ hướng tới sản phẩm chất lượng nhất, chúng tôi đầu tư và áp dụng công nghệ hàng đầu để có thể đưa nước ép tới từng hộ gia đình."
+  //     );
+  //     $(`#shopAll`).addClass("nav-hover-active");
+  //     break;
+  // }
 
   $("#loginForm").validate({
     rules: {
