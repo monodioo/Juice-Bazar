@@ -1,15 +1,15 @@
 <div class="page-section card col-12 p-5">
     <div class="section-title">All Products</div>
     <div>
-        <table class="table table-hover table-striped table-responsive tablesorter " id='prodTable'>
+        <table class="table table-hover table-striped table-responsive tablesorter" id='prodTable'>
             <thead>
                 <tr>
-                    <th scope="col" rowspan="2">#</th>
-                    <th scope="col" rowspan="2" style="width:5%"><span onclick='sortTable("Name");'>Name</span></th>
+                    <th scope="col" rowspan="2">ID</th>
+                    <th scope="col" rowspan="2" style="width:5%">Name</th>
                     <th scope="col" rowspan="2" style="width:6%" class="sorter-false filter-false">Image</th>
                     <th scope="col" rowspan="2" style="width:5%" class="filter-select filter-exact" data-placeholder="All Categories">Category</th>
-                    <th scope="col" rowspan="2" style="width:10%">Description</th>
-                    <th scope="col" rowspan="2" style="width:10%">Nutrition</th>
+                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Description</th>
+                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Nutrition</th>
                     <th scope="col" colspan="2" class="sorter-false filter-false">Price</th>
                     <th scope="col" colspan="3" class="sorter-false filter-false">Total Qty.</th>
                     <th scope="col" colspan="3" class="sorter-false filter-false">Sold Qty.</th>
@@ -18,26 +18,26 @@
                     <th scope="col" rowspan="2" class="sorter-false filter-false">Action</th>
                 </tr>
                 <tr>
-                    <th scope="col" class="filter-false">250ml</th>
-                    <th scope="col" class="filter-false">330ml</th>
-                    <th scope="col" class="filter-false">250ml</th>
-                    <th scope="col" class="filter-false">330ml</th>
-                    <th scope="col" class="filter-false">Both</th>
-                    <th scope="col" class="filter-false">250ml</th>
-                    <th scope="col" class="filter-false">330ml</th>
-                    <th scope="col" class="filter-false">Both</th>
-                    <th scope="col" class="filter-false">250ml</th>
-                    <th scope="col" class="filter-false">330ml</th>
-                    <th scope="col" class="filter-false">Both</th>
+                    <th scope="col" class="filter-exact">250ml</th>
+                    <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">250ml</th>
+                    <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">Both</th>
+                    <th scope="col" class="filter-exact">250ml</th>
+                    <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">Both</th>
+                    <th scope="col" class="filter-exact">250ml</th>
+                    <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">Both</th>
                 </tr>
             </thead>
 
             <tbody>
                 <?php $count = 0; ?>
                 <?php foreach ($products as $product) : ?>
-                    <?php $count++; ?>
+                    <!-- <?php $count++; ?> -->
                     <tr>
-                        <th scope="row"><?= $count; ?></th>
+                        <th scope="row"><?= $product['ProductId'] ?></th>
                         <td><?= $product['Name']; ?></td>
                         <td><img class="img-fluid" src="../../<?= $product['Image']; ?>" alt="<?= $product['Name']; ?>"></td>
                         <td><?php switch ($product['TypeId']) {
