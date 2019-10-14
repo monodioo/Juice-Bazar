@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
       ignoreCase: true,
       headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
       widthFixed: true,
-      widgets: ["filter"],
+      widgets: ["filter", "cssStickyHeaders"],
       widgetOptions: {
         // extra css class name (string or array) added to the filter element (input or select)
         filter_cssFilter: [
@@ -37,9 +37,13 @@ jQuery(document).ready(function($) {
           "form-control",
           "form-control",
           "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
           "form-control custom-select",
           "form-control"
-        ]
+        ],
+        cssStickyHeaders_offset: 70
       }
     })
     .tablesorterPager({
@@ -58,12 +62,7 @@ jQuery(document).ready(function($) {
       output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
     });
 
-  // Table sorter plugin on products edit table
-  $("#prodEditTable").tablesorter({
-    // theme: "bootstrap",
-    ignoreCase: true,
-    widthFixed: true
-  });
+  $prodTable.doubleScroll();
 
   //Delete modal
   $("#deleteModal").on("show.bs.modal", function(event) {
@@ -76,9 +75,14 @@ jQuery(document).ready(function($) {
   });
 
   //Calculate Sum of new quantity for products
-  // $("#newQty1").change(function() {
-  //   // $sumNew = $("#newQty1").val() + $("#newQty2").val();
-  //   // $("#newQty").val($sumNew);
-  //   console.log("aa");
-  // });
+  $("#newQty1").change(function() {
+    $sumNew = Number($("#newQty1").val()) + Number($("#newQty2").val());
+    $("#newQty").val($sumNew);
+    $("#newQtyHidden").val($sumNew);
+  });
+  $("#newQty2").change(function() {
+    $sumNew = Number($("#newQty1").val()) + Number($("#newQty2").val());
+    $("#newQty").val($sumNew);
+    $("#newQtyHidden").val($sumNew);
+  });
 });

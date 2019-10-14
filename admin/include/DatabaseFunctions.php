@@ -67,8 +67,8 @@ function getProducts($pdo, $id = '')
     $products = [];
     foreach ($results as $result) {
         $capacity = findCapacity($pdo, $result['ProductId']);
-        $sold = findSold($pdo, $result['ProductId']);
-        $pending = findPending($pdo, $result['ProductId']);
+        $sold = countProductByOrderStatus($pdo, $result['ProductId'], "3"); //3 for products in concluded orders
+        $shipping = countProductByOrderStatus($pdo, $result['ProductId'], "2"); // (0,1) for pending and processing orders
         $products[] = [
             'ProductId' => $result['ProductId'],
             'TypeId' => $result['TypeId'],
@@ -79,13 +79,15 @@ function getProducts($pdo, $id = '')
             'Status' => $result['Status'],
             'Price1' => $capacity[0]['Price'],
             'Price2' => $capacity[1]['Price'],
-            'Total1' => $capacity[0]['Quantity'],
-            'Total2' => $capacity[1]['Quantity'],
-            'Total' => ($capacity[0]['Quantity'] + $capacity[1]['Quantity']),
-            'Sold1' => empty($sold[0]['Quantity']) ? 0 : $sold[0]['Quantity'],
-            'Sold2' => empty($sold[1]['Quantity']) ? 0 : $sold[1]['Quantity'],
-            'Sold' => (empty($sold[0]['Quantity']) ? 0 : $sold[0]['Quantity']) + (empty($sold[1]['Quantity']) ? 0 : $sold[1]['Quantity']),
-            'Pending' => (empty($pending[0]['Quantity']) ? 0 : $pending[0]['Quantity']) + (empty($pending[1]['Quantity']) ? 0 : $pending[1]['Quantity'])
+            'Available1' => $capacity[0]['Quantity'],
+            'Available2' => $capacity[1]['Quantity'],
+            'Available' => ($capacity[0]['Quantity'] + $capacity[1]['Quantity']),
+            'Sold1' => $sold[0]['Quantity'] ?? 0,
+            'Sold2' => $sold[1]['Quantity'] ?? 0,
+            'Sold' => ($sold[0]['Quantity'] ?? 0) + ($sold[1]['Quantity'] ?? 0),
+            'Shipping1' => ($shipping[0]['Quantity'] ?? 0),
+            'Shipping2' => ($shipping[0]['Quantity'] ?? 0),
+            'Shipping' => ($shipping[0]['Quantity'] ?? 0) + ($shipping[1]['Quantity'] ?? 0)
         ];
     }
     return $products;
@@ -98,21 +100,21 @@ function findCapacity($pdo, $ProductId)
     return query($pdo, $sql, $parameters)->fetchAll();
 }
 
-function findSold($pdo, $ProductId)
+function countProductByOrderStatus($pdo, $ProductId, $OrderStatus)
 {
-    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status` = 2 AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 2 for concluded orders
+    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status` IN (:OrderStatus) AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`';
 
-    $parameters = [':ProductId' => $ProductId];
+    $parameters = [':OrderStatus' => $OrderStatus, ':ProductId' => $ProductId];
     return query($pdo, $sql, $parameters)->fetchAll();
 }
 
-function findPending($pdo, $ProductId)
-{
-    $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`= 1 AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // STatus = 1for pending orders
+// function findPending($pdo, $ProductId)
+// {
+//     $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `pricebycapacity` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status`= 1 AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`'; // Status = 1for pending orders
 
-    $parameters = [':ProductId' => $ProductId];
-    return query($pdo, $sql, $parameters)->fetchAll();
-}
+//     $parameters = [':ProductId' => $ProductId];
+//     return query($pdo, $sql, $parameters)->fetchAll();
+// }
 
 // function findByID($pdo, $sql, $id)
 // {
@@ -140,12 +142,14 @@ function saveElement($pdo, $table, $primaryKey, $record)
     $recordPrice1 =  [
         'ProductId' => $record['ProductId'],
         'CapacityId' => 1,
-        'Price' => $record['Price1']
+        'Price' => $record['Price1'],
+        'Quantity' => $record['New1'],
     ];
     $recordPrice2 =  [
         'ProductId' => $record['ProductId'],
         'CapacityId' => 2,
         'Price' => $record['Price2'],
+        'Quantity' => $record['New2']
     ];
 
 
@@ -251,10 +255,20 @@ function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 
     query($pdo, $sqlElement, $recordElement);
 
     if (!empty($recordPrice1) && !empty($recordPrice2)) {
-        $sqlPrice1 = 'UPDATE `pricebycapacity` SET `Price` = :Price WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
-        query($pdo, $sqlPrice1, $recordPrice1);
+        if (empty($recordPrice1['Quantity'])) {
+            $sqlPrice1 = 'UPDATE `pricebycapacity` SET `Price` = :Price  WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            unset($recordPrice1['Quantity']);
+        } else {
+            $sqlPrice1 = 'UPDATE `pricebycapacity` SET `Price` = :Price , `Quantity` = :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+        }
+        if (empty($recordPrice2['Quantity'])) {
+            $sqlPrice2 = 'UPDATE `pricebycapacity` SET `Price` = :Price  WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            unset($recordPrice2['Quantity']);
+        } else {
+            $sqlPrice2 = 'UPDATE `pricebycapacity` SET `Price` = :Price , `Quantity` = :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+        }
 
-        $sqlPrice2 = 'UPDATE `pricebycapacity` SET `Price` = :Price WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+        query($pdo, $sqlPrice1, $recordPrice1);
         query($pdo, $sqlPrice2, $recordPrice2);
     }
 }
@@ -262,11 +276,17 @@ function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 
 
 function deleteElement($pdo, $id)
 {
-
     $sqlPrice = 'DELETE FROM `pricebycapacity` WHERE `ProductId` = :primaryKey';
     $parameters = [':primaryKey' => $id];
     query($pdo, $sqlPrice, $parameters);
 
     $sql = 'DELETE FROM `product` WHERE `ProductId` = :primaryKey';
+    query($pdo, $sql, $parameters);
+}
+
+function switchProductStatus($pdo, $table, $primaryKey, $id, $statusKey, $statusVal)
+{
+    $sql = 'UPDATE `' . $table . '` SET `' . $statusKey . '` = :statusVal WHERE `' . $primaryKey . '` = :primaryKey';
+    $parameters = [':primaryKey' => $id, ':statusVal' => $statusVal];
     query($pdo, $sql, $parameters);
 }

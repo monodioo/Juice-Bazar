@@ -1,7 +1,7 @@
 <div class="page-section card col-12 p-5">
     <div class="section-title"><?= $sectionTitle ?></div>
     <div class="px-5">
-        <table class="table table-hover table-striped table-md-responsive" id='prodEditTable'>
+        <table class="table table-hover table-striped" id='prodEditTable'>
             <thead>
                 <tr>
                     <th scope="col" width=15%>Information</th>
@@ -55,9 +55,9 @@
                     </tr>
                     <tr>
                         <td scope="col">Product by Capacity</td>
-                        <th scope="col">250ml</th>
-                        <th scope="col">330ml</th>
-                        <th scope="col">Both</th>
+                        <th scope="col" style="width: 25%">250ml</th>
+                        <th scope="col" style="width: 25%">330ml</th>
+                        <th scope="col" style="width: 25%">Both</th>
                     </tr>
                     <tr>
                         <td scope="col">Price</td>
@@ -66,10 +66,25 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td scope="col">Total Quantity</td>
-                        <td><input type="number" name="Total1" value="<?= $products[0]['Total1'] ?>" disabled></td>
-                        <td><input type="number" name="Total2" value="<?= $products[0]['Total2'] ?>" disabled></td>
-                        <td><input type="number" name="Total" value="<?= $products[0]['Total'] ?>" disabled></td>
+                        <td scope="col">Available Quantity</td>
+                        <td>
+                            <input type="number" value="<?= $products[0]['Available1'] ?>" disabled>
+                            <input type="hidden" name="Available1" value="<?= $products[0]['Available1'] ?>">
+                        </td>
+                        <td>
+                            <input type="number" value="<?= $products[0]['Available2'] ?>" disabled>
+                            <input type="hidden" name="Available2" value="<?= $products[0]['Available2'] ?>">
+                        </td>
+                        <td>
+                            <input type="number" value="<?= $products[0]['Available']  ?>" disabled>
+                            <input type="hidden" name="Available" value="<?= $products[0]['Available']  ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Shipping Quantity</td>
+                        <td><input type="number" name="Shipping1" value="<?= $products[0]['Shipping1'] ?>" disabled></td>
+                        <td><input type="number" name="Shipping2" value="<?= $products[0]['Shipping2'] ?>" disabled></td>
+                        <td><input type="number" name="Shipping" value="<?= $products[0]['Shipping'] ?>" disabled></td>
                     </tr>
                     <tr>
                         <td scope="col">Sold Quantity</td>
@@ -78,18 +93,18 @@
                         <td><input type="number" name="Sold" value="<?= $products[0]['Sold'] ?>" disabled></td>
                     </tr>
                     <tr>
-                        <td scope="col">Available Quantity</td>
-                        <td><input type="number" name="Avail1" value="<?= $products[0]['Total1'] - $products[0]['Sold1'] ?>" disabled></td>
-                        <td><input type="number" name="Avail2" value="<?= $products[0]['Total2'] - $products[0]['Sold2'] ?>" disabled></td>
-                        <td><input type="number" name="Avail" value="<?= $products[0]['Total'] - $products[0]['Sold'] ?>" disabled></td>
+                        <td scope="col">Total Quantity</td>
+                        <td><input type="number" name="Total1" value="<?= $products[0]['Available1'] + $products[0]['Shipping1'] + $products[0]['Sold1'] ?>" disabled></td>
+                        <td><input type="number" name="Total2" value="<?= $products[0]['Available2'] + $products[0]['Shipping2'] + $products[0]['Sold2'] ?>" disabled></td>
+                        <td><input type="number" name="Total" value="<?= $products[0]['Available'] + $products[0]['Shipping'] + $products[0]['Sold'] ?>" disabled></td>
                     </tr>
                     <tr>
                         <td scope="col">New Quantity</td>
-                        <td><input type="number" name="New1" id="newQty1" value="" min=0></td>
-                        <td><input type="number" name="New2" id="newQty2" value="" min=0></td>
+                        <td><input type="number" name="New1" id="newQty1" value="0" min=0></td>
+                        <td><input type="number" name="New2" id="newQty2" value="0" min=0></td>
                         <td>
-                            <input type="number" id="newQty" value="" disabled>
-                            <input type="hidden" name="New" id="newQtyhidden" value="">
+                            <input type="number" id="newQty" value="0" disabled>
+                            <input type="hidden" name="New" id="newQtyHidden" value="0">
                         </td>
                     </tr>
                     <tr>

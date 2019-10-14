@@ -56,7 +56,7 @@
                     <div class="dropdown-menu" aria-labelledby="productDropdown">
                         <a class="dropdown-item text-dark" href="admin-products.php">All Products</a>
                         <a class="dropdown-item text-dark" href="products-edit.php">Add Product</a>
-                        <a class="dropdown-item text-dark" href="products-quantity.php">Add Quantity</a>
+                        <!-- <a class="dropdown-item text-dark" href="products-quantity.php">Add Quantity</a> -->
                     </div>
                     <a href="admin-orders.html" class="nav-link">Orders</a>
                     <a href="admin-customers.html" class="nav-link ">Customers</a>
@@ -89,6 +89,11 @@
     <!-- jQuery TableSorter -->
     <script type="text/javascript" src="../../assets/js/jquery.tablesorter.combined.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.tablesorter.pager.min.js"></script>
+    <!-- <script type="text/javascript" src="../../assets/js/widget-stickyHeaders.min.js"></script> -->
+    <script type="text/javascript" src="../../assets/js/widget-cssStickyHeaders.min.js"></script>
+
+    <!-- table double scroll -->
+    <script type="text/javascript" src="../../assets/js/jquery.doubleScroll.js"></script>
 
     <!-- custom script -->
     <script src="../../assets/js/custom.js"></script>

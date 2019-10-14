@@ -724,3 +724,10 @@ label.error {
 input.error {
   border: 1px solid red;
 }
+
+/* ADMIN  */
+
+/* .table-wrapper {
+  height: calc(100vh - 250px) !important;
+  overflow: auto;
+} */
