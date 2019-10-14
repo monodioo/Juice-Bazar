@@ -15,14 +15,15 @@ jQuery(document).ready(function($) {
       sortTable: true,
       ignoreCase: true,
       headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
-      widthFixed: false,
+      widthFixed: true,
       widgets: ["filter"],
       widgetOptions: {
         // extra css class name (string or array) added to the filter element (input or select)
         filter_cssFilter: [
           "form-control",
           "form-control",
-          "form-control", // select needs custom class names :(
+          "form-control",
+          "form-control custom-select",
           "form-control",
           "form-control",
           "form-control",
@@ -56,4 +57,28 @@ jQuery(document).ready(function($) {
       // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
       output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
     });
+
+  // Table sorter plugin on products edit table
+  $("#prodEditTable").tablesorter({
+    // theme: "bootstrap",
+    ignoreCase: true,
+    widthFixed: true
+  });
+
+  //Delete modal
+  $("#deleteModal").on("show.bs.modal", function(event) {
+    var button = $(event.relatedTarget);
+    var productId = button.data("product-id");
+    var productName = button.data("product-name");
+    var modal = $(this);
+    modal.find("input#deleteProduct").val(productId);
+    modal.find(".modal-text").text(productName);
+  });
+
+  //Calculate Sum of new quantity for products
+  // $("#newQty1").change(function() {
+  //   // $sumNew = $("#newQty1").val() + $("#newQty2").val();
+  //   // $("#newQty").val($sumNew);
+  //   console.log("aa");
+  // });
 });
