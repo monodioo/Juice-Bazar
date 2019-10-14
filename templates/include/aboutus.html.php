@@ -41,7 +41,7 @@
         <div class="col-sm-12 col-md-4">
           <img
             class="img-fluid float-right rounded"
-            src="../assets/image/about us.png"
+            src="assets/image/about us.png"
           />
         </div>
       </div>
