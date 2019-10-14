@@ -13,7 +13,8 @@
                     <tr>
                         <td scope="col">ID</td>
                         <td colspan="3">
-                            <input type="text" disabled name="ProductId" value="<?= $products[0]['ProductId'] ?>">
+                            <input type="text" disabled value="<?= $products[0]['ProductId'] ?>">
+                            <input type="hidden" name="ProductId" value="<?= $products[0]['ProductId'] ?>">
                         </td>
                     </tr>
                     <tr>
@@ -78,15 +79,18 @@
                     </tr>
                     <tr>
                         <td scope="col">Available Quantity</td>
-                        <td><input type="number" name="Avail1" value="<?= $product['Total1'] - $product['Sold1'] ?>" disabled></td>
-                        <td><input type="number" name="Avail2" value="<?= $product['Total2'] - $product['Sold2'] ?>" disabled></td>
-                        <td><input type="number" name="Avail" value="<?= $product['Total'] - $product['Sold'] ?>" disabled></td>
+                        <td><input type="number" name="Avail1" value="<?= $products[0]['Total1'] - $products[0]['Sold1'] ?>" disabled></td>
+                        <td><input type="number" name="Avail2" value="<?= $products[0]['Total2'] - $products[0]['Sold2'] ?>" disabled></td>
+                        <td><input type="number" name="Avail" value="<?= $products[0]['Total'] - $products[0]['Sold'] ?>" disabled></td>
                     </tr>
                     <tr>
                         <td scope="col">New Quantity</td>
-                        <td><input type="number" name="New1" value="" min=0></td>
-                        <td><input type="number" name="New2" value="" min=0></td>
-                        <td><input type="number" name="New" value="" min=0></td>
+                        <td><input type="number" name="New1" id="newQty1" value="" min=0></td>
+                        <td><input type="number" name="New2" id="newQty2" value="" min=0></td>
+                        <td>
+                            <input type="number" id="newQty" value="" disabled>
+                            <input type="hidden" name="New" id="newQtyhidden" value="">
+                        </td>
                     </tr>
                     <tr>
                         <td scope="col">Status</td>

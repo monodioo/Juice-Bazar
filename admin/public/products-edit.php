@@ -11,6 +11,9 @@ if (!empty($_SESSION['admin'])) {
     try {
         if (isset($_POST['SubmitProduct'])) {
 
+            // $title = 'XX';
+            // $output = print_r($_POST);
+
             $folder = __DIR__ . "/../../assets/image/juice bottle/";
 
             $image = $_FILES['Image']['name'];
@@ -36,14 +39,15 @@ if (!empty($_SESSION['admin'])) {
                     'ProductId' => $_POST['ProductId'],
                     'TypeId' => $_POST['TypeId'],
                     'Name' => $_POST['Name'],
-                    'Image' => empty($_POST['ImageCheck']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name']) : ($_POST['ImageCheck']),
+                    'Image' => empty($_POST['Image']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
                     'Description' => $_POST['Description'],
                     'Nutrition' => $_POST['Nutrition'],
                     'Status' => $_POST['Status'],
                     'Price1' => $_POST['Price1'],
-                    'Price2' => $_POST['Price2']
+                    'Price2' => $_POST['Price2'],
                 ];
 
+                // $output = print_r($record);
                 saveElement(
                     $pdo,
                     'product',
@@ -51,7 +55,7 @@ if (!empty($_SESSION['admin'])) {
                     $record
                 );
 
-                header('location: admin-products.php');
+                empty($_POST['ProductId']) ? header('location: admin-products.php') : header('location: products-edit.php?id=' . $_POST['ProductId'] . '');
             }
 
             // $output = print_r();
@@ -85,6 +89,11 @@ if (!empty($_SESSION['admin'])) {
                     'Status' => '',
                     'Price1' => '',
                     'Price2' => '',
+                    'Total1' => 0,
+                    'Total2' => 0,
+                    'Total' => 0,
+                    'Sold1' => 0,
+                    'Sold2' => 0,
                     'Sold' => 0,
                     'Pending' => 1,
                 ];

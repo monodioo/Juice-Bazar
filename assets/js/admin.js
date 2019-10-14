@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
       sortTable: true,
       ignoreCase: true,
       headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
-      widthFixed: false,
+      widthFixed: true,
       widgets: ["filter"],
       widgetOptions: {
         // extra css class name (string or array) added to the filter element (input or select)
@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
   $("#prodEditTable").tablesorter({
     // theme: "bootstrap",
     ignoreCase: true,
-    widthFixed: false
+    widthFixed: true
   });
 
   //Delete modal
@@ -74,4 +74,11 @@ jQuery(document).ready(function($) {
     modal.find("input#deleteProduct").val(productId);
     modal.find(".modal-text").text(productName);
   });
+
+  //Calculate Sum of new quantity for products
+  // $("#newQty1").change(function() {
+  //   // $sumNew = $("#newQty1").val() + $("#newQty2").val();
+  //   // $("#newQty").val($sumNew);
+  //   console.log("aa");
+  // });
 });
