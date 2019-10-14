@@ -1,6 +1,7 @@
+<?php include "templates/scripts/checkCoupon.php";?>
 <div class="row my-4" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
-          <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
+          <li class="breadcrumb-item"><a href="?section=home">Trang chủ</a></li>
           <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
         </ol>
       </div>
@@ -90,15 +91,18 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-warning btn-sm" type="button" id="couponBtn">Áp dụng</button>
+                  <form method="post">
+                    <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-warning btn-sm" type="submit" id="couponBtn" name="couponBtn">Áp dụng</button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
+              <div class="col-12"><?=$errCoupon?></div>
             </div>
             <div class="col-md-6 mt-3 mt-md-0">
               <div class="row justify-content-end">
@@ -113,7 +117,7 @@
                       <span class="">Tổng giá sản phẩm</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class=""><?=$_SESSION['sumOrder']/1000?>.000₫</strong>
+                      <strong class=""><?php if(isset($_SESSION['sumOrder'])) echo number_format($_SESSION['sumOrder'],0,'.','.'); else echo '0'?> ₫</strong>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -121,7 +125,7 @@
                       <span class="">Giảm giá</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="">0%</strong>
+                      <strong class=""><?php if(isset($_SESSION['discount'])) echo $_SESSION['discount']*100; else echo '0';?> %</strong>
                     </div>
                   </div>
                   <div class="row mb-5">
@@ -129,7 +133,14 @@
                       <span class="">Tổng tiền</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="">40.000₫</strong>
+                      <strong class="">
+                        <?php
+                        if (empty($_SESSION['sumOrder'])) echo '0';
+                        else  if (empty($_SESSION['discount'])) echo number_format($_SESSION['sumOrder'],0,'.','.');
+                              else echo number_format($_SESSION['sumOrder']*(1-$_SESSION['discount']),0,'.','.');
+                        ?>
+                         ₫
+                      </strong>
                     </div>
                   </div>
     
