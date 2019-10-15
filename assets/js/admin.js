@@ -9,6 +9,8 @@ jQuery(document).ready(function($) {
   var $prodTable = $("#prodTable");
   var $orderTable = $("#orderTable");
 
+  $prodTable.doubleScroll();
+
   $prodTable
     .tablesorter({
       theme: "bootstrap",
@@ -154,5 +156,23 @@ jQuery(document).ready(function($) {
     $sumNew = Number($("#newQty1").val()) + Number($("#newQty2").val());
     $("#newQty").val($sumNew);
     $("#newQtyHidden").val($sumNew);
+  });
+
+  // SummerNote Editor
+  $("#Description").summernote({
+    toolbar: [
+      ["style", ["bold", "italic", "underline", "clear"]],
+      ["color", ["color"]],
+      ["view", ["codeview", "help"]]
+    ],
+    popover: []
+  });
+  $("#Nutrition").summernote({
+    toolbar: [
+      ["style", ["bold", "italic", "underline", "clear"]],
+      ["color", ["color"]],
+      ["view", ["codeview", "help"]]
+    ],
+    popover: []
   });
 });

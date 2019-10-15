@@ -1,4 +1,4 @@
-<div class="page-section card col-12 p-5">
+<div class="page-section card col-12 py-5">
     <div class="section-title">All Products</div>
     <div class="">
         <table class=" table table-hover table-striped table-sm table-responsive tablesorter" id='prodTable'>
@@ -129,7 +129,8 @@
                                 <button type="button" class="btn btn-secondary last" title="last">⇥</button>
                             </div>
                             <select class="form-control-sm custom-select px-1 pagesize" title="Select page size">
-                                <option selected="selected" value="10">10</option>
+                                <option selected="selected" value="5">5</option>
+                                <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="30">30</option>
                                 <option value="all">All Rows</option>

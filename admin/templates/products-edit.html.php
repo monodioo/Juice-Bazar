@@ -44,13 +44,13 @@
                     <tr>
                         <td scope="col">Description</td>
                         <td colspan="3">
-                            <textarea name="Description" style="width:100%"><?= $products[0]['Description']; ?></textarea>
+                            <textarea name="Description" id="Description" style="width:100%"><?= $products[0]['Description']; ?></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td scope="col">Nutrition</td>
                         <td colspan="3">
-                            <textarea name="Nutrition" style="width:100%"><?= $products[0]['Nutrition']; ?></textarea>
+                            <textarea name="Nutrition" id="Nutrition" style="width:100%"><?= $products[0]['Nutrition']; ?></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +60,13 @@
                         <th scope="col" style="width: 25%">Both</th>
                     </tr>
                     <tr>
-                        <td scope="col">Price</td>
+                        <td scope="col">Entry Price</td>
+                        <td><input type="number" name="Price1" value="<?= $products[0]['Price1'] ?>" min=0 step=500 style="width: 100px" required>₫</td>
+                        <td><input type="number" name="Price2" value="<?= $products[0]['Price2'] ?>" min=0 step=500 style="width: 100px" required>₫</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td scope="col">SalePrice</td>
                         <td><input type="number" name="Price1" value="<?= $products[0]['Price1'] ?>" min=0 step=500 style="width: 100px" required>₫</td>
                         <td><input type="number" name="Price2" value="<?= $products[0]['Price2'] ?>" min=0 step=500 style="width: 100px" required>₫</td>
                         <td></td>
