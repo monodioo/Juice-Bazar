@@ -9,8 +9,6 @@ jQuery(document).ready(function($) {
   var $prodTable = $("#prodTable");
   var $orderTable = $("#orderTable");
 
-  $prodTable.doubleScroll();
-
   $prodTable
     .tablesorter({
       theme: "bootstrap",
@@ -43,10 +41,12 @@ jQuery(document).ready(function($) {
           "form-control",
           "form-control",
           "form-control",
+          "form-control",
+          "form-control",
           "form-control custom-select",
           "form-control"
         ],
-        cssStickyHeaders_offset: 70,
+        cssStickyHeaders_offset: 145,
         // Set this option to false to make the searches case sensitive
         filter_ignoreCase: true
       }

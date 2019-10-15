@@ -53,28 +53,16 @@
 
             <div class="col-12 col-md-6">
                 <nav class="nav">
-                    <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Products
-                    </a>
-                    <!-- <div class="dropdown-menu" aria-labelledby="productDropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                    <div class="dropdown-menu" aria-labelledby="productDropdown">
                         <a class="dropdown-item text-dark" href="admin-products.php">All Products</a>
                         <a class="dropdown-item text-dark" href="products-edit.php">Add Product</a>
                         <a class="dropdown-item text-dark" href="admin-types.php">Product Types</a>
-                    </div> -->
-                    <a class="nav-link dropdown-toggle" href="#" id="orderDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Orders
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="orderDropdown">
-                        <a class="dropdown-item text-dark" href="admin-orders.php">All Orders</a>
-                        <a class=" dropdown-item text-dark" href="orders-edit.php">Add Product</a>
-                        <a class="dropdown-item text-dark" href="admin-promos.php">Promotion Codes</a>
                     </div>
+                    <a href="admin-orders.php" class="nav-link ">Orders</a>
+                    <a href="admin-promos.php" class="nav-link ">Promotion</a>
                     <a href="admin-customers.php" class="nav-link ">Customers</a>
-                    <a class="nav-link dropdown-toggle" href="#" id="websiteDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Website</a>
-                    <div class="dropdown-menu" aria-labelledby="websiteDropdown">
-                        <a class="dropdown-item text-dark" href="admin-blogs.php">Blogs</a>
-                    </div>
-
+                    <a href="admin-customers.php" class="nav-link ">Website</a>
                     <a href="admin-logout.php" class="nav-link ">Log Out</a>
                 </nav>
             </div>
@@ -102,11 +90,7 @@
     <!-- jQuery TableSorter -->
     <script type="text/javascript" src="../../assets/js/jquery.tablesorter.combined.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.tablesorter.pager.min.js"></script>
-    <!-- <script type="text/javascript" src="../../assets/js/widget-stickyHeaders.min.js"></script> -->
     <script type="text/javascript" src="../../assets/js/widget-cssStickyHeaders.min.js"></script>
-
-    <!-- table double scroll -->
-    <script type="text/javascript" src="../../assets/js/jquery.doubleScroll.js"></script>
 
     <!-- SummerNote Editor -->
     <script type="text/javascript" src="../../assets/js/summernote.min.js"></script>
