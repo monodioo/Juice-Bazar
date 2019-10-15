@@ -4,35 +4,21 @@
         <table class=" table table-hover table-striped table-sm table-responsive tablesorter" id='prodTable'>
             <thead>
                 <tr>
-                    <th scope="col" rowspan="2">ID</th>
-                    <th scope="col" rowspan="2" style="width:5%">Name</th>
-                    <th scope="col" rowspan="2" style="width:6%" class="sorter-false filter-false">Image</th>
-                    <th scope="col" rowspan="2" style="width:5%" class="filter-select filter-exact" data-placeholder="All Categories">Category</th>
-                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Description</th>
-                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Nutrition</th>
-                    <th scope="col" colspan="2" class="sorter-false filter-false">Price</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Avail. Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Shipping Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Sold Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Total Qty.</th>
-                    <th scope="col" rowspan="2" class="filter-select filter-exact" data-placeholder="Pick a Status">Status</th>
-                    <th scope="col" rowspan="2" class="sorter-false filter-false">Action</th>
-                </tr>
-                <tr>
-                    <th scope="col" class="filter-exact">250ml</th>
-                    <th scope="col" class="filter-exact">330ml</th>
-                    <th scope="col" class="filter-exact">250ml</th>
-                    <th scope="col" class="filter-exact">330ml</th>
-                    <th scope="col" class="filter-exact">Both</th>
-                    <th scope="col" class="filter-exact">250ml</th>
-                    <th scope="col" class="filter-exact">330ml</th>
-                    <th scope="col" class="filter-exact">Both</th>
-                    <th scope="col" class="filter-exact">250ml</th>
-                    <th scope="col" class="filter-exact">330ml</th>
-                    <th scope="col" class="filter-exact">Both</th>
-                    <th scope="col" class="filter-exact">250ml</th>
-                    <th scope="col" class="filter-exact">330ml</th>
-                    <th scope="col" class="filter-exact">Both</th>
+                    <th scope="col">ID</th>
+                    <th scope="col" style="width:5%">Name</th>
+                    <th scope="col" style="width:6%" class="sorter-false filter-false">Image</th>
+                    <th scope="col" style="width:5%" class="filter-select filter-exact" data-placeholder="All Categories">Category</th>
+                    <th scope="col" class="" style="width:10%">Description</th>
+                    <th scope="col" class="" style="width:10%">Nutrition</th>
+                    <th scope="col" class="filter-select filter-exact" data-placeholder="Select Capacity" style="width:10%">Capacity</th>
+                    <th scope="col" class="">Entry Price</th>
+                    <th scope="col" class="">Price</th>
+                    <th scope="col" class="">Avail. Qty.</th>
+                    <th scope="col" class="">Shipping Qty.</th>
+                    <th scope="col" class="">Sold Qty.</th>
+                    <th scope="col" class="">Total Qty.</th>
+                    <th scope="col" class="filter-select filter-exact" data-placeholder="Pick a Status">Status</th>
+                    <th scope="col" class="filter-false sorter-false">Action</th>
                 </tr>
             </thead>
 
@@ -41,40 +27,33 @@
                 <?php foreach ($products as $product) : ?>
                     <!-- <?php $count++; ?> -->
                     <tr>
-                        <th scope="row"><?= $product['ProductId'] ?></th>
-                        <td><?= $product['Name']; ?></td>
-                        <td><img class="img-fluid" src="../../<?= $product['Image']; ?>" alt="<?= $product['Name']; ?>"></td>
-                        <td><?php switch ($product['TypeId']) {
-                                    case 1:
-                                        echo '1.Fruits';
-                                        break;
-                                    case 2:
-                                        echo '2.Greens';
-                                        break;
-                                    case 3:
-                                        echo '3.Combo';
-                                        break;
-                                }; ?></td>
-                        <td><?= $product['Description']; ?></td>
-                        <td>
+                        <th rowspan=3 scope="row"><?= $product['ProductId'] ?></th>
+                        <td rowspan=3><?= $product['Name']; ?></td>
+                        <td rowspan=3><img class="img-fluid" src="../../<?= $product['Image']; ?>" alt="<?= $product['Name']; ?>"></td>
+                        <td rowspan=3><?php switch ($product['TypeId']) {
+                                                case 1:
+                                                    echo '1.Fruits';
+                                                    break;
+                                                case 2:
+                                                    echo '2.Greens';
+                                                    break;
+                                                case 3:
+                                                    echo '3.Combo';
+                                                    break;
+                                            }; ?></td>
+                        <td rowspan=3><?= $product['Description']; ?></td>
+                        <td rowspan=3>
                             <div class="overflow-auto" style="height:200px"><?= $product['Nutrition']; ?></div>
                         </td>
-                        <td><?= number_format($product['Price1'], 0, '', '.'); ?>₫</td>
-                        <td><?= number_format($product['Price2'], 0, '', '.'); ?>₫</td>
-                        <td><?= $product['Available1']; ?></td>
-                        <td><?= $product['Available2']; ?></td>
+                        <td>Both</td>
+                        <td></td>
+                        <td></td>
                         <td class="font-weight-bold"><?= $product['Available']; ?></td>
-                        <td><?= $product['Shipping1']; ?></td>
-                        <td><?= $product['Shipping2']; ?></td>
                         <td class="font-weight-bold"><?= $product['Shipping']; ?></td>
-                        <td><?= $product['Sold1'] ?></td>
-                        <td><?= $product['Sold2'] ?></td>
                         <td class="font-weight-bold"><?= $product['Sold'] ?></td>
-                        <td><?= $product['Available1'] + $product['Shipping1'] + $product['Sold1'] ?></td>
-                        <td><?= $product['Available2'] + $product['Shipping2'] + $product['Sold2'] ?></td>
                         <td class="font-weight-bold"><?= $product['Available'] + $product['Shipping'] + $product['Sold'] ?></td>
-                        <td><?= ($product['Status'] == 0) ? 'Disabled' : 'Enabled' ?></td>
-                        <td>
+                        <td rowspan=3><?= ($product['Status'] == 0) ? 'Disabled' : 'Enabled' ?></td>
+                        <td rowspan=3>
                             <a class="btn btn-warning btn-block btn-sm mb-1 text-white" href="products-edit.php?id=<?= $product['ProductId'] ?>">Edit</a>
                             <form action="productStatusSwitch.php" method="post">
                                 <button type="submit" class="btn btn-<?= ($product['Status'] == 1) ? 'secondary' : 'success' ?> btn-block btn-sm mb-1" name="switchProductBtn"><?= ($product['Status'] == 1) ? 'Disable' : 'Enable' ?></button>
@@ -85,6 +64,24 @@
                                 Delete
                             </a>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>250ml</td>
+                        <td><?= number_format($product['Price1'], 0, '', '.'); ?>₫</td>
+                        <td><?= number_format($product['Price1'], 0, '', '.'); ?>₫</td>
+                        <td><?= $product['Available1']; ?></td>
+                        <td><?= $product['Shipping1']; ?></td>
+                        <td><?= $product['Sold1'] ?></td>
+                        <td><?= $product['Available1'] + $product['Shipping1'] + $product['Sold1'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>330ml</td>
+                        <td><?= number_format($product['Price2'], 0, '', '.'); ?>₫</td>
+                        <td><?= number_format($product['Price2'], 0, '', '.'); ?>₫</td>
+                        <td><?= $product['Available2']; ?></td>
+                        <td><?= $product['Shipping2']; ?></td>
+                        <td><?= $product['Sold2'] ?></td>
+                        <td><?= $product['Available2'] + $product['Shipping2'] + $product['Sold2'] ?></td>
                     </tr>
                 <?php endforeach; ?>
 
