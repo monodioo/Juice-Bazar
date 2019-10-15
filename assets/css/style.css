@@ -739,3 +739,7 @@ input.error {
 .admin-link {
   color: black !important;
 }
+
+.table-order th {
+  width: auto !important;
+}

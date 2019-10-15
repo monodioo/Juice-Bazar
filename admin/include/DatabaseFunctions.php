@@ -344,3 +344,19 @@ function getInfoOrder($pdo, $table, $primaryKey, $keyValue)
     $results = query($pdo, $sql, $parameters)->fetch();
     return $results;
 }
+
+function changeStock($pdo, $OrderId, $return = false)
+{
+    $returneds = getOrderDetail($pdo, $OrderId);
+
+    //if $return is true, then the function acts as returning shipment to stock(increase stock), else it will send shipment (decrease stock)
+    foreach ($returneds as $returned) {
+        if ($return) {
+            $sql = 'UPDATE `pricebycapacity` SET `Quantity`= `Quantity` + :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
+        } else {
+            $sql = 'UPDATE `pricebycapacity` SET `Quantity`= `Quantity` - :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
+        }
+        $parameters = [':Quantity' => $returned['Quantity'], ':ProductId' => $returned['ProductId'], ':CapacityId' => $returned['CapacityId']];
+        query($pdo, $sql, $parameters);
+    }
+}

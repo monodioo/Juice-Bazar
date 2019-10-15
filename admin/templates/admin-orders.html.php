@@ -1,18 +1,18 @@
 <div class="page-section card col-12 p-5">
     <div class="section-title">All Orders</div>
     <div class="">
-        <table class=" table table-hover table-sm table-responsive tablesorter" id='orderTable'>
+        <table class="table-order table table-hover table-sm table-responsive tablesorter" id='orderTable'>
             <thead>
                 <tr>
                     <th scope="col" style="" class="filter-exact">Order ID</th>
                     <th scope="col" style="">Customer</th>
                     <th scope="col" style="">Purchase Date</th>
                     <th scope="col" style="">Delivery Date</th>
-                    <th scope="col" style="" class="sorter-false">Item</th>
+                    <th scope="col" style="width:5%" class="sorter-false">Item</th>
                     <th scope="col" style="" class="sorter-false">Cat.</th>
-                    <th scope="col" style="" class="sorter-false">Qty.</th>
+                    <th scope="col" style="width:5%" class="sorter-false">Qty.</th>
                     <th scope="col" style="" class="sorter-false">Unit Price</th>
-                    <th scope="col" style="">Value</th>
+                    <th scope="col" style="width: 8%">Value</th>
                     <th scope="col" style="" class="filter-select filter-exact" data-placeholder="All Codes">Promotion Code</th>
                     <th scope="col" style="">Promotion Value</th>
                     <th scope="col" style="">Total Value</th>
@@ -79,7 +79,17 @@
                             <td></td>
                             <td></td>
                             <td><a href="products-edit.php?id=<?= $item['ProductId'] ?>"><?= $item['Name'] ?></td>
-                            <td><a href="products-edit.php?id=<?= $item['ProductId'] ?>"><?= $item['Name'] ?></td>
+                            <td><?php switch ($item['TypeId']) {
+                                            case 1:
+                                                echo '1.Fruits';
+                                                break;
+                                            case 2:
+                                                echo '2.Greens';
+                                                break;
+                                            case 3:
+                                                echo '3.Combo';
+                                                break;
+                                        }; ?></td>
                             <td><?= $item['Quantity'] ?></td>
                             <td><?= number_format($item['Price']) ?> ₫</td>
                             <td><?= number_format($item['Price'] * $item['Quantity']) ?> ₫</td>
