@@ -1,7 +1,7 @@
 <div class="page-section card col-12 p-5">
     <div class="section-title">All Products</div>
-    <div>
-        <table class="table table-hover table-striped table-responsive tablesorter" id='prodTable'>
+    <div class="">
+        <table class=" table table-hover table-striped table-sm table-responsive tablesorter" id='prodTable'>
             <thead>
                 <tr>
                     <th scope="col" rowspan="2">ID</th>
@@ -11,15 +11,19 @@
                     <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Description</th>
                     <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Nutrition</th>
                     <th scope="col" colspan="2" class="sorter-false filter-false">Price</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Total Qty.</th>
-                    <th scope="col" colspan="3" class="sorter-false filter-false">Sold Qty.</th>
                     <th scope="col" colspan="3" class="sorter-false filter-false">Avail. Qty.</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Shipping Qty.</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Sold Qty.</th>
+                    <th scope="col" colspan="3" class="sorter-false filter-false">Total Qty.</th>
                     <th scope="col" rowspan="2" class="filter-select filter-exact" data-placeholder="Pick a Status">Status</th>
                     <th scope="col" rowspan="2" class="sorter-false filter-false">Action</th>
                 </tr>
                 <tr>
                     <th scope="col" class="filter-exact">250ml</th>
                     <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">250ml</th>
+                    <th scope="col" class="filter-exact">330ml</th>
+                    <th scope="col" class="filter-exact">Both</th>
                     <th scope="col" class="filter-exact">250ml</th>
                     <th scope="col" class="filter-exact">330ml</th>
                     <th scope="col" class="filter-exact">Both</th>
@@ -57,22 +61,27 @@
                         </td>
                         <td><?= number_format($product['Price1'], 0, '', '.'); ?>₫</td>
                         <td><?= number_format($product['Price2'], 0, '', '.'); ?>₫</td>
-                        <td><?= $product['Total1']; ?></td>
-                        <td><?= $product['Total2']; ?></td>
-                        <td class="font-weight-bold"><?= $product['Total']; ?></td>
-                        <td><?= $product['Sold1']; ?></td>
-                        <td><?= $product['Sold2']; ?></td>
-                        <td class="font-weight-bold"><?= $product['Sold']; ?></td>
-                        <td><?= $product['Total1'] - $product['Sold1'] ?></td>
-                        <td><?= $product['Total2'] - $product['Sold2'] ?></td>
-                        <td class="font-weight-bold"><?= $product['Total'] - $product['Sold'] ?></td>
+                        <td><?= $product['Available1']; ?></td>
+                        <td><?= $product['Available2']; ?></td>
+                        <td class="font-weight-bold"><?= $product['Available']; ?></td>
+                        <td><?= $product['Shipping1']; ?></td>
+                        <td><?= $product['Shipping2']; ?></td>
+                        <td class="font-weight-bold"><?= $product['Shipping']; ?></td>
+                        <td><?= $product['Sold1'] ?></td>
+                        <td><?= $product['Sold2'] ?></td>
+                        <td class="font-weight-bold"><?= $product['Sold'] ?></td>
+                        <td><?= $product['Available1'] + $product['Shipping1'] + $product['Sold1'] ?></td>
+                        <td><?= $product['Available2'] + $product['Shipping2'] + $product['Sold2'] ?></td>
+                        <td class="font-weight-bold"><?= $product['Available'] + $product['Shipping'] + $product['Sold'] ?></td>
                         <td><?= ($product['Status'] == 0) ? 'Disabled' : 'Enabled' ?></td>
                         <td>
-                            <a class="btn btn-warning btn-sm mb-1 text-white" href="products-edit.php?id=<?= $product['ProductId'] ?>">Edit</a>
-                            <br>
-                            <button class="btn btn-<?= ($product['Status'] == 1) ? 'secondary' : 'success' ?> btn-sm mb-1" action="disableSwitch.php?productId=<?= $product['ProductId'] ?>"><?= ($product['Status'] == 1) ? 'Disable' : 'Enable' ?></button>
-                            <br>
-                            <a class="btn btn-danger btn-sm text-white delete-product <?= ($product['Sold'] + $product['Pending'] > 0) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>" data-product-name="<?= $product['Name'] ?> ">
+                            <a class="btn btn-warning btn-block btn-sm mb-1 text-white" href="products-edit.php?id=<?= $product['ProductId'] ?>">Edit</a>
+                            <form action="productStatusSwitch.php" method="post">
+                                <button type="submit" class="btn btn-<?= ($product['Status'] == 1) ? 'secondary' : 'success' ?> btn-block btn-sm mb-1" name="switchProductBtn"><?= ($product['Status'] == 1) ? 'Disable' : 'Enable' ?></button>
+                                <input type="hidden" name="switchProductId" value="<?= $product['ProductId'] ?>">
+                                <input type="hidden" name="switchProductStatus" value="<?= $product['Status'] ?>">
+                            </form>
+                            <a class="btn btn-danger btn-block btn-sm text-white delete-product <?= ($product['Sold'] + $product['Shipping'] > 0) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>" data-product-name="<?= $product['Name'] ?> ">
                                 Delete
                             </a>
                         </td>
@@ -108,7 +117,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="19" class="ts-pager">
+                    <th colspan="22" class="ts-pager">
                         <div class="form-inline">
                             <div class="btn-group btn-group-sm mx-1" role="group">
                                 <button type="button" class="btn btn-secondary first" title="first">⇤</button>

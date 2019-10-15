@@ -6,15 +6,22 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
-    $title = "Juice Bazar - Admin - Products";
+    try {
+        $title = "Juice Bazar - Admin - Products";
 
-    $products = getProducts($pdo);
+        $products = getProducts($pdo);
 
-    ob_start();
+        ob_start();
 
-    include __DIR__ . '/../templates/admin-products.html.php';
+        include __DIR__ . '/../templates/admin-products.html.php';
 
-    $output = ob_get_clean();
+        $output = ob_get_clean();
+    } catch (PDOException $e) {
+        $title = 'An error has occurred';
+
+        $output = 'Database error: ' . $e->getMessage() . ' in ' .
+            $e->getFile() . ':' . $e->getLine();
+    }
 } else {
     header('location: index.php');
 }

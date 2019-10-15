@@ -8,8 +8,11 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
     try {
-        if (isset($_POST['deleteProductBtn'])) {
-            deleteElement($pdo, $_POST['deleteProduct']);
+        if (isset($_POST['switchProductBtn'])) {
+
+            $newStatus = ($_POST['switchProductStatus'] == 0) ? 1 : 0;
+            switchStatus($pdo, 'product', 'ProductId', $_POST['switchProductId'], 'Status', $newStatus);
+
             header('location: admin-products.php');
         } else {
             header('location: admin-products.php');

@@ -39,15 +39,17 @@ if (!empty($_SESSION['admin'])) {
                     'ProductId' => $_POST['ProductId'],
                     'TypeId' => $_POST['TypeId'],
                     'Name' => $_POST['Name'],
-                    'Image' => empty($_POST['Image']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
+                    'Image' => !empty($_FILES['Image']['name']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
                     'Description' => $_POST['Description'],
                     'Nutrition' => $_POST['Nutrition'],
                     'Status' => $_POST['Status'],
                     'Price1' => $_POST['Price1'],
                     'Price2' => $_POST['Price2'],
+                    'New1' => $_POST['New1'] + $_POST['Available1'],
+                    'New2' => $_POST['New2'] + $_POST['Available2'],
                 ];
 
-                // $output = print_r($record);
+                // $output = print_r($_POST);
                 saveElement(
                     $pdo,
                     'product',
@@ -95,7 +97,7 @@ if (!empty($_SESSION['admin'])) {
                     'Sold1' => 0,
                     'Sold2' => 0,
                     'Sold' => 0,
-                    'Pending' => 1,
+                    'Shipping' => 1,
                 ];
             }
 
