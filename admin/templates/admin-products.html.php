@@ -76,7 +76,7 @@
                         <td><?= ($product['Status'] == 0) ? 'Disabled' : 'Enabled' ?></td>
                         <td>
                             <a class="btn btn-warning btn-block btn-sm mb-1 text-white" href="products-edit.php?id=<?= $product['ProductId'] ?>">Edit</a>
-                            <form action="disableSwitch.php" method="post">
+                            <form action="productStatusSwitch.php" method="post">
                                 <button type="submit" class="btn btn-<?= ($product['Status'] == 1) ? 'secondary' : 'success' ?> btn-block btn-sm mb-1" name="switchProductBtn"><?= ($product['Status'] == 1) ? 'Disable' : 'Enable' ?></button>
                                 <input type="hidden" name="switchProductId" value="<?= $product['ProductId'] ?>">
                                 <input type="hidden" name="switchProductStatus" value="<?= $product['Status'] ?>">

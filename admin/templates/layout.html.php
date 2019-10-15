@@ -58,10 +58,10 @@
                         <a class="dropdown-item text-dark" href="products-edit.php">Add Product</a>
                         <!-- <a class="dropdown-item text-dark" href="products-quantity.php">Add Quantity</a> -->
                     </div>
-                    <a href="admin-orders.html" class="nav-link">Orders</a>
-                    <a href="admin-customers.html" class="nav-link ">Customers</a>
-                    <a href="admin-blogs.html" class="nav-link ">Blogs</a>
-                    <a href="admin-website.html" class="nav-link">Website</a>
+                    <a href="admin-orders.php" class="nav-link">Orders</a>
+                    <a href="admin-customers.php" class="nav-link ">Customers</a>
+                    <a href="admin-blogs.php" class="nav-link ">Blogs</a>
+                    <a href="admin-website.php" class="nav-link">Website</a>
                     <a href="admin-logout.php" class="nav-link ">Log Out</a>
                 </nav>
             </div>

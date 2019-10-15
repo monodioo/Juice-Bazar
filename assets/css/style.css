@@ -731,3 +731,11 @@ input.error {
   height: calc(100vh - 250px) !important;
   overflow: auto;
 } */
+
+.tablesorter-hidden {
+  display: none;
+}
+
+.admin-link {
+  color: black !important;
+}

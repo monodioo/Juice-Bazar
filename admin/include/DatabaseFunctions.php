@@ -54,11 +54,11 @@ function adminLogin($pdo, $adminName, $adminPass)
 function getProducts($pdo, $id = '')
 {
     if ($id == '') {
-        $sql = 'SELECT * FROM `product` p WHERE p.`TypeId` IN (1,2,3) ORDER BY p.`Name`';
+        $sql = 'SELECT * FROM `product` p ORDER BY p.`Name`';
         $query = query($pdo, $sql);
         $results = $query->fetchAll();
     } else {
-        $sql = $sql = 'SELECT * FROM `product` p WHERE p.`TypeId` IN (1,2,3) AND p.`ProductId` = :ProductId';
+        $sql = $sql = 'SELECT * FROM `product` p WHERE p.`ProductId` = :ProductId';
         $parameters = [':ProductId' => $id];
         $query = query($pdo, $sql, $parameters);
         $results = $query->fetchAll();
@@ -284,9 +284,63 @@ function deleteElement($pdo, $id)
     query($pdo, $sql, $parameters);
 }
 
-function switchProductStatus($pdo, $table, $primaryKey, $id, $statusKey, $statusVal)
+function switchStatus($pdo, $table, $primaryKey, $id, $statusKey, $statusVal)
 {
     $sql = 'UPDATE `' . $table . '` SET `' . $statusKey . '` = :statusVal WHERE `' . $primaryKey . '` = :primaryKey';
     $parameters = [':primaryKey' => $id, ':statusVal' => $statusVal];
     query($pdo, $sql, $parameters);
+}
+
+
+function getOrders($pdo, $id = '')
+{
+    if ($id == '') {
+        $sql = 'SELECT * FROM `orders`';
+        $query = query($pdo, $sql);
+        $results = $query->fetchAll();
+    } else {
+        $sql = 'SELECT * FROM `orders` WHERE `OrderId` = :OrderId';
+        $parameters = [':OrderId' => $id];
+        $query = query($pdo, $sql, $parameters);
+        $results = $query->fetchAll();
+    }
+
+    $orders = [];
+    foreach ($results as $result) {
+        $promo = empty($result['PromoId']) ? ['PromoName' => '', 'PromoValue' => 0] : getInfoOrder($pdo, 'promotion', 'PromoId', $result['PromoId']);
+
+        $member = getInfoOrder($pdo, 'member', 'MemberId', $result['MemberId']);
+
+        $orders[] = [
+            'OrderId' => $result['OrderId'],
+            'MemberId' => $result['MemberId'],
+            'MemberName' => $member['Name'],
+            'PurchaseDate' => $result['PurchaseDate'],
+            'DeliveryDate' => $result['DeliveryDate'],
+            'Items' => getOrderDetail($pdo, $result['OrderId']),
+            'PromoId' => $result['PromoId'],
+            'PromoName' => $promo['PromoName'],
+            'PromoValue' => $promo['PromoValue'],
+            'TotalPrice' => $result['TotalPrice'],
+            'Status' => $result['Status'],
+            'Note' => $result['Note']
+        ];
+    }
+    return $orders;
+}
+
+function getOrderDetail($pdo, $OrderId)
+{
+    $sql = 'SELECT p.`ProductId`, p.`Name`, pc.`Price`, od.`Quantity`, od.`CapacityId`, p.`TypeId` FROM `orderdetail` od JOIN `product` p ON od.`ProductId` = p.`ProductId` JOIN `pricebycapacity` pc ON od.`ProductId` = pc.`ProductId` AND od.`CapacityId` = pc.`CapacityId` WHERE `OrderID` = :OrderId';
+    $parameters = [':OrderId' => $OrderId];
+    $results = query($pdo, $sql, $parameters)->fetchAll();
+    return $results;
+}
+
+function getInfoOrder($pdo, $table, $primaryKey, $keyValue)
+{
+    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :keyValue';
+    $parameters = [':keyValue' => $keyValue];
+    $results = query($pdo, $sql, $parameters)->fetch();
+    return $results;
 }

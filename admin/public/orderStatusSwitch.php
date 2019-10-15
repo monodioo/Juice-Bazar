@@ -3,19 +3,21 @@
 session_start();
 
 if (!empty($_SESSION['admin'])) {
+
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
     try {
-        $title = "Juice Bazar - Admin - Products";
+        if (isset($_POST['OrderStatusBtn'])) {
 
-        $products = getProducts($pdo);
+            $oldStatus = ($_POST['oldStatus']);
 
-        ob_start();
+            switchStatus($pdo, 'orders', 'OrderId', $_POST['OrderId'], 'Status', $_POST['newStatus']);
 
-        include __DIR__ . '/../templates/admin-products.html.php';
-
-        $output = ob_get_clean();
+            header('location: admin-orders.php');
+        } else {
+            header('location: admin-orders.php');
+        }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
 
@@ -23,8 +25,6 @@ if (!empty($_SESSION['admin'])) {
             $e->getFile() . ':' . $e->getLine();
     }
 } else {
+
     header('location: index.php');
 }
-
-
-include __DIR__ . '/../templates/layout.html.php';

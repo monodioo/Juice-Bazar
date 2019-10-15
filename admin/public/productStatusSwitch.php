@@ -11,7 +11,7 @@ if (!empty($_SESSION['admin'])) {
         if (isset($_POST['switchProductBtn'])) {
 
             $newStatus = ($_POST['switchProductStatus'] == 0) ? 1 : 0;
-            switchProductStatus($pdo, 'product', 'ProductId', $_POST['switchProductId'], 'Status', $newStatus);
+            switchStatus($pdo, 'product', 'ProductId', $_POST['switchProductId'], 'Status', $newStatus);
 
             header('location: admin-products.php');
         } else {

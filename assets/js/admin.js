@@ -7,6 +7,7 @@ jQuery(document).ready(function($) {
   });
 
   var $prodTable = $("#prodTable");
+  var $orderTable = $("#orderTable");
 
   $prodTable
     .tablesorter({
@@ -43,7 +44,9 @@ jQuery(document).ready(function($) {
           "form-control custom-select",
           "form-control"
         ],
-        cssStickyHeaders_offset: 70
+        cssStickyHeaders_offset: 70,
+        // Set this option to false to make the searches case sensitive
+        filter_ignoreCase: true
       }
     })
     .tablesorterPager({
@@ -62,7 +65,74 @@ jQuery(document).ready(function($) {
       output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
     });
 
-  $prodTable.doubleScroll();
+  $orderTable
+    .tablesorter({
+      theme: "bootstrap",
+      cssChildRow: "tablesorter-childRow",
+      ignoreCase: true,
+      sortLocaleCompare: true,
+      sortTable: true,
+      headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
+      widthFixed: true,
+      widgets: ["filter", "cssStickyHeaders"],
+      widgetOptions: {
+        // extra css class name (string or array) added to the filter element (input or select)
+        filter_cssFilter: [
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control custom-select",
+          "form-control",
+          "form-control",
+          "form-control",
+          "form-control custom-select",
+          "form-control"
+        ],
+        cssStickyHeaders_offset: 70,
+        // include child row content while filtering, if true
+        filter_childRows: true,
+        // filter child row content by column; filter_childRows must also be true
+        filter_childByColumn: true,
+        // Set this option to false to make the searches case sensitive
+        filter_ignoreCase: true
+      }
+    })
+    .tablesorterPager({
+      // target the pager markup - see the HTML block below
+      container: $(".ts-pager"),
+
+      // target the pager page select dropdown - choose a page
+      cssGoto: ".pagenum",
+
+      // remove rows from the table to speed up the sort of large tables.
+      // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+      removeRows: false,
+
+      // output string - default is '{page}/{totalPages}';
+      // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+      output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
+    });
+
+  // hide child rows - don't use .hide() because filtered rows get a "filtered" class
+  // added to them, and style="display: table-row;" will override this
+  $orderTable.find(".tablesorter-childRow").addClass("tablesorter-hidden");
+
+  // Toggle child row content (td), not hiding the row since we are using rowspan
+  $orderTable.delegate(".toggle", "click", function() {
+    // use "nextUntil" to toggle multiple child rows
+    // toggle table cells instead of the row
+    $(this)
+      .closest("tr")
+      .nextUntil("tr.tablesorter-hasChildRow")
+      .toggleClass("tablesorter-hidden");
+    return false;
+  });
 
   //Delete modal
   $("#deleteModal").on("show.bs.modal", function(event) {
