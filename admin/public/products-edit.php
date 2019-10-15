@@ -9,10 +9,7 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
     try {
-        if (isset($_POST['SubmitProduct'])) {
-
-            // $title = 'XX';
-            // $output = print_r($_POST);
+        if (isset($_POST['SubmitProductBtn'])) {
 
             $folder = __DIR__ . "/../../assets/image/juice bottle/";
 
@@ -29,50 +26,56 @@ if (!empty($_SESSION['admin'])) {
 
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
-            if (!in_array($ext, $allowed) && empty($_POST['ImageCheck'])) {
-                $title = 'Error';
-                $output = "Sorry, only JPG, JPEG, PNG files are allowed.";
-            } else {
-                move_uploaded_file($_FILES['Image']['tmp_name'], $path);
-
-                $record =  [
-                    'ProductId' => $_POST['ProductId'],
-                    'TypeId' => $_POST['TypeId'],
-                    'Name' => $_POST['Name'],
-                    'Image' => !empty($_FILES['Image']['name']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
-                    'Description' => $_POST['Description'],
-                    'Nutrition' => $_POST['Nutrition'],
-                    'Status' => $_POST['Status'],
-                    'Price1' => $_POST['Price1'],
-                    'Price2' => $_POST['Price2'],
-                    'New1' => $_POST['New1'] + $_POST['Available1'],
-                    'New2' => $_POST['New2'] + $_POST['Available2'],
-                ];
-
-                // $output = print_r($_POST);
-                saveElement(
-                    $pdo,
-                    'product',
-                    'ProductId',
-                    $record
-                );
-
-                empty($_POST['ProductId']) ? header('location: admin-products.php') : header('location: products-edit.php?id=' . $_POST['ProductId'] . '');
+            //get previous location to go back in case of error
+            $previous = "javascript:history.go(-1)";
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $previous = $_SERVER['HTTP_REFERER'];
             }
 
-            // $output = print_r();
-            // $output = $record;
+            if (($_POST['EntryPrice1'] > $_POST['Price1']) || ($_POST['EntryPrice2'] > $_POST['Price2'])) {
+                $title = 'Error';
+                $output = "Sorry, Entry Prices should not be higher than SalePrice. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";
+            } else {
+                if (!in_array($ext, $allowed) && empty($_POST['ImageCheck'])) {
+                    $title = 'Error';
+                    $output = "Sorry, only JPG, JPEG, PNG files are allowed. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";;
+                } else {
+                    move_uploaded_file($_FILES['Image']['tmp_name'], $path);
 
+                    $record =  [
+                        'ProductId' => $_POST['ProductId'],
+                        'TypeId' => $_POST['TypeId'],
+                        'Name' => $_POST['Name'],
+                        'Image' => !empty($_FILES['Image']['name']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
+                        'Description' => $_POST['Description'],
+                        'Nutrition' => $_POST['Nutrition'],
+                        'Status' => $_POST['Status'],
+                        'EntryPrice1' => $_POST['EntryPrice1'],
+                        'EntryPrice2' => $_POST['EntryPrice2'],
+                        'Price1' => $_POST['Price1'],
+                        'Price2' => $_POST['Price2'],
+                        'New1' => $_POST['New1'],
+                        'New2' => $_POST['New2'],
+                    ];
 
+                    saveElement(
+                        $pdo,
+                        'product',
+                        'ProductId',
+                        $record
+                    );
+
+                    empty($_POST['ProductId']) ? header('location: products-edit.php') : header('location: products-edit.php?id=' . $_POST['ProductId'] . '');
+                }
+            }
         } else {
 
-            if (isset($_GET['id'])) {
+            if (!empty($_GET['id'])) {
 
                 $title = "Juice Bazar - Admin - Product Edit";
                 $sectionTitle = "Edit Product";
 
-                $products = getProducts($pdo, $_GET['id']);
-
+                //if id is not found then go to products page
                 if (!empty(getProducts($pdo, $_GET['id']))) {
                     $products = getProducts($pdo, $_GET['id']);
                 } else {

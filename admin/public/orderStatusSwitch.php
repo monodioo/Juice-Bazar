@@ -20,7 +20,7 @@ if (!empty($_SESSION['admin'])) {
 
             //If order status from not processed / processing > shipping / successful: Remove shipment from stock
             if (($oldStatus == 1 || $oldStatus == 0) && ($newStatus == 2 || $newStatus == 3)) {
-                changeStock($pdo, $_POST['OrderId']);
+                changeStock($pdo, $_POST['OrderId'], false, $newStatus);
             }
 
             switchStatus($pdo, 'orders', 'OrderId', $_POST['OrderId'], 'Status', $newStatus);

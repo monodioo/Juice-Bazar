@@ -727,10 +727,13 @@ input.error {
 
 /* ADMIN  */
 
-/* .table-wrapper {
-  height: calc(100vh - 250px) !important;
+.table-wrapper {
+  height: calc(100vh - 160px) !important;
+  /* position: relative;
+  top: 150px;  */
   overflow: auto;
-} */
+  font-size: 10px !important;
+}
 
 .tablesorter-hidden {
   display: none;
@@ -738,8 +741,4 @@ input.error {
 
 .admin-link {
   color: black !important;
-}
-
-.table-order th {
-  width: auto !important;
 }

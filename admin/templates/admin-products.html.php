@@ -1,15 +1,15 @@
-<div class="page-section card col-12 py-5">
-    <div class="section-title">All Products</div>
-    <div class="">
-        <table class=" table table-hover table-striped table-sm table-xl    -responsive tablesorter" id='prodTable'>
+<div class="page-section card col-12 py-2">
+    <div class="section-title pb-2">All Products</div>
+    <div class="table-wrapper">
+        <table class="table table-hover table-striped table-sm tablesorter" id='prodTable'>
             <thead>
                 <tr>
                     <th scope="col" rowspan="2">ID</th>
                     <th scope="col" rowspan="2" style="width:5%">Name</th>
                     <th scope="col" rowspan="2" style="width:6%" class="sorter-false filter-false">Image</th>
                     <th scope="col" rowspan="2" style="width:5%" class="filter-select filter-exact" data-placeholder="All Categories">Category</th>
-                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Description</th>
-                    <th scope="col" rowspan="2" class="sorter-false" style="width:10%">Nutrition</th>
+                    <th scope="col" rowspan="2" class="sorter-false">Description</th>
+                    <th scope="col" rowspan="2" class="sorter-false">Nutrition</th>
                     <th scope="col" colspan="2" class="sorter-false filter-false">Entry Price</th>
                     <th scope="col" colspan="2" class="sorter-false filter-false">Sale Price</th>
                     <th scope="col" colspan="3" class="sorter-false filter-false">Avail. Qty.</th>
@@ -60,7 +60,7 @@
                                 }; ?></td>
                         <td><?= $product['Description']; ?></td>
                         <td>
-                            <div class="overflow-auto" style="height:200px"><?= $product['Nutrition']; ?></div>
+                            <div class="overflow-auto" style="height:80px; width: 200px"><?= $product['Nutrition']; ?></div>
                         </td>
                         <td><?= number_format($product['EntryPrice1'], 0, '', '.'); ?>₫</td>
                         <td><?= number_format($product['EntryPrice2'], 0, '', '.'); ?>₫</td>
@@ -86,7 +86,7 @@
                                 <input type="hidden" name="switchProductId" value="<?= $product['ProductId'] ?>">
                                 <input type="hidden" name="switchProductStatus" value="<?= $product['Status'] ?>">
                             </form>
-                            <a class="btn btn-danger btn-block btn-sm text-white delete-product <?= ($product['Sold'] + $product['Shipping'] > 0) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>" data-product-name="<?= $product['Name'] ?> ">
+                            <a class="btn btn-danger btn-block btn-sm text-white delete-product <?= ($product['Existed'] > 0) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-element-id="<?= $product['ProductId'] ?>" data-element-name="<?= $product['Name'] ?> ">
                                 Delete
                             </a>
                         </td>
@@ -137,7 +137,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <form method="post" action="products-delete.php">
-                            <input type="hidden" name="deleteProduct" id="deleteProduct" value="">
+                            <input type="hidden" name="deleteProduct" id="deleteElement" value="">
                             <button type="submit" name="deleteProductBtn" class="btn btn-danger">Delete</button>
                         </form>
                     </div>

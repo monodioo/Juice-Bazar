@@ -15,38 +15,39 @@ jQuery(document).ready(function($) {
       sortLocaleCompare: true,
       sortTable: true,
       ignoreCase: true,
-      headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
+      headerTemplate: "{content} {icon}",
       widthFixed: true,
       widgets: ["filter", "cssStickyHeaders"],
       widgetOptions: {
-        // extra css class name (string or array) added to the filter element (input or select)
-        filter_cssFilter: [
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control custom-select",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control custom-select",
-          "form-control"
-        ],
-        cssStickyHeaders_offset: 145,
+        // // extra css class name (string or array) added to the filter element (input or select)
+        // filter_cssFilter: [
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control custom-select",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control custom-select",
+        //   "form-control"
+        // ],
+        // cssStickyHeaders_offset: 70,
+        cssStickyHeaders_attachTo: ".table-wrapper",
         // Set this option to false to make the searches case sensitive
         filter_ignoreCase: true
       }
@@ -74,33 +75,33 @@ jQuery(document).ready(function($) {
       ignoreCase: true,
       sortLocaleCompare: true,
       sortTable: true,
-      headerTemplate: "{content} {icon}", // new in v2.7. Needed to add the bootstrap icon!
+      headerTemplate: "{content} {icon}",
       widthFixed: true,
       widgets: ["filter", "cssStickyHeaders"],
       widgetOptions: {
         // extra css class name (string or array) added to the filter element (input or select)
-        filter_cssFilter: [
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control custom-select",
-          "form-control",
-          "form-control",
-          "form-control",
-          "form-control custom-select",
-          "form-control"
-        ],
-        cssStickyHeaders_offset: 70,
-        // include child row content while filtering, if true
+        // filter_cssFilter: [
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control custom-select",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control",
+        //   "form-control custom-select",
+        //   "form-control"
+        // ],
+        // cssStickyHeaders_offset: 70,
+        cssStickyHeaders_attachTo: ".table-wrapper",
         filter_childRows: true,
-        // filter child row content by column; filter_childRows must also be true
         filter_childByColumn: true,
+        filter_childWithSibs: false,
         // Set this option to false to make the searches case sensitive
         filter_ignoreCase: true
       }
@@ -139,11 +140,11 @@ jQuery(document).ready(function($) {
   //Delete modal
   $("#deleteModal").on("show.bs.modal", function(event) {
     var button = $(event.relatedTarget);
-    var productId = button.data("product-id");
-    var productName = button.data("product-name");
+    var ElementId = button.data("element-id");
+    var ElementName = button.data("element-name");
     var modal = $(this);
-    modal.find("input#deleteProduct").val(productId);
-    modal.find(".modal-text").text(productName);
+    modal.find("input#deleteElement").val(ElementId);
+    modal.find(".modal-text").text(ElementName);
   });
 
   //Calculate Sum of new quantity for products
