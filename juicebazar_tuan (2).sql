@@ -163,10 +163,10 @@ INSERT INTO `orders` (`OrderId`, `MemberId`, `PurchaseDate`, `DeliveryDate`, `Pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pricebycapacity`
+-- Table structure for table `Inventory`
 --
 
-CREATE TABLE `pricebycapacity` (
+CREATE TABLE `Inventory` (
   `ProductId` int(11) NOT NULL,
   `CapacityId` tinyint(4) NOT NULL,
   `Price` double NOT NULL,
@@ -174,10 +174,10 @@ CREATE TABLE `pricebycapacity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
 
 --
--- Dumping data for table `pricebycapacity`
+-- Dumping data for table `Inventory`
 --
 
-INSERT INTO `pricebycapacity` (`ProductId`, `CapacityId`, `Price`, `Quantity`) VALUES
+INSERT INTO `Inventory` (`ProductId`, `CapacityId`, `Price`, `Quantity`) VALUES
 (1, 1, 55000, 15),
 (1, 2, 65000, 15),
 (2, 1, 45000, 20),
@@ -434,11 +434,11 @@ ALTER TABLE `orders`
   ADD KEY `PromoId` (`PromoId`);
 
 --
--- Indexes for table `pricebycapacity`
+-- Indexes for table `Inventory`
 --
-ALTER TABLE `pricebycapacity`
+ALTER TABLE `Inventory`
   ADD PRIMARY KEY (`ProductId`,`CapacityId`),
-  ADD KEY `fk_PriceByCapacity_Capacity` (`CapacityId`);
+  ADD KEY `fk_Inventory_Capacity` (`CapacityId`);
 
 --
 -- Indexes for table `product`
@@ -532,11 +532,11 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`PromoId`) REFERENCES `promotion` (`PromoId`);
 
 --
--- Constraints for table `pricebycapacity`
+-- Constraints for table `Inventory`
 --
-ALTER TABLE `pricebycapacity`
-  ADD CONSTRAINT `fk_PriceByCapacity_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_PriceByCapacity_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Inventory`
+  ADD CONSTRAINT `fk_Inventory_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Inventory_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`

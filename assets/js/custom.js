@@ -75,7 +75,7 @@ jQuery(document).ready(function($) {
         $(this)
           .closest(".input-group")
           .find(".form-control")
-          .val() != 0
+          .val() > 1
       ) {
         $(this)
           .closest(".input-group")
@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
         $(this)
           .closest(".input-group")
           .find(".form-control")
-          .val(parseInt(0));
+          .val(parseInt(1));
       }
     });
     $(".js-btn-plus").on("click", function(e) {

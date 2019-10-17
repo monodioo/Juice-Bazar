@@ -95,10 +95,10 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pricebycapacity`
+-- Table structure for table `Inventory`
 --
 
-CREATE TABLE `pricebycapacity` (
+CREATE TABLE `Inventory` (
   `ProductId` int(11) NOT NULL,
   `CapacityId` tinyint(4) NOT NULL,
   `Price` double NOT NULL,
@@ -241,11 +241,11 @@ ALTER TABLE `orders`
   ADD KEY `fk_Orders_Member` (`MemberId`);
 
 --
--- Indexes for table `pricebycapacity`
+-- Indexes for table `Inventory`
 --
-ALTER TABLE `pricebycapacity`
+ALTER TABLE `Inventory`
   ADD PRIMARY KEY (`ProductId`,`CapacityId`),
-  ADD KEY `fk_PriceByCapacity_Capacity` (`CapacityId`);
+  ADD KEY `fk_Inventory_Capacity` (`CapacityId`);
 
 --
 -- Indexes for table `product`
@@ -318,11 +318,11 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `fk_Orders_Member` FOREIGN KEY (`MemberId`) REFERENCES `member` (`MemberId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `pricebycapacity`
+-- Constraints for table `Inventory`
 --
-ALTER TABLE `pricebycapacity`
-  ADD CONSTRAINT `fk_PriceByCapacity_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_PriceByCapacity_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Inventory`
+  ADD CONSTRAINT `fk_Inventory_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Inventory_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`

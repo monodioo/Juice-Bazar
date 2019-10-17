@@ -49,7 +49,8 @@
         <div class="page-section px-0 col">
           <div class="section-body row">
             
-            <?php include "templates/scripts/showProduct.php";?>
+            <?php include "templates/scripts/shopShowProduct.php";?>
+            <?php include "templates/scripts/shopAddToCart.php";?>
 
           </div>
         </div>
