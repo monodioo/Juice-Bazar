@@ -8,12 +8,11 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
     try {
-        if (isset($_POST['deleteProductBtn'])) {
-            //function to delete in both Products and Inventory tables
-            deleteProduct($pdo, $_POST['deleteProduct']);
-            header('location: admin-products.php');
+        if (isset($_POST['deleteCategoryBtn'])) {
+            deleteType($pdo, $_POST['deleteCategory']);
+            header('location: admin-types.php');
         } else {
-            header('location: admin-products.php');
+            header('location: admin-types.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';

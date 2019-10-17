@@ -1,24 +1,24 @@
-<div class="page-section card col-12 p-5">
-    <div class="section-title">All Orders</div>
-    <div class="">
-        <table class="table-order table table-hover table-sm table-responsive tablesorter" id='orderTable'>
+<div class="page-section card col-12 py-2">
+    <div class="section-title pb-2">All Orders</div>
+    <div class="table-wrapper">
+        <table class="table table-hover table-striped table-sm tablesorter" id='orderTable'>
             <thead>
                 <tr>
                     <th scope="col" style="" class="filter-exact">Order ID</th>
-                    <th scope="col" style="">Customer</th>
-                    <th scope="col" style="">Purchase Date</th>
-                    <th scope="col" style="">Delivery Date</th>
-                    <th scope="col" style="width:5%" class="sorter-false">Item</th>
+                    <th scope="col" style="width: 10%">Customer</th>
+                    <th scope="col" style="width: 10%">Purchase Date</th>
+                    <th scope="col" style="width: 10%">Delivery Date</th>
+                    <th scope="col" style="width:5%" class="sorter-false">Product</th>
                     <th scope="col" style="" class="sorter-false">Cat.</th>
-                    <th scope="col" style="width:5%" class="sorter-false">Qty.</th>
+                    <th scope="col" style="width:5%" class="sorter-false filter-exact">Qty.</th>
                     <th scope="col" style="" class="sorter-false">Unit Price</th>
                     <th scope="col" style="width: 8%">Value</th>
                     <th scope="col" style="" class="filter-select filter-exact" data-placeholder="All Codes">Promotion Code</th>
                     <th scope="col" style="">Promotion Value</th>
-                    <th scope="col" style="">Total Value</th>
+                    <th scope="col" style="width: 5%">Total Value</th>
                     <th scope="col" style="" class="sorter-false">Note</th>
                     <th scope="col" style="" class="filter-select filter-exact" data-placeholder="All Status">Status</th>
-                    <th scope="col" style="width:10%" class="sorter-false filter-false">Change Status</th>
+                    <th scope="col" style="width:20%" class="sorter-false filter-false">Change Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,14 +27,18 @@
                         <td><?= $order['OrderId'] ?></td>
                         <td><a class="admin-link" href="member-edit.php?id=<?= $order['MemberId'] ?>"><?= $order['MemberName'] ?></td>
                         <td><?= date_format(date_create($order['PurchaseDate']), 'M-d-Y H:i') ?></td>
-                        <td><?= date_format(date_create($order['DeliveryDate']), 'M-d-Y H:i') ?></td>
-                        <td colspan=4 class="text-center align-middle p-0"><a href="#" class="toggle admin-link d-block h-100 py-3">
+                        <td><?php if ($order['DeliveryDate'] == '') {
+                                    echo '<i>Will update when order is completed.</i>';
+                                } else {
+                                    echo date_format(date_create($order['DeliveryDate']), 'M-d-Y H:i');
+                                } ?></td>
+                        <td colspan=4 class="text-center align-middle p-0" style="width: 300px"><a href="#" class="toggle admin-link d-block h-100 py-3">
                                 Click here to expand
                             </a></td>
-                        <td><?= number_format($order['TotalPrice'] / (1 - $order['PromoValue'])) ?> ₫</td>
+                        <td><?= number_format($order['TotalPrice']) ?> ₫</td>
                         <td><?= empty($order['PromoName']) ?  'N/A' : $order['PromoName'] ?></td>
                         <td><?= $order['PromoValue'] * 100 ?>%</td>
-                        <td><?= number_format($order['TotalPrice']) ?> ₫</td>
+                        <td><?= number_format($order['TotalPrice'] * (1 - $order['PromoValue'])) ?> ₫</td>
                         <td><?= $order['Note'] ?></td>
                         <td>
                             <?php switch ($order['Status']) {
@@ -48,7 +52,7 @@
                                         echo '2.Shipping';
                                         break;
                                     case 3:
-                                        echo '3.Successful';
+                                        echo '3.Completed';
                                         break;
                                     case 4:
                                         echo '4.Cancelled';
@@ -56,13 +60,14 @@
                                 } ?>
                         </td>
                         <td>
+                            <a class="btn btn-primary btn-sm mb-1 text-white" href="orders-edit.php?id=<?= $order['OrderId'] ?>">Edit</a>
                             <form method="POST" action="orderStatusSwitch.php">
                                 <select class="custom-select" name="newStatus">
                                     <option selected>Select Status</option>
                                     <option value="0" disabled <?= $order['Status'] == 0 ? 'selected' : '' ?>>0.Processed</option>
                                     <option value="1" <?= $order['Status'] >= 1 ? 'disabled' : '' ?> <?= $order['Status'] == 1 ? 'selected' : '' ?>>1.Processing</option>
                                     <option value="2" <?= $order['Status'] >= 2 ? 'disabled' : '' ?>>2.Shipping</option>
-                                    <option value="3" <?= $order['Status'] >= 3 ? 'disabled' : '' ?>>3.Successful</option>
+                                    <option value="3" <?= $order['Status'] >= 3 ? 'disabled' : '' ?>>3.Completed</option>
                                     <option value="4" <?= $order['Status'] > 2 ? 'disabled' : '' ?>>4.Cancelled</option>
                                 </select>
                                 <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
@@ -79,18 +84,8 @@
                             <td></td>
                             <td></td>
                             <td><a href="products-edit.php?id=<?= $item['ProductId'] ?>"><?= $item['Name'] ?></td>
-                            <td><?php switch ($item['TypeId']) {
-                                            case 1:
-                                                echo '1.Fruits';
-                                                break;
-                                            case 2:
-                                                echo '2.Greens';
-                                                break;
-                                            case 3:
-                                                echo '3.Combo';
-                                                break;
-                                        }; ?></td>
-                            <td><?= $item['Quantity'] ?></td>
+                            <td><?= $item['Type']; ?></td>
+                            <td><?= $item['Quantity']; ?></td>
                             <td><?= number_format($item['Price']) ?> ₫</td>
                             <td><?= number_format($item['Price'] * $item['Quantity']) ?> ₫</td>
                             <td></td>

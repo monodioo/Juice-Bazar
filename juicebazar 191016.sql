@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2019 at 08:32 AM
+-- Generation Time: Oct 15, 2019 at 03:19 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `AdminId` int(11) NOT NULL,
-  `User` varchar(32) COLLATE utf32_vietnamese_ci NOT NULL,
-  `Pass` varchar(32) COLLATE utf32_vietnamese_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+  `User` varchar(32) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `Pass` varchar(32) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin`
@@ -53,7 +53,7 @@ INSERT INTO `admin` (`AdminId`, `User`, `Pass`) VALUES
 CREATE TABLE `capacity` (
   `CapacityId` tinyint(4) NOT NULL,
   `Capacity` smallint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `capacity`
@@ -66,20 +66,118 @@ INSERT INTO `capacity` (`CapacityId`, `Capacity`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `ProductId` int(11) NOT NULL,
+  `CapacityId` tinyint(4) NOT NULL,
+  `Price` int(11) NOT NULL,
+  `EntryPrice` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`ProductId`, `CapacityId`, `Price`, `EntryPrice`, `Quantity`) VALUES
+(1, 1, 55000, 43000, 15),
+(1, 2, 65000, 50000, 15),
+(2, 1, 45000, 35000, 20),
+(2, 2, 55000, 43000, 20),
+(3, 1, 60000, 47000, 15),
+(3, 2, 70000, 50000, 15),
+(4, 1, 55000, 42000, 25),
+(4, 2, 65000, 50000, 25),
+(5, 1, 35000, 27000, 30),
+(5, 2, 45000, 34000, 30),
+(6, 1, 55000, 43000, 20),
+(6, 2, 65000, 51000, 20),
+(7, 1, 50000, 370000, 25),
+(7, 2, 60000, 48000, 25),
+(8, 1, 55000, 43000, 20),
+(8, 2, 65000, 51000, 20),
+(9, 1, 45000, 35000, 30),
+(9, 2, 55000, 43000, 30),
+(10, 1, 60000, 48000, 15),
+(10, 2, 70000, 50000, 15),
+(11, 1, 35000, 25000, 30),
+(11, 2, 45000, 34000, 30),
+(12, 1, 45000, 35000, 20),
+(12, 2, 55000, 43000, 20),
+(13, 1, 45000, 34000, 25),
+(13, 2, 55000, 43000, 25),
+(14, 1, 50000, 40000, 10),
+(14, 2, 60000, 45000, 10),
+(15, 1, 45000, 32000, 20),
+(15, 2, 55000, 42000, 20),
+(16, 1, 45000, 34000, 20),
+(16, 2, 55000, 43000, 20),
+(17, 1, 50000, 38000, 15),
+(17, 2, 60000, 48000, 15),
+(18, 1, 45000, 32000, 20),
+(18, 2, 55000, 43000, 20),
+(19, 1, 45000, 39000, 30),
+(19, 2, 55000, 44000, 30),
+(20, 1, 45000, 35000, 30),
+(20, 2, 55000, 43000, 30),
+(21, 1, 45000, 34000, 25),
+(21, 2, 55000, 43000, 25),
+(22, 1, 45000, 34000, 20),
+(22, 2, 55000, 43000, 20),
+(23, 1, 50000, 40000, 15),
+(23, 2, 60000, 45000, 15),
+(24, 1, 55000, 42000, 15),
+(24, 2, 65000, 50000, 15),
+(25, 1, 440000, 300000, 10),
+(25, 2, 540000, 420000, 10),
+(26, 1, 450000, 310000, 10),
+(26, 2, 550000, 425000, 10),
+(27, 1, 450000, 310000, 10),
+(27, 2, 550000, 420000, 10),
+(28, 1, 450000, 300000, 10),
+(28, 2, 550000, 410000, 10),
+(39, 1, 45000, 32000, 15),
+(39, 2, 55000, 43000, 20),
+(40, 1, 45000, 33000, 10),
+(40, 2, 55000, 42000, 15),
+(42, 1, 45000, 33000, 15),
+(42, 2, 55000, 42000, 15),
+(43, 1, 45000, 34000, 15),
+(43, 2, 55000, 43000, 15),
+(44, 1, 45000, 34000, 15),
+(44, 2, 55000, 43000, 15),
+(45, 1, 45000, 34000, 20),
+(45, 2, 55000, 43000, 25),
+(46, 1, 45000, 34000, 25),
+(46, 2, 55000, 43000, 30),
+(47, 1, 45000, 34000, 40),
+(47, 2, 55000, 43000, 50),
+(48, 1, 45000, 34000, 30),
+(48, 2, 55000, 43000, 40),
+(49, 1, 50000, 40000, 45),
+(49, 2, 60000, 47000, 40),
+(51, 1, 50000, 38000, 30),
+(51, 2, 60000, 48000, 40);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
 CREATE TABLE `member` (
   `MemberId` int(11) NOT NULL,
-  `Email` varchar(100) COLLATE utf32_vietnamese_ci NOT NULL,
-  `Pass` varchar(32) COLLATE utf32_vietnamese_ci NOT NULL,
-  `Name` varchar(50) COLLATE utf32_vietnamese_ci NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `Pass` varchar(32) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `Name` varchar(50) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
   `Birthday` date DEFAULT NULL,
   `Gender` tinyint(1) NOT NULL DEFAULT 0,
   `Status` tinyint(1) NOT NULL DEFAULT 1,
-  `Phone` varchar(10) COLLATE utf32_vietnamese_ci NOT NULL,
-  `Address` varchar(255) COLLATE utf32_vietnamese_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+  `Phone` varchar(10) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `Address` varchar(255) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `member`
@@ -107,7 +205,7 @@ CREATE TABLE `orderdetail` (
   `ProductId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `CapacityId` tinyint(4) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orderdetail`
@@ -141,121 +239,23 @@ CREATE TABLE `orders` (
   `MemberId` int(11) NOT NULL,
   `PurchaseDate` datetime NOT NULL DEFAULT current_timestamp(),
   `DeliveryDate` datetime DEFAULT NULL,
-  `PromoId` tinyint(4),
-  `TotalPrice` double NOT NULL,
+  `PromoId` tinyint(4) DEFAULT NULL,
   `Status` tinyint(1) NOT NULL DEFAULT 0,
-  `Note` text COLLATE utf32_vietnamese_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+  `Note` text CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderId`, `MemberId`, `PurchaseDate`, `DeliveryDate`, `PromoId`, `TotalPrice`, `Status`, `Note`) VALUES
-(1, 1, '2019-10-02 20:35:00', NULL, NULL, 0, 2, '0123456789'),
-(2, 2, '2019-10-03 10:20:00', NULL, NULL, 0, 2, '0987654321'),
-(3, 5, '2019-10-04 15:10:00', NULL, NULL, 0, 2, '0213456789'),
-(4, 6, '2019-10-04 00:00:00', NULL, NULL, 0, 0, '0132456789'),
-(5, 7, '2019-10-05 00:00:00', NULL, NULL, 0, 1, '0123465789'),
-(6, 8, '2019-10-05 07:00:00', NULL, NULL, 0, 1, '0123546789'),
-(7, 9, '2019-10-06 09:00:00', NULL, NULL, 0, 2, 'California');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Inventory`
---
-
-CREATE TABLE `Inventory` (
-  `ProductId` int(11) NOT NULL,
-  `CapacityId` tinyint(4) NOT NULL,
-  `Price` double NOT NULL,
-  `Quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
-
---
--- Dumping data for table `Inventory`
---
-
-INSERT INTO `Inventory` (`ProductId`, `CapacityId`, `Price`, `Quantity`) VALUES
-(1, 1, 55000, 15),
-(1, 2, 65000, 15),
-(2, 1, 45000, 20),
-(2, 2, 55000, 20),
-(3, 1, 60000, 15),
-(3, 2, 70000, 15),
-(4, 1, 55000, 25),
-(4, 2, 65000, 25),
-(5, 1, 35000, 30),
-(5, 2, 45000, 30),
-(6, 1, 55000, 20),
-(6, 2, 65000, 20),
-(7, 1, 50000, 25),
-(7, 2, 60000, 25),
-(8, 1, 55000, 20),
-(8, 2, 65000, 20),
-(9, 1, 45000, 30),
-(9, 2, 55000, 30),
-(10, 1, 60000, 15),
-(10, 2, 70000, 15),
-(11, 1, 35000, 30),
-(11, 2, 45000, 30),
-(12, 1, 45000, 20),
-(12, 2, 55000, 20),
-(13, 1, 45000, 25),
-(13, 2, 55000, 25),
-(14, 1, 50000, 10),
-(14, 2, 60000, 10),
-(15, 1, 45000, 20),
-(15, 2, 55000, 20),
-(16, 1, 45000, 20),
-(16, 2, 55000, 20),
-(17, 1, 50000, 15),
-(17, 2, 60000, 15),
-(18, 1, 45000, 20),
-(18, 2, 55000, 20),
-(19, 1, 45000, 30),
-(19, 2, 55000, 30),
-(20, 1, 45000, 30),
-(20, 2, 55000, 30),
-(21, 1, 45000, 25),
-(21, 2, 55000, 25),
-(22, 1, 45000, 20),
-(22, 2, 55000, 20),
-(23, 1, 50000, 15),
-(23, 2, 60000, 15),
-(24, 1, 55000, 15),
-(24, 2, 65000, 15),
-(25, 1, 440000, 10),
-(25, 2, 540000, 10),
-(26, 1, 450000, 10),
-(26, 2, 550000, 10),
-(27, 1, 450000, 10),
-(27, 2, 550000, 10),
-(28, 1, 450000, 10),
-(28, 2, 550000, 10),
-(39, 1, 45000, 15),
-(39, 2, 55000, 20),
-(40, 1, 45000, 10),
-(40, 2, 55000, 15),
-(42, 1, 45000, 15),
-(42, 2, 55000, 15),
-(43, 1, 45000, 15),
-(43, 2, 55000, 15),
-(44, 1, 45000, 15),
-(44, 2, 55000, 15),
-(45, 1, 45000, 20),
-(45, 2, 55000, 25),
-(46, 1, 45000, 25),
-(46, 2, 55000, 30),
-(47, 1, 45000, 40),
-(47, 2, 55000, 50),
-(48, 1, 45000, 30),
-(48, 2, 55000, 40),
-(49, 1, 50000, 45),
-(49, 2, 60000, 40),
-(51, 1, 50000, 30),
-(51, 2, 60000, 40);
+INSERT INTO `orders` (`OrderId`, `MemberId`, `PurchaseDate`, `DeliveryDate`, `PromoId`, `Status`, `Note`) VALUES
+(1, 1, '2019-09-27 08:00:00', '2019-09-27 16:00:00', 3, 3, '0123456789'),
+(2, 2, '2019-10-03 10:20:00', '2019-10-03 16:21:00', NULL, 3, '0987654321'),
+(3, 5, '2019-10-04 15:10:00', NULL, NULL, 0, '0213456789'),
+(4, 6, '2019-10-04 00:00:00', NULL, NULL, 0, '0132456789'),
+(5, 7, '2019-10-05 00:00:00', '2019-10-05 13:00:00', NULL, 4, '0123465789'),
+(6, 8, '2019-10-05 07:00:00', NULL, NULL, 1, '0123546789'),
+(7, 9, '2019-10-06 09:00:00', NULL, NULL, 2, 'California');
 
 -- --------------------------------------------------------
 
@@ -266,12 +266,12 @@ INSERT INTO `Inventory` (`ProductId`, `CapacityId`, `Price`, `Quantity`) VALUES
 CREATE TABLE `product` (
   `ProductId` int(11) NOT NULL,
   `TypeId` int(11) NOT NULL,
-  `Name` varchar(50) COLLATE utf32_vietnamese_ci NOT NULL,
-  `Image` varchar(255) COLLATE utf32_vietnamese_ci DEFAULT NULL,
-  `Description` text COLLATE utf32_vietnamese_ci DEFAULT NULL,
-  `Nutrition` text COLLATE utf32_vietnamese_ci DEFAULT NULL,
+  `Name` varchar(50) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `Image` varchar(255) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci DEFAULT NULL,
+  `Description` text CHARACTER SET utf32 COLLATE utf32_vietnamese_ci DEFAULT NULL,
+  `Nutrition` text CHARACTER SET utf32 COLLATE utf32_vietnamese_ci DEFAULT NULL,
   `Status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product`
@@ -330,36 +330,15 @@ INSERT INTO `product` (`ProductId`, `TypeId`, `Name`, `Image`, `Description`, `N
 -- --------------------------------------------------------
 
 --
--- Table structure for table `promomember`
---
-
-CREATE TABLE `promomember` (
-  `MemberId` int(11) NOT NULL,
-  `PromoId` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
-
---
--- Dumping data for table `promomember`
---
-
-INSERT INTO `promomember` (`MemberId`, `PromoId`) VALUES
-(1, 2),
-(2, 2),
-(3, 2),
-(9, 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `promotion`
 --
 
 CREATE TABLE `promotion` (
   `PromoId` tinyint(4) NOT NULL,
-  `PromoName` varchar(50) COLLATE utf32_vietnamese_ci NOT NULL,
+  `PromoName` varchar(50) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
   `PromoValue` float NOT NULL,
   `PromoStatus` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `promotion`
@@ -367,7 +346,8 @@ CREATE TABLE `promotion` (
 
 INSERT INTO `promotion` (`PromoId`, `PromoName`, `PromoValue`, `PromoStatus`) VALUES
 (1, 'JUICEFORWOMEN', 0.05, 1),
-(2, 'JUICEBAZAR2019', 0.1, 0);
+(2, 'JUICEBAZAR2019', 0.1, 0),
+(3, 'JUICEFORKID', 0.2, 1);
 
 -- --------------------------------------------------------
 
@@ -377,20 +357,21 @@ INSERT INTO `promotion` (`PromoId`, `PromoName`, `PromoValue`, `PromoStatus`) VA
 
 CREATE TABLE `type` (
   `TypeId` int(11) NOT NULL,
-  `Type` varchar(50) COLLATE utf32_vietnamese_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
+  `Type` varchar(50) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci NOT NULL,
+  `TypeStatus` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `type`
 --
 
-INSERT INTO `type` (`TypeId`, `Type`) VALUES
-(1, 'Fruit Juices'),
-(2, 'Green Juices'),
-(3, 'Combos'),
-(4, 'Hot Teas'),
-(5, 'Coffees'),
-(6, 'Other Drinks');
+INSERT INTO `type` (`TypeId`, `Type`, `TypeStatus`) VALUES
+(1, 'Fruit', 1),
+(2, 'Green', 1),
+(3, 'Combos', 1),
+(4, 'Hot Teas', 0),
+(5, 'Coffees', 0),
+(6, 'Other Drinks', 0);
 
 --
 -- Indexes for dumped tables
@@ -407,6 +388,13 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `capacity`
   ADD PRIMARY KEY (`CapacityId`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`ProductId`,`CapacityId`),
+  ADD KEY `fk_PriceByCapacity_Capacity` (`CapacityId`);
 
 --
 -- Indexes for table `member`
@@ -434,25 +422,11 @@ ALTER TABLE `orders`
   ADD KEY `PromoId` (`PromoId`);
 
 --
--- Indexes for table `Inventory`
---
-ALTER TABLE `Inventory`
-  ADD PRIMARY KEY (`ProductId`,`CapacityId`),
-  ADD KEY `fk_Inventory_Capacity` (`CapacityId`);
-
---
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ProductId`),
   ADD KEY `fk_Product_Type` (`TypeId`);
-
---
--- Indexes for table `promomember`
---
-ALTER TABLE `promomember`
-  ADD PRIMARY KEY (`MemberId`,`PromoId`),
-  ADD KEY `FK_PromoMember_Promotion` (`PromoId`);
 
 --
 -- Indexes for table `promotion`
@@ -504,7 +478,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `PromoId` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PromoId` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `type`
@@ -515,6 +489,13 @@ ALTER TABLE `type`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD CONSTRAINT `fk_PriceByCapacity_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_PriceByCapacity_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orderdetail`
@@ -529,27 +510,13 @@ ALTER TABLE `orderdetail`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_Orders_Member` FOREIGN KEY (`MemberId`) REFERENCES `member` (`MemberId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`PromoId`) REFERENCES `promotion` (`PromoId`);
-
---
--- Constraints for table `Inventory`
---
-ALTER TABLE `Inventory`
-  ADD CONSTRAINT `fk_Inventory_Capacity` FOREIGN KEY (`CapacityId`) REFERENCES `capacity` (`CapacityId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Inventory_Product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`PromoId`) REFERENCES `promotion` (`PromoId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_Product_Type` FOREIGN KEY (`TypeId`) REFERENCES `type` (`TypeId`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `promomember`
---
-ALTER TABLE `promomember`
-  ADD CONSTRAINT `FK_PromoMember_Member` FOREIGN KEY (`MemberId`) REFERENCES `member` (`MemberId`),
-  ADD CONSTRAINT `FK_PromoMember_Promotion` FOREIGN KEY (`PromoId`) REFERENCES `promotion` (`PromoId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
