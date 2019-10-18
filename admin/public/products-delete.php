@@ -9,7 +9,7 @@ if (!empty($_SESSION['admin'])) {
 
     try {
         if (isset($_POST['deleteProductBtn'])) {
-            //function to delete in both Products and Inventory tables
+            //function to delete in both Products and productdetail tables
             deleteProduct($pdo, $_POST['deleteProduct']);
             header('location: admin-products.php');
         } else {

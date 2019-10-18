@@ -59,7 +59,7 @@ function getProducts($pdo, $id = '')
 
     $products = [];
     foreach ($results as $result) {
-        $inventory = findInventory($pdo, $result['ProductId']);
+        $productdetail = findInventory($pdo, $result['ProductId']);
         $sold = countProductByOrderStatus($pdo, $result['ProductId'], "3"); //3 for products in concluded orders
         $shipping = countProductByOrderStatus($pdo, $result['ProductId'], "2"); // (2) for shipping orders
         $existed = countProductByOrderStatus($pdo, $result['ProductId']); // empty 3rd param to count all orders
@@ -71,13 +71,13 @@ function getProducts($pdo, $id = '')
             'Description' => $result['Description'],
             'Nutrition' => $result['Nutrition'],
             'Status' => $result['Status'],
-            'EntryPrice1' => $inventory[0]['EntryPrice'] ?? 0,
-            'EntryPrice2' => $inventory[1]['EntryPrice'] ?? 0,
-            'Price1' => $inventory[0]['Price'] ?? 0,
-            'Price2' => $inventory[1]['Price'] ?? 0,
-            'Available1' => $inventory[0]['Quantity'] ?? 0,
-            'Available2' => $inventory[1]['Quantity'] ?? 0,
-            'Available' => ($inventory[0]['Quantity'] ?? 0) + ($inventory[1]['Quantity'] ?? 0),
+            'EntryPrice1' => $productdetail[0]['EntryPrice'] ?? 0,
+            'EntryPrice2' => $productdetail[1]['EntryPrice'] ?? 0,
+            'Price1' => $productdetail[0]['Price'] ?? 0,
+            'Price2' => $productdetail[1]['Price'] ?? 0,
+            'Available1' => $productdetail[0]['Quantity'] ?? 0,
+            'Available2' => $productdetail[1]['Quantity'] ?? 0,
+            'Available' => ($productdetail[0]['Quantity'] ?? 0) + ($productdetail[1]['Quantity'] ?? 0),
             'Sold1' => $sold[0]['Quantity'] ?? 0,
             'Sold2' => $sold[1]['Quantity'] ?? 0,
             'Sold' => ($sold[0]['Quantity'] ?? 0) + ($sold[1]['Quantity'] ?? 0),
@@ -92,7 +92,7 @@ function getProducts($pdo, $id = '')
 
 function findInventory($pdo, $ProductId)
 {
-    $sql = 'SELECT pc.`CapacityId`, pc.`Price`, pc.`EntryPrice`,  pc.`Quantity` FROM `inventory` pc JOIN `product` p ON pc.`ProductId` = p.`ProductId` WHERE pc.`ProductId` = :ProductId ORDER BY pc.`CapacityId`';
+    $sql = 'SELECT pd.`ProductDetailId`, pd.`Price`, pd.`EntryPrice`, pd.`Quantity` FROM `productdetail` pd JOIN `product` p ON pd.`ProductId` = p.`ProductId` WHERE pd.`ProductId` = :ProductId ORDER BY pd.`CapacityId`';
     $parameters = [':ProductId' => $ProductId];
     return query($pdo, $sql, $parameters)->fetchAll();
 }
@@ -100,17 +100,17 @@ function findInventory($pdo, $ProductId)
 function countProductByOrderStatus($pdo, $ProductId, $OrderStatus = "")
 {
     if ($OrderStatus == '') {
-        $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `inventory` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`';
+        $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `productdetail` pd LEFT JOIN `orderdetail` od ON pd.`ProductDetailId` = od.`ProductDetailId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE pd.`ProductId`= :ProductId GROUP BY pd.`ProductDetailId` ORDER BY pd.`ProductDetailId`';
         $parameters = [':ProductId' => $ProductId];
     } else {
-        $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `inventory` pc LEFT JOIN `orderdetail` od ON pc.`ProductId` = od.`ProductId` AND pc.`CapacityId`= od.`CapacityId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status` IN (:OrderStatus) AND pc.`ProductId`= :ProductId GROUP BY pc.`CapacityId` ORDER BY pc.`CapacityId`';
+        $sql = 'SELECT SUM(od.`Quantity`) as Quantity FROM `productdetail` pd LEFT JOIN `orderdetail` od ON pd.`ProductDetailId` = od.`ProductDetailId` JOIN `orders` o ON o.`OrderId`= od.`OrderId` WHERE o.`Status` IN (:OrderStatus) AND pd.`ProductId`= :ProductId GROUP BY pd.`ProductDetailId` ORDER BY pd.`ProductDetailId`';
         $parameters = [':OrderStatus' => $OrderStatus, ':ProductId' => $ProductId];
     }
 
     return query($pdo, $sql, $parameters)->fetchAll();
 }
 
-function saveElement($pdo, $table, $primaryKey, $record)
+function saveProduct($pdo, $table, $primaryKey, $record)
 {
     $recordElement = [
         'ProductId' => $record['ProductId'],
@@ -138,14 +138,14 @@ function saveElement($pdo, $table, $primaryKey, $record)
 
     if ($recordElement['ProductId'] == '') {
         $recordElement['ProductId'] = null;
-        insertElement($pdo, $table, $recordElement, $recordPrice1, $recordPrice2);
+        insertProduct($pdo, $table, $recordElement, $recordPrice1, $recordPrice2);
     } else {
 
-        updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1, $recordPrice2);
+        updateProduct($pdo, $table, $primaryKey, $recordElement, $recordPrice1, $recordPrice2);
     }
 }
 
-function insertElement($pdo, $table, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
+function insertProduct($pdo, $table, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
 {
 
     //insert new Item into $Table
@@ -178,8 +178,8 @@ function insertElement($pdo, $table, $recordElement, $recordPrice1 = [], $record
     if (!empty($recordPrice1) && !empty($recordPrice2)) {
         $recordPrice1['ProductId'] = $newId;
         $recordPrice2['ProductId'] = $newId;
-        //insert into Table inventory for CapacityId = 1 (250ml)
-        $sqlPrice1 = 'INSERT INTO `inventory` (';
+        //insert into Table productdetail for CapacityId = 1 (250ml)
+        $sqlPrice1 = 'INSERT INTO `productdetail` (';
 
         foreach ($recordPrice1 as $key => $value) {
             $sqlPrice1 .= '`' . $key . '`,';
@@ -199,8 +199,8 @@ function insertElement($pdo, $table, $recordElement, $recordPrice1 = [], $record
 
         query($pdo, $sqlPrice1, $recordPrice1);
 
-        //insert into Table inventory for CapacityId = 2 (330ml)
-        $sqlPrice2 = 'INSERT INTO `inventory` (';
+        //insert into Table productdetail for CapacityId = 2 (330ml)
+        $sqlPrice2 = 'INSERT INTO `productdetail` (';
 
         foreach ($recordPrice2 as $key => $value) {
             $sqlPrice2 .= '`' . $key . '`,';
@@ -222,7 +222,7 @@ function insertElement($pdo, $table, $recordElement, $recordPrice1 = [], $record
     }
 }
 
-function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
+function updateProduct($pdo, $table, $primaryKey, $recordElement, $recordPrice1 = [], $recordPrice2 = [])
 {
     // update element in $table
     $sqlElement = ' UPDATE `' . $table . '` SET ';
@@ -239,16 +239,16 @@ function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 
 
     if (!empty($recordPrice1) && !empty($recordPrice2)) {
         if (empty($recordPrice1['Quantity'])) {
-            $sqlPrice1 = 'UPDATE `inventory` SET `Price` = :Price, `EntryPrice` = :EntryPrice WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            $sqlPrice1 = 'UPDATE `productdetail` SET `Price` = :Price, `EntryPrice` = :EntryPrice WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
             unset($recordPrice1['Quantity']);
         } else {
-            $sqlPrice1 = 'UPDATE `inventory` SET `Price` = :Price, `EntryPrice` = :EntryPrice, `Quantity` = `Quantity`+ :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            $sqlPrice1 = 'UPDATE `productdetail` SET `Price` = :Price, `EntryPrice` = :EntryPrice, `Quantity` = `Quantity`+ :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
         }
         if (empty($recordPrice2['Quantity'])) {
-            $sqlPrice2 = 'UPDATE `inventory` SET `Price` = :Price, `EntryPrice` = :EntryPrice  WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            $sqlPrice2 = 'UPDATE `productdetail` SET `Price` = :Price, `EntryPrice` = :EntryPrice  WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
             unset($recordPrice2['Quantity']);
         } else {
-            $sqlPrice2 = 'UPDATE `inventory` SET `Price` = :Price, `EntryPrice` = :EntryPrice , `Quantity` = `Quantity` + :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
+            $sqlPrice2 = 'UPDATE `productdetail` SET `Price` = :Price, `EntryPrice` = :EntryPrice , `Quantity` = `Quantity` + :Quantity WHERE `ProductId` = :ProductId AND `CapacityId` = :CapacityId';
         }
 
         query($pdo, $sqlPrice1, $recordPrice1);
@@ -259,7 +259,7 @@ function updateElement($pdo, $table, $primaryKey, $recordElement, $recordPrice1 
 
 function deleteProduct($pdo, $id)
 {
-    $sqlPrice = 'DELETE FROM `inventory` WHERE `ProductId` = :primaryKey';
+    $sqlPrice = 'DELETE FROM `productdetail` WHERE `ProductId` = :primaryKey';
     $parameters = [':primaryKey' => $id];
     query($pdo, $sqlPrice, $parameters);
 
@@ -290,13 +290,13 @@ function getOrders($pdo, $id = '')
 
     $orders = [];
     foreach ($results as $result) {
-        $promo = empty($result['PromoId']) ? ['PromoName' => '', 'PromoValue' => 0] : getInfoOrder($pdo, 'promotion', 'PromoId', $result['PromoId']);
+        $promo = empty($result['PromoId']) ? ['PromoName' => '', 'PromoValue' => 0] : getOrderInfo($pdo, 'promotion', 'PromoId', $result['PromoId']);
 
-        $member = getInfoOrder($pdo, 'member', 'MemberId', $result['MemberId']);
+        $member = getOrderInfo($pdo, 'member', 'MemberId', $result['MemberId']);
         $items = getOrderDetail($pdo, $result['OrderId']);
-        $totalPrice = 0;
+        $subTotalValue = 0;
         foreach ($items as $item) {
-            $totalPrice += ($item['Price'] * $item['Quantity']);
+            $subTotalValue += ($item['SalePrice'] * $item['Quantity']);
         }
 
         $orders[] = [
@@ -306,10 +306,11 @@ function getOrders($pdo, $id = '')
             'PurchaseDate' => $result['PurchaseDate'],
             'DeliveryDate' => $result['DeliveryDate'] ?? "",
             'Items' => getOrderDetail($pdo, $result['OrderId']),
+            'List' => getListProducts($pdo),
             'PromoId' => $result['PromoId'],
             'PromoName' => $promo['PromoName'],
             'PromoValue' => $promo['PromoValue'],
-            'TotalPrice' => $totalPrice,
+            'subTotalValue' => $subTotalValue,
             'Status' => $result['Status'],
             'Note' => $result['Note']
         ];
@@ -319,18 +320,24 @@ function getOrders($pdo, $id = '')
 
 function getOrderDetail($pdo, $OrderId)
 {
-    $sql = 'SELECT p.`ProductId`, p.`Name`, pc.`Price`, od.`Quantity`, od.`CapacityId`, p.`TypeId`, t.`Type` FROM `orderdetail` od JOIN `product` p ON od.`ProductId` = p.`ProductId` JOIN `inventory` pc ON od.`ProductId` = pc.`ProductId` AND od.`CapacityId` = pc.`CapacityId` JOIN `Type` t ON t.`TypeId` = p.`TypeId` WHERE `OrderID` = :OrderId';
+    $sql = 'SELECT pd.`ProductDetailId`, p.`ProductId`, p.`Name`, od.`SalePrice`, od.`Quantity`, pd.`CapacityId`, p.`TypeId`, t.`Type` FROM `orderdetail` od JOIN `productdetail` pd ON od.`ProductDetailId` = pd.`ProductDetailId` JOIN  `product` p ON pd.`ProductId` = p.`ProductId` JOIN `Type` t ON t.`TypeId` = p.`TypeId` WHERE `OrderID` = :OrderId';
     $parameters = [':OrderId' => $OrderId];
     $results = query($pdo, $sql, $parameters)->fetchAll();
     return $results;
 }
 
-function getInfoOrder($pdo, $table, $primaryKey, $keyValue)
+function getOrderInfo($pdo, $table, $primaryKey, $keyValue)
 {
     $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :keyValue';
     $parameters = [':keyValue' => $keyValue];
     $results = query($pdo, $sql, $parameters)->fetch();
     return $results;
+}
+
+function getListProducts($pdo)
+{
+    $sql = 'SELECT pd.`ProductDetailId`, pd.`Price`, p.`Name`, pd.`CapacityId` FROM `productdetail` pd JOIN `product` p ON pd.`ProductId`= p.`ProductId` WHERE p.`Status`= 1 ORDER BY p.`Name`';
+    return query($pdo, $sql)->fetchAll();
 }
 
 function changeStock($pdo, $OrderId, $return = false, $newStatus)
@@ -340,9 +347,9 @@ function changeStock($pdo, $OrderId, $return = false, $newStatus)
     //if $return is true, then the function acts as returning shipment to stock(increase stock), else it will send shipment (decrease stock)
     foreach ($returneds as $returned) {
         if ($return) {
-            $sql = 'UPDATE `inventory` SET `Quantity`= `Quantity` + :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
+            $sql = 'UPDATE `productdetail` SET `Quantity`= `Quantity` + :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
         } else {
-            $sql = 'UPDATE `inventory` SET `Quantity`= `Quantity` - :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
+            $sql = 'UPDATE `productdetail` SET `Quantity`= `Quantity` - :Quantity WHERE `ProductId`= :ProductId AND `CapacityId` = :CapacityId';
         }
         $parameters = [':Quantity' => $returned['Quantity'], ':ProductId' => $returned['ProductId'], ':CapacityId' => $returned['CapacityId']];
         query($pdo, $sql, $parameters);

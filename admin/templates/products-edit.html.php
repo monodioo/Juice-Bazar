@@ -159,6 +159,13 @@
                             </a>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            <a class="btn btn-primary text-white" href="admin-products.php">
+                                Go back to Products List
+                            </a>
+                        </td>
+                    </tr>
                 </form>
             </tbody>
 

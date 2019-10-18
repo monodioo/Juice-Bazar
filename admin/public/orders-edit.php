@@ -13,14 +13,14 @@ if (!empty($_SESSION['admin'])) {
             $record =  [
                 'OrderId' => $_POST['OrderId'],
                 'DeliveryDate' => $_POST['DeliveryDate'],
-                'PromoId' => $_POST['PromoId'],
+                'PromoId' => $_POST['PromoId'] ?? "0",
                 'Note' => $_POST['Note'],
                 'Status' => $_POST['Status']
             ];
 
-            editOrder($pdo, $record);
-
-            header('location: orders-edit.php?id=' . $_POST['OrderId'] . '');
+            // editOrder($pdo, $record);
+            print_r($_POST);
+            // header('location: orders-edit.php?id=' . $_POST['OrderId'] . '');
         } else {
             if (!empty($_GET['id'])) {
 
