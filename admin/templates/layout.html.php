@@ -41,7 +41,7 @@
                     <div class="dropdown-menu" aria-labelledby="productDropdown">
                         <a class="dropdown-item text-dark" href="admin-products.php">All Products</a>
                         <a class="dropdown-item text-dark" href="products-edit.php">Add Product</a>
-                        <a class="dropdown-item text-dark" href="admin-types.php">Categories</a>
+                        <a class="dropdown-item text-dark" href="admin-types.php">All Categories</a>
                     </div>
                     <a href="admin-orders.php" class="nav-link ">Orders</a>
                     <a href="admin-promos.php" class="nav-link ">Promotion</a>
@@ -57,6 +57,12 @@
             <div class="col-auto"></div>
             <?= $output ?>
             <div class="col-auto"></div>
+        </div>
+    </div>
+
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-show="true">
+        <div class="toast-body p-3 px-5 bg-success">
+            <span class="text-white">Successful login!</span>
         </div>
     </div>
 

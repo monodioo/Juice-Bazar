@@ -1,5 +1,5 @@
 <div class="page-section card col-12 py-2">
-    <div class="section-title pb-2">All Products</div>
+    <div class="section-title pb-2">Products List</div>
     <div class="table-wrapper">
         <table class="table table-hover table-striped table-sm tablesorter" id='prodTable'>
             <thead>

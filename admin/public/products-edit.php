@@ -58,7 +58,7 @@ if (!empty($_SESSION['admin'])) {
                         'New2' => $_POST['New2'],
                     ];
 
-                    saveElement(
+                    saveProduct(
                         $pdo,
                         'product',
                         'ProductId',

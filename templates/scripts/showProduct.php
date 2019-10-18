@@ -1,10 +1,10 @@
 <?php
 if ($_REQUEST["typeid"] == '0') {
-    $sql = "SELECT * FROM Product JOIN inventory ON Product.ProductId = inventory.ProductId
+    $sql = "SELECT * FROM Product JOIN productdetail ON Product.ProductId = productdetail.ProductId
                 WHERE CapacityId = 1 AND Status = 1";
 } else {
     $typeid = $_REQUEST['typeid'];
-    $sql = "SELECT * FROM Product  JOIN inventory ON Product.ProductId = inventory.ProductId
+    $sql = "SELECT * FROM Product  JOIN productdetail ON Product.ProductId = productdetail.ProductId
         WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
 }
 $result = mysqli_query($con, $sql);

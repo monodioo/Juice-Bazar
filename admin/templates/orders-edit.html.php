@@ -30,7 +30,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td scope="col">Delivery Date</td>
+                        <td scope="col" class="align-middle">Delivery Date</td>
                         <td colspan="5">
                             <input class="form-control" name="DeliveryDate" type="datetime-local" value="<?php if ($orders[0]['DeliveryDate'] == '') {
                                                                                                                 echo '';
@@ -41,44 +41,66 @@
                     </tr>
 
                     <tr>
-                        <td scope="col">Order`s products</td>
-                        <td>Product</td>
+                        <td scope="col" style="width: 20%">Order's products</td>
+                        <td style="width: 25%">Change Product</td>
                         <td>Category</td>
+                        <td style="width: 15%">Sale Price</td>
                         <td>Quantity</td>
-                        <td>Unit Price</td>
-                        <td>Subtotal Price</td>
+                        <td style="width: 15%">Total Price</td>
                     </tr>
                     <?php $countItem = 0; ?>
                     <?php foreach ($orders[0]['Items'] as $item) : ?>
-                        <tr>
-                            <td>#<?= ++$countItem ?> </td>
-                            <td><a href="products-edit.php?id=<?= $item['ProductId'] ?>"><?= $item['Name'] ?></td>
-                            <td><?= $item['Type']; ?></td>
-                            <td><?= number_format($item['Price']) ?> ₫</td>
-                            <td><?= $item['Quantity']; ?></td>
-                            <td><?= number_format($item['Price'] * $item['Quantity']) ?> ₫</td>
+                        <tr class="product-item">
+                            <td class="align-middle"><a href="products-edit.php?id=<?= $item['ProductId'] ?>"><?= $item['Name'] ?>&nbsp;(<?= $item['CapacityId'] - 1 ? "330ml" : "250ml" ?>)</td>
+                            <td><select name="newProduct" class="custom-select product-select">
+                                    <option disabled="">Select New Product</option>
+                                    <?php foreach ($orders[0]['List'] as $list) : ?>
+                                        <option value="<?= $list['ProductDetailId']; ?>" <?= ($item['ProductDetailId'] == $list['ProductDetailId']) ? 'selected' : '' ?>>
+                                            <?= $list['Name']; ?> <?= ($list['CapacityId'] == 1) ? "250ml" : "330ml" ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                            <td class="align-middle product-type"><?= $item['Type']; ?></td>
+                            <td class="align-middle"><span class="product-price"><?= number_format($item['SalePrice'], 0, ",", ".") ?></span> ₫</td>
+                            <td>
+                                <input type="number" min=1 max=100 class="form-control product-quantity" name="Quantity" value="<?= $item['Quantity']; ?>">
+                            </td>
+                            <td class="align-middle"><span class="product-totalPrice"><?= number_format($item['SalePrice'] * $item['Quantity'], 0, ",", ".") ?></span> ₫</td>
                         </tr>
                     <?php endforeach; ?>
                     <tr>
+                        <td colspan="6" class="text-center"><button class="btn btn-primary" id="addProductBtn">Add more Item</button></td>
+                    </tr>
+                    <tr>
                         <td scope="col">Subtotal Value</td>
-                        <td colspan="5">
-                            <?= number_format($orders[0]['TotalPrice']) ?> ₫
+                        <td colspan="4">
+                        </td>
+                        <td>
+                            <span class="product-subtotal"><?= number_format($orders[0]['subTotalValue'], 0, ",", ".") ?> </span> ₫
                         </td>
                     </tr>
                     <tr>
-                        <td scope="col">Promotion</td>
-                        <td colspan="3">
-                            <input class="form-control" type="text" disabled value="Name: <?= $orders[0]['PromoName'] ?>">
-                            <input class="form-control" type="hidden" name="PromoId" value="<?= $orders[0]['PromoId'] ?>">
-                        </td>
+                        <td scope="col" class="align-middle">Promotion Code</td>
                         <td colspan="2">
-                            <input class="form-control" type="text" disabled value="Discount:  <?= $orders[0]['PromoValue'] * 100 ?>%">
+                            <input class="form-control" type="text" disabled value="<?= $orders[0]['PromoName'] ?>">
+                            <input class="form-control product-promo" type="hidden" name="PromoId" value="<?= $orders[0]['PromoId'] ?>">
+                        </td>
+                        <td class="align-middle">
+                            Value</td>
+                        <td>
+                            <input class="form-control product-promovalue" type="text" disabled value="<?= $orders[0]['PromoValue'] * 100 ?>%">
+                        </td>
+                        <td class="align-middle">
+                            -<span class="product-discount"><?= number_format($orders[0]['PromoValue'] * $orders[0]['subTotalValue'], 0, ",", ".") ?> </span>₫
                         </td>
                     </tr>
                     <tr>
                         <td scope="col">Total Value</td>
-                        <td colspan="5">
-                            <?= number_format($orders[0]['TotalPrice'] * (1 - $orders[0]['PromoValue'])) ?> ₫
+                        <td colspan="4">
+                        </td>
+                        <td>
+                            <span class="product-total font-weight-bold"> <?= number_format($orders[0]['subTotalValue'] * (1 - $orders[0]['PromoValue']), 0, ",", ".") ?> </span><strong>₫</strong>
                         </td>
                     </tr>
                     <tr>
@@ -91,11 +113,11 @@
                         <td scope="col">Status</td>
                         <td colspan="5">
                             <select class="custom-select" name="Status" value="<?= $orders[0]['Status'] ?>">
-                                <option value="0" <?= $orders[0]['Status'] > 0 ? 'disabled' : '' ?> <?= $orders[0]['Status'] == 0 ? 'selected' : '' ?>>0.Processed</option>
-                                <option value="1" <?= $orders[0]['Status'] >= 1 ? 'disabled' : '' ?> <?= $orders[0]['Status'] == 1 ? 'selected' : '' ?>>1.Processing</option>
-                                <option value="2" <?= $orders[0]['Status'] >= 2 ? 'disabled' : '' ?> <?= $orders[0]['Status'] == 2 ? 'selected' : '' ?>>2.Shipping</option>
-                                <option value="3" <?= $orders[0]['Status'] >= 3 ? 'disabled' : '' ?> <?= $orders[0]['Status'] == 3 ? 'selected' : '' ?>>3.Completed</option>
-                                <option value="4" <?= $orders[0]['Status'] == 3 ? 'disabled' : '' ?> <?= $orders[0]['Status'] == 4 ? 'selected' : '' ?>>4.Cancelled</option>
+                                <option value="0" <?= $orders[0]['Status'] == 0 ? 'selected' : '' ?>>0.Pending</option>
+                                <option value="1" <?= $orders[0]['Status'] == 1 ? 'selected' : '' ?>>1.Processing</option>
+                                <option value="2" <?= $orders[0]['Status'] == 2 ? 'selected' : '' ?>>2.Shipping</option>
+                                <option value="3" <?= $orders[0]['Status'] == 3 ? 'selected' : '' ?>>3.Completed</option>
+                                <option value="4" <?= $orders[0]['Status'] == 4 ? 'selected' : '' ?>>4.Cancelled</option>
                             </select>
                         </td>
                     </tr>
@@ -106,6 +128,13 @@
                                 Delete
                             </a>
                         </td>
+                    </tr>
+                    <td colspan="6" class="text-center">
+                        <a class="btn btn-primary text-white" href="admin-orders.php">
+                            Go back to Orders List
+                        </a>
+                    </td>
+                    <tr>
                     </tr>
                 </form>
             </tbody>

@@ -732,7 +732,7 @@ input.error {
   /* position: relative;
   top: 150px;  */
   overflow: auto;
-  font-size: 10px !important;
+  font-size: 12px !important;
 }
 
 .tablesorter-hidden {
@@ -741,4 +741,10 @@ input.error {
 
 .admin-link {
   color: black !important;
+}
+
+.toast {
+  position: absolute;
+  top: 50px;
+  right: 45%;
 }
