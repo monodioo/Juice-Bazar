@@ -410,8 +410,53 @@ function deleteOrder($pdo, $id)
     query($pdo, $sql2, $parameters);
 }
 
+//Update order information from orders-edit.php
 function editOrder($pdo, $record)
 {
-    $sql = 'UPDATE `orders` SET `DeliveryDate` = :DeliveryDate, `Status`=:Status, `PromoId` =:PromoId, `Note` =:Note WHERE `OrderId` = :OrderId';
-    query($pdo, $sql, $record);
+    //Update Order information
+    $recordOrder = array_splice($record, 'NewProduct', 1);
+    $sqlOrder = 'UPDATE `orders` SET `DeliveryDate` = :DeliveryDate, `Status`=:Status, `PromoId` =:PromoId, `Note` =:Note WHERE `OrderId` = :OrderId';
+
+    query($pdo, $sqlOrder, $recordOrder);
+
+    //Group quantity from duplicated items
+    $products = $record['NewProduct'];
+
+    $length = $products . length();
+
+    for ($i = 0; $i < $length; $i++) {
+        for ($j = $i; $j < $length; $j++) {
+            if ($products[i]['ProductDetailId'] === $products[j]['ProductDetailId']) {
+                $products[i]['Quantity'] += $products[j]['Quantity'];
+            };
+        }
+    }
+    //delete duplicated items after grouping quantity
+    $products = array_unique($products);
+
+    //delete old entries from orderdetail table
+    $sqlDelete = 'DELETE FROM `orderdetail` WHERE `OrderId` = :OrderId';
+    $parameters = [':OrderId' => $record['OrderId']];
+    query($pdo, $sqlDelete, $parameters);
+
+    //create new entries into order Detail
+    $sqlNewEntries = 'INSERT INTO `orderDetail` (';
+
+    foreach ($products as $key => $value) {
+        $sqlNewEntries .= '`' . $key . '`,';
+    }
+
+    $sqlNewEntries = rtrim($sqlNewEntries, ',');
+
+    $sqlNewEntries .= ') VALUES (';
+
+    foreach ($products as $key => $value) {
+        $sqlNewEntries .= ':' . $key . ',';
+    }
+
+    $sqlNewEntries = rtrim($sqlNewEntries, ',');
+
+    $sqlNewEntries .= ')';
+
+    query($pdo, $sqlNewEntries, $products);
 }

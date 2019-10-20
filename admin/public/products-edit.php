@@ -36,7 +36,7 @@ if (!empty($_SESSION['admin'])) {
                 $title = 'Error';
                 $output = "Sorry, Entry Prices should not be higher than SalePrice. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";
             } else {
-                if (!in_array($ext, $allowed) && empty($_POST['ImageCheck'])) {
+                if (!in_array($ext, $allowed) || empty($_POST['ImageCheck'])) {
                     $title = 'Error';
                     $output = "Sorry, only JPG, JPEG, PNG files are allowed. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";;
                 } else {

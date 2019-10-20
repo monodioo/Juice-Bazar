@@ -182,8 +182,9 @@ jQuery(document).ready(function($) {
     popover: []
   });
 
-  //ajax function to update price& category of new product in Order Edit page
-  $(".product-select").on("change", function() {
+  //AJAX function to update price& category of new product in Order Edit page
+  $(".table-body").on("change", ".product-select", function() {
+    console.log(this);
     //Price
     $.ajax({
       url: "../include/snippets/getSalePrice.php?id=" + this.value,
@@ -196,6 +197,10 @@ jQuery(document).ready(function($) {
           .closest("tr")
           .find(".product-price")
           .html(data);
+        $(this)
+          .closest("tr")
+          .find(".product-price-input")
+          .val(parseInt(data) * 1000);
         $quantity = parseInt(
           $(this)
             .closest("tr")
@@ -220,8 +225,16 @@ jQuery(document).ready(function($) {
     });
   });
 
+  //AJAX Delete product row
+  $(".table-body").on("click", ".product-delete", function() {
+    this.preventDefault;
+    $(this)
+      .closest("tr")
+      .remove();
+  });
+
   //calculate subtotal price for new product in Order Edit page
-  $(".product-quantity").change(function() {
+  $(".table-body").on("change", ".product-quantity", function() {
     $price = parseInt(
       $(this)
         .closest("tr")
@@ -231,6 +244,7 @@ jQuery(document).ready(function($) {
     updateTotalValue(this, this.value, $price);
   });
 
+  //function to update price from ajax
   function updateTotalValue(target, price, quantity) {
     $subtotal = price * quantity;
     $(target)
@@ -275,4 +289,22 @@ jQuery(document).ready(function($) {
     }
     return $number;
   }
+
+  //AJAX Add more products into order
+  $("#addProductBtn").on("click", function() {
+    this.preventDefault;
+    // $count = $("#productCount").val();
+    $.ajax({
+      url: "../include/snippets/insertRowIntoOrder.php",
+      method: "GET",
+      context: this,
+      success: function(data) {
+        $(this)
+          .closest("tr")
+          .before(data);
+
+        // $("#productCount").val() + 2;
+      }
+    });
+  });
 });

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+$_SESSION['productCount'] = -1;
 
 if (!empty($_SESSION['admin'])) {
 
@@ -10,17 +11,31 @@ if (!empty($_SESSION['admin'])) {
 
     try {
         if (isset($_POST['EditOrderBtn'])) {
-            $record =  [
-                'OrderId' => $_POST['OrderId'],
-                'DeliveryDate' => $_POST['DeliveryDate'],
-                'PromoId' => $_POST['PromoId'] ?? "0",
-                'Note' => $_POST['Note'],
-                'Status' => $_POST['Status']
-            ];
 
-            // editOrder($pdo, $record);
-            print_r($_POST);
-            // header('location: orders-edit.php?id=' . $_POST['OrderId'] . '');
+            //get previous location to go back in case of error
+            $previous = "javascript:history.go(-1)";
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $previous = $_SERVER['HTTP_REFERER'];
+            }
+
+            if ($_POST['DeliveryDate'] && strtotime($_POST['PurchaseDate']) > strtotime($_POST['DeliveryDate'])) {
+                $title = 'Error';
+                $output = "Sorry, DeliveryDate should be later than PurchaseDate. Please go &nbsp; <a href='. $previous . '>back</a> &nbsp; to edit. ";
+            } else {
+                $record =  [
+                    'OrderId' => $_POST['OrderId'],
+                    'DeliveryDate' => ($_POST['DeliveryDate'] ?? ''),
+                    'NewProduct' => $_POST['newProduct'],
+                    'PromoId' => $_POST['PromoId'] ?? "",
+                    'Note' => $_POST['Note'],
+                    'Status' => $_POST['Status'],
+                    'OldStatus' => $_POST['oldStatus']
+                ];
+
+                // editOrder($pdo, $record);
+                print_r($_POST);
+                // header('location: orders-edit.php?id=' . $_POST['OrderId'] . '');
+            }
         } else {
             if (!empty($_GET['id'])) {
 
