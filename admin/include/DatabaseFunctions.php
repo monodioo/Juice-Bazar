@@ -7,6 +7,43 @@ function query($pdo, $sql, $parameters = [])
     return $query;
 }
 
+function insertIntoTable($pdo, $table, $record, $idCol = "", $idValue = "")
+{
+    $sql = 'INSERT INTO `' . $table . '` (';
+
+    foreach ($record as $key => $value) {
+        $sql .= '`' . $key . '`,';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ') VALUES (';
+
+    foreach ($record as $key => $value) {
+        $sql .= ':' . $key . ',';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ')';
+
+    // if ($idCol != "" && $idValue != "") {
+    //     $sql .= ' WHERE `' . $idCol . '` = ' . $idValue . '';
+    //     // $record[':idVal'] = $idValue;
+    // }
+
+    query($pdo, $sql, $record);
+}
+
+function findMaxInTable($pdo, $table, $column)
+{
+    $sql = 'SELECT MAX(`' . $column . '`) FROM `' . $table . '`';
+    $query = query($pdo, $sql);
+    $result = $query->fetch();
+    return $result[0];
+}
+
+
 function adminLogin($pdo, $adminName, $adminPass)
 {
     try {
@@ -149,76 +186,21 @@ function insertProduct($pdo, $table, $recordElement, $recordPrice1 = [], $record
 {
 
     //insert new Item into $Table
-    $sql = 'INSERT INTO `' . $table . '` (';
-
-    foreach ($recordElement as $key => $value) {
-        $sql .= '`' . $key . '`,';
-    }
-
-    $sql = rtrim($sql, ',');
-
-    $sql .= ') VALUES (';
-
-    foreach ($recordElement as $key => $value) {
-        $sql .= ':' . $key . ',';
-    }
-
-    $sql = rtrim($sql, ',');
-
-    $sql .= ')';
-
-    query($pdo, $sql, $recordElement);
+    insertIntoTable($pdo, $table, $recordElement);
 
     //find the newly inserted element 
-    $query = query($pdo, 'SELECT MAX(`ProductId`) FROM `product`');
-    $query = $query->fetch();
-    $newId = $query[0];
+
+    $newId = findMaxInTable($pdo, 'product', 'ProductId');
 
 
     if (!empty($recordPrice1) && !empty($recordPrice2)) {
         $recordPrice1['ProductId'] = $newId;
         $recordPrice2['ProductId'] = $newId;
         //insert into Table productdetail for CapacityId = 1 (250ml)
-        $sqlPrice1 = 'INSERT INTO `productdetail` (';
-
-        foreach ($recordPrice1 as $key => $value) {
-            $sqlPrice1 .= '`' . $key . '`,';
-        }
-
-        $sqlPrice1 = rtrim($sqlPrice1, ',');
-
-        $sqlPrice1 .= ') VALUES (';
-
-        foreach ($recordPrice1 as $key => $value) {
-            $sqlPrice1 .= ':' . $key . ',';
-        }
-
-        $sqlPrice1 = rtrim($sqlPrice1, ',');
-
-        $sqlPrice1 .= ')';
-
-        query($pdo, $sqlPrice1, $recordPrice1);
+        insertIntoTable($pdo, 'productdetail', $recordPrice1);
 
         //insert into Table productdetail for CapacityId = 2 (330ml)
-        $sqlPrice2 = 'INSERT INTO `productdetail` (';
-
-        foreach ($recordPrice2 as $key => $value) {
-            $sqlPrice2 .= '`' . $key . '`,';
-        }
-
-        $sqlPrice2 = rtrim($sqlPrice2, ',');
-
-        $sqlPrice2 .= ') VALUES (';
-
-        foreach ($recordPrice2 as $key => $value) {
-            $sqlPrice2 .= ':' . $key . ',';
-        }
-
-        $sqlPrice2 = rtrim($sqlPrice2, ',');
-
-        $sqlPrice2 .= ')';
-
-        query($pdo, $sqlPrice2, $recordPrice2);
+        insertIntoTable($pdo, 'productdetail', $recordPrice2);
     }
 }
 
@@ -410,53 +392,49 @@ function deleteOrder($pdo, $id)
     query($pdo, $sql2, $parameters);
 }
 
-//Update order information from orders-edit.php
-function editOrder($pdo, $record)
+//Save order information from orders-new.php
+function saveOrder($pdo, $record)
 {
-    //Update Order information
-    $recordOrder = array_splice($record, 'NewProduct', 1);
-    $sqlOrder = 'UPDATE `orders` SET `DeliveryDate` = :DeliveryDate, `Status`=:Status, `PromoId` =:PromoId, `Note` =:Note WHERE `OrderId` = :OrderId';
 
-    query($pdo, $sqlOrder, $recordOrder);
+    //Create new Order information
+    $recordOrder = $record;
+    unset($recordOrder['NewProduct']); //remove NewProduct 
 
-    //Group quantity from duplicated items
+    if ($recordOrder['PromoId'] == 0) {
+        unset($recordOrder['PromoId']); //remove PromoId if there is none
+    }
+
+    insertIntoTable($pdo, 'orders', $recordOrder);
+
+
     $products = $record['NewProduct'];
 
-    $length = $products . length();
+    $newOrderId = findMaxInTable($pdo, 'orders', 'OrderId');
 
-    for ($i = 0; $i < $length; $i++) {
-        for ($j = $i; $j < $length; $j++) {
-            if ($products[i]['ProductDetailId'] === $products[j]['ProductDetailId']) {
-                $products[i]['Quantity'] += $products[j]['Quantity'];
-            };
+    foreach ($products as $product) {
+        $product['OrderId'] = $newOrderId;
+        insertIntoTable($pdo, 'orderdetail', $product);
+    }
+
+    if ($recordOrder['Status'] > 1) {
+
+        if (isset($recordOrder['DeliveryDate'])) {
+            changeStock($pdo, $newOrderId, false, 0); // 0 to not update delivery time
+        } else {
+            changeStock($pdo, $newOrderId, false, 3); // 3 to update delivery time
         }
     }
-    //delete duplicated items after grouping quantity
-    $products = array_unique($products);
+}
+//get data for new Order
 
-    //delete old entries from orderdetail table
-    $sqlDelete = 'DELETE FROM `orderdetail` WHERE `OrderId` = :OrderId';
-    $parameters = [':OrderId' => $record['OrderId']];
-    query($pdo, $sqlDelete, $parameters);
 
-    //create new entries into order Detail
-    $sqlNewEntries = 'INSERT INTO `orderDetail` (';
-
-    foreach ($products as $key => $value) {
-        $sqlNewEntries .= '`' . $key . '`,';
+function getTable($pdo, $table, $StatusCol, $status = false)
+{
+    if ($status == false) {
+        $sql = 'SELECT * FROM `' . $table . '`';
+    } else {
+        $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $StatusCol . '` = 1';
     }
 
-    $sqlNewEntries = rtrim($sqlNewEntries, ',');
-
-    $sqlNewEntries .= ') VALUES (';
-
-    foreach ($products as $key => $value) {
-        $sqlNewEntries .= ':' . $key . ',';
-    }
-
-    $sqlNewEntries = rtrim($sqlNewEntries, ',');
-
-    $sqlNewEntries .= ')';
-
-    query($pdo, $sqlNewEntries, $products);
+    return query($pdo, $sql)->fetchAll();
 }

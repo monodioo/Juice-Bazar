@@ -68,7 +68,7 @@
                                 } ?>
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-sm mb-1 text-white" href="orders-edit.php?id=<?= $order['OrderId'] ?>">Edit</a>
+                            <!-- <a class="btn btn-primary btn-sm mb-1 text-white" href="orders-edit.php?id=<?= $order['OrderId'] ?>">Edit</a> -->
                             <form method="POST" action="orderStatusSwitch.php">
                                 <select class="custom-select mb-1" name="newStatus" id='statusSelector'>
                                     <option disabled>Select Status</option>

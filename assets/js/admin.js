@@ -184,7 +184,6 @@ jQuery(document).ready(function($) {
 
   //AJAX function to update price& category of new product in Order Edit page
   $(".table-body").on("change", ".product-select", function() {
-    console.log(this);
     //Price
     $.ajax({
       url: "../include/snippets/getSalePrice.php?id=" + this.value,
@@ -225,7 +224,7 @@ jQuery(document).ready(function($) {
     });
   });
 
-  //AJAX Delete product row
+  //Delete product row
   $(".table-body").on("click", ".product-delete", function() {
     this.preventDefault;
     $(this)
@@ -241,7 +240,7 @@ jQuery(document).ready(function($) {
         .find(".product-price")
         .html()
     );
-    updateTotalValue(this, this.value, $price);
+    updateTotalValue(this, $price, this.value);
   });
 
   //function to update price from ajax
@@ -265,9 +264,9 @@ jQuery(document).ready(function($) {
       });
 
     $(".product-subtotal").html($subtotal + ".000");
-    $promo = $(".product-promovalue").val();
-    $promo = parseInt($promo.replace("%", ""));
-
+    $promo = $(".promo-value").val();
+    $promo = parseInt($promo);
+    // console.log($promo);
     $discount = ($subtotal * $promo) / 100;
     $discountText = formatNumber($discount);
     $(".product-discount").html($discountText);
@@ -293,7 +292,6 @@ jQuery(document).ready(function($) {
   //AJAX Add more products into order
   $("#addProductBtn").on("click", function() {
     this.preventDefault;
-    // $count = $("#productCount").val();
     $.ajax({
       url: "../include/snippets/insertRowIntoOrder.php",
       method: "GET",
@@ -302,9 +300,37 @@ jQuery(document).ready(function($) {
         $(this)
           .closest("tr")
           .before(data);
-
-        // $("#productCount").val() + 2;
       }
     });
   });
+
+  //AJAX update promotion value
+  $(".table-body").on("change", ".promo-select", function() {
+    $.ajax({
+      url: "../include/snippets/getPromo.php?id=" + this.value,
+      method: "GET",
+      context: this,
+      success: function(data) {
+        $(this)
+          .closest("tr")
+          .find(".promo-value")
+          .val(data * 100);
+
+        $subtotal = parseInt(
+          $(".product-subtotal")
+            .html()
+            .replace("%", "")
+        );
+        $promo = data;
+        $discount = $subtotal * $promo;
+        $discountText = formatNumber($discount);
+        $(".product-discount").html($discountText);
+        $total = $subtotal - $discount;
+        $totalText = formatNumber($total);
+        $(".product-total").html($totalText);
+      }
+    });
+  });
+
+  // end $document.ready
 });
