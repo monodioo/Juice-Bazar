@@ -4,8 +4,8 @@ session_start();
 
 if (!empty($_SESSION['admin'])) {
 
-    include_once __DIR__ . '/../include/DatabaseConnection.php';
-    include_once __DIR__ . '/../include/DatabaseFunctions.php';
+    include_once __DIR__ . '/../DatabaseConnection.php';
+    include_once __DIR__ . '/../DatabaseFunctions.php';
 
     try {
         if (isset($_POST['switchProductBtn'])) {
@@ -13,9 +13,10 @@ if (!empty($_SESSION['admin'])) {
             $newStatus = ($_POST['switchProductStatus'] == 0) ? 1 : 0;
             switchStatus($pdo, 'product', 'ProductId', $_POST['switchProductId'], 'Status', $newStatus);
 
-            header('location: admin-products.php');
+            $_SESSION['flashMessage'] = $newStatus == 1 ? 'Product enabled' : 'Product disabled';
+            header('location: ../../public/admin-products.php');
         } else {
-            header('location: admin-products.php');
+            header('location: ../../public/admin-products.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
@@ -25,5 +26,5 @@ if (!empty($_SESSION['admin'])) {
     }
 } else {
 
-    header('location: index.php');
+    header('location: ../../public/index.php');
 }

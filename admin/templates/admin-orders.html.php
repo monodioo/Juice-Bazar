@@ -69,7 +69,7 @@
                         </td>
                         <td>
                             <!-- <a class="btn btn-primary btn-sm mb-1 text-white" href="orders-edit.php?id=<?= $order['OrderId'] ?>">Edit</a> -->
-                            <form method="POST" action="orderStatusSwitch.php">
+                            <form method="POST" action="../include/snippets/orderStatusSwitch.php">
                                 <select class="custom-select mb-1" name="newStatus" id='statusSelector'>
                                     <option disabled>Select Status</option>
                                     <option value="0" <?= $order['Status'] > 0 ? 'disabled' : '' ?> <?= $order['Status'] == 0 ? 'selected' : '' ?>>0.Pending</option>
@@ -80,8 +80,11 @@
                                 </select>
                                 <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
                                 <input type="hidden" name="OrderId" value="<?= $order['OrderId'] ?>">
-                                <button type="submit" class="btn btn-warning btn-sm text-white" name="OrderStatusBtn" id="OrderStatusBtn" <?= $order['Status'] >= 3 ? 'disabled' : '' ?>>Apply</button>
+                                <button type="submit" class="btn btn-warning btn-sm text-white mb-1" name="OrderStatusBtn" id="OrderStatusBtn" <?= $order['Status'] >= 3 ? 'disabled' : '' ?>>Apply</button>
                             </form>
+                            <a class="btn btn-danger btn-sm text-white delete-product <?= ($order['Status'] != 4) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-element-id="<?= $order['OrderId'] ?>" data-element-name="<?= $order['OrderId'] ?>">
+                                Delete
+                            </a>
 
                         </td>
                     </tr>
@@ -137,5 +140,31 @@
                 </tr>
             </tfoot>
         </table>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span>Are you sure you want to delete the Order Id No.: </span>
+                        <span class="modal-text font-weight-bold"></span>
+                        <span>?</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form method="post" action="../include/snippets/orders-delete.php" class="m-0">
+                            <input type="hidden" name="deleteOrder" id="deleteElement" value="">
+                            <button type="submit" name="deleteOrderBtn" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal -->
     </div>
 </div>

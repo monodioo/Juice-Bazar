@@ -16,6 +16,10 @@ if (!empty($_SESSION['admin'])) {
         include __DIR__ . '/../templates/admin-products.html.php';
 
         $output = ob_get_clean();
+        if (isset($_SESSION['flashMessage'])) {
+            echo "<script>alert('$_SESSION[flashMessage]')</script>";
+            unset($_SESSION['flashMessage']);
+        }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
 

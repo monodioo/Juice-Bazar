@@ -28,7 +28,7 @@ if (!empty($_SESSION['admin'])) {
                 header('location: admin-types.php');
             }
         } else {
-            $title = 'Juice Bazar - Admin - Product Types';
+            $title = 'Juice Bazar - Admin - Product Categories';
             $types = getTypes($pdo);
             ob_start();
 

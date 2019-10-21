@@ -7,14 +7,14 @@
                     <th scope="col" style="width: 15%" class="filter-exact">Category ID</th>
                     <th scope="col" style="">Category Name</th>
                     <th scope="col" style="" class="filter-select filter-exact" data-placeholder="All Status">Category Status</th>
-                    <th scope="col" style="" class="filter-false sorter-false">Change Status</th>
+                    <th scope="col" style="" class="filter-false sorter-false">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($types as $type) : ?>
                     <form method="POST">
                         <tr>
-                            <td><?= $type['TypeId'] ?>
+                            <td class="align-middle"><?= $type['TypeId'] ?>
                                 <input type="hidden" name="TypeId" value="<?= $type['TypeId'] ?>">
                             </td>
                             <td><input class="form-control" type="text" name="Type" value="<?= $type['Type'] ?>" required>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form method="post" action="types-delete.php">
+                        <form method="post" action="../include/snippets/types-delete.php">
                             <input type="hidden" name="deleteCategory" id="deleteElement" value="">
                             <button type="submit" name="deleteCategoryBtn" class="btn btn-danger">Delete</button>
                         </form>

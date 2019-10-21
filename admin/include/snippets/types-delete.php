@@ -4,15 +4,15 @@ session_start();
 
 if (!empty($_SESSION['admin'])) {
 
-    include_once __DIR__ . '/../include/DatabaseConnection.php';
-    include_once __DIR__ . '/../include/DatabaseFunctions.php';
+    include_once __DIR__ . '/../DatabaseConnection.php';
+    include_once __DIR__ . '/../DatabaseFunctions.php';
 
     try {
         if (isset($_POST['deleteCategoryBtn'])) {
             deleteType($pdo, $_POST['deleteCategory']);
-            header('location: admin-types.php');
+            header('location: ../../public/admin-types.php');
         } else {
-            header('location: admin-types.php');
+            header('location: ../../public/admin-types.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
@@ -22,5 +22,5 @@ if (!empty($_SESSION['admin'])) {
     }
 } else {
 
-    header('location: index.php');
+    header('location: ../../public/index.php');
 }

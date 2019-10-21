@@ -4,15 +4,16 @@ session_start();
 
 if (!empty($_SESSION['admin'])) {
 
-    include_once __DIR__ . '/../include/DatabaseConnection.php';
-    include_once __DIR__ . '/../include/DatabaseFunctions.php';
+    include_once __DIR__ . '/../DatabaseConnection.php';
+    include_once __DIR__ . '/../DatabaseFunctions.php';
 
     try {
         if (isset($_POST['deleteOrderBtn'])) {
             deleteOrder($pdo, $_POST['deleteOrder']);
-            header('location: admin-orders.php');
+            $_SESSION['flashMessage'] = 'Order deleted';
+            header('location: ../../public/admin-orders.php');
         } else {
-            header('location: admin-orders.php');
+            header('location: ../../public/admin-orders.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
@@ -22,5 +23,5 @@ if (!empty($_SESSION['admin'])) {
     }
 } else {
 
-    header('location: index.php');
+    header('location: ../../public/index.php');
 }

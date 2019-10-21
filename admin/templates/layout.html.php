@@ -58,13 +58,13 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="admin-promos.php" class="nav-link ">Promotion</a>
+                                    <a href="admin-promotion.php" class="nav-link ">Promotion</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="admin-customers.php" class="nav-link ">Customers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="admin-customers.php" class="nav-link ">Website</a>
+                                    <a href="admin-website.php" class="nav-link ">Website</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="admin-logout.php" class="nav-link ">Log Out</a>
@@ -83,11 +83,9 @@
         </div>
     </div>
 
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-show="true">
-        <div class="toast-body p-3 px-5 bg-success">
-            <span class="text-white">Successful login!</span>
-        </div>
+    <div class="toast-wrapper">
     </div>
+
 
     <script type="text/javascript" src="../../assets/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../../assets/js/popper.min.js"></script>

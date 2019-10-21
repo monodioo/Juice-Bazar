@@ -30,13 +30,13 @@ if (!empty($_SESSION['admin'])) {
                     'PurchaseDate' => ($_POST['PurchaseDate'] ?? ''),
                     'DeliveryDate' => ($_POST['DeliveryDate'] ?? ''),
                     'NewProduct' => $_POST['newProduct'],
-                    'PromoId' => $_POST['PromoId'] ?? 0 == 0,
+                    'PromoId' => $_POST['PromoId'] ?? 0,
                     'Note' => $_POST['Note'],
                     'Status' => $_POST['Status'],
                 ];
 
                 saveOrder($pdo, $record);
-                // print_r($POST);
+                $_SESSION['orderAddMsg'] = 'Order created';
                 header('location: admin-orders.php');
             }
         } else {
