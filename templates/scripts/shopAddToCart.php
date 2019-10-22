@@ -1,29 +1,33 @@
 <?php
-//Them sp vao gio hang
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_REQUEST['quantity'] > 0) {
-        $indexCart = 'p' . $_REQUEST['productid'] . 'c' . $_REQUEST['capacity'];
-        $_SESSION['cart'][$indexCart]['productid'] = $_REQUEST['productid'];
-        $_SESSION['cart'][$indexCart]['capacity'] = $_REQUEST['capacity'];
-        if (isset($_SESSION['cart'][$indexCart]['quantity']))
-            $_SESSION['cart'][$indexCart]['quantity'] += $_REQUEST['quantity'];
-        else
-            $_SESSION['cart'][$indexCart]['quantity'] = $_REQUEST['quantity'];
-
-        //Cap nhat gia tien don hang ngay lap tuc.
-        $sqlNewProduct = "SELECT * FROM Product
-                                    JOIN Inventory ON Product.ProductId = Inventory.ProductId
-                                    JOIN Capacity        ON Inventory.CapacityId = Capacity.CapacityId
-                            WHERE Product.ProductId =" . $_REQUEST['productid'] . " AND Capacity = " . $_REQUEST['capacity'];
-        $resultNewProduct = mysqli_query($con, $sqlNewProduct);
-        $rowNewProduct = mysqli_fetch_array($resultNewProduct);
-
-        if (isset($_SESSION['sumOrder']))
-            $_SESSION['sumOrder'] += $rowNewProduct['Price'] * $_REQUEST['quantity'];
-        else
-            $_SESSION['sumOrder'] = $rowNewProduct['Price'] * $_REQUEST['quantity'];
+session_start();
+$totalPrice = 0;
+$countCart = 0;
+//Add product to cart
+if (isset($_POST['productDetailId'])) {
+    $indexCart = $_POST['productDetailId'];
+    if (empty($_SESSION['cart'])) {
+        $_SESSION['cart'] = array($indexCart => array('price' => $_POST['price'], 'quantity' => $_POST['quantity']));
+    } else {
+        if (empty($_SESSION['cart'][$indexCart])) {
+            $_SESSION['cart'][$indexCart]['price'] = $_POST['price'];
+            $_SESSION['cart'][$indexCart]['quantity'] = $_POST['quantity'];
+        } else
+            $_SESSION['cart'][$indexCart]['quantity'] += $_POST['quantity'];
     }
+    //Update cart status
 
-    // Quay lai mua hang.
-    echo "<script>location='?section=shop&typeid=" . $_REQUEST["typeid"] . "'</script>";
+    if (empty($_SESSION['totalPrice']))
+        $_SESSION['totalPrice'] = $_POST['quantity'] * $_POST['price'];
+
+    else
+        $_SESSION['totalPrice'] += $_POST['quantity'] * $_POST['price'];
+
+    $totalPrice = number_format($_SESSION['totalPrice'], 0, '.', '.');
+    $countCart = count($_SESSION['cart']);
 }
+$result = array(
+    'totalPrice' => $totalPrice,
+    'cartCount' => $countCart
+);
+
+echo json_encode($result);

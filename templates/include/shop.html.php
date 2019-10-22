@@ -2,7 +2,7 @@
         <div class="page-section">
           <ul class="nav shop-nav mt-2 mt-lg-5 mw-100">
 
-            <?php include "templates/scripts/shopShowTypeProduct.php";?>
+            <?php include "templates/scripts/shopShowTypeProduct.php"; ?>
 
           </ul>
         </div>
@@ -11,20 +11,22 @@
         <div class="page-section w-100 mb-4">
           <div class="section-body">
             <div class="shop-gradient-wrap">
-              <img
-                src="
+              <img src="
                 <?php
-                  switch($_REQUEST['typeid'])
-                  {
-                    case '0': echo 'assets/image/shop-banner-all.png'; break;
-                    case '1': echo 'assets/image/shop-banner-fruit.png'; break;
-                    case '2': echo 'assets/image/shop-banner-green.png'; break;
-                    case '3': echo 'assets/image/shop-banner-combo.png';
-                  }
-                ?>"
-                alt="shop banner"
-                class="shop-img-gradient float-right img-fluid"
-              />
+                switch ($_REQUEST['typeid']) {
+                  case '0':
+                    echo 'assets/image/shop-banner-all.png';
+                    break;
+                  case '1':
+                    echo 'assets/image/shop-banner-fruit.png';
+                    break;
+                  case '2':
+                    echo 'assets/image/shop-banner-green.png';
+                    break;
+                  case '3':
+                    echo 'assets/image/shop-banner-combo.png';
+                }
+                ?>" alt="shop banner" class="shop-img-gradient float-right img-fluid" />
               <div class="shop-base-gradient float-left d-none d-lg-block"></div>
               <div class="shop-gradient-caption d-none d-lg-block">
                 <!-- <h5>Juice Bazar</h5> -->
@@ -48,9 +50,8 @@
       <div class="row">
         <div class="page-section px-0 col">
           <div class="section-body row">
-            
-            <?php include "templates/scripts/shopShowProduct.php";?>
-            <?php include "templates/scripts/shopAddToCart.php";?>
+
+            <?php include "templates/scripts/shopShowProduct.php"; ?>
 
           </div>
         </div>

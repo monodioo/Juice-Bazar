@@ -1,7 +1,3 @@
-<?php
-include "templates/scripts/cartCheckCoupon.php";
-include "templates/scripts/cartDelete.php";
-?>
 <div class="row my-4" aria-label="breadcrumb">
   <ol class="breadcrumb mb-0 pl-3 pl-lg-0 bg-transparent">
     <li class="breadcrumb-item"><a href="?section=home">Trang chủ</a></li>
@@ -97,18 +93,15 @@ include "templates/scripts/cartDelete.php";
             <form name="couponForm" method="post">
               <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
               <div class="input-group">
-                <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?php
-                                                                                                                                                                              if (isset($_REQUEST['c_code'])) echo $_REQUEST['c_code'];
-                                                                                                                                                                              else if (isset($_SESSION['promoname'])) echo $_SESSION['promoname'];
-                                                                                                                                                                              ?>">
+                <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?php if (isset($_SESSION['promoname'])) echo $_SESSION['promoname'] ?>">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-warning btn-sm" type="submit" id="couponBtn" name="couponBtn">Áp dụng</button>
+                  <button class="btn btn-outline-warning btn-sm" type="button" id="couponBtn" name="couponBtn">Áp dụng</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
-        <div class="col-12"><?= $errCoupon ?></div>
+        <div class="col-12" id="stCoupon"></div>
       </div>
       <div class="col-md-6 mt-3 mt-md-0">
         <div class="row justify-content-end">
@@ -123,8 +116,8 @@ include "templates/scripts/cartDelete.php";
                 <span class="">Tổng giá sản phẩm</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong class=""><?php if (isset($_SESSION['sumOrder'])) echo number_format($_SESSION['sumOrder'], 0, '.', '.');
-                                  else echo '0' ?> ₫</strong>
+                <strong class=""><span id="totalPrice"><?php if (isset($_SESSION['totalPrice'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                                                        else echo '0' ?></span><span> ₫</span></strong>
               </div>
             </div>
             <div class="row mb-3">
@@ -132,8 +125,8 @@ include "templates/scripts/cartDelete.php";
                 <span class="">Giảm giá</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong class=""><?php if (isset($_SESSION['promovalue'])) echo $_SESSION['promovalue'] * 100;
-                                  else echo '0'; ?> %</strong>
+                <strong><span id="promovalue"><?php if (isset($_SESSION['promovalue'])) echo $_SESSION['promovalue'] * 100;
+                                              else echo '0'; ?></span><span> %</span></strong>
               </div>
             </div>
             <div class="row mb-5">
@@ -142,12 +135,12 @@ include "templates/scripts/cartDelete.php";
               </div>
               <div class="col-md-6 text-right">
                 <strong class="">
-                  <?php
-                  if (empty($_SESSION['sumOrder'])) echo '0';
-                  else  if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['sumOrder'], 0, '.', '.');
-                  else echo number_format($_SESSION['sumOrder'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
-                  ?>
-                  ₫
+                  <span id="lastPrice">
+                    <?php
+                    if (empty($_SESSION['totalPrice'])) echo '0';
+                    else  if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                    else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
+                    ?></span><span> ₫</span>
                 </strong>
               </div>
             </div>

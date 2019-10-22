@@ -8,7 +8,7 @@ $hotProductId = mysqli_query($con, $sqlHotProductId);
 
 while ($rowHotProductId = mysqli_fetch_array($hotProductId)) {
 
-    $sqlShowHotProduct = "SELECT * FROM Product JOIN Inventory ON Product.ProductId = Inventory.ProductId
+    $sqlShowHotProduct = "SELECT * FROM Product JOIN Productdetail ON Product.ProductId = Productdetail.ProductId
                         WHERE CapacityId = 1 AND Status = 1 AND Product.ProductId = " . $rowHotProductId['ProductId'];
 
     $showHotProduct = mysqli_query($con, $sqlShowHotProduct);

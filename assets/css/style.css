@@ -497,10 +497,10 @@ a:hover {
 .juice-volume-btn:hover {
   color: white;
   background-color: #ffc634;
+  cursor: pointer;
 }
 
-.juice-volume-btn:not(:disabled):not(.disabled):active,
-.juice-volume-btn:not(:disabled):not(.disabled).active {
+.juice-volume-btn-active {
   color: white;
   background-color: #ffc634;
   box-shadow: none;
