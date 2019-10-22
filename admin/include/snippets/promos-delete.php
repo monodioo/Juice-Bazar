@@ -9,11 +9,11 @@ if (!empty($_SESSION['admin'])) {
 
     try {
         if (isset($_POST['deleteElementBtn'])) {
-            deleteType($pdo, $_POST['deleteElement']);
-            $_SESSION['flashMessage'] = 'Category deleted';
-            header('location: ../../public/admin-types.php');
+            deleteSimple($pdo, 'promotion', 'PromoId', $_POST['deleteElement']);
+            $_SESSION['flashMessage'] = 'Promotion Code deleted';
+            header('location: ../../public/admin-promotion.php');
         } else {
-            header('location: ../../public/admin-types.php');
+            header('location: ../../public/admin-promotion.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';

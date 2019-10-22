@@ -8,12 +8,15 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../DatabaseFunctions.php';
 
     try {
-        if (isset($_POST['deleteElementBtn'])) {
-            deleteType($pdo, $_POST['deleteElement']);
-            $_SESSION['flashMessage'] = 'Category deleted';
-            header('location: ../../public/admin-types.php');
+        if (isset($_POST['switchMemberBtn'])) {
+
+            $newStatus = ($_POST['switchMemberStatus'] == 0) ? 1 : 0;
+            switchStatus($pdo, 'member', 'MemberId', $_POST['switchMemberId'], 'Status', $newStatus);
+
+            $_SESSION['flashMessage'] = $newStatus == 1 ? 'Member enabled' : 'Member disabled';
+            header('location: ../../public/admin-members.php');
         } else {
-            header('location: ../../public/admin-types.php');
+            header('location: ../../public/admin-members.php');
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';

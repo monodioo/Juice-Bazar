@@ -1,11 +1,11 @@
 <div class="page-section card col-6 p-5">
-    <div class="section-title">Kết quả doanh thu</div>
+    <div class="section-title">Sales results</div>
     <div>
-        <form>
+        <form class="report-form">
             <div class="form-group form-inline">
-                <label for="inputMonthReport">Tháng</label>
-                <select class="mx-2 form-control" id="inputMonthReport">
-                    <option value="0">Cả năm</option>
+                <label for="inputMonthReport">Month</label>
+                <select class="mx-2 form-control month-select" id="inputMonthReport">
+                    <option value="0" selected>Entire Year</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -19,9 +19,12 @@
                     <option value="11">11</option>
                     <option value="12">12</option>
                 </select>
-                <label for="inputYearReport">Năm</label>
-                <select class="mx-2 form-control" id="inputYearReport">
-                    <option value="0">2019</option>
+                <label for="inputYearReport">Year</label>
+                <select class="mx-2 form-control year-select" id="inputYearReport">
+                    <option value="2018">2018</option>
+                    <option value="2019" selected>2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
                 </select>
             </div>
         </form>
@@ -31,13 +34,13 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Thời gian</th>
-                    <th scope="col">Số đơn hàng</th>
-                    <th scope="col">Doanh thu</th>
+                    <th scope="col">Month/Year</th>
+                    <th scope="col">No. Orders</th>
+                    <th scope="col">Revenue</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody class="table-body">
+                <!-- <tr>
                     <th scope="row">1</th>
                     <td>Tháng 1 / 2019</td>
                     <td>10</td>
@@ -72,7 +75,7 @@
                     <td>Tháng 6 / 2019</td>
                     <td>10</td>
                     <td>500.000<span>₫</span></td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>

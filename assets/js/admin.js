@@ -332,5 +332,32 @@ jQuery(document).ready(function($) {
     });
   });
 
+  //AJAX function to update report per Month in Home page
+  function loadMonth(month, year) {
+    $(".table-body").empty();
+    $.ajax({
+      url:
+        "../include/snippets/report-getMonth.php?month=" +
+        month +
+        "&year=" +
+        year,
+      method: "GET",
+      context: this,
+      // data: { view: view },
+      // dataType: "json",
+      success: function(data) {
+        console.log(data);
+        $(".table-body").append(data);
+      }
+    });
+  }
+
+  loadMonth($(".month-select").val(), $(".year-select").val());
+
+  $(".report-form").on("change", ".month-select", function() {
+    loadMonth(this.value, $("#inputYearReport").val());
+    console.log(this.value);
+  });
+
   // end $document.ready
 });
