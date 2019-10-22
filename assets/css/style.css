@@ -17,6 +17,10 @@ a:hover {
   text-decoration: none;
 }
 
+.btn-light:hover{
+  background-color: white !important
+}
+
 /* Extra small devices (phones, 576 and down) */
 
 @media only screen and (max-width: 576) {
@@ -146,25 +150,24 @@ a:hover {
 }
 
 .nav-icon {
-  font-size: 1.3rem;
+  font-size: 2rem;
   text-decoration: none;
-  color: #494949;
-  margin-right: 0.8rem;
-  margin-top: 0.4rem;
+  /* margin-right: 0.8rem; */
+  margin-top: 0.3rem;
 }
 
-.search-input-wrap > .form-control {
-  border-radius: 100px;
+.search-input-wrap > #searchInput {
+  /* border-radius: 100px; */
   border: 0;
   width: 50px !important;
-  font-size: 0.8rem;
+  /* font-size: 0.8rem; */
 }
 
-.search-input-wrap > .form-control:focus {
+.search-input-wrap > #searchInput:focus {
   box-shadow: none;
 }
 
-.search-input-wrap > .form-control::placeholder {
+.search-input-wrap > #searchInput::placeholder {
   color: lightgray;
   font-style: italic;
   font-size: 0.8rem;
@@ -276,14 +279,14 @@ a:hover {
 }
 
 .carousel-caption h1 {
-  font-size: 3.5rem !important;
+  font-size: 3rem !important;
   text-transform: uppercase;
   font-weight: 700 !important;
 }
 
 .carousel-caption > p {
   font-weight: 700 !important;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 39px;
 }
 
@@ -460,12 +463,17 @@ a:hover {
   }
 }
 
+.juice-card .card-title{
+  height: 40px !important;
+  text-align: middle;
+}
+
 .juice-card-price {
   border: 2px solid #ffc634;
   box-sizing: border-box;
   border-radius: 100px;
   color: #ffc634;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .juice-modal * {

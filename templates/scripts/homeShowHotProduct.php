@@ -104,12 +104,14 @@ while ($rowHotProductId = mysqli_fetch_array($hotProductId)) {
     <!-- END OF MODAL -->
 
     <div class="col-6 col-md-4 col-lg-2">
-        <div class="card juice-card px-1 px-xl-4 pt-3 mt-4" data-toggle="modal" data-target="<?php echo '#a' . $row['ProductId']; ?>">
-            <img src="<?php echo $row['Image'] ?>" class="card-img-top" alt="<?php echo $row['Name']; ?>" />
-            <div class="card-body">
-                <h6 class="card-title text-center"><?php echo $row['Name'] ?></h6>
+        <div class="card juice-card px-0 px-xl-2 py-3 mt-4" data-toggle="modal" data-target="<?= '#a' . $row['ProductId']; ?>">
+            <img src="<?= $row['Image'] ?>" class="card-img-top" alt="<?= $row['Name']; ?>" />
+            <div class="card-body px-2 pb-0">
+                <h6 class="card-title d-flex align-items-center justify-content-center">
+                    <div class="text-center"><?= $row['Name'] ?></div>
+                </h6>
                 <p class="juice-card-price py-1 text-center font-weight-bold mb-0">
-                    <?php echo $row['Price'] / 1000 ?>.000₫
+                    <?= $row['Price'] / 1000 ?>.000₫
                 </p>
             </div>
         </div>
