@@ -346,8 +346,10 @@ jQuery(document).ready(function($) {
       // data: { view: view },
       // dataType: "json",
       success: function(data) {
-        console.log(data);
         $(".table-body").append(data);
+        $totalRev = $(".hidden-revenue").val();
+        // console.log($totalRev);
+        $(".total-revenue").html($totalRev);
       }
     });
   }
@@ -356,7 +358,9 @@ jQuery(document).ready(function($) {
 
   $(".report-form").on("change", ".month-select", function() {
     loadMonth(this.value, $("#inputYearReport").val());
-    console.log(this.value);
+  });
+  $(".report-form").on("change", ".year-select", function() {
+    loadMonth($("#inputMonthReport").val(), this.value);
   });
 
   // end $document.ready

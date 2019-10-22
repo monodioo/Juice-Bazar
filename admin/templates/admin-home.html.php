@@ -1,4 +1,4 @@
-<div class="page-section card col-6 p-5">
+<div class="page-section card col-8 p-3 px-5">
     <div class="section-title">Sales results</div>
     <div>
         <form class="report-form">
@@ -26,56 +26,24 @@
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
                 </select>
-            </div>
+                <label for="totalRevenue" class="ml-4">Total Revenue</label>
+                <div class="mx-2 font-weight-bold total-revenue" id="totalRevenue">
+
+                </div>
         </form>
     </div>
     <div>
-        <table class="table table-sm table-responsive-sm table-hover text-center">
+        <table class="table table-sm table-striped table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Month/Year</th>
-                    <th scope="col">No. Orders</th>
+
+                    <th scope="col" class="timeCol">Day/Month/Year</th>
+                    <th scope="col">No. Successful Orders</th>
                     <th scope="col">Revenue</th>
                 </tr>
             </thead>
             <tbody class="table-body">
-                <!-- <tr>
-                    <th scope="row">1</th>
-                    <td>Tháng 1 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Tháng 2 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Tháng 3 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Tháng 4 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Tháng 5 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Tháng 6 / 2019</td>
-                    <td>10</td>
-                    <td>500.000<span>₫</span></td>
-                </tr> -->
+
             </tbody>
         </table>
     </div>
