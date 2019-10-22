@@ -18,6 +18,7 @@ a:hover {
 }
 
 /* Extra small devices (phones, 576 and down) */
+
 @media only screen and (max-width: 576) {
   .site-wrap > .row,
   .newsletter-text {
@@ -27,6 +28,7 @@ a:hover {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
   .site-wrap > .row,
   .newsletter-text {
@@ -36,6 +38,7 @@ a:hover {
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
+
 @media only screen and (min-width: 768px) {
   .site-wrap > .row,
   .newsletter-text {
@@ -45,6 +48,7 @@ a:hover {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
   .site-wrap > .row,
   .newsletter-text {
@@ -54,6 +58,7 @@ a:hover {
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
   .site-wrap > .row,
   .newsletter-text {
@@ -121,6 +126,7 @@ a:hover {
   left: 0;
   right: 0;
 }
+
 /* 
 .nav-hover:active,
 .nav-hover:focus {
@@ -153,6 +159,7 @@ a:hover {
   width: 50px !important;
   font-size: 0.8rem;
 }
+
 .search-input-wrap > .form-control:focus {
   box-shadow: none;
 }
@@ -162,6 +169,7 @@ a:hover {
   font-style: italic;
   font-size: 0.8rem;
 }
+
 .search-input-wrap > .btn:focus {
   box-shadow: none;
 }
@@ -183,11 +191,13 @@ a:hover {
   -o-transition: 0.3s all ease-in-out;
   transition: 0.3s all ease-in-out;
 }
+
 .offcanvas-menu .site-mobile-menu {
   -webkit-transform: translateX(0%);
   -ms-transform: translateX(0%);
   transform: translateX(0%);
 }
+
 .site-mobile-menu .site-mobile-menu-header {
   width: 100%;
 }
@@ -210,6 +220,7 @@ a:hover {
 .site-mobile-menu .site-mobile-menu-body {
   padding: 20px;
 }
+
 .site-mobile-menu .site-nav-wrap {
   padding: 0;
   margin: 0;
@@ -337,11 +348,13 @@ a:hover {
   -moz-transition: opacity 0.25s ease-in-out;
   -webkit-transition: opacity 0.25s ease-in-out;
 }
+
 .img-wrap > img:hover {
   opacity: 0.5;
 }
 
 /* Extra small devices (phones, 576 and down) */
+
 @media only screen and (max-width: 576) {
   .img-gradient {
     width: 100%;
@@ -349,6 +362,7 @@ a:hover {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
   .img-gradient {
     width: 100%;
@@ -356,6 +370,7 @@ a:hover {
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
+
 @media only screen and (min-width: 768px) {
   .img-gradient {
     width: 100%;
@@ -363,6 +378,7 @@ a:hover {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
   .gradient-wrap {
     height: 368px;
@@ -392,6 +408,7 @@ a:hover {
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
   .gradient-wrap {
     height: 368px;
@@ -421,6 +438,7 @@ a:hover {
 }
 
 /* Hyper large devices (large laptops and desktops, 1440px and up) */
+
 @media only screen and (min-width: 1440px) {
   .base-gradient {
     position: absolute;
@@ -479,10 +497,10 @@ a:hover {
 .juice-volume-btn:hover {
   color: white;
   background-color: #ffc634;
+  cursor: pointer;
 }
 
-.juice-volume-btn:not(:disabled):not(.disabled):active,
-.juice-volume-btn:not(:disabled):not(.disabled).active {
+.juice-volume-btn-active {
   color: white;
   background-color: #ffc634;
   box-shadow: none;
@@ -506,10 +524,12 @@ a:hover {
   border: transparent;
   outline: none;
 }
+
 .js-btn-minus:active,
 .js-btn-plus:active {
   color: #ffc634;
 }
+
 .js-btn-minus:hover,
 .js-btn-plus:hover {
   color: #ffc634;
@@ -521,6 +541,7 @@ a:hover {
   font-weight: bold;
   box-shadow: none;
 }
+
 .juice-qty-input:focus {
   color: #ffc634;
   box-shadow: none;
@@ -532,6 +553,7 @@ a:hover {
   border-radius: 100px;
   height: 40px;
 }
+
 .juice-modal-cart:active,
 .juice-modal-cart:hover {
   color: white;
@@ -556,11 +578,13 @@ a:hover {
   padding-left: 1.5rem;
   height: 50px;
 }
+
 .newsletter-input-wrap .form-control::placeholder {
   color: lightgray;
   font-style: italic;
   font-size: 0.8rem;
 }
+
 .newsletter-input-wrap .btn:focus {
   box-shadow: none;
 }
@@ -593,6 +617,7 @@ a:hover {
 }
 
 /* Extra small devices (phones, 576 and down) */
+
 @media only screen and (max-width: 576) {
   .shop-img-gradient {
     width: 100%;
@@ -600,6 +625,7 @@ a:hover {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
   .shop-img-gradient {
     width: 100%;
@@ -607,6 +633,7 @@ a:hover {
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
+
 @media only screen and (min-width: 768px) {
   .shop-img-gradient {
     width: 100%;
@@ -614,6 +641,7 @@ a:hover {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
   .shop-gradient-wrap {
     height: 344px;
@@ -643,6 +671,7 @@ a:hover {
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
   .shop-gradient-wrap {
     height: 344px;
@@ -670,6 +699,7 @@ a:hover {
     font-size: 1rem;
   }
 }
+
 @media only screen and (min-width: 1440px) {
   .shop-base-gradient {
     position: absolute;
@@ -692,6 +722,7 @@ a:hover {
 }
 
 /* CART CSS */
+
 .cart-delete-btn:hover,
 .cart-delete-btn {
   color: #ffc634;
