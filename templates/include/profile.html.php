@@ -146,56 +146,193 @@ $row = mysqli_fetch_array($rs);
         ?>
         <div class="">
             <div class="h4 textBazar mb-3">Quản lý đơn hàng</div>
-            <table class="table table-hover table-responsive-md text-center mb-0">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Ngày</th>
-                        <th scope="col">Mã đơn</th>
-                        <th scope="col" style="width: 30%">Sản phẩm</th>
-                        <th scope="col">Tổng tiền</th>
-                        <th scope="col">Tình trạng đơn</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">01/09/2019</th>
-                        <td>123FR001</td>
-                        <td>Dưa hấu x 1</td>
-                        <td>40.000đ</td>
-                        <td>Thành công</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/09/2019</th>
-                        <td>123456789</td>
-                        <td>Dưa hấu x 1</td>
-                        <td>40.000đ</td>
-                        <td>Thành công</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/09/2019</th>
-                        <td>123456789</td>
-                        <td>Dưa hấu x 1</td>
-                        <td>40.000đ</td>
-                        <td>Thành công</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/09/2019</th>
-                        <td>123456789</td>
-                        <td>Dưa hấu x 1</td>
-                        <td>40.000đ</td>
-                        <td>Thành công</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/09/2019</th>
-                        <td>123456789</td>
-                        <td>Dưa hấu x 1</td>
-                        <td>40.000đ</td>
-                        <td>Thành công</td>
-                    </tr>
+            <div class="table-wrapper">
+                <table class="table table-hover table-sm tablesorter" id='profileTable'>
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 80px" class="filter-exact">Mã đơn</th>
+                            <th scope="col" style="width: 10%">Ngày đặt hàng</th>
+                            <th scope="col" style="width: 10%">Ngày giao hàng</th>
+                            <th scope="col" style="width:5%" class="sorter-false">Tên SP</th>
+                            <th scope="col" style="width:5%" class="sorter-false filter-false">SLg.</th>
+                            <th scope="col" style="width: 8%" class="sorter-false">Giá</th>
+                            <th scope="col" style="width: 8%">Tổng giá</th>
+                            <th scope="col" style="" class="">Khuyến mại</th>
+                            <th scope="col" style="">Giảm giá</th>
+                            <th scope="col" style="width: 5%">Tổng tiền</th>
+                            <th scope="col" style="" class="sorter-false">Chú ý</th>
+                            <th scope="col" style="" class="sorter-false">Trạng thái</th>
+                            <th scope="col" class="sorter-false filter-false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders as $order) : ?>
+                            <tr>
+                                <td><?= $order['OrderId'] ?></td>
+                                <td><?= date_format(date_create($order['PurchaseDate']), 'M-d-Y H:i') ?></td>
+                                <td><?php if (($order['Status'] == 4)) {
+                                            echo '<i>Đơn đã hủy</i>';
+                                        } else if ($order['DeliveryDate'] == '') {
+                                            echo '<i>Sẽ cập nhật khi đơn hoàn thành.</i>';
+                                        } else {
+                                            echo date_format(date_create($order['DeliveryDate']), 'M-d-Y H:i');
+                                        } ?></td>
+                                <td colspan=3 class="text-center">
+                                    <a href="#" class="toggle admin-link d-block" style="height: 120px">
+                                        Bấm để xem
+                                    </a>
+                                </td>
+                                <td><?= number_format($order['subTotalValue']) ?> ₫</td>
+                                <td><?= empty($order['PromoName']) ?  'N/A' : $order['PromoName'] ?></td>
+                                <td><?= $order['PromoValue'] * 100 ?>%</td>
+                                <td><?= number_format($order['subTotalValue'] * (1 - $order['PromoValue'])) ?> ₫</td>
+                                <td><?= $order['Note'] ?></td>
+                                <td>
+                                    <?php switch ($order['Status']) {
+                                            case 0:
+                                                echo '0.Not processed';
+                                                break;
+                                            case 1:
+                                                echo '1.Processing';
+                                                break;
+                                            case 2:
+                                                echo '2.Shipping';
+                                                break;
+                                            case 3:
+                                                echo '3.Completed';
+                                                break;
+                                            case 4:
+                                                echo '4.Cancelled';
+                                                break;
+                                        } ?>
+                                </td>
+                                <td>
+                                    <form method="POST" action="">
 
-                </tbody>
-            </table>
+                                        <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
+                                        <input type="hidden" name="OrderId" value="<?= $order['OrderId'] ?>">
+                                        <a class="btn btn-danger btn-sm text-white <?= ($order['Status'] != 4) ? 'disabled' : ''; ?>">
+                                            Hủy Đơn
+                                        </a>
+
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php foreach ($order['Items'] as $item) : ?>
+                                <tr class="tablesorter-childRow bg-light">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a href="products-edit.php?id=<?= $item['ProductId'] ?>">
+                                            <?= $item['Name'] ?>
+                                            &nbsp;
+                                            (<?= $item['CapacityId'] - 1 ? "330ml" : "250ml" ?>)
+                                        </a>
+                                    </td>
+                                    <td><?= $item['Quantity']; ?></td>
+                                    <td><?= number_format($item['SalePrice']) ?> ₫</td>
+                                    <td><?= number_format($item['SalePrice'] * $item['Quantity']) ?> ₫</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="14" class="ts-pager">
+                                <div class="form-inline">
+                                    <div class="btn-group btn-group-sm mx-1" role="group">
+                                        <button type="button" class="btn btn-secondary first" title="first">⇤</button>
+                                        <button type="button" class="btn btn-secondary prev" title="previous">←</button>
+                                    </div>
+                                    <span class="pagedisplay"></span>
+                                    <div class="btn-group btn-group-sm mx-1" role="group">
+                                        <button type="button" class="btn btn-secondary next" title="next">→</button>
+                                        <button type="button" class="btn btn-secondary last" title="last">⇥</button>
+                                    </div>
+                                    <select class="form-control-sm custom-select px-1 pagesize" title="Select page size">
+                                        <option selected="selected" value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="all">All Rows</option>
+                                    </select>
+                                    <select class="form-control-sm custom-select px-4 mx-1 pagenum" title="Select page number"></select>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
         </div>
 
     </div>
 </div>
+
+
+<!-- 
+    function getOrders($pdo, $id = '')
+{
+    if ($id == '') {
+        $sql = 'SELECT * FROM `orders` ORDER BY `OrderId` DESC';
+        $query = query($pdo, $sql);
+        $results = $query->fetchAll();
+    } else {
+        $sql = 'SELECT * FROM `orders` WHERE `OrderId` = :OrderId';
+        $parameters = [':OrderId' => $id];
+        $query = query($pdo, $sql, $parameters);
+        $results = $query->fetchAll();
+    }
+
+    $orders = [];
+    foreach ($results as $result) {
+        $promo = empty($result['PromoId']) ? ['PromoName' => '', 'PromoValue' => 0] : getOrderInfo($pdo, 'promotion', 'PromoId', $result['PromoId']);
+
+        $member = getOrderInfo($pdo, 'member', 'MemberId', $result['MemberId']);
+        $items = getOrderDetail($pdo, $result['OrderId']);
+        $subTotalValue = 0;
+        foreach ($items as $item) {
+            $subTotalValue += ($item['SalePrice'] * $item['Quantity']);
+        }
+
+        $orders[] = [
+            'OrderId' => $result['OrderId'],
+            'MemberId' => $result['MemberId'],
+            'MemberName' => $member['Name'],
+            'PurchaseDate' => $result['PurchaseDate'],
+            'DeliveryDate' => $result['DeliveryDate'] ?? "",
+            'Items' => getOrderDetail($pdo, $result['OrderId']),
+            'List' => getListProducts($pdo),
+            'PromoId' => $result['PromoId'],
+            'PromoName' => $promo['PromoName'],
+            'PromoValue' => $promo['PromoValue'],
+            'subTotalValue' => $subTotalValue,
+            'Status' => $result['Status'],
+            'Note' => $result['Note']
+        ];
+    }
+    return $orders;
+}
+
+function getOrderDetail($pdo, $OrderId)
+{
+    $sql = 'SELECT pd.`ProductDetailId`, p.`ProductId`, p.`Name`, od.`SalePrice`, od.`Quantity`, pd.`CapacityId`, p.`TypeId`, t.`Type` FROM `orderdetail` od JOIN `productdetail` pd ON od.`ProductDetailId` = pd.`ProductDetailId` JOIN  `product` p ON pd.`ProductId` = p.`ProductId` JOIN `Type` t ON t.`TypeId` = p.`TypeId` WHERE `OrderID` = :OrderId';
+    $parameters = [':OrderId' => $OrderId];
+    $results = query($pdo, $sql, $parameters)->fetchAll();
+    return $results;
+}
+
+function getOrderInfo($pdo, $table, $primaryKey, $keyValue)
+{
+    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :keyValue';
+    $parameters = [':keyValue' => $keyValue];
+    $results = query($pdo, $sql, $parameters)->fetch();
+    return $results;
+}
+ -->

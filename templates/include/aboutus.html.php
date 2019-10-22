@@ -1,8 +1,5 @@
-    <div class="container-fluid site-wrap">
-      <div
-        class="page-section row"
-        style="margin-top: 5rem; margin-bottom: 5rem"
-      >
+    <div class="container-fluid site-wrap px-0">
+      <div class="page-section row" style="margin-top: 5rem; margin-bottom: 5rem">
         <div class="col-sm-12 col-md-8 px-5 pl-md-3">
           <div class="row mb-4 h4 font-weight-bold">
             VỀ CHÚNG TÔI
@@ -39,9 +36,6 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-4">
-          <img
-            class="img-fluid float-right rounded"
-            src="assets/image/about us.png"
-          />
+          <img class="img-fluid float-right rounded" src="assets/image/about us.png" />
         </div>
       </div>

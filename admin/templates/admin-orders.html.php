@@ -1,7 +1,7 @@
 <div class="page-section card col-12 py-2">
     <div class="section-title pb-2">Orders List</div>
     <div class="table-wrapper">
-        <table class="table table-hover table-striped table-sm tablesorter" id='orderTable'>
+        <table class="table table-hover table-sm tablesorter" id='orderTable'>
             <thead>
                 <tr>
                     <th scope="col" style="width: 80px" class="filter-exact">Order ID</th>
@@ -89,7 +89,7 @@
                         </td>
                     </tr>
                     <?php foreach ($order['Items'] as $item) : ?>
-                        <tr class="tablesorter-childRow">
+                        <tr class="tablesorter-childRow bg-light">
                             <td></td>
                             <td></td>
                             <td></td>

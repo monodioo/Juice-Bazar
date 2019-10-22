@@ -28,8 +28,8 @@
 
             <div class="form-group row">
               <div class="col-md-12">
-                <label for="c_name" class="">Họ và Tên<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="c_name" name="c_name" placeholder="Họ và Tên" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Name'] ?>">
+                <label for="c_name" class="">Họ tên <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="c_name" name="c_name" placeholder="Họ tên" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Name'] ?>">
               </div>
             </div>
 
@@ -39,36 +39,12 @@
                 <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Số nhà, Tên đường" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Address'] ?>">
               </div>
             </div>
-            <!-- 
-                  <div class="form-group row">
-                    <div class="col-md-6">
-                      <label for="c_ward" class="">Xã / Phường <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_ward" name="c_ward">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="c_district" class="">Quận<span class="text-danger">*</span></label>
-                    <select id="c_district" class="form-control">
-                      <option value="0">Chọn Quận</option>    
-                      <option value="1">Ba Đình</option>    
-                      <option value="2">Bắc Từ Liêm</option>    
-                      <option value="3">Cầu Giấy</option>    
-                      <option value="4">Đống Đa</option>    
-                      <option value="5">Hà Đông</option>    
-                      <option value="6">Hai Bà Trưng</option>    
-                      <option value="7">Hoàn Kiếm</option>    
-                      <option value="8">Hoàng Mai</option>     
-                      <option value="9">Long Biên</option>    
-                      <option value="10">Nam Từ Liêm</option>    
-                      <option value="11">Thanh Xuân</option>    
-                      <option value="12">Tây Hồ</option>
-                    </select>
-                    </div>
-                  </div> -->
+
 
             <div class="form-group row mb-5">
               <div class="col-md-6">
                 <label for="c_email_address" class="">Email <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="c_email_address" name="c_email_address" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Email'] ?>">
+                <input type="text" class="form-control" id="c_email_address" name="c_email_address" placeholder="Email" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Email'] ?>">
               </div>
               <div class="col-md-6">
                 <label for="c_phone" class="">Điện thoại <span class="text-danger">*</span></label>
@@ -140,7 +116,7 @@
                   <div class="form-group row">
                     <div class="col-md-6">
                       <label for="c_diff_email_address" class="">Email <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_diff_email_address" name="c_diff_email_address">
+                      <input type="text" class="form-control" placeholder="Email" id="c_diff_email_address" name="c_diff_email_address">
                     </div>
                     <div class="col-md-6">
                       <label for="c_diff_phone" class="">Điện thoại <span class="text-danger">*</span></label>
@@ -160,79 +136,57 @@
         </div>
         <div class="col-md-6">
 
-          <div class="row mb-5">
-            <div class="col-md-12">
-              <h2 class="h3 mb-3 ">Mã giảm giá</h2>
-              <div class="p-3 p-lg-5 border">
+          <h2 class="h3 mb-3">Đơn hàng của bạn</h2>
+          <div class="p-3 p-lg-5 border">
+            <table class="table site-block-order-table mb-4">
+              <thead>
+                <th>Sản phẩm</th>
+                <th class="text-right">Tổng</th>
+              </thead>
+              <tbody>
 
-                <label for="c_code" class=" mb-3">Nhập mã khuyến mại của bạn</label>
-                <div class="input-group w-75">
-                  <input type="text" class="form-control" id="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="button-addon2" value="<?php if (empty($_SESSION['promovalue'])) echo '';
-                                                                                                                                                                      else echo $_SESSION['promoname'] ?>">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-warning btn-sm" type="button" id="couponBtn">Áp dụng</button>
-                  </div>
-                </div>
-                <div class="col-12" id="stCoupon"></div>
+                <?php include "templates/scripts/checkoutShowList.php" ?>
+
+                <tr>
+                  <td class="font-weight-bold"><strong>Tổng giá sản phẩm</strong></td>
+                  <td class="text-right"><?php if (empty($_SESSION['cart'])) echo '0';
+                                          else echo number_format($_SESSION['totalPrice'], 0, '.', '.') ?></td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold"><strong>Giảm giá</strong></td>
+                  <td class="text-right"><? ?>₫</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold"><strong>Tổng tiền</strong></td>
+                  <td class="font-weight-bold text-right"><strong>40.000₫</strong></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="mb-4">
+              <div class="font-weight-bold mb-2">
+                Hình thức thanh toán
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_cash" value="cash" checked>
+                <label class="form-check-label" for="paymentMethod_cash">
+                  Thanh toán khi nhận hàng
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_baokim" value="baokim">
+                <label class="form-check-label" for="paymentMethod_baokim">
+                  Thanh toán qua cổng Bảo Kim
+                </label>
               </div>
             </div>
-          </div>
 
 
-          <div class="row">
-            <div class="col-md-12">
-              <h2 class="h3 mb-3">Đơn hàng của bạn</h2>
-              <div class="p-3 p-lg-5 border">
-                <table class="table site-block-order-table mb-4">
-                  <thead>
-                    <th>Sản phẩm</th>
-                    <th class="text-right">Tổng</th>
-                  </thead>
-                  <tbody>
-
-                    <?php include "templates/scripts/checkoutShowList.php" ?>
-
-                    <tr>
-                      <td class="font-weight-bold"><strong>Tổng giá sản phẩm</strong></td>
-                      <td class="text-right"><?php if (empty($_SESSION['cart'])) echo '0';
-                                              else echo number_format($_SESSION['totalPrice'], 0, '.', '.') ?></td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold"><strong>Giảm giá</strong></td>
-                      <td class="text-right"><? ?>₫</td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold"><strong>Tổng tiền</strong></td>
-                      <td class="font-weight-bold text-right"><strong>40.000₫</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <div class="mb-4">
-                  <div class="font-weight-bold mb-2">
-                    Hình thức thanh toán
-                  </div>
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_cash" value="cash" checked>
-                    <label class="form-check-label" for="paymentMethod_cash">
-                      Thanh toán khi nhận hàng
-                    </label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_baokim" value="baokim">
-                    <label class="form-check-label" for="paymentMethod_baokim">
-                      Thanh toán qua cổng Bảo Kim
-                    </label>
-                  </div>
-                </div>
-
-
-                <div class="form-group">
-                  <button class="btn btn-cart btn-block text-decoration-none text-white font-weight-bold p-3" onclick="window.location='thankyou.html'">Đặt hàng</button>
-                </div>
-
-              </div>
+            <div class="form-group">
+              <button class="btn btn-warning btn-block text-decoration-none text-white font-weight-bold px-4" onclick="window.location='checkout-final.html.php'">Đặt hàng</button>
             </div>
+
+
           </div>
         </div>
       </div>
