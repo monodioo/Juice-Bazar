@@ -1,4 +1,4 @@
-<div class="page-section card col-12 py-2">
+<div class="page-section card col-12 py-2 px-0">
     <div class="section-title pb-2">Products List</div>
     <div class="table-wrapper">
         <table class="table table-hover table-striped table-sm tablesorter" id='prodTable'>
@@ -81,7 +81,7 @@
                         <td><?= ($product['Status'] == 0) ? 'Disabled' : 'Enabled' ?></td>
                         <td>
                             <a class="btn btn-warning btn-block btn-sm mb-1 text-white" href="products-edit.php?id=<?= $product['ProductId'] ?>">Edit</a>
-                            <form action="productStatusSwitch.php" method="post">
+                            <form action="../include/snippets/productStatusSwitch.php" method="post" class="m-0">
                                 <button type="submit" class="btn btn-<?= ($product['Status'] == 1) ? 'secondary' : 'success' ?> btn-block btn-sm mb-1" name="switchProductBtn"><?= ($product['Status'] == 1) ? 'Disable' : 'Enable' ?></button>
                                 <input type="hidden" name="switchProductId" value="<?= $product['ProductId'] ?>">
                                 <input type="hidden" name="switchProductStatus" value="<?= $product['Status'] ?>">
@@ -136,7 +136,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form method="post" action="products-delete.php">
+                        <form method="post" action="../include/snippets/products-delete.php" class="m-0">
                             <input type="hidden" name="deleteProduct" id="deleteElement" value="">
                             <button type="submit" name="deleteProductBtn" class="btn btn-danger">Delete</button>
                         </form>

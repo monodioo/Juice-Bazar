@@ -5,7 +5,7 @@ $_SESSION['productCount'] = -1;
 
 if (!empty($_SESSION['admin'])) {
 
-    //If there is a POST request, meaning the edition is submitted >> Proceed to verify and save to DB.
+
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
@@ -18,42 +18,37 @@ if (!empty($_SESSION['admin'])) {
                 $previous = $_SERVER['HTTP_REFERER'];
             }
 
-            if ($_POST['DeliveryDate'] && strtotime($_POST['PurchaseDate']) > strtotime($_POST['DeliveryDate'])) {
+            if (!isset($_POST['newProduct']) || empty($_POST['newProduct'])) {
                 $title = 'Error';
-                $output = "Sorry, DeliveryDate should be later than PurchaseDate. Please go &nbsp; <a href='. $previous . '>back</a> &nbsp; to edit. ";
+                $output = "Sorry, No item in order. Please go back to edit. ";
+            } else if ($_POST['DeliveryDate'] && strtotime($_POST['PurchaseDate']) > strtotime($_POST['DeliveryDate'])) {
+                $title = 'Error';
+                $output = "Sorry, DeliveryDate should be later than PurchaseDate. Please go back to edit. ";
             } else {
                 $record =  [
-                    'OrderId' => $_POST['OrderId'],
+                    'MemberId' => $_POST['MemberId'],
+                    'PurchaseDate' => ($_POST['PurchaseDate'] ?? ''),
                     'DeliveryDate' => ($_POST['DeliveryDate'] ?? ''),
                     'NewProduct' => $_POST['newProduct'],
-                    'PromoId' => $_POST['PromoId'] ?? "",
+                    'PromoId' => $_POST['PromoId'] ?? 0,
                     'Note' => $_POST['Note'],
                     'Status' => $_POST['Status'],
-                    'OldStatus' => $_POST['oldStatus']
                 ];
 
-                // editOrder($pdo, $record);
-                print_r($_POST);
-                // header('location: orders-edit.php?id=' . $_POST['OrderId'] . '');
-            }
-        } else {
-            if (!empty($_GET['id'])) {
-
-                $title = "Juice Bazar - Admin - Order Edit";
-                $sectionTitle = "Edit Order";
-
-                //if id is not found then go to orders page
-                if (!empty(getOrders($pdo, $_GET['id']))) {
-                    $orders = getOrders($pdo, $_GET['id']);
-                } else {
-                    header('location: admin-orders.php');
-                }
-            } else {
+                saveOrder($pdo, $record);
+                $_SESSION['orderAddMsg'] = 'Order created';
                 header('location: admin-orders.php');
             }
+        } else {
+            $title = "Juice Bazar - Admin - Order";
+            $sectionTitle = "New Order";
+
+            $members = getTable($pdo, 'member', 'Status', true);
+            $promos = getTable($pdo, 'promotion', 'PromoStatus', true);
+
             ob_start();
 
-            include __DIR__ . '/../templates/orders-edit.html.php';
+            include __DIR__ . '/../templates/orders-new.html.php';
 
             $output = ob_get_clean();
         }

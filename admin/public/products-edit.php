@@ -8,6 +8,11 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
+    if (isset($_SESSION['productEditMsg'])) {
+        echo "<script>alert('$_SESSION[productEditMsg]')</script>";
+        unset($_SESSION['productEditMsg']);
+    }
+
     try {
         if (isset($_POST['SubmitProductBtn'])) {
 
@@ -33,12 +38,15 @@ if (!empty($_SESSION['admin'])) {
             }
 
             if (($_POST['EntryPrice1'] > $_POST['Price1']) || ($_POST['EntryPrice2'] > $_POST['Price2'])) {
-                $title = 'Error';
-                $output = "Sorry, Entry Prices should not be higher than SalePrice. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";
+                $_SESSION['productEditMsg'] = 'Sorry, Entry Price should not be higher than SalePrice';
+                header('location: products-edit.php');
             } else {
+
                 if (!in_array($ext, $allowed) && empty($_POST['ImageCheck'])) {
-                    $title = 'Error';
-                    $output = "Sorry, only JPG, JPEG, PNG files are allowed. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";;
+                    // $title = 'Error';
+                    // $output = "Sorry, only JPG, JPEG, PNG files are allowed. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";;
+                    $_SESSION['productEditMsg'] = 'Sorry, only JPG, JPEG, PNG files are allowed';
+                    header('location: products-edit.php');
                 } else {
                     move_uploaded_file($_FILES['Image']['tmp_name'], $path);
 
@@ -65,7 +73,12 @@ if (!empty($_SESSION['admin'])) {
                         $record
                     );
 
-                    empty($_POST['ProductId']) ? header('location: products-edit.php') : header('location: products-edit.php?id=' . $_POST['ProductId'] . '');
+                    if (empty($_POST['ProductId'])) {
+                        $_SESSION['flashMessage'] = 'Product ' . $record['Name'] . ' added';
+                    } else {
+                        $_SESSION['flashMessage'] = 'Product ' . $record['Name'] . ' edited';
+                    }
+                    header('location: admin-products.php');
                 }
             }
         } else {

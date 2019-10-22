@@ -7,40 +7,77 @@ function query($pdo, $sql, $parameters = [])
     return $query;
 }
 
+function insertIntoTable($pdo, $table, $record)
+{
+    $sql = 'INSERT INTO `' . $table . '` (';
+
+    foreach ($record as $key => $value) {
+        $sql .= '`' . $key . '`,';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ') VALUES (';
+
+    foreach ($record as $key => $value) {
+        $sql .= ':' . $key . ',';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ')';
+
+
+    query($pdo, $sql, $record);
+}
+
+function findMaxInTable($pdo, $table, $column)
+{
+    $sql = 'SELECT MAX(`' . $column . '`) FROM `' . $table . '`';
+    $query = query($pdo, $sql);
+    $result = $query->fetch();
+    return $result[0];
+}
+
+//get all data from $table
+function getTable($pdo, $table, $StatusCol, $status = false)
+{
+    if ($status == false) {
+        $sql = 'SELECT * FROM `' . $table . '`';
+    } else {
+        $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $StatusCol . '` = 1';
+    }
+
+    return query($pdo, $sql)->fetchAll();
+}
+
+
 function adminLogin($pdo, $adminName, $adminPass)
 {
-    try {
+    // try {
+    $sql = 'SELECT `User` FROM `admin` WHERE `User`=:adminName ';
+    $parameters = [':adminName' => $adminName];
+    $query = query($pdo, $sql, $parameters);
+    $data = $query->fetch();
 
-        // $hash_password = hash('sha256', $adminPass); //Password encryption 
-        $sql = 'SELECT * FROM `admin` WHERE `user`=:adminName AND `pass`=:adminPass';
-        $parameters = [':adminName' => $adminName, ':adminPass' => $adminPass];
+    //If no username is found
+    if ($data === false) {
+        return 'userError';
+    } else {
+        $sql2 = 'SELECT `User`,`Pass` FROM `admin` WHERE `User`=:adminName AND `Pass`=:adminPass';
+        $parameters2 = [':adminName' => $adminName, ':adminPass' => $adminPass];
+        $query2 = query($pdo, $sql2, $parameters2);
 
-        $query = query($pdo, $sql, $parameters);
-        //Fetch row.
-        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $data2 = $query2->fetch();
 
-        //If $row is FALSE.
-        if ($data === false) {
-            die('No admin name found! Please go back to sign in again.');
+        //check if password is correct
+        $validPassword = $adminPass == $data2['Pass'] ? true : false;
+
+        if ($validPassword) {
+            return 'ok';
         } else {
-            $validPassword = $adminPass == $data['Pass'] ? true : false;
-
-            if ($validPassword) {
-
-                //Provide the user with a login session.
-                $_SESSION['admin'] = $data['User'];
-                $_SESSION['logged_in'] = time();
-
-                //Redirect to our protected page, which we called home.php
-                header('location: admin-home.php');
-                exit;
-            } else {
-                //$validPassword was FALSE. Passwords do not match.
-                die('Incorrect admin / password combination! Please go back to sign in again.');
-            }
+            return 'passError';
         }
-    } catch (PDOException $e) {
-        echo '{"error":{"text":' . $e->getMessage() . '}}';
     }
 }
 
@@ -149,76 +186,21 @@ function insertProduct($pdo, $table, $recordElement, $recordPrice1 = [], $record
 {
 
     //insert new Item into $Table
-    $sql = 'INSERT INTO `' . $table . '` (';
-
-    foreach ($recordElement as $key => $value) {
-        $sql .= '`' . $key . '`,';
-    }
-
-    $sql = rtrim($sql, ',');
-
-    $sql .= ') VALUES (';
-
-    foreach ($recordElement as $key => $value) {
-        $sql .= ':' . $key . ',';
-    }
-
-    $sql = rtrim($sql, ',');
-
-    $sql .= ')';
-
-    query($pdo, $sql, $recordElement);
+    insertIntoTable($pdo, $table, $recordElement);
 
     //find the newly inserted element 
-    $query = query($pdo, 'SELECT MAX(`ProductId`) FROM `product`');
-    $query = $query->fetch();
-    $newId = $query[0];
+
+    $newId = findMaxInTable($pdo, 'product', 'ProductId');
 
 
     if (!empty($recordPrice1) && !empty($recordPrice2)) {
         $recordPrice1['ProductId'] = $newId;
         $recordPrice2['ProductId'] = $newId;
         //insert into Table productdetail for CapacityId = 1 (250ml)
-        $sqlPrice1 = 'INSERT INTO `productdetail` (';
-
-        foreach ($recordPrice1 as $key => $value) {
-            $sqlPrice1 .= '`' . $key . '`,';
-        }
-
-        $sqlPrice1 = rtrim($sqlPrice1, ',');
-
-        $sqlPrice1 .= ') VALUES (';
-
-        foreach ($recordPrice1 as $key => $value) {
-            $sqlPrice1 .= ':' . $key . ',';
-        }
-
-        $sqlPrice1 = rtrim($sqlPrice1, ',');
-
-        $sqlPrice1 .= ')';
-
-        query($pdo, $sqlPrice1, $recordPrice1);
+        insertIntoTable($pdo, 'productdetail', $recordPrice1);
 
         //insert into Table productdetail for CapacityId = 2 (330ml)
-        $sqlPrice2 = 'INSERT INTO `productdetail` (';
-
-        foreach ($recordPrice2 as $key => $value) {
-            $sqlPrice2 .= '`' . $key . '`,';
-        }
-
-        $sqlPrice2 = rtrim($sqlPrice2, ',');
-
-        $sqlPrice2 .= ') VALUES (';
-
-        foreach ($recordPrice2 as $key => $value) {
-            $sqlPrice2 .= ':' . $key . ',';
-        }
-
-        $sqlPrice2 = rtrim($sqlPrice2, ',');
-
-        $sqlPrice2 .= ')';
-
-        query($pdo, $sqlPrice2, $recordPrice2);
+        insertIntoTable($pdo, 'productdetail', $recordPrice2);
     }
 }
 
@@ -278,7 +260,7 @@ function switchStatus($pdo, $table, $primaryKey, $id, $statusKey, $statusVal)
 function getOrders($pdo, $id = '')
 {
     if ($id == '') {
-        $sql = 'SELECT * FROM `orders`';
+        $sql = 'SELECT * FROM `orders` ORDER BY `OrderId` DESC';
         $query = query($pdo, $sql);
         $results = $query->fetchAll();
     } else {
@@ -365,11 +347,10 @@ function changeStock($pdo, $OrderId, $return = false, $newStatus)
 
 function getTypes($pdo)
 {
-    $sql = 'SELECT * FROM `type`';
-    $results = query($pdo, $sql)->fetchAll();
+    $results = getTable($pdo, 'type', 'TypeId');
     $type = [];
     foreach ($results as $result) {
-        $checkIfUsed = query($pdo, 'SELECT COUNT(p.`TypeId`) AS Existed FROM `product` p JOIN `orderdetail` od ON p.`ProductId` = od.`ProductId` JOIN `orders` o ON o.`OrderId` = od.`OrderId` WHERE p.`TypeId` = ' . $result['TypeId'] . '')->fetchAll();
+        $checkIfUsed = query($pdo, 'SELECT COUNT(p.`TypeId`) AS Existed FROM `product` p JOIN `productdetail`pd ON p.`ProductId` = pd.`ProductId` JOIN `orderdetail` od ON pd.`ProductDetailId` = od.`ProductDetailId` JOIN `orders` o ON o.`OrderId` = od.`OrderId` WHERE p.`TypeId` = ' . $result['TypeId'] . '')->fetchAll();
         $type[] = [
             'TypeId' => $result['TypeId'],
             'Type' => $result['Type'],
@@ -396,22 +377,116 @@ function editType($pdo, $type)
 function addType($pdo, $type)
 {
     $sql = 'INSERT INTO `type`(`Type`, `TypeStatus`) VALUES (:Type, :TypeStatus)';
-    $parameters = [':Type' => $type['Type'], ':TypeStatus' => $type['TypeStatus']];
+    // $parameters = [':Type' => $type['Type'], ':TypeStatus' => $type['TypeStatus']];
     query($pdo, $sql, $type);
 }
 
 function deleteOrder($pdo, $id)
 {
-    $sql1 = 'DELETE FROM `orderdetail` WHERE `OrderId` = :primaryKey';
-    $parameters = [':primaryKey' => $id];
+    $sql1 = 'DELETE FROM `orderdetail` WHERE `OrderId` = :OrderId';
+    $parameters = [':OrderId' => $id];
     query($pdo, $sql1, $parameters);
 
-    $sql2 = 'DELETE FROM `orders` WHERE `OrderId` = :primaryKey';
+    $sql2 = 'DELETE FROM `orders` WHERE `OrderId` = :OrderId';
     query($pdo, $sql2, $parameters);
 }
 
-function editOrder($pdo, $record)
+//Save order information from orders-new.php
+function saveOrder($pdo, $record)
 {
-    $sql = 'UPDATE `orders` SET `DeliveryDate` = :DeliveryDate, `Status`=:Status, `PromoId` =:PromoId, `Note` =:Note WHERE `OrderId` = :OrderId';
+
+    //Create new Order information
+    $recordOrder = $record;
+    unset($recordOrder['NewProduct']); //remove NewProduct 
+
+    if ($recordOrder['DeliveryDate'] == "") {
+        unset($recordOrder['DeliveryDate']); //remove DeliveryDate if there is none
+    }
+    if ($recordOrder['PromoId'] == 0) {
+        unset($recordOrder['PromoId']); //remove PromoId if there is none
+    }
+
+    insertIntoTable($pdo, 'orders', $recordOrder);
+
+
+    $products = $record['NewProduct'];
+
+    $newOrderId = findMaxInTable($pdo, 'orders', 'OrderId');
+
+    foreach ($products as $product) {
+        $product['OrderId'] = $newOrderId;
+        insertIntoTable($pdo, 'orderdetail', $product);
+    }
+
+    //if new order's status is 2 or 3 => move product from stock to shipping
+    if ($recordOrder['Status'] > 1) {
+
+        if (isset($recordOrder['DeliveryDate'])) {
+            changeStock($pdo, $newOrderId, false, 0); // 0 to not update delivery time
+        } else {
+            changeStock($pdo, $newOrderId, false, 3); // 3 to update delivery time
+        }
+    }
+}
+
+function getPromos($pdo)
+{
+    $results = getTable($pdo, 'promotion', 'PromoId');
+    $promos = [];
+    foreach ($results as $result) {
+        $checkIfUsed = query($pdo, 'SELECT COUNT(o.`PromoId`) AS Existed FROM `orders` o WHERE o.`PromoId` = ' . $result['PromoId'] . '')->fetchAll();
+        $promos[] = [
+            'PromoId' => $result['PromoId'],
+            'PromoName' => $result['PromoName'],
+            'PromoValue' => $result['PromoValue'],
+            'PromoStatus' => $result['PromoStatus'],
+            'Existed' => $checkIfUsed[0]['Existed'],
+        ];
+    };
+    return $promos;
+}
+
+// function deleteType($pdo, $id)
+// {
+//     $sql = 'DELETE FROM `type` WHERE `TypeId` = :primaryKey';
+//     $parameters = [':primaryKey' => $id];
+//     query($pdo, $sql, $parameters);
+// }
+
+// function editTableSimple($pdo, $table, $record)
+// {
+//     $sql = 'UPDATE `type` SET `Type` = :Type, `TypeStatus` =:TypeStatus WHERE `TypeId` = :TypeId';
+//     query($pdo, $sql, $type);
+// }
+
+// function addType($pdo, $type)
+// {
+//     $sql = 'INSERT INTO `type`(`Type`, `TypeStatus`) VALUES (:Type, :TypeStatus)';
+//     // $parameters = [':Type' => $type['Type'], ':TypeStatus' => $type['TypeStatus']];
+//     query($pdo, $sql, $type);
+// }
+
+
+function findDuplicate($pdo, $table, $col, $colVal)
+{
+    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $col . '`=:colVal';
+    $parameters = [':colVal' => $colVal];
+    $result = query($pdo, $sql, $parameters);
+    return $result->fetch();
+}
+
+
+function updateTableSimple($pdo, $table, $record, $idCol = "", $idValue = "")
+{
+    $sql = 'UPDATE `' . $table . '` SET ';
+
+    foreach ($record as $key => $value) {
+        $sql .= ' `' . $key . '` =:' . $key . ',';
+    }
+
+    $sql = rtrim($sql, ',');
+
+    $sql .= ' WHERE `' . $idCol . '` = ' . $idValue . '';
+
     query($pdo, $sql, $record);
 }

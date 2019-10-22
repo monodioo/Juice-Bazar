@@ -15,6 +15,11 @@ if (!empty($_SESSION['admin'])) {
         include __DIR__ . '/../templates/admin-orders.html.php';
 
         $output = ob_get_clean();
+
+        if (isset($_SESSION['flashMessage'])) {
+            echo "<script>alert('$_SESSION[flashMessage]')</script>";
+            unset($_SESSION['flashMessage']);
+        }
     } catch (PDOException $e) {
         $title = 'An error has occurred';
 
@@ -24,6 +29,5 @@ if (!empty($_SESSION['admin'])) {
 } else {
     header('location: index.php');
 }
-
 
 include __DIR__ . '/../templates/layout.html.php';

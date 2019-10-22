@@ -182,8 +182,8 @@ jQuery(document).ready(function($) {
     popover: []
   });
 
-  //ajax function to update price& category of new product in Order Edit page
-  $(".product-select").on("change", function() {
+  //AJAX function to update price& category of new product in Order Edit page
+  $(".table-body").on("change", ".product-select", function() {
     //Price
     $.ajax({
       url: "../include/snippets/getSalePrice.php?id=" + this.value,
@@ -196,6 +196,10 @@ jQuery(document).ready(function($) {
           .closest("tr")
           .find(".product-price")
           .html(data);
+        $(this)
+          .closest("tr")
+          .find(".product-price-input")
+          .val(parseInt(data) * 1000);
         $quantity = parseInt(
           $(this)
             .closest("tr")
@@ -220,17 +224,26 @@ jQuery(document).ready(function($) {
     });
   });
 
+  //Delete product row
+  $(".table-body").on("click", ".product-delete", function() {
+    this.preventDefault;
+    $(this)
+      .closest("tr")
+      .remove();
+  });
+
   //calculate subtotal price for new product in Order Edit page
-  $(".product-quantity").change(function() {
+  $(".table-body").on("change", ".product-quantity", function() {
     $price = parseInt(
       $(this)
         .closest("tr")
         .find(".product-price")
         .html()
     );
-    updateTotalValue(this, this.value, $price);
+    updateTotalValue(this, $price, this.value);
   });
 
+  //function to update price from ajax
   function updateTotalValue(target, price, quantity) {
     $subtotal = price * quantity;
     $(target)
@@ -251,9 +264,9 @@ jQuery(document).ready(function($) {
       });
 
     $(".product-subtotal").html($subtotal + ".000");
-    $promo = $(".product-promovalue").val();
-    $promo = parseInt($promo.replace("%", ""));
-
+    $promo = $(".promo-value").val();
+    $promo = parseInt($promo);
+    // console.log($promo);
     $discount = ($subtotal * $promo) / 100;
     $discountText = formatNumber($discount);
     $(".product-discount").html($discountText);
@@ -275,4 +288,49 @@ jQuery(document).ready(function($) {
     }
     return $number;
   }
+
+  //AJAX Add more products into order
+  $("#addProductBtn").on("click", function() {
+    this.preventDefault;
+    $.ajax({
+      url: "../include/snippets/insertRowIntoOrder.php",
+      method: "GET",
+      context: this,
+      success: function(data) {
+        $(this)
+          .closest("tr")
+          .before(data);
+      }
+    });
+  });
+
+  //AJAX update promotion value
+  $(".table-body").on("change", ".promo-select", function() {
+    $.ajax({
+      url: "../include/snippets/getPromo.php?id=" + this.value,
+      method: "GET",
+      context: this,
+      success: function(data) {
+        $(this)
+          .closest("tr")
+          .find(".promo-value")
+          .val(data * 100);
+
+        $subtotal = parseInt(
+          $(".product-subtotal")
+            .html()
+            .replace("%", "")
+        );
+        $promo = data;
+        $discount = $subtotal * $promo;
+        $discountText = formatNumber($discount);
+        $(".product-discount").html($discountText);
+        $total = $subtotal - $discount;
+        $totalText = formatNumber($total);
+        $(".product-total").html($totalText);
+      }
+    });
+  });
+
+  // end $document.ready
 });
