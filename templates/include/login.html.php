@@ -31,7 +31,7 @@
                                                                                                                               ?>' />
           </div>
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="rememberCheckLogin" name="rememberCheckLogin" <?php if (isset($_COOKIE["emailLogin"])) echo 'checked'; ?> />
+            <input type="checkbox" class="form-check-input" id="rememberCheckLogin" name="rememberCheckLogin" checked="<?php if (isset($_COOKIE["emailLogin"])) echo 'checked'; ?>" />
             <label class="form-check-label" for="rememberCheckLogin">Lưu thông tin đăng nhập</label>
           </div>
           <button type="submit" id="loginBtn" name="loginBtn" class="btn btn-cart">

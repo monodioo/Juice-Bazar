@@ -85,7 +85,7 @@
           <div class="form-group row">
             <div class="col-md-12">
               <label for="addSignup" class="">Địa chỉ:</label>
-              <input type="text" class="form-control" id="addSignup" name="addSignup" placeholder="Số nhà, Tên đường, Xã / Phường, Quận" value='<?php if (isset($_POST["telSignup"])) echo $_POST["telSignup"]; ?>' />
+              <input type="text" class="form-control" id="addSignup" name="addSignup" placeholder="Số nhà, Tên đường, Xã / Phường, Quận" value='<?php if (isset($_POST["addSignup"])) echo $_POST["addSignup"]; ?>' />
             </div>
           </div>
 

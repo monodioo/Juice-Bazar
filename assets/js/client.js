@@ -105,6 +105,7 @@ $(document).ready(function() {
     });
   });
 
+  //Cart Update: Delete Cart.
   $(document).on("click", "#js-cart-deleteAll", function() {
     $.ajax({
       url: "templates/scripts/cart.php",
@@ -139,6 +140,21 @@ $(document).ready(function() {
         $("#promovalue").html(result.promoValue * 100);
         $("#lastPrice").html(result.lastPrice);
       }
+    });
+  });
+
+  //Search
+  $("#searchBtn").on("click", function() {
+    var search_input = $("#searchInput")
+      .val()
+      .toLowerCase();
+    $(".search-item").filter(function() {
+      $(this).toggle(
+        $(this)
+          .text()
+          .toLowerCase()
+          .indexOf(search_input) > -1
+      );
     });
   });
 });

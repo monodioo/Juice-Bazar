@@ -1,7 +1,5 @@
-<div class='row my-3 border-bottom' id="cart-empty" style="display:none"><strong>ĐƠN HÀNG TRỐNG</strong></div>
 <?php
-if (empty($_SESSION['cart'])) echo "<div class='row my-3 border-bottom'><strong>ĐƠN HÀNG TRỐNG</strong></div>";
-else {
+if (isset($_SESSION['cart'])) {
     $listCart = $_SESSION['cart'];
     $totalPrice = 0;
     foreach ($listCart as $key => $value) {

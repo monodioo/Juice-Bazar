@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         setcookie('emailLogin', $_POST['emailLogin'], time() + 86400 * 30);
                         setcookie('passwordLogin', $_POST['passwordLogin'], time() + 86400 * 30);
                     }
-                    echo "<script>location='?section=home';</script>";
-                    echo "<script>alert('Đăng nhập thành công!');</script>";
+                    echo "<script>alert('Đăng nhập thành công!');location='?';</script>";
                 }
             } else {
                 echo "<script>alert('Email hoặc mật khẩu không đúng!');</script>";
@@ -44,8 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $addSignup = test_input($_POST["addSignup"]);
                 $fnameSignup = standardizedData($fnameSignup);
                 $insertMemberSQL = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
-                if (mysqli_query($con, $insertMemberSQL)) {
-                    echo "<script>alert('Bạn đã đăng ký thành công!');</script>";
+                $rs = mysqli_query($con, $insertMemberSQL);
+                if ($rs) {
+                    echo "<script>alert('Bạn đã đăng ký thành công. Xin mời đăng nhập.');location='?section=login';</script>";
                 } else echo "<script>alert('Đăng ký thất bại!');</script>";
             }
         }

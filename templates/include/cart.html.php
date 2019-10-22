@@ -27,6 +27,7 @@
         </div>
       </div>
     </div>
+    <div class='row my-3 border-bottom' id="cart-empty" style="display:<?php if (isset($_SESSION['cart'])) echo 'none' ?>"><strong>ĐƠN HÀNG TRỐNG</strong></div>
     <?php include "templates/scripts/cartShowList.php" ?>
 
     <!-- <div class="row">
@@ -128,8 +129,8 @@
                 <span class="">Giảm giá</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong><span id="promovalue"><?php if (isset($_SESSION['promovalue'])) echo $_SESSION['promovalue'] * 100;
-                                              else echo '0'; ?></span><span> %</span></strong>
+                <strong><span id="promovalue"><?php if (empty($_SESSION['promovalue'])) echo '0';
+                                              else echo $_SESSION['promovalue'] * 100; ?></span><span> %</span></strong>
               </div>
             </div>
             <div class="row mb-5">

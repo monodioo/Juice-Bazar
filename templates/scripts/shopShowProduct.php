@@ -1,11 +1,13 @@
 <?php
 if ($_REQUEST["typeid"] == '0') {
     $sqlShowProduct = "SELECT * FROM Product JOIN Productdetail ON Product.ProductId = Productdetail.ProductId
-                            WHERE CapacityId = 1 AND Status = 1";
+                            WHERE CapacityId = 1 AND Status = 1
+                            ORDER BY Name";
 } else {
     $typeid = $_REQUEST['typeid'];
     $sqlShowProduct = "SELECT * FROM Product  JOIN Productdetail ON Product.ProductId = Productdetail.ProductId
-                            WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1";
+                            WHERE CapacityId = 1 AND TypeId = $typeid AND Status = 1
+                            ORDER BY Name";
 }
 
 $tableProduct = mysqli_query($con, $sqlShowProduct);
@@ -97,14 +99,15 @@ while ($row = mysqli_fetch_array($tableProduct)) {
     </div>
     <!-- END OF MODAL -->
 
-    <div class="col-6 col-md-4 col-lg-2">
+    <div class="col-6 col-md-4 col-lg-2 search-item" data-productid="<?= $row['productid'] ?>">
         <div class="card juice-card px-1 px-xl-4 pt-3 mt-4" data-toggle="modal" data-target="<?php echo '#a' . $row['ProductId']; ?>">
             <img src="<?php echo $row['Image'] ?>" class="card-img-top" alt="<?php echo $row['Name']; ?>" />
             <div class="card-body">
                 <h6 class="card-title text-center"><?php echo $row['Name'] ?></h6>
                 <p class="juice-card-price py-1 text-center font-weight-bold mb-0">
-                    <?php echo $row['Price'] / 1000 ?>.000₫
+                    <?php echo number_format($row['Price'], 0, '.', '.') ?>₫
                 </p>
+                <div hidden><?php echo $row['Description'] ?></div>
             </div>
         </div>
     </div>

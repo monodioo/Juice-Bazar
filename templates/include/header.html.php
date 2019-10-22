@@ -64,7 +64,7 @@
         <div class="float-right nav-icon-group d-flex flex-row align-items-center justify-content-end">
           <form class="search-input-wrap d-flex flex-row align-items-center ">
             <input type="text" class="form-control pb-0 px-0 d-none d-lg-block" name="search" id="searchInput" placeholder="Search">
-            <button type="submit" class="btn pb-0 px-0 d-none d-lg-block"><i class="fas fa-search nav-icon" aria-hidden="true"></i></button>
+            <button type="button" id="searchBtn" class="btn pb-0 px-0 d-none d-lg-block"><i class="fas fa-search nav-icon" aria-hidden="true"></i></button>
           </form>
           <a href="?section=login" class="text-decoration-none" <?php if (isset($_SESSION['memberId'])) echo 'hidden' ?>>
             <i class="far fa-user-circle  nav-icon  d-none d-lg-block"></i>
@@ -73,7 +73,7 @@
             <a href="?section=profile" class="text-decoration-none">
               <i> <?php if (isset($_SESSION['memberId'])) echo $_SESSION['memberName'] ?></i>
             </a>
-            <a href="?action=logout&section=<?= $_REQUEST['section'] ?>" id="logoutBtn">Đăng xuất</a>
+            <a href="?action=logout" id="logoutBtn">Đăng xuất</a>
             <?php include "templates/scripts/logout.php" ?>
           </div>
           <a href="?section=cart" class="d-flex justify-content-center align-items-center btn-cart text-decoration-none px-3 py-2 text-white" id="cart-status">
