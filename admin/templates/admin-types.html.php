@@ -16,8 +16,11 @@
                         <tr>
                             <td class="align-middle"><?= $type['TypeId'] ?>
                                 <input type="hidden" name="TypeId" value="<?= $type['TypeId'] ?>">
+                                <input type="hidden" name="Existed" value="<?= $type['Existed'] ?>">
                             </td>
-                            <td><input class="form-control" type="text" name="Type" value="<?= $type['Type'] ?>" required>
+                            <td>
+                                <input class="form-control" type="text" name="Type" value="<?= $type['Type'] ?>" required>
+                                <input type="hidden" name="OldName" value="<?= $type['Type'] ?>">
                             </td>
                             <td>
                                 <select class="custom-select" name="TypeStatus" value=<?= $type['TypeStatus'] ?>>
@@ -72,8 +75,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <form method="post" action="../include/snippets/types-delete.php">
-                            <input type="hidden" name="deleteCategory" id="deleteElement" value="">
-                            <button type="submit" name="deleteCategoryBtn" class="btn btn-danger">Delete</button>
+                            <input type="hidden" name="deleteElement" id="deleteElement" value="">
+                            <button type="submit" name="deleteElementBtn" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>

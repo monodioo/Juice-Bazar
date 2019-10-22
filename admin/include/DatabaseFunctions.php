@@ -188,7 +188,7 @@ function insertProduct($pdo, $table, $recordElement, $recordPrice1 = [], $record
     //insert new Item into $Table
     insertIntoTable($pdo, $table, $recordElement);
 
-    //find the newly inserted element 
+    //find the newly inserted element
 
     $newId = findMaxInTable($pdo, 'product', 'ProductId');
 
@@ -397,7 +397,7 @@ function saveOrder($pdo, $record)
 
     //Create new Order information
     $recordOrder = $record;
-    unset($recordOrder['NewProduct']); //remove NewProduct 
+    unset($recordOrder['NewProduct']); //remove NewProduct
 
     if ($recordOrder['DeliveryDate'] == "") {
         unset($recordOrder['DeliveryDate']); //remove DeliveryDate if there is none
@@ -446,18 +446,12 @@ function getPromos($pdo)
     return $promos;
 }
 
-// function deleteType($pdo, $id)
-// {
-//     $sql = 'DELETE FROM `type` WHERE `TypeId` = :primaryKey';
-//     $parameters = [':primaryKey' => $id];
-//     query($pdo, $sql, $parameters);
-// }
-
-// function editTableSimple($pdo, $table, $record)
-// {
-//     $sql = 'UPDATE `type` SET `Type` = :Type, `TypeStatus` =:TypeStatus WHERE `TypeId` = :TypeId';
-//     query($pdo, $sql, $type);
-// }
+function deleteSimple($pdo, $table, $idCol, $idVal)
+{
+    $sql = 'DELETE FROM `' . $table . '` WHERE `' . $idCol . '` = :primaryKey';
+    $parameters = [':primaryKey' => $idVal];
+    query($pdo, $sql, $parameters);
+}
 
 // function addType($pdo, $type)
 // {
@@ -467,10 +461,10 @@ function getPromos($pdo)
 // }
 
 
-function findDuplicate($pdo, $table, $col, $colVal)
+function findDuplicate($pdo, $table, $idCol, $idVal)
 {
-    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $col . '`=:colVal';
-    $parameters = [':colVal' => $colVal];
+    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $idCol . '`=:idVal';
+    $parameters = [':idVal' => $idVal];
     $result = query($pdo, $sql, $parameters);
     return $result->fetch();
 }
@@ -489,4 +483,57 @@ function updateTableSimple($pdo, $table, $record, $idCol = "", $idValue = "")
     $sql .= ' WHERE `' . $idCol . '` = ' . $idValue . '';
 
     query($pdo, $sql, $record);
+}
+
+
+function getMembers($pdo)
+{
+    $sql = 'SELECT * FROM `member` WHERE `MemberId` > 0 ';
+    $results = query($pdo, $sql)->fetchAll();
+
+    $members = [];
+    foreach ($results as $result) {
+
+        $items = getMemberOrders($pdo, $result['MemberId']);
+        $Spending = 0;
+        foreach ($items as $item) {
+            $Spending += ($item['Status'] == 3) ? ($item['Spending']) : 0;
+        }
+
+        $members[] = [
+            'MemberId' => $result['MemberId'],
+            'Email' => $result['Email'],
+            'Name' => $result['Name'],
+            'Pass' => $result['Pass'],
+            'Birthday' => $result['Birthday'],
+            'Gender' => $result['Gender'],
+            'Status' => $result['Status'],
+            'Phone' => $result['Phone'],
+            'Address' => $result['Address'],
+            'Items' => $items,
+            'Spending' => $Spending
+        ];
+    }
+    return $members;
+}
+
+function getMemberOrders($pdo, $id)
+{
+    $sql = 'SELECT o.`OrderId`, o.`PurchaseDate`, o.`Status`, SUM(od.`Quantity`* od.`SalePrice`) as `Spending` FROM `orders` o JOIN `orderdetail` od ON o.`OrderId` = od.`OrderId` WHERE o.`MemberId` = :id GROUP BY o.`OrderId` ';
+    $parameters = [':id' => $id];
+    $results = query($pdo, $sql, $parameters)->fetchAll();
+
+    $dummy = [];
+    $dummy[] = [
+        'OrderId' => null,
+        'PurchaseDate' => null,
+        'Status' => null,
+        'Spending' => null
+    ];
+
+    if ($results != null) {
+        return $results;
+    } else {
+        return $dummy;
+    }
 }

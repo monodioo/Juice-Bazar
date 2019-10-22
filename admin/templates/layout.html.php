@@ -61,7 +61,7 @@
                                     <a href="admin-promotion.php" class="nav-link ">Promotion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="admin-customers.php" class="nav-link ">Customers</a>
+                                    <a href="admin-members.php" class="nav-link ">Members</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="admin-website.php" class="nav-link ">Website</a>

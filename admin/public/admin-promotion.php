@@ -25,10 +25,11 @@ if (!empty($_SESSION['admin'])) {
                 } else {
                     $promo = [
                         'PromoName' => $trimmedNewName,
-                        'PromoValue' => $_POST['NewValue'],
-                        'PromoStatus' => $_POST['NewStatus'] / 100,
+                        'PromoValue' => $_POST['NewValue'] / 100,
+                        'PromoStatus' => $_POST['NewStatus'],
                     ];
                     insertIntoTable($pdo, 'promotion', $promo);
+                    $_SESSION['flashMessage'] = 'New promotion code created';
                     header('location: admin-promotion.php');
                 }
             }
@@ -40,11 +41,14 @@ if (!empty($_SESSION['admin'])) {
                         'PromoStatus' => $_POST['PromoStatus'],
                     ];
                     updateTableSimple($pdo, 'promotion', $promo, 'PromoId', $_POST['PromoId']);
+                    $_SESSION['flashMessage'] = 'Promotion status changed';
                     header('location: admin-promotion.php');
                 } else {
                     $trimmedName = trim($_POST['PromoName']);
+                    $isSameName = $trimmedName == $_POST['OldName'] ? true : false;
                     $isDuplicated = findDuplicate($pdo, 'promotion', 'PromoName', $trimmedName);
-                    if ($isDuplicated) {
+
+                    if ($isDuplicated && !$isSameName) {
                         $_SESSION['flashMessage'] = 'This name has already existed';
                         header('location: admin-promotion.php');
                     } else {
@@ -55,6 +59,7 @@ if (!empty($_SESSION['admin'])) {
                             'PromoStatus' => $_POST['PromoStatus'],
                         ];
                         updateTableSimple($pdo, 'promotion', $promo, 'PromoId', $_POST['PromoId']);
+                        $_SESSION['flashMessage'] = 'Promotion info changed';
                         header('location: admin-promotion.php');
                     }
                 }
