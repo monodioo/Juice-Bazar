@@ -22,7 +22,7 @@ if (isset($_POST['action'])) {
         echo json_encode($result);
     }
 
-    if ($_POST['action'] == 'delete') {
+    if ($_POST['action'] == 'delete_item') {
         $indexCart = $_POST['productDetailId'];
         $deletePrice = $_SESSION['cart'][$indexCart]['quantity'] * $_SESSION['cart'][$indexCart]['price'];
         unset($_SESSION['cart'][$indexCart]);
@@ -41,11 +41,20 @@ if (isset($_POST['action'])) {
         echo json_encode($result);
     }
 
+    if ($_POST['action'] == 'delete_all') {
+        unset($_SESSION['cart']);
+        unset($_SESSION['totalPrice']);
+    }
+
     if ($_POST['action'] == 'add_coupon') {
         $promoValue = 0;
         $promoName = '';
         $stCoupon = '';
-        if (isset($_SESSION["memberId"])) {
+        if (empty($_SESSION["memberId"])) {
+            $stCoupon = "Chỉ thành viên mới được sử dụng mã khuyến mại!";
+            $_SESSION['promoname'] = $_POST["c_code"];
+            $_SESSION['promovalue'] = 0;
+        } else {
             $sqlCheckCouponCode = "SELECT * FROM Promotion WHERE PromoName = '" . $_POST["c_code"] . "'";
             $rsCoupon = mysqli_query($con, $sqlCheckCouponCode);
             if (mysqli_num_rows($rsCoupon) < 1) {
@@ -60,7 +69,7 @@ if (isset($_POST['action'])) {
                     $_SESSION['promovalue'] = 0;
                 } else {
                     $sqlCheckUsedCoupon = "SELECT * FROM Orders JOIN Promotion ON Orders.PromoId = Promotion.PromoId
-                                                 WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'";
+                                            WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'";
                     $rsCheckUsed = mysqli_query($con, $sqlCheckUsedCoupon);
                     if (mysqli_num_rows($rsCheckUsed)) {
                         $stCoupon = 'Bạn đã sử dụng mã này rồi';
@@ -73,7 +82,7 @@ if (isset($_POST['action'])) {
                     }
                 }
             }
-        } else $stCoupon = "Chỉ thành viên mới được sử dung mã khuyến mại!";
+        }
         $promoName = $_SESSION['promoname'];
         $promoValue = $_SESSION['promovalue'];
         $lastPrice = empty($_SESSION['promovalue']) ? $_SESSION['totalPrice'] : ($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']));

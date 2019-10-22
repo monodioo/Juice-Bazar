@@ -115,7 +115,6 @@
     <div class="section-body row">
 
       <?php include "templates/scripts/homeShowHotProduct.php" ?>
-      <?php include "templates/scripts/shopAddToCart.php"; ?>
 
     </div>
   </div>

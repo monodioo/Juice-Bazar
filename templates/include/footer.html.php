@@ -33,17 +33,17 @@
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="footer-title pl-0 mb-0">
-              <a href="?section=shop" class="text-decoration-none text-dark">Cửa hàng</a>
+              <a href="?section=shop&typeid=0" class="text-decoration-none text-dark">Cửa hàng</a>
             </div>
             <ul class="footer-list">
-              <li><a href="?section=shopFruits" class="text-decoration-none text-dark">Fruits</a></li>
-              <li><a href="?section=shopGreen" class="text-decoration-none text-dark">Green</a></li>
-              <li><a href="?section=shopCombo" class="text-decoration-none text-dark">Combo</a></li>
+              <li><a href="?section=shop&typeid=1" class="text-decoration-none text-dark">Fruits</a></li>
+              <li><a href="?section=shop&typeid=2" class="text-decoration-none text-dark">Green</a></li>
+              <li><a href="?section=shop&typeid=3" class="text-decoration-none text-dark">Combo</a></li>
             </ul>
           </div>
           <div class="col-12 col-lg-3">
             <div class="footer-title">
-              <a href="blog.html?section=blogAll" class="text-decoration-none text-dark">Blog</a>
+              <a href="blog.html?section=blog" class="text-decoration-none text-dark">Blog</a>
             </div>
             <ul class="footer-list d-none d-lg-block">
               <li><a href="?section=blogEatDrink" class="text-decoration-none text-dark">Ăn & Uống</a></li>

@@ -21,6 +21,9 @@
           <div class="col-md-4 col-lg-3 d-none d-md-block text-center font-weight-bold h5 ">Đơn giá</div>
           <div class="col-md-4 col-lg-3 d-none d-md-block text-center font-weight-bold h5 ">Số lượng</div>
           <div class="col-lg-3 d-none d-lg-block text-center font-weight-bold h5 ">Tổng</div>
+          <div class="col-12 text-right">
+            <button type="button" class="btn btn-link cart-delete-btn p-0 mt-2" id="js-cart-deleteAll"><i class="far fa-trash-alt mb-2"></i></button>
+          </div>
         </div>
       </div>
     </div>

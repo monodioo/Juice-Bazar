@@ -14,7 +14,7 @@ else {
         $subPrice = $value['price'] * $value['quantity'];
         ?>
 
-        <div class="row my-3 border-bottom" id="<?= $key ?>">
+        <div class="row my-3 border-bottom list-cart" id="<?= $key ?>">
             <div class="col-4 col-md-2">
                 <a href="#!"><img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name'] ?>" class="mr-2 img-fluid"></a>
             </div>

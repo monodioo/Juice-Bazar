@@ -1,35 +1,39 @@
 $(document).ready(function() {
+  //Shop: Select Capacity and Change Price
   $(document).on("click", ".juice-volume-btn", function() {
     $(this).addClass("juice-volume-btn-active");
     $(this)
       .siblings()
       .removeClass("juice-volume-btn-active");
     $.ajax({
-      url: "templates/scripts/shopSelectCapacity.php",
+      url: "templates/scripts/shop.php",
       type: "post",
       dataType: "json",
       data: {
-        productDetailId: $(this).attr("id")
+        productDetailId: $(this).attr("id"),
+        action: "select_capacity"
       },
       success: function(result) {
-        $("#priceCapacity" + result.productId).text(result.price);
-        $("#addThisPrice" + result.productId).val(result.price);
+        $("#priceCapacity" + result.productId).text(result.priceShow);
+        $("#addThisPrice" + result.productId).val(result.priceValue);
         $("#addThisId" + result.productId).val(result.productDetailId);
       }
     });
   });
 
-  // Event add product from shop to cart.
+  // Shop: Add Product to Cart.
   $(document).on("click", ".addCartBtn", function() {
     var product_id = $(this).attr("id");
     $.ajax({
-      url: "templates/scripts/shopAddToCart.php",
+      url: "templates/scripts/shop.php",
       type: "post",
       dataType: "json",
       data: {
         productDetailId: $("#addThisId" + product_id).val(),
+        name: $("#addThisName" + product_id).val(),
         quantity: $("#quantity" + product_id).val(),
-        price: $("#addThisPrice" + product_id).val()
+        price: $("#addThisPrice" + product_id).val(),
+        action: "add_cart"
       },
       success: function(result) {
         $("#cart-sum").html(result.totalPrice);
@@ -37,11 +41,11 @@ $(document).ready(function() {
       }
     });
   });
-  // Update cart: Change quantity
+  // Cart Update : Change Quantity
   $(document).on("click", ".js-btn-quantity", function() {
     let index_cart = $(this).attr("data-productDetailId");
     $.ajax({
-      url: "templates/scripts/cartUpdate.php",
+      url: "templates/scripts/cart.php",
       type: "post",
       dataType: "json",
       data: {
@@ -62,7 +66,7 @@ $(document).ready(function() {
     if ($(this).val() <= 0) $(this).val(parseInt(1));
     let index_cart = $(this).attr("data-productDetailId");
     $.ajax({
-      url: "templates/scripts/cartUpdate.php",
+      url: "templates/scripts/cart.php",
       type: "post",
       dataType: "json",
       data: {
@@ -79,16 +83,16 @@ $(document).ready(function() {
     });
   });
 
-  // Update cart: delete item
+  // Cart Update: Delete Item
   $(document).on("click", ".js-cart-delete", function() {
     let index_cart = $(this).attr("data-productDetailId");
     $.ajax({
-      url: "templates/scripts/cartUpdate.php",
+      url: "templates/scripts/cart.php",
       type: "post",
       dataType: "json",
       data: {
         productDetailId: index_cart,
-        action: "delete"
+        action: "delete_item"
       },
       success: function(result) {
         $("#" + result.productDetailId).hide();
@@ -101,10 +105,28 @@ $(document).ready(function() {
     });
   });
 
-  //Update cart: add coupon
+  $(document).on("click", "#js-cart-deleteAll", function() {
+    $.ajax({
+      url: "templates/scripts/cart.php",
+      type: "post",
+      data: {
+        action: "delete_all"
+      },
+      success: function() {
+        $(".list-cart").hide();
+        $("#cart-empty").show();
+        $("#totalPrice").html(0);
+        $("#lastPrice").html(0);
+        $("#cart-sum").html(0);
+        $("#cart-count").html(0);
+      }
+    });
+  });
+
+  //Cart Update: Add Coupon
   $(document).on("click", "#couponBtn", function() {
     $.ajax({
-      url: "templates/scripts/cartUpdate.php",
+      url: "templates/scripts/cart.php",
       type: "post",
       dataType: "json",
       data: {
