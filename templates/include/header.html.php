@@ -35,7 +35,7 @@
             </li>
             <li class="nav-item">
               <form class="search-input-wrap d-flex flex-row align-items-center ">
-                <button type="submit" class="btn ml-5 ml-lg-0 pr-1"><i class="fas fa-search mt-2" aria-hidden="true"></i></button>
+                <button type="button" class="btn ml-5 ml-lg-0 pr-1"><i class="fas fa-search mt-2" aria-hidden="true"></i></button>
                 <input type="text" class="form-control pb-0 px-0" name="search" id="searchInput" placeholder="Tìm..">
               </form>
             </li>
