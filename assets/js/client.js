@@ -156,5 +156,50 @@ $(document).ready(function() {
           .indexOf(search_input) > -1
       );
     });
+  //Popover profile button
+  $("#profileBtn").popover({
+    placement: "bottom",
+    html: true,
+    template:
+      '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+  });
+
+  //Profile table sorter
+
+  var $profileTable = $("#profileTable");
+
+  $profileTable
+    .tablesorter({
+      theme: "bootstrap",
+      cssChildRow: "tablesorter-childRow",
+      ignoreCase: true,
+      sortLocaleCompare: true,
+      sortTable: true,
+      headerTemplate: "{content} {icon}",
+      // widthFixed: false,
+      widgets: ["filter", "cssStickyHeaders"],
+      widgetOptions: {
+        cssStickyHeaders_attachTo: ".table-wrapper",
+        filter_childRows: true,
+        filter_childByColumn: true,
+        filter_childWithSibs: false,
+
+        filter_ignoreCase: true
+      }
+    })
+    .tablesorterPager({
+      container: $(".ts-pager"),
+      cssGoto: ".pagenum",
+      removeRows: false,
+      output: "{startRow} - {endRow} / {filteredRows} ({totalRows})"
+    });
+
+  $profileTable.find(".tablesorter-childRow").addClass("tablesorter-hidden");
+  $profileTable.delegate(".toggle", "click", function() {
+    $(this)
+      .closest("tr")
+      .nextUntil("tr.tablesorter-hasChildRow")
+      .toggleClass("tablesorter-hidden");
+    return false;
   });
 });

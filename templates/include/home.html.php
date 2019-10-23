@@ -9,38 +9,38 @@
       <div class="carousel-item active">
         <img src="assets/image/home_carousel_01.png" class="d-block w-100" alt="Carousel Image 01" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Promotion</h1>
+          <h1>Sản phẩm rau, quả</h1>
           <p>
-            Subtitle
+            Sạch, xanh, ngon
           </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="assets/image/home_carousel_02.png" class="d-block w-100" alt="Carousel Image 02" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Sales</h1>
+          <h1>Công nghệ Cold-Pressed</h1>
           <p>
-            Subtitle
+            Giữ nguyên vị và chất
           </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="assets/image/home_carousel_03.png" class="d-block w-100" alt="Carousel Image 03" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Updates</h1>
+          <h1>Giao hàng tận nơi</h1>
           <p>
-            Subtitle
+            Thưởng thức tại nhà
           </p>
         </div>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+      <span class="sr-only">Trước</span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+      <span class="sr-only">Sau</span>
     </a>
   </div>
 </div>
@@ -51,24 +51,26 @@
     <div class="row mb-4">
       <div class="col-4">
         <a href="?section=shop&typeid=1" class="img-wrap d-flex flex-row align-items-center justify-content-center rounded">
-          <img src="assets/image/home_fruit.png" class="w-100 rounded" alt=".." />
           <div class="img-caption">
             Fruits
           </div>
+          <img src="assets/image/home_fruit.png" class="w-100 rounded" alt=".." />
         </a>
       </div>
       <div class="col-4">
-        <a href="?section=shop&typeid=2" class="img-wrap d-flex flex-row align-items-center justify-content-center rounded"><img src="assets/image/home_green.png" class="w-100 rounded" alt=".." />
+        <a href="?section=shop&typeid=2" class="img-wrap d-flex flex-row align-items-center justify-content-center rounded">
           <div class="img-caption">
             Green
           </div>
+          <img src="assets/image/home_green.png" class="w-100 rounded" alt=".." />
         </a>
       </div>
       <div class="col-4">
-        <a href="?section=shop&typeid=3" class="img-wrap d-flex flex-row align-items-center justify-content-center rounded"><img src="assets/image/home_combo.png" class="w-100 rounded" alt=".." />
+        <a href="?section=shop&typeid=3" class="img-wrap d-flex flex-row align-items-center justify-content-center rounded">
           <div class="img-caption">
             Combo
           </div>
+          <img src="assets/image/home_combo.png" class="w-100 rounded" alt=".." />
         </a>
       </div>
     </div>
@@ -101,9 +103,9 @@
             Hãy thử sản phẩm và dịch vụ của chúng tôi để cảm nhận sự khác
             biệt!
           </p>
-          <a href="?section=aboutus" class="text-decoration-none text-dark font-weight-bold">
+          <!-- <a href="?section=aboutus" class="text-decoration-none text-dark font-weight-bold">
             <h5 style="color: #ffc634">Chi tiết</h5>
-          </a>
+          </a> -->
         </div>
       </div>
     </div>

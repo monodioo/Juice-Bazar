@@ -10,12 +10,9 @@
 <div class="row mt-5 ">
   <div class="page-section card col-6 mx-auto">
     <div class="row">
-      <div class="col-12 border p-5" w>
-        <div class="h3 mb-1 textBazar">Đăng nhập</div>
-        <div class="mb-3">
-          Nếu bạn đã có tài khoản, xin đăng nhập ở đây.
-        </div>
-        <br />
+      <div class="col-12 border p-5">
+        <div class="h3 mb-4 textBazar">Đăng nhập</div>
+
         <form method="post" id="loginForm" name="loginForm" action="">
           <div class="form-group">
             <label for="emailLogin">Email: </label>

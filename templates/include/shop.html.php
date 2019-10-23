@@ -38,9 +38,9 @@
                   tôi tập trung vào dịch vụ cung cấp nước ép tại nhà, đặc biệt
                   cho các gia đình trẻ hiện nay.
                 </p>
-                <a href="#!" class="text-decoration-none text-dark font-weight-bold">
+                <!-- <a href="#!" class="text-decoration-none text-dark font-weight-bold">
                   <h5 style="color: #ffc634">Chi tiết</h5>
-                </a>
+                </a> -->
               </div>
             </div>
           </div>

@@ -1,26 +1,23 @@
 <div class="row px-0">
   <div class="page-section newsletter-section col py-3">
     <div class="section-body row row-eq-height newsletter-text">
-      <div class="col-12 col-md-7 d-flex flex-column justify-content-center pl-3 pl-lg-0">
+      <div class="col-12 col-md-7 d-flex flex-column justify-content-center pl-0 pr-4 pl-lg-0">
         <h5 class="text-uppercase font-weight-bold">
           Cập nhật thông tin từ Juice Bazar
         </h5>
-        <p class="mb-0 w-75">
-          Đăng ký nhận các thông báo mới nhất về dinh dưỡng và khuyến mãi
+        <p class="mb-0">
+          Đăng ký ngay để nhận các thông báo mới nhất về dinh dưỡng và khuyến mãi
           từ chúng tôi!
         </p>
       </div>
       <div class="col-12 col-md-5 d-flex flex-column justify-content-center mt-3 mt-lg-0">
-        <form class="newsletter-input-wrap d-flex flex-row">
-          <input type="text" class="form-control py-1 mr-n4" placeholder="email@domain.com" aria-label="Newsletter email" aria-describedby="sendEmailBtn" />
-          <button class="btn" type="button" id="sendEmailBtn" style="
-                  position:  relative;
-                  right:  30px;
-                  color:  #ffc634;
-              ">
-            <i class="fas fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
+        <!-- <form class="newsletter-input-wrap d-flex flex-row"> -->
+        <!-- <input type="text" class="form-control py-1 mr-n4" placeholder="email@domain.com" aria-label="Newsletter email" aria-describedby="sendEmailBtn" /> -->
+        <a class="btn btn-light btn-lg btn-link text-decoration-none" href="?section=register" id="sendEmailBtn">
+          Đăng ký
+          <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        </a>
+        <!-- </form> -->
       </div>
     </div>
   </div>
@@ -39,17 +36,6 @@
               <li><a href="?section=shop&typeid=1" class="text-decoration-none text-dark">Fruits</a></li>
               <li><a href="?section=shop&typeid=2" class="text-decoration-none text-dark">Green</a></li>
               <li><a href="?section=shop&typeid=3" class="text-decoration-none text-dark">Combo</a></li>
-            </ul>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="footer-title">
-              <a href="blog.html?section=blog" class="text-decoration-none text-dark">Blog</a>
-            </div>
-            <ul class="footer-list d-none d-lg-block">
-              <li><a href="?section=blogEatDrink" class="text-decoration-none text-dark">Ăn & Uống</a></li>
-              <li><a href="?section=blogLifestyle" class="text-decoration-none text-dark">Lối sống</a></li>
-              <li><a href="?section=blogBeauty" class="text-decoration-none text-dark">Làm đẹp</a></li>
-              <li><a href="?section=blogEvent" class="text-decoration-none text-dark">Sự kiện</a></li>
             </ul>
           </div>
           <div class="col-12 col-lg-3">
@@ -75,15 +61,15 @@
           </svg>
           <div class="mt-4 text-right">
             Hotline:
-            <a href="tel:0966001084" class="text-decoration-none font-weight-bold text-dark">096 600 1084</a>
+            <a href="tel:0966001084" class="text-decoration-none font-weight-bold text-dark text-nowrap">096 600 1084</a>
           </div>
           <div class="mt-2 text-right">
             Email:
-            <a href="mailto:hello@juicebazar.com" class="text-decoration-none font-weight-bold text-dark">hello@juicebazar.com</a>
+            <a href="mailto:hello@juicebazar.com" class="text-decoration-none font-weight-bold text-dark text-nowrap">hello@juicebazar.com</a>
           </div>
           <div class="social-btn-group mt-3">
-            <a href="#!" class="fab fa-facebook-square text-decoration-none text-dark" style="font-size:24px"></a>
-            <a href="#!" class="fab fa-instagram text-decoration-none text-dark" style="font-size:24px"></a>
+            <a href="www.facebook.com" class="fab fa-facebook-square text-decoration-none text-dark" style="font-size:24px"></a>
+            <a href="www.instagram.com" class="fab fa-instagram text-decoration-none text-dark" style="font-size:24px"></a>
           </div>
         </div>
       </div>
