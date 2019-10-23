@@ -12,6 +12,11 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
   <!--  font awesome -->
   <link href="assets/css/all.min.css" rel="stylesheet" />
+  <!--  TablerSorter Pager CSS-->
+  <link href="../../assets/css/jquery.tablesorter.pager.min.css" rel="stylesheet" />
+  <link href="../../assets/css/theme.bootstrap_4.min.css" rel="stylesheet" />
+  <!-- Summernote Editor -->
+  <link href="../../assets/css/summernote.css" rel="stylesheet" />
   <!-- favicon -->
   <link href="assets/image/favicon.png" sizes="32x32" rel="shortcut icon">
   <!-- Custom CSS -->

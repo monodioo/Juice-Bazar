@@ -85,8 +85,17 @@
 
 <!-- Font awesome  -->
 <script src="assets/js/all.min.js"></script>
+
 <!-- jQuery Validate -->
-<script src="assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../../assets/js/jquery.validate.min.js"></script>
+
+<!-- jQuery TableSorter -->
+<script type="text/javascript" src="../../assets/js/jquery.tablesorter.combined.min.js"></script>
+<script type="text/javascript" src="../../assets/js/jquery.tablesorter.pager.min.js"></script>
+<script type="text/javascript" src="../../assets/js/widget-cssStickyHeaders.min.js"></script>
+
+<!-- SummerNote Editor -->
+<script type="text/javascript" src="../../assets/js/summernote.min.js"></script>
 
 <!-- custom script -->
 <script src="assets/js/custom.js"></script>

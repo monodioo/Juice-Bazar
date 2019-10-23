@@ -156,6 +156,7 @@ $(document).ready(function() {
           .indexOf(search_input) > -1
       );
     });
+  });
   //Popover profile button
   $("#profileBtn").popover({
     placement: "bottom",
@@ -164,7 +165,7 @@ $(document).ready(function() {
       '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
   });
 
-  //Profile table sorter
+  // //Profile table sorter
 
   var $profileTable = $("#profileTable");
 
