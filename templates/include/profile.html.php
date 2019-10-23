@@ -9,7 +9,7 @@ $row = mysqli_fetch_array($rs);
     <div class="page-section card col-12 p-5">
         <div class="section-title">Quản lý tài khoản</div>
         <div class="h4 mb-3 textBazar">Thông tin tài khoản</div>
-        <div class="row mb-4">
+        <div class="row">
             <div class="col-12 col-md-6">
                 <div class="mb-1">
                     <span>Họ tên:&nbsp;</span>
@@ -19,18 +19,21 @@ $row = mysqli_fetch_array($rs);
                     <span>Email:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Email'] ?></span>
                 </div>
-                <div class="mb-1">
+                <!-- <div class="mb-1">
                     <span>Mật khẩu:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Pass'] ?></span>
+                </div> -->
+                <div class="mb-1">
+                    <span>Giới tính:&nbsp;</span>
+                    <span class="font-weight-bold">Nam</span>
                 </div>
-                <!-- <div class="mb-1">
-        <span>Giới tính:&nbsp;</span>
-        <span class="font-weight-bold">Nam</span>
-        </div>
-        <div class="mb-1">
-        <span>Ngày sinh:&nbsp;</span>
-        <span class="font-weight-bold">31/12/1990 </span>
-        </div> -->
+                <div class="mb-1">
+                    <span>Ngày sinh:&nbsp;</span>
+                    <span class="font-weight-bold">31/12/1990 </span>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 align-top">
                 <div class="mb-1">
                     <span>Số điện thoại:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Phone'] ?></span>
@@ -40,8 +43,11 @@ $row = mysqli_fetch_array($rs);
                     <span class="font-weight-bold"><?= $row['Address'] ?></span>
                 </div>
             </div>
-            <div class="col-12 col-md-6 align-top">
-                <button type="button" class="btn btn-cart text-white mt-3 mt-md-0" data-toggle="modal" data-target="#changeProfile">
+        </div>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <button type="button" class="btn btn-cart text-white" data-toggle="modal" data-target="#changeProfile">
                     Thay đổi thông tin
                 </button>
                 <!-- Modal -->
@@ -71,53 +77,25 @@ $row = mysqli_fetch_array($rs);
                                         </label>
                                         <input type="password" class="form-control" name="password2Change" id="password2Change" placeholder="Nhập lại Mật khẩu mới" />
                                     </div>
-                                    <!-- <div class="form-group">
-                    <label class="mr-2">Giới tính: </label>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender1"
-                        value="male"
-                    />
-                    <label class="form-check-label" for="radioGender1"
-                        >Nam</label
-                    >
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender2"
-                        value="female"
-                    />
-                    <label class="form-check-label" for="radioGender2"
-                        >Nữ</label
-                    >
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender3"
-                        value="other"
-                    />
-                    <label class="form-check-label" for="radioGender3"
-                        >Khác</label
-                    >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="birthdayChange" class="">Ngày sinh:</label>
-                    <input
-                    type="date"
-                    name="birthdayChange"
-                    class="form-control"
-                    />
-                </div> -->
+                                    <div class="form-group">
+                                        <label class="mr-2">Giới tính: </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender1" value="male" />
+                                            <label class="form-check-label" for="radioGender1">Nam</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender2" value="female" />
+                                            <label class="form-check-label" for="radioGender2">Nữ</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender3" value="other" />
+                                            <label class="form-check-label" for="radioGender3">Khác</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdayChange" class="">Ngày sinh:</label>
+                                        <input type="date" name="birthdayChange" class="form-control" />
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="telChange" class="">Số điện thoại<span class="text-danger"> * </span>:</label>
@@ -145,7 +123,7 @@ $row = mysqli_fetch_array($rs);
         $sqlOrder = "SELECT * FROM Orders "
         ?>
         <div class="">
-            <div class="h4 textBazar mb-3">Quản lý đơn hàng</div>
+            <div class="h4 textBazar my-3">Quản lý đơn hàng</div>
             <div class="table-wrapper">
                 <table class="table table-hover table-sm tablesorter" id='profileTable'>
                     <thead>
@@ -245,7 +223,7 @@ $row = mysqli_fetch_array($rs);
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="14" class="ts-pager">
+                            <th colspan="13" class="ts-pager">
                                 <div class="form-inline">
                                     <div class="btn-group btn-group-sm mx-1" role="group">
                                         <button type="button" class="btn btn-secondary first" title="first">⇤</button>

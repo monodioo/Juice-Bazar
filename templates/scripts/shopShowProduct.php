@@ -22,7 +22,7 @@ while ($row = mysqli_fetch_array($tableProduct)) {
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-4">
-                                <img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name']; ?>" class="w-100" />
+                                <img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name']; ?>" class="w-100 rounded" />
                             </div>
                             <div class="col-8">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
