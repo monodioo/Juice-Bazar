@@ -27,7 +27,9 @@
         </div>
       </div>
     </div>
-    <div class='row my-3 border-bottom' id="cart-empty" style="display:<?php if (isset($_SESSION['cart'])) echo 'none' ?>"><strong>ĐƠN HÀNG TRỐNG</strong></div>
+    <div class='row mb-3  border-bottom '>
+      <div class='py-3 font-weight-bold text-uppercase' id="cart-empty" style="display:<?= empty($_SESSION['cart']) ?? 'none' ?>">Đơn hàng trống</div>
+    </div>
     <?php include "templates/scripts/cartShowList.php" ?>
 
     <div class="row">

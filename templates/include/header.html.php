@@ -13,10 +13,10 @@
   <!--  font awesome -->
   <link href="assets/css/all.min.css" rel="stylesheet" />
   <!--  TablerSorter Pager CSS-->
-  <link href="../../assets/css/jquery.tablesorter.pager.min.css" rel="stylesheet" />
-  <link href="../../assets/css/theme.bootstrap_4.min.css" rel="stylesheet" />
+  <link href="assets/css/jquery.tablesorter.pager.min.css" rel="stylesheet" />
+  <link href="assets/css/theme.bootstrap_4.min.css" rel="stylesheet" />
   <!-- Summernote Editor -->
-  <link href="../../assets/css/summernote.css" rel="stylesheet" />
+  <link href="assets/css/summernote.css" rel="stylesheet" />
   <!-- favicon -->
   <link href="assets/image/favicon.png" sizes="32x32" rel="shortcut icon">
   <!-- Custom CSS -->
@@ -41,7 +41,7 @@
             <li class="nav-item">
               <form class="search-input-wrap d-flex flex-row align-items-center ">
                 <button type="submit" class="btn ml-5 ml-lg-0 pr-1"><i class="fas fa-search mt-2" aria-hidden="true"></i></button>
-                <input type="text" class="form-control pb-0 px-0" name="search" id="searchInput" placeholder="Tìm..">
+                <input type="text" class="form-control pb-0 px-0" name="search" id="searchInput" placeholder="Tìm ...">
               </form>
             </li>
           </ul>

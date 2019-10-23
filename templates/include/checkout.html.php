@@ -41,7 +41,7 @@
             </div>
 
 
-            <div class="form-group row mb-5">
+            <div class="form-group row">
               <div class="col-md-6">
                 <label for="c_email_address" class="">Email <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="c_email_address" name="c_email_address" placeholder="Email" value="<?php if (isset($_SESSION['memberId'])) echo $rowCheckoutInfo['Email'] ?>">
@@ -52,80 +52,6 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="c_create_account" class="" data-toggle="collapse" href="#create_an_account" role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1" id="c_create_account"> Tạo tài khoản mới?</label>
-              <div class="collapse" id="create_an_account">
-                <div class="py-2">
-                  <p class="mb-3">Bạn có thể tạo tài khoản mới sau khi nhập thông tin dưới đây. Nếu bạn đã có tài khoản xin đăng nhập phía trên.</p>
-                  <div class="form-group">
-                    <label for="c_account_password" class="">Mật khẩu cho tài khoản mới</label>
-                    <input type="email" class="form-control" id="c_account_password" name="c_account_password" placeholder="">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="c_ship_different_address" class="" data-toggle="collapse" href="#ship_different_address" role="button" aria-expanded="false" aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address"> Bạn muốn nhận sản phẩm tại địa chỉ khác?</label>
-              <div class="collapse" id="ship_different_address">
-                <div class="py-2">
-
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_diff_name" class="">Họ và Tên<span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_diff_name" name="c_name" placeholder="Họ và Tên">
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_diff_address" class="">Địa chỉ <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_diff_address" name="c_address" placeholder="Số nhà, Tên đường">
-                    </div>
-                  </div>
-
-                  <!-- <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Địa chỉ phụ">
-                        </div> -->
-                  <!--       
-                        <div class="form-group row">
-                          <div class="col-md-6">
-                            <label for="c_diff_ward" class="">Xã / Phường <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_diff_ward" name="c_diff_ward">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="c_diff_district" class="">Quận<span class="text-danger">*</span></label>
-                          <select id="c_diff_district" class="form-control">
-                            <option value="0">Chọn Quận</option>    
-                            <option value="1">Ba Đình</option>    
-                            <option value="2">Bắc Từ Liêm</option>    
-                            <option value="3">Cầu Giấy</option>    
-                            <option value="4">Đống Đa</option>    
-                            <option value="5">Hà Đông</option>    
-                            <option value="6">Hai Bà Trưng</option>    
-                            <option value="7">Hoàn Kiếm</option>    
-                            <option value="8">Hoàng Mai</option>     
-                            <option value="9">Long Biên</option>    
-                            <option value="10">Nam Từ Liêm</option>    
-                            <option value="11">Thanh Xuân</option>    
-                            <option value="12">Tây Hồ</option>
-                          </select>
-                          </div>
-                        </div> -->
-
-                  <div class="form-group row">
-                    <div class="col-md-6">
-                      <label for="c_diff_email_address" class="">Email <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" placeholder="Email" id="c_diff_email_address" name="c_diff_email_address">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="c_diff_phone" class="">Điện thoại <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="c_diff_phone" name="c_diff_phone" placeholder="Số điện thoại">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="form-group">
               <label for="c_order_notes" class="">Ghi chú</label>
@@ -173,20 +99,14 @@
                   Thanh toán khi nhận hàng
                 </label>
               </div>
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_baokim" value="baokim">
-                <label class="form-check-label" for="paymentMethod_baokim">
-                  Thanh toán qua cổng Bảo Kim
-                </label>
+
+
+              <div class="form-group">
+                <button class="btn btn-warning btn-block text-decoration-none text-white font-weight-bold px-4" onclick="window.location='checkout-final.html.php'">Đặt hàng</button>
               </div>
+
+
             </div>
-
-
-            <div class="form-group">
-              <button class="btn btn-warning btn-block text-decoration-none text-white font-weight-bold px-4" onclick="window.location='checkout-final.html.php'">Đặt hàng</button>
-            </div>
-
-
           </div>
         </div>
       </div>
