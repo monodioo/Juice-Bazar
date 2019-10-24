@@ -143,20 +143,6 @@ $(document).ready(function() {
     });
   });
 
-  //Search
-  $("#searchBtn").on("click", function() {
-    var search_input = $("#searchInput")
-      .val()
-      .toLowerCase();
-    $(".search-item").filter(function() {
-      $(this).toggle(
-        $(this)
-          .text()
-          .toLowerCase()
-          .indexOf(search_input) > -1
-      );
-    });
-  });
   //Popover profile button
   $("#profileBtn").popover({
     placement: "bottom",

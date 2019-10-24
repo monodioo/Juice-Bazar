@@ -33,15 +33,15 @@
         <div class=" d-none d-lg-block">
           <ul class="navbar-nav js-clone-nav">
             <li class="nav-item">
-              <a class="nav-link nav-hover <?= ($_REQUEST['section'] == 'shop') ? 'nav-hover-active' : ""; ?> mr-lg-3" href="?section=shop&typeid=0" id="navShop">Shop <span class="sr-only">(current)</span></a>
+              <a class="nav-link nav-hover <?= ($_REQUEST['section'] == 'shop') ? 'nav-hover-active' : ""; ?> mr-lg-3" href="index.php?section=shop&typeid=0" id="navShop">Shop <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-hover <?= ($_REQUEST['section'] == 'aboutus') ? 'nav-hover-active' : "" ?>" href="?section=aboutus" id="navAbout">Về chúng tôi</a>
+              <a class="nav-link nav-hover <?= ($_REQUEST['section'] == 'aboutus') ? 'nav-hover-active' : "" ?>" href="index.php?section=aboutus" id="navAbout">Về chúng tôi</a>
             </li>
             <li class="nav-item">
-              <form class="search-input-wrap d-flex flex-row align-items-center ">
-                <button type="submit" class="btn ml-5 ml-lg-0 pr-1"><i class="fas fa-search mt-2" aria-hidden="true"></i></button>
-                <input type="text" class="form-control pb-0 px-0" name="search" id="searchInput" placeholder="Tìm ...">
+              <form class="search-input-wrap d-flex flex-row align-items-center " method="post" action="searchProduct.php">
+                <button type="submit" class="btn ml-5 ml-lg-0 pr-1" id="searchBtn"><i class="fas fa-search mt-2" aria-hidden="true"></i></button>
+                <input type="text" class="form-control pb-0 px-0" name="searchInput" id="searchInput" placeholder="Tìm ...">
               </form>
             </li>
           </ul>
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="col-4 text-center">
-        <a class="text-center js-logo-clone text-decoration-none" href="?section=home">
+        <a class="text-center js-logo-clone text-decoration-none" href="index.php?section=home">
           <svg width="128" height="32" viewBox="0 0 128 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="img-fluid">
             <path d="M47.5408 31.5455C46.5768 31.5455 45.748 30.7787 45.748 29.8039V5.90383C45.748 4.95637 46.5768 4.16226 47.5408 4.16226C48.5443 4.16226 49.3336 4.96185 49.3336 5.90383V29.8039C49.3392 30.7787 48.5499 31.5455 47.5408 31.5455Z" fill="#FFC634" />
             <path d="M8.02672 31.9288C6.94993 31.9288 6.01409 31.8248 5.12334 31.6167C2.93595 31.0909 1.2503 29.9463 0.246803 28.3416C-0.254946 27.5092 0.0325729 26.4631 0.889491 25.9429C1.71258 25.4554 2.82883 25.7293 3.32494 26.5672C3.82669 27.3339 4.68925 27.8925 5.90697 28.2102C6.48201 28.3471 7.27128 28.4457 7.98726 28.4457C9.63908 28.4457 10.8568 28.0733 11.6066 27.3011C12.6157 26.2222 12.5425 24.6887 12.5425 24.6504V5.90383C12.5425 4.92899 13.3317 4.16226 14.3352 4.16226C15.3049 4.16226 16.128 4.92899 16.128 5.90383V24.4751C16.128 25.0337 16.1618 27.6078 14.2281 29.6286C13.546 30.357 12.6834 30.9211 11.7194 31.3045C10.6426 31.7152 9.38539 31.9288 8.02672 31.9288Z" fill="#FFC634" />
@@ -72,21 +72,21 @@
         <div class="float-right nav-icon-group d-flex flex-row align-items-center justify-content-end">
 
           <?php if (isset($_SESSION['memberId'])) : ?>
-            <a id="profileBtn" class="mr-1 mr-md-3" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout&section=<?= $_REQUEST['section'] ?>" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
+            <a id="profileBtn" class="mr-1 mr-md-3" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
               <!-- <a > -->
               <i class="fas fa-user-circle nav-icon textBazar"></i>
             </a>
           <?php else : ?>
-            <a href="?section=login" class="mr-1 mr-md-3" id="profileBtn">
+            <a href="index.php?section=login" class="mr-1 mr-md-3" id="profileBtn">
               <i class="far fa-user-circle nav-icon text-dark"></i>
             </a>
           <?php endif; ?>
 
           <?php include "templates/scripts/logout.php" ?>
-          <a href="?section=cart" class="d-flex justify-content-center align-items-center btn-cart px-3 py-2 text-white" id="cart-status">
+          <a href="index.php?section=cart" class="d-flex justify-content-center align-items-center btn-cart px-3 py-2 text-white" id="cart-status">
             <span class="cart-sum d-none d-lg-block" id="cart-sum">
               <?= (empty($_SESSION['cart'])) ? '0' : number_format($_SESSION['totalPrice'], 0, '.', '.') ?>
-              <span class=" mr-2">₫</span></span>
+            </span><span class=" mr-2">₫</span>
 
             <span>
               <svg class="cart-icon mr-2" width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="img-fluid">

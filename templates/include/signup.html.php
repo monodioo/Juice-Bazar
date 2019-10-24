@@ -1,5 +1,5 @@
 <?php include "templates/scripts/testForm.php"; ?>
-<div class="row mt-5 ">
+<div class="row mt-5">
   <div class="page-section card col-6 mx-auto">
     <div class="row">
       <div class="col-12 bg-light p-5">
@@ -29,53 +29,25 @@
             </label>
             <input type="password" class="form-control" name="password2Signup" id="password2Signup" placeholder="Nhập lại Mật khẩu" value='<?php if (isset($_POST["password2Signup"])) echo $_POST["password2Signup"]; ?>' />
           </div>
-          <!-- <div class="form-group">
-                  <label class="mr-2">Giới tính: </label>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender1"
-                      value="male"
-                    />
-                    <label class="form-check-label" for="radioGender1"
-                      >Nam</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender2"
-                      value="female"
-                    />
-                    <label class="form-check-label" for="radioGender2"
-                      >Nữ</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genderSignup"
-                      id="radioGender3"
-                      value="other"
-                    />
-                    <label class="form-check-label" for="radioGender3"
-                      >Khác</label
-                    >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="birthdaySignup" class="">Ngày sinh:</label>
-                  <input
-                    type="date"
-                    name="birthdaySignup"
-                    class="form-control"
-                  />
-                </div> -->
+          <div class="form-group">
+            <label class="mr-2">Giới tính: </label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="genderSignup" id="radioGender1" value="male" />
+              <label class="form-check-label" for="radioGender1">Nam</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="genderSignup" id="radioGender2" value="female" />
+              <label class="form-check-label" for="radioGender2">Nữ</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="genderSignup" id="radioGender3" value="other" checked />
+              <label class="form-check-label" for="radioGender3">Khác</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="birthdaySignup" class="">Ngày sinh:</label>
+            <input type="date" name="birthdaySignup" class="form-control" />
+          </div>
 
           <div class="form-group">
             <label for="telSignup" class="">Số điện thoại<span class="text-danger"> * </span>:</label>

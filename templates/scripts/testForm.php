@@ -1,10 +1,8 @@
 <?php
-$emailSignup = $fnameSignup = $passwordSignup = $password2Signup = $telSignup = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST["loginBtn"])) {
-        if (empty($_POST["emailLogin"]) || empty($_POST["passwordLogin"])) {
+        if (empty($_POST["emailLogin"]) && empty($_POST["passwordLogin"])) {
             echo "<script>alert('Email và mật khẩu không được để trống!');</script>";
         } else {
             $sqlMember = "SELECT * FROM Member WHERE Email = '" . $_POST["emailLogin"] . "' AND Pass = '" . $_POST["passwordLogin"] . "'";
@@ -16,11 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $_SESSION["memberName"] = $rowMember['Name'];
                     $_SESSION["memberId"] = $rowMember["MemberId"];
-                    if (isset($_POST['rememberCheckLogin'])) {
-                        setcookie('emailLogin', $_POST['emailLogin'], time() + 86400 * 30);
-                        setcookie('passwordLogin', $_POST['passwordLogin'], time() + 86400 * 30);
-                    }
-                    echo "<script>alert('Đăng nhập thành công!');location='?';</script>";
+                    echo "<script>alert('Đăng nhập thành công!');location='index.php?section=home';</script>";
                 }
             } else {
                 echo "<script>alert('Email hoặc mật khẩu không đúng!');</script>";
@@ -29,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST["signupBtn"])) {
-        $signup = validation();
+        $signup = validate_signup_form($_POST['emailSignup'], $_POST['fnameSignup'], $_POST['passwordSignup'], $_POST['password2Signup'], $_POST['telSignup']);
         if ($signup) {
             $sqlMember = "SELECT * FROM Member WHERE Email = '" . $_POST["emailSignup"] . "'";
             $resultMember = mysqli_query($con, $sqlMember);
@@ -39,15 +33,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $emailSignup = test_input($_POST['emailSignup']);
                 $fnameSignup = test_input($_POST["fnameSignup"]);
                 $passwordSignup = test_input($_POST["passwordSignup"]);
+                $genderSigup = $_POST['genderSignup'];
+                $birthdaySignup = isset($_POST['birthdaySignup']) ? $_POST['birthdaySignup'] : 'NULL';
+                $addSignup = isset($_POST["addSignup"]) ? $_POST["addSignup"] : 'NULL';
                 $telSignup = test_input($_POST["telSignup"]);
                 $addSignup = test_input($_POST["addSignup"]);
                 $fnameSignup = standardizedData($fnameSignup);
-                $insertMemberSQL = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
-                $rs = mysqli_query($con, $insertMemberSQL);
+                $addSignup = standardizedData($addSignup);
+                $sqlInsertMember = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
+                $rs = mysqli_query($con, $sqlInsertMember);
                 if ($rs) {
                     echo "<script>alert('Bạn đã đăng ký thành công. Xin mời đăng nhập.');location='?section=login';</script>";
                 } else echo "<script>alert('Đăng ký thất bại!');</script>";
             }
+        } else echo "<script>alert('Nhập dữ liệu sai!');</script>";
+    }
+
+    if (isset($_POST['profile_update'])) {
+        $change = validate_change_form($_POST['fnameChange'], $_POST['passwordChange'], $_POST['password2Change'], $_POST['telChange']);
+        if ($change) {
+            $birthdayChange = isset($_POST['birthdayChange']) ? $_POST['birthdayChange'] : 'NULL';
+            $addChange = isset($_POST['addChange']) ? $_POST['addChange'] : 'NULL';
+            $genderChange = (int) $_POST['genderChange'];
+            $fnameChange = test_input($_POST["fnameChange"]);
+            $passwordChange = test_input($_POST["passwordChange"]);
+            $telChange = test_input($_POST["telChange"]);
+            $addChange = test_input($_POST["addChange"]);
+            $fnameChange = standardizedData($fnameChange);
+            $addChange = standardizedData($addChange);
+            $sqlUpdateMember = "UPDATE Member SET Pass='$passwordChange',Name='$nameChange',Birthday='$bithdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
+            $rs = mysqli_query($con, $sqlUpdateMember);
+            if ($rs) {
+                echo "<script>alert('Cập nhật thông tin thành công!');location='index.php?section=profile';</script>";
+            } else echo "<script>alert('Cập nhật thông tin thất bại!');</script>";
         }
     }
 }
@@ -68,61 +86,99 @@ function standardizedData($data)
     return $data;
 }
 
-function validation()
+function validate_email($email)
 {
-    if (empty($_POST['emailSignup'])) {
+    if (empty($email)) {
         echo "<script>alert('Email is required');</script>";
         return false;
     } else {
-        $emailSignup = test_input($_POST['emailSignup']);
-        if (!filter_var($emailSignup, FILTER_VALIDATE_EMAIL)) {
+        $email_ok = test_input($email);
+        if (!filter_var($email_ok, FILTER_VALIDATE_EMAIL)) {
             echo "<script>alert('Invalid email format');</script>";
             return false;
-        }
+        } else
+            return true;
     }
+}
 
-    if (empty($_POST["fnameSignup"])) {
+function validate_name($name)
+{
+    if (empty($name)) {
         echo "<script>alert('Name is required');</script>";
         return false;
     } else {
-        $fnameSignup = test_input($_POST["fnameSignup"]);
-        if (!preg_match("/^[a-zA-Z ]*$/", $fnameSignup)) {
+        $name_ok = test_input($name);
+        if (!preg_match("/^[a-zA-Z ]*$/", $name_ok)) {
             echo "<script>alert('Invalid name format');</script>";
             return false;
-        }
+        } else
+            return true;
     }
+}
 
-    if (empty($_POST["passwordSignup"])) {
+function validate_pass($pass)
+{
+    if (empty($pass)) {
         echo "<script>alert('Password is required');</script>";
         return false;
     } else {
-        $passwordSignup = test_input($_POST["passwordSignup"]);
-        if (!preg_match("/^.+$/", $passwordSignup)) {
+        $pass_ok = test_input($pass);
+        if (!preg_match("/^.+$/", $pass_ok)) {
             echo "<script>alert('Invalid password format');</script>";
             return false;
-        }
+        } else
+            return true;
     }
+}
 
-    if (empty($_POST["password2Signup"])) {
+
+function validate_repass($pass, $repass)
+{
+    if (empty($repass)) {
         echo "<script>alert('Password is retype');</script>";
         return false;
     } else {
-        $password2Signup = test_input($_POST["password2Signup"]);
-        if ($password2Signup != $passwordSignup) {
+        $repass_ok = test_input($repass);
+        if ($repass_ok != $pass) {
             echo "<script>alert('Retype password incorrect.');</script>";
             return false;
-        }
+        } else
+            return true;
     }
+}
 
-    if (empty($_POST["telSignup"])) {
+function validate_tel($tel)
+{
+    if (empty($tel)) {
         echo "<script>alert('Telephone number is required');</script>";
         return false;
     } else {
-        $telSignup = test_input($_POST["telSignup"]);
-        if (!preg_match("/^\d{10}$/", $telSignup)) {
+        $tel_ok = test_input($tel);
+        if (!preg_match("/^\d{10}$/", $tel_ok)) {
             echo "<script>alert('Invalid Telephone number format');</script>";
             return false;
-        }
+        } else
+            return true;
     }
-    return true;
+}
+
+function validate_signup_form($email, $name, $pass, $repass, $tel)
+{
+    $test_email = validate_email($email);
+    $test_name = validate_name($name);
+    $test_pass = validate_pass($pass);
+    $test_repass = validate_repass($pass, $repass);
+    $test_tel = validate_tel($tel);
+    if ($test_email && $test_name && $test_pass && $test_repass && $test_tel) return true;
+    else return false;
+}
+
+function validate_change_form($name, $pass, $repass, $tel)
+{
+    $test_name = validate_name($name);
+    $test_pass = validate_pass($pass);
+    $test_repass = validate_repass($pass, $repass);
+    $test_tel = validate_tel($tel);
+    if ($test_name && $test_pass && $test_repass && $test_tel) return true;
+    else return false;
 }

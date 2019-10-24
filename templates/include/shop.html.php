@@ -47,12 +47,4 @@
         </div>
       </div>
       <!-- End of row -->
-      <div class="row">
-        <div class="page-section px-0 col">
-          <div class="section-body row">
-
-            <?php include "templates/scripts/shopShowProduct.php"; ?>
-
-          </div>
-        </div>
-      </div>
+      <?php include "templates/scripts/shopShowProduct.php"; ?>
