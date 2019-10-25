@@ -1,7 +1,5 @@
-<div class='row my-3 border-bottom' id="cart-empty" style="display:none"><strong>ĐƠN HÀNG TRỐNG</strong></div>
 <?php
-if (empty($_SESSION['cart'])) echo "<div class='row my-3 border-bottom'><strong>ĐƠN HÀNG TRỐNG</strong></div>";
-else {
+if (isset($_SESSION['cart'])) {
     $listCart = $_SESSION['cart'];
     $totalPrice = 0;
     foreach ($listCart as $key => $value) {
@@ -14,9 +12,9 @@ else {
         $subPrice = $value['price'] * $value['quantity'];
         ?>
 
-        <div class="row my-3 border-bottom list-cart" id="<?= $key ?>">
+        <div class="row mb-3 border-bottom list-cart" id="<?= $key ?>">
             <div class="col-4 col-md-2">
-                <a href="#!"><img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name'] ?>" class="img-fluid"></a>
+                <a href="#!"><img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name'] ?>" class="img-fluid rounded"></a>
             </div>
             <div class="col-8 col-md-10">
                 <div class="row">

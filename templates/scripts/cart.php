@@ -69,7 +69,7 @@ if (isset($_POST['action'])) {
                     $_SESSION['promovalue'] = 0;
                 } else {
                     $sqlCheckUsedCoupon = "SELECT * FROM Orders JOIN Promotion ON Orders.PromoId = Promotion.PromoId
-                                            WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'";
+                                            WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'AND Status != 4";
                     $rsCheckUsed = mysqli_query($con, $sqlCheckUsedCoupon);
                     if (mysqli_num_rows($rsCheckUsed)) {
                         $stCoupon = 'Bạn đã sử dụng mã này rồi';
@@ -78,6 +78,7 @@ if (isset($_POST['action'])) {
                     } else {
                         $_SESSION['promoname'] = $rowCoupon['PromoName'];
                         $_SESSION['promovalue'] = $rowCoupon['PromoValue'];
+                        $_SESSION['promoid'] = $rowCoupon['PromoId'];
                         $stCoupon = 'Nhập mã thành công';
                     }
                 }

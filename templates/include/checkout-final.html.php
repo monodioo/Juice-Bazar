@@ -5,7 +5,7 @@
         </ol>
       </div> -->
 
-<div class="row mt-5 ">
+<div class="row mt-5">
   <div class="page-section card col-6 mx-auto">
     <div class="row">
       <div class="col-12 border p-5">

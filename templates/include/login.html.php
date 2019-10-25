@@ -7,7 +7,7 @@
         </ol>
       </div> -->
 
-<div class="row mt-5 ">
+<div class="row mt-5">
   <div class="page-section card col-6 mx-auto">
     <div class="row">
       <div class="col-12 border p-5">
@@ -28,7 +28,7 @@
                                                                                                                               ?>' />
           </div>
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="rememberCheckLogin" name="rememberCheckLogin" <?php if (isset($_COOKIE["emailLogin"])) echo 'checked'; ?> />
+            <input type="checkbox" class="form-check-input" id="rememberCheckLogin" name="rememberCheckLogin" checked="<?php if (isset($_COOKIE["emailLogin"])) echo 'checked'; ?>" />
             <label class="form-check-label" for="rememberCheckLogin">Lưu thông tin đăng nhập</label>
           </div>
           <button type="submit" id="loginBtn" name="loginBtn" class="btn btn-cart">

@@ -13,7 +13,7 @@
       <div class="col-12 col-md-5 d-flex flex-column justify-content-center mt-3 mt-lg-0">
         <!-- <form class="newsletter-input-wrap d-flex flex-row"> -->
         <!-- <input type="text" class="form-control py-1 mr-n4" placeholder="email@domain.com" aria-label="Newsletter email" aria-describedby="sendEmailBtn" /> -->
-        <a class="btn btn-light btn-lg btn-link text-decoration-none" href="?section=register" id="sendEmailBtn">
+        <a class="btn btn-light btn-lg btn-link text-decoration-none" href="index.php?section=register" id="sendEmailBtn">
           Đăng ký
           <i class="fas fa-paper-plane" aria-hidden="true"></i>
         </a>
@@ -30,16 +30,16 @@
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="footer-title pl-0 mb-0">
-              <a href="?section=shop&typeid=0" class="text-decoration-none text-dark">Cửa hàng</a>
+              <a href="index.php?section=shop&typeid=0" class="text-decoration-none text-dark">Cửa hàng</a>
             </div>
             <ul class="footer-list">
-              <li><a href="?section=shop&typeid=1" class="text-decoration-none text-dark">Fruits</a></li>
-              <li><a href="?section=shop&typeid=2" class="text-decoration-none text-dark">Green</a></li>
-              <li><a href="?section=shop&typeid=3" class="text-decoration-none text-dark">Combo</a></li>
+              <li><a href="index.php?section=shop&typeid=1" class="text-decoration-none text-dark">Fruits</a></li>
+              <li><a href="index.php?section=shop&typeid=2" class="text-decoration-none text-dark">Green</a></li>
+              <li><a href="index.php?section=shop&typeid=3" class="text-decoration-none text-dark">Combo</a></li>
             </ul>
           </div>
           <div class="col-12 col-lg-3">
-            <a href="?section=aboutus" class="footer-title text-decoration-none text-dark">Về chúng tôi</a>
+            <a href="index.php?section=aboutus" class="footer-title text-decoration-none text-dark">Về chúng tôi</a>
           </div>
         </div>
       </div>
@@ -85,8 +85,17 @@
 
 <!-- Font awesome  -->
 <script src="assets/js/all.min.js"></script>
+
 <!-- jQuery Validate -->
-<script src="assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
+
+<!-- jQuery TableSorter -->
+<script type="text/javascript" src="assets/js/jquery.tablesorter.combined.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.tablesorter.pager.min.js"></script>
+<script type="text/javascript" src="assets/js/widget-cssStickyHeaders.min.js"></script>
+
+<!-- SummerNote Editor -->
+<script type="text/javascript" src="assets/js/summernote.min.js"></script>
 
 <!-- custom script -->
 <script src="assets/js/custom.js"></script>
