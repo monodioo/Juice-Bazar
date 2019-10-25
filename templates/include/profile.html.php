@@ -8,10 +8,14 @@ $row = mysqli_fetch_array($rs);
 ?>
 
 <div class="row my-5">
-    <div class="page-section card col-12 p-5">
-        <div class="section-title">Quản lý tài khoản</div>
-        <div class="h4 mb-3 textBazar">Thông tin tài khoản</div>
-        <div class="row">
+    <div class="page-section card col-12">
+
+        <div class="section-title p-5">Quản lý tài khoản</div>
+
+        <div class="row px-3 px-md-5">
+            <div class="col-12">
+                <div class="h4 my-3 textBazar">Thông tin tài khoản</div>
+            </div>
             <div class="col-12 col-md-6">
                 <div class="mb-1">
                     <span>Họ tên:&nbsp;</span>
@@ -56,7 +60,8 @@ $row = mysqli_fetch_array($rs);
                 </div>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row px-3 px-md-5">
             <div class="col-6"></div>
             <div class="col-6">
                 <button type="button" class="btn btn-cart text-white" data-toggle="modal" data-target="#changeProfile">
@@ -131,6 +136,11 @@ $row = mysqli_fetch_array($rs);
             </div>
         </div>
 
+        <div class="row px-3 px-md-5">
+            <div class="col-12">
+                <div class="h4 textBazar my-3">Quản lý đơn hàng</div>
+            </div>
+        </div>
         <?php
         $orders = array();
         $sqlOrder = "SELECT * FROM Orders LEFT JOIN Promotion ON Orders.PromoId = Promotion.PromoId WHERE MemberId =" . $_SESSION['memberId'];
@@ -141,10 +151,10 @@ $row = mysqli_fetch_array($rs);
 
             $orders[$rowOrder['OrderId']]['OrderDetail'] = array();
             $sqlDetail = "SELECT * FROM OrderDetail
-                                    JOIN ProductDetail ON OrderDetail.ProductDetailId = ProductDetail.ProductDetailId
-                                    JOIN Product       ON ProductDetail.ProductId = Product.ProductId
-                                    JOIN Capacity      ON ProductDetail.CapacityId = Capacity.CapacityId
-                            WHERE OrderId = " . $rowOrder['OrderId'];
+                                        JOIN ProductDetail ON OrderDetail.ProductDetailId = ProductDetail.ProductDetailId
+                                        JOIN Product       ON ProductDetail.ProductId = Product.ProductId
+                                        JOIN Capacity      ON ProductDetail.CapacityId = Capacity.CapacityId
+                                WHERE OrderId = " . $rowOrder['OrderId'];
             $rsDetail = mysqli_query($con, $sqlDetail);
             $subTotalValue = 0;
             while ($rowDetail = mysqli_fetch_array($rsDetail)) {
@@ -166,25 +176,20 @@ $row = mysqli_fetch_array($rs);
             $orders[$rowOrder['OrderId']]['Status'] = $rowOrder['Status'];
         }
         ?>
-        <div class="">
-            <div class="h4 textBazar my-3">Quản lý đơn hàng</div>
+        <div class="row px-0 mt-3">
             <div class="table-wrapper">
                 <table class="table table-hover table-sm tablesorter" id='profileTable'>
                     <thead>
                         <tr>
-                            <th scope="col" style="width: 80px" class="filter-exact">Mã đơn</th>
+                            <th scope="col" style="width: 3%" class="filter-exact">Mã đơn</th>
                             <th scope="col" style="width: 10%">Ngày đặt hàng</th>
                             <th scope="col" style="width: 10%">Ngày giao hàng</th>
-                            <th scope="col" style="width:5%" class="sorter-false">Tên SP</th>
-                            <th scope="col" style="width:5%" class="sorter-false filter-false">SLg.</th>
-                            <th scope="col" style="width: 8%" class="sorter-false">Giá</th>
-                            <th scope="col" style="width: 8%">Tổng giá</th>
+                            <th scope="col" style="width: 20%" class="sorter-false">Sản phẩm</th>
+                            <th scope="col" style="width: 10%">Tạm tính</th>
                             <th scope="col" style="" class="">Khuyến mại</th>
-                            <th scope="col" style="">Giảm giá</th>
-                            <th scope="col" style="width: 5%">Tổng tiền</th>
-                            <th scope="col" style="" class="sorter-false">Chú ý</th>
+                            <th scope="col" style="width: 10%">Tổng tiền</th>
+                            <th scope="col" style="" class="sorter-false">Ghi chú</th>
                             <th scope="col" style="" class="sorter-false">Trạng thái</th>
-                            <th scope="col" class="sorter-false filter-false"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -195,42 +200,48 @@ $row = mysqli_fetch_array($rs);
                                 <td><?php if (($order['Status'] == 4)) {
                                             echo '<i>Đơn đã hủy</i>';
                                         } else if ($order['DeliveryDate'] == '') {
-                                            echo '<i>Sẽ cập nhật khi đơn hoàn thành.</i>';
+                                            echo '<i>Chưa có.</i>';
                                         } else {
                                             echo date_format(date_create($order['DeliveryDate']), 'M-d-Y H:i');
                                         } ?></td>
-                                <td colspan=3 class="text-center">
+                                <td class="text-center">
                                     <a href="#" class="toggle admin-link d-block" style="height: 120px">
                                         Bấm để xem
                                     </a>
                                 </td>
                                 <td><?= number_format($order['totalPrice'], 0, '.', '.') ?> ₫</td>
-                                <td><?= empty($order['PromoName']) ?  'N/A' : $order['PromoName'] ?></td>
-                                <td><?= $order['PromoValue'] * 100 ?>%</td>
+                                <td>
+                                    <span class="mr-2">
+                                        <?= empty($order['PromoName']) ? 'N/A' : $order['PromoName'] ?>
+                                    </span>
+                                    <span>
+                                        <?= $order['PromoValue'] * 100 ?>%
+                                    </span>
+                                </td>
                                 <td><?= number_format($order['totalPrice'], 0, '.', '.') ?> ₫</td>
                                 <td><?= $order['Note'] ?></td>
                                 <td>
                                     <?php switch ($order['Status']) {
                                             case 0:
-                                                echo '0.Chưa xử lý';
+                                                echo 'Chưa xử lý';
                                                 break;
                                             case 1:
-                                                echo '1.Đang xử lý';
+                                                echo 'Đang xử lý';
                                                 break;
                                             case 2:
-                                                echo '2.Đang vận chuyển';
+                                                echo 'Đang vận chuyển';
                                                 break;
                                             case 3:
-                                                echo '3.Thành công';
+                                                echo 'Thành công';
                                                 break;
                                             case 4:
-                                                echo '4.Đơn đã hủy';
+                                                echo 'Đơn đã hủy';
                                         } ?>
                                         <form method="POST" action="">
 
                                             <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
                                             <input type="hidden" name="OrderId" value="<?= $key ?>">
-                                            <button type="submit" class="btn btn-danger btn-sm text-white" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
+                                            <button type="submit" class="btn btn-danger btn-sm text-white mt-3" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
                                                 Hủy Đơn
                                             </button>
 
@@ -243,15 +254,19 @@ $row = mysqli_fetch_array($rs);
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <a href="?section=shop&typeid=0&id=<?= $item['ProductId'] ?>">
-                                            <?= $item['Name'] ?>
-                                        </a>
+                                        <span>
+                                            <a href="?section=shop&typeid=0&id=<?= $item['ProductId'] ?>">
+                                                <?= $item['Name'] ?>
+                                            </a>
+                                        </span>
+                                        <span>
+                                            x <?= $item['Quantity']; ?>
+                                        </span>
+                                        <span>
+                                            = <?= number_format($item['SalePrice'], 0, '.', '.') ?> ₫
+                                        </span>
                                     </td>
-                                    <td><?= $item['Quantity']; ?></td>
-                                    <td><?= number_format($item['SalePrice'], 0, '.', '.') ?> ₫</td>
                                     <td><?= number_format($item['SalePrice'] * $item['Quantity'], 0, '.', '.') ?> ₫</td>
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -262,7 +277,7 @@ $row = mysqli_fetch_array($rs);
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="13" class="ts-pager">
+                            <th colspan="9" class="ts-pager">
                                 <div class="form-inline">
                                     <div class="btn-group btn-group-sm mx-1" role="group">
                                         <button type="button" class="btn btn-secondary first" title="first">⇤</button>
@@ -289,67 +304,7 @@ $row = mysqli_fetch_array($rs);
             </div>
         </div>
 
+
+
     </div>
 </div>
-
-
-<!-- 
-    function getOrders($pdo, $id = '')
-{
-    if ($id == '') {
-        $sql = 'SELECT * FROM `orders` ORDER BY `OrderId` DESC';
-        $query = query($pdo, $sql);
-        $results = $query->fetchAll();
-    } else {
-        $sql = 'SELECT * FROM `orders` WHERE `OrderId` = :OrderId';
-        $parameters = [':OrderId' => $id];
-        $query = query($pdo, $sql, $parameters);
-        $results = $query->fetchAll();
-    }
-
-    $orders = [];
-    foreach ($results as $result) {
-        $promo = empty($result['PromoId']) ? ['PromoName' => '', 'PromoValue' => 0] : getOrderInfo($pdo, 'promotion', 'PromoId', $result['PromoId']);
-
-        $member = getOrderInfo($pdo, 'member', 'MemberId', $result['MemberId']);
-        $items = getOrderDetail($pdo, $result['OrderId']);
-        $subTotalValue = 0;
-        foreach ($items as $item) {
-            $subTotalValue += ($item['SalePrice'] * $item['Quantity']);
-        }
-
-        $orders[] = [
-            'OrderId' => $result['OrderId'],
-            'MemberId' => $result['MemberId'],
-            'MemberName' => $member['Name'],
-            'PurchaseDate' => $result['PurchaseDate'],
-            'DeliveryDate' => $result['DeliveryDate'] ?? "",
-            'Items' => getOrderDetail($pdo, $result['OrderId']),
-            'List' => getListProducts($pdo),
-            'PromoId' => $result['PromoId'],
-            'PromoName' => $promo['PromoName'],
-            'PromoValue' => $promo['PromoValue'],
-            'subTotalValue' => $subTotalValue,
-            'Status' => $result['Status'],
-            'Note' => $result['Note']
-        ];
-    }
-    return $orders;
-}
-
-function getOrderDetail($pdo, $OrderId)
-{
-    $sql = 'SELECT pd.`ProductDetailId`, p.`ProductId`, p.`Name`, od.`SalePrice`, od.`Quantity`, pd.`CapacityId`, p.`TypeId`, t.`Type` FROM `orderdetail` od JOIN `productdetail` pd ON od.`ProductDetailId` = pd.`ProductDetailId` JOIN  `product` p ON pd.`ProductId` = p.`ProductId` JOIN `Type` t ON t.`TypeId` = p.`TypeId` WHERE `OrderID` = :OrderId';
-    $parameters = [':OrderId' => $OrderId];
-    $results = query($pdo, $sql, $parameters)->fetchAll();
-    return $results;
-}
-
-function getOrderInfo($pdo, $table, $primaryKey, $keyValue)
-{
-    $sql = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :keyValue';
-    $parameters = [':keyValue' => $keyValue];
-    $results = query($pdo, $sql, $parameters)->fetch();
-    return $results;
-}
- -->
