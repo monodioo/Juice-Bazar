@@ -50,18 +50,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['profile_update'])) {
-        $change = validate_change_form($_POST['fnameChange'], $_POST['passwordChange'], $_POST['password2Change'], $_POST['telChange']);
+        $change = validate_change_form($_POST['fnameChange'], $_POST['telChange']);
         if ($change) {
             $birthdayChange = isset($_POST['birthdayChange']) ? $_POST['birthdayChange'] : 'NULL';
             $addChange = isset($_POST['addChange']) ? $_POST['addChange'] : 'NULL';
             $genderChange = (int) $_POST['genderChange'];
             $fnameChange = test_input($_POST["fnameChange"]);
-            $passwordChange = test_input($_POST["passwordChange"]);
             $telChange = test_input($_POST["telChange"]);
             $addChange = test_input($_POST["addChange"]);
             $fnameChange = standardizedData($fnameChange);
             $addChange = standardizedData($addChange);
-            $sqlUpdateMember = "UPDATE Member SET Pass='$passwordChange',Name='$nameChange',Birthday='$bithdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
+            if (empty($_POST['passwordChange'])) {
+                $sqlUpdateMember = "UPDATE Member SET Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
+            } else {
+                $passwordChange = test_input($_POST["passwordChange"]);
+                $sqlUpdateMember = "UPDATE Member SET Pass='$passwordChange',Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
+            }
             $rs = mysqli_query($con, $sqlUpdateMember);
             if ($rs) {
                 echo "<script>alert('Cập nhật thông tin thành công!');location='index.php?section=profile';</script>";
@@ -173,12 +177,10 @@ function validate_signup_form($email, $name, $pass, $repass, $tel)
     else return false;
 }
 
-function validate_change_form($name, $pass, $repass, $tel)
+function validate_change_form($name, $tel)
 {
     $test_name = validate_name($name);
-    $test_pass = validate_pass($pass);
-    $test_repass = validate_repass($pass, $repass);
     $test_tel = validate_tel($tel);
-    if ($test_name && $test_pass && $test_repass && $test_tel) return true;
+    if ($test_name && $test_tel) return true;
     else return false;
 }

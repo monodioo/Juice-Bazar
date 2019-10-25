@@ -266,11 +266,11 @@ jQuery(document).ready(function($) {
   $("#changeForm").validate({
     rules: {
       passwordChange: {
-        required: true,
+        // required: true,
         minlength: 6
       },
       password2Change: {
-        required: true,
+        // required: true,
         minlength: 6,
         equalTo: "#passwordChange"
       },
@@ -288,11 +288,11 @@ jQuery(document).ready(function($) {
     },
     messages: {
       passwordChange: {
-        required: "Xin điền lại mật khẩu",
+        // required: "Xin điền lại mật khẩu",
         minlength: "Mật khẩu có tối thiểu 6 ký tự"
       },
       password2Change: {
-        required: "Xin điền lại mật khẩu",
+        // required: "Xin điền lại mật khẩu",
         minlength: "Mật khẩu có tối thiểu 6 ký tự",
         equalTo: "Mật khẩu không trùng"
       },

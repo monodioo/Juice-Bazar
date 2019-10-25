@@ -19,11 +19,14 @@ if (isset($_REQUEST["section"])) {
         case 'profile':
             include "templates/include/profile.html.php";
             break;
-        case 'checkout':
-            include "templates/include/checkout.html.php";
+        case 'checkout': {
+                if (empty($_SESSION['cart'])) echo "<script>location='?section=home'</script>";
+                else include "templates/include/checkout.html.php";
+            }
             break;
         case 'checkoutfinal':
             include "templates/include/checkout-final.html.php";
+            echo "<script>setTimeout(function(){location='?section=home'},5000)</script>";
             break;
         case 'search':
             include "templates/scripts/searchProduct.php";

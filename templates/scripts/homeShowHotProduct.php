@@ -1,9 +1,9 @@
 <?php
 $sqlHotProductId = "SELECT Product.ProductId
                     FROM ProductDetail  JOIN Product     ON ProductDetail.ProductId = Product.ProductId
-                                        JOIN OrderDetail ON ProductDetail.ProductDetailid = Orderdetail.ProductDetailId
+                                        JOIN OrderDetail ON ProductDetail.ProductDetailId = Orderdetail.ProductDetailId
                     GROUP BY Product.ProductId
-                    ORDER BY SUM(orderdetail.Quantity) DESC
+                    ORDER BY SUM(OrderDetail.Quantity) DESC
                     LIMIT 6";
 
 $hotProductId = mysqli_query($con, $sqlHotProductId);

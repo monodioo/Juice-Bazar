@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class='row mb-3  border-bottom '>
-      <div class='py-3 font-weight-bold text-uppercase' id="cart-empty" style="display:<?= empty($_SESSION['cart']) ?? 'none' ?>">Đơn hàng trống</div>
+      <div class='py-3 font-weight-bold text-uppercase' id="cart-empty" style="display:<?= empty($_SESSION['cart']) ? '' : 'none' ?>">Đơn hàng trống</div>
     </div>
     <?php include "templates/scripts/cartShowList.php" ?>
 
@@ -51,7 +51,7 @@
               </div>
             </form>
           </div>
-          <div class="col-12 text-info font-italic mt-1" id="stCoupon" style="font-size: 12px"></div>
+          <div class="col-12 font-italic mt-1" id="stCoupon" style="font-size: 12px"></div>
         </div>
       </div>
       <div class="col-md-6 mt-3 mt-md-0">

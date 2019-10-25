@@ -18,7 +18,7 @@ if (isset($_POST['loginSubmit'])) {
 
     if ($result === 'userError') {
 
-        echo "<script>alert('aha')</script>";
+        echo "<script>alert('Wrong Username')</script>";
         ob_start();
         include __DIR__ . '/../templates/login.html.php';
         $output = ob_get_clean();

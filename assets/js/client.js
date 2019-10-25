@@ -126,6 +126,8 @@ $(document).ready(function() {
 
   //Cart Update: Add Coupon
   $(document).on("click", "#couponBtn", function() {
+    $("#stCoupon").removeClass("text-danger");
+    $("#stCoupon").removeClass("text-success");
     $.ajax({
       url: "templates/scripts/cart.php",
       type: "post",
@@ -135,6 +137,7 @@ $(document).ready(function() {
         action: "add_coupon"
       },
       success: function(result) {
+        $("#stCoupon").addClass(result.stColor);
         $("#stCoupon").html(result.stCoupon);
         $("#c_code").val(result.promoName);
         $("#promovalue").html(result.promoValue * 100);

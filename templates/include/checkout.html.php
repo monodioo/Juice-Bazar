@@ -48,7 +48,7 @@
               <label for="c_order_notes" class="">Ghi chú</label>
               <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Bạn muốn nhắn gì cho chúng tôi?"></textarea>
             </div>
-            <div class="row">Bạn có muốn&nbsp;<a href="?section=signup"><strong>ĐĂNG KÝ</strong></a>&nbsp;?</div>
+            <div class="row" <?= !empty($_SESSION['memberId']) ? 'hidden' : '' ?>>Bạn có muốn&nbsp;<a href="?section=signup"><strong>ĐĂNG KÝ</strong></a>&nbsp;?</div>
           </div>
         </div>
         <div class="col-md-6">
@@ -66,7 +66,7 @@
 
                 <tr>
                   <td class="font-weight-bold"><strong>Tổng giá sản phẩm</strong></td>
-                  <td class="text-right"><strong><?= number_format($_SESSION['totalPrice'], 0, '.', '.') ?>₫</strong> </td>
+                  <td class="text-right"><strong><?= isset($_SESSION['totalPrice']) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?>₫</strong> </td>
                 </tr>
                 <tr>
                   <td class="font-weight-bold"><strong>Giảm giá</strong></td>
@@ -74,7 +74,12 @@
                 </tr>
                 <tr>
                   <td class="font-weight-bold"><strong>Tổng tiền</strong></td>
-                  <td class="font-weight-bold text-right"><strong><?= (empty($_SESSION['promovalue'])) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.') ?>₫</strong></td>
+                  <td class="font-weight-bold text-right"><strong>
+                      <?php if (empty($_SESSION['totalPrice'])) echo '0';
+                      else if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                      else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
+
+                      ?>₫</strong></td>
                 </tr>
               </tbody>
             </table>
