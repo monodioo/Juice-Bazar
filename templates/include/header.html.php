@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand-lg sticky-top row">
       <div class="col-4 px-0 pt-2">
         <i class="fas fa-bars btn-nav js-menu-toggle d-sm-block d-lg-none" style="color: #ffc634; cursor: pointer"></i>
-        <div class=" d-none d-lg-block">
+        <div class="d-none d-lg-block">
           <ul class="navbar-nav js-clone-nav">
             <li class="nav-item">
               <a class="nav-link nav-hover <?= ($_REQUEST['section'] == 'shop') ? 'nav-hover-active' : ""; ?> mr-lg-3" href="index.php?section=shop&typeid=0" id="navShop">Shop <span class="sr-only">(current)</span></a>
@@ -46,6 +46,17 @@
             </li>
           </ul>
 
+        </div>
+        <div class="d-inline-block d-md-none ml-2">
+          <?php if (isset($_SESSION['memberId'])) : ?>
+            <a id="profileBtn" class="" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
+              <i class="fas fa-user-circle nav-icon textBazar"></i>
+            </a>
+          <?php else : ?>
+            <a href="index.php?section=login" class="" id="profileBtn">
+              <i class="far fa-user-circle nav-icon text-dark"></i>
+            </a>
+          <?php endif; ?>
         </div>
       </div>
       <div class="col-4 text-center">
@@ -71,16 +82,17 @@
       <div class="col-4 pr-0">
         <div class="float-right nav-icon-group d-flex flex-row align-items-center justify-content-end">
 
-          <?php if (isset($_SESSION['memberId'])) : ?>
-            <a id="profileBtn" class="mr-1 mr-md-3" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
-              <!-- <a > -->
-              <i class="fas fa-user-circle nav-icon textBazar"></i>
-            </a>
-          <?php else : ?>
-            <a href="index.php?section=login" class="mr-1 mr-md-3" id="profileBtn">
-              <i class="far fa-user-circle nav-icon text-dark"></i>
-            </a>
-          <?php endif; ?>
+          <div class="d-none d-md-inline-block">
+            <?php if (isset($_SESSION['memberId'])) : ?>
+              <a id="profileBtn" class="mr-1 mr-md-3" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
+                <i class="fas fa-user-circle nav-icon textBazar"></i>
+              </a>
+            <?php else : ?>
+              <a href="index.php?section=login" class="mr-1 mr-md-3" id="profileBtn">
+                <i class="far fa-user-circle nav-icon text-dark"></i>
+              </a>
+            <?php endif; ?>
+          </div>
 
           <?php include "templates/scripts/logout.php" ?>
           <a href="index.php?section=cart" class="d-flex justify-content-center align-items-center btn-cart px-3 py-2 text-white" id="cart-status">
