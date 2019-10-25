@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2019 at 04:43 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Generation Time: Oct 25, 2019 at 07:59 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -87,7 +87,7 @@ CREATE TABLE `member` (
 
 INSERT INTO `member` (`MemberId`, `Email`, `Pass`, `Name`, `Birthday`, `Gender`, `Status`, `Phone`, `Address`) VALUES
 (0, 'none', 'none', 'Guest', NULL, 0, 1, 'none', NULL),
-(1, 'mark0514@gmail.com', 'mark0514', 'Mark Zuckerberg', '1984-05-14', 1, 1, '0123456789', NULL),
+(1, 'mark0514@gmail.com', '12345678', 'Mark AO', '1984-05-14', 1, 1, '0123456789', ''),
 (2, 'bill1028@gmail.com', 'bill1028', 'Bill Gates', '1955-10-28', 1, 1, '0987654321', NULL),
 (3, 'messi0624@Gmail.com', 'messi0624', 'Lionel Messi', '1987-06-24', 1, 1, '0123789456', NULL),
 (4, 'ronaldo0205@gmail.com', 'ronaldo0205', 'Cristiano Ronaldo', '1985-02-05', 1, 1, '0987321654', NULL),
@@ -255,7 +255,9 @@ INSERT INTO `orderdetail` (`OrderId`, `ProductDetailId`, `SalePrice`, `Quantity`
 (60, 69, 45000, 2),
 (60, 70, 55000, 1),
 (61, 71, 45000, 3),
-(61, 72, 55000, 2);
+(61, 72, 55000, 2),
+(68, 15, 55000, 7),
+(68, 29, 45000, 3);
 
 -- --------------------------------------------------------
 
@@ -338,7 +340,8 @@ INSERT INTO `orders` (`OrderId`, `MemberId`, `PurchaseDate`, `DeliveryDate`, `Pr
 (58, 18, '2019-06-13 06:04:05', '2019-06-14 06:04:05', NULL, 3, '0985487510'),
 (59, 19, '2019-07-12 06:04:05', '2019-07-13 06:04:05', NULL, 3, '0384839393'),
 (60, 20, '2019-07-23 06:04:05', '2019-07-24 06:04:05', NULL, 3, '0958375812'),
-(61, 22, '2019-08-17 06:04:05', '2019-08-18 06:04:05', NULL, 3, '0949389520');
+(61, 22, '2019-08-17 06:04:05', '2019-08-18 06:04:05', NULL, 3, '0949389520'),
+(68, 1, '2019-10-25 23:58:40', NULL, NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -361,34 +364,34 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`ProductId`, `TypeId`, `Name`, `Image`, `Description`, `Nutrition`, `Status`) VALUES
-(1, 1, 'Quýt', 'assets/image/juice bottle/quyt.png', 'Tương đương với  7 quả quýt.', 'Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, B1, Kali\r\n\r\nCÔNG DỤNG CHUNG\r\nQuýt là loại quả chứa rất ít chất béo bão hòa, cholesterol và natri nên rất tốt cho tim mạch. Quýt cũng cung cấp cho cơ thể hàm lượng xơ cao và các vitamin như Vitamin A và Vitamin C. Một số công dụng nổi bật của họ nhà quýt: chữa gàu hói, nhức đầu; chữa ho, trị viêm tuyến sữa, trị say xe, và tạo cảm giác ngon miệng.', 1),
-(2, 1, 'Táo', 'assets/image/juice bottle/tao.png', 'Tương đương với 4 quả táo.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, Vitamin K, Kali\r\n\r\n\r\nCÔNG DỤNG CHUNG\r\nTáo chứa ít chất béo bão hòa, cholesterol, natri và rất tốt cho tim mạch, hệ tiêu hóa.\r\nMột số tác dụng khác của táo: giảm rối loạn đường ruột, viêm túi thừa. Ngoài ra, táo có nhiều kali, đem lại một trái tim khỏe mạnh.', 1),
-(3, 1, 'Thanh Long Đỏ', 'assets/image/juice bottle/thanh long do.png', 'Tương đương với 1.5 quả thanh long đỏ.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, Fe, các loại Vitamin B\r\n\r\nCÔNG DỤNG CHUNG\r\nThanh long có thể giúp cải thiện sức khỏe tim mạch bằng cách giảm mức cholesterol xấu và bổ sung thêm cholesterol tốt. Một số công dụng khác: hỗ trợ tiêu hóa, ngừa tiểu đường và giảm viêm khớp.', 1),
-(4, 1, 'Nho', 'assets/image/juice bottle/nho.png', 'Tương đương với 1 chùm nho.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, B1, B2.\r\n\r\nCÔNG DỤNG CHUNG\r\nNho chứa ít chất béo bảo hòa, Cholesterol và natri, rất tốt cho tim mạch. Trong nho chứa một hàm lượng Vitamin C và Vvitamin K dồi dào. Một số công dụng khác của nho: chữa bệnh đau nửa đầu, khó tiêu, sỏi thận, mỡ máu, thoái hóa điểm vàng.', 1),
-(5, 1, 'Ổi', 'assets/image/juice bottle/oi.png', 'Tương đương với 2 quả ổi.', 'Chỉ số dinh dưỡng nổi bật: Vitmain A, C, B1, Folate, Kali\r\n\r\nCÔNG DỤNG CHUNG:\r\nTrái ổi rất tốt cho sức khỏe bởi chứa nhiều vitamin và khoáng chất như vitamin A, folate, kali, đồng và magan; vì thế là một nguồn năng lượng tự nhiên rất tốt cho chế độ ăn nhiều xơ và vitamin C. Ngoài ra, ổi còn rất tốt cho tim mạch, cải thiện chức năng nội tiết, làm đẹp da và chống lão hóa.', 1),
-(6, 1, 'Xoài Tượng', 'assets/image/juice bottle/xoai tuong.png', 'Tương đương với 1.5 quả xoài tượng.', 'Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, B1, B6, Đồng\r\n\r\nCÔNG DỤNG CHUNG\r\nXoài là loại trái cây giàu dinh dưỡng, có tác dụng làm sạch da từ bên trong, có ít chất béo bão hòa, cholesterol và natri. Đây là loại hoa quả rất giàu vitamin A,C và B6. Công dụng chung: làm sạch da, rất tốt cho mắt, giảm lượng cholesterol, cải thiện hệ tiêu hóa và tăng cường hệ miễn dịch.', 1),
-(7, 1, 'Dưa Vàng', 'assets/image/juice bottle/dua vang.png', 'Tương đương với 1/4 quả dưa vàng.', 'Chỉ số dinh dưỡng nổi bật: Vitamn C, Folate, B6, K\r\n\r\nCÔNG DỤNG CHUNG\r\nDưa vàng có lượng enzyme tiêu hóa lớn nhất trong các nhóm hoa quả. Một số công dụng của dưa vàng: cân bằng lượng đường huyết, giúp da mịn màng tươi trẻ, chống lại viêm khớp và tăng cường hệ miễn dịch.', 1),
-(8, 1, 'Cam', 'assets/image/juice bottle/cam.png', 'Tương đương với  2.5 quả cam.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali\r\n\r\nCÔNG DỤNG CHUNG\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.', 1),
-(9, 1, 'Dứa', 'assets/image/juice bottle/dua.png', 'Tương đương với 1 quả dứa.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan\r\n\r\nCÔNG DỤNG CHUNG\r\nDứa có rất nhiều vitamin khoáng chất, cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chứa bromelain, hợp chất thực vật. Hợp chất này rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viêm, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.', 1),
-(10, 1, 'Bưởi', 'assets/image/juice bottle/buoi.png', 'Tương đương với 3/4 quả bưởi.', 'Chỉ số dinh dưỡng nổi bật: Vitamin A, C, B6, Kali\r\n\r\nCÔNG DỤNG CHUNG\r\nBưởi góp phần bổ sung một lượng Vitamin C tuyệt vời và làm tăng sức đề kháng của cơ thể. Bưởi còn là một quả chống oxy hóa, giúp cơ thể chống lại stress và các bệnh liên quan đến hen suyễn và viêm khớp. Ngoài ra, bưởi giúp còn giúp làm đẹp da (trị các vấn đề da khô, mụn trứng cá, nếp nhăn hay vẩy nến), giảm cân, giảm lượng cholesterol trong máu.', 1),
-(11, 1, 'Dưa Hấu', 'assets/image/juice bottle/dua hau.png', 'Tương đương với 1/4 quả dưa hấu.', 'Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, Protein\r\n\r\nCÔNG DỤNG KHÁC:\r\nDưa hấu chứa rất nhiều Vitamin A và C, với lượng chất béo bão hòa, cholesterol và natri rất thấp. Dưa hấu chính là loại hoa rất tốt để giữ nước cho cơ thể, đặc biệt vào mùa hè; giúp sáng da với lượng đường cao nhưng lại có calo thấp.\r\nMột số tác dụng khác của dưa hấu: bảo vệ da khỏi tia UV, hỗ trợ thị lực, tránh nhiễm trùng và bảo vệ tim mạch.', 1),
-(12, 1, 'Dứa Cà Rốt', 'assets/image/juice bottle/dua ca rot.png', 'Tương đương với 0.5 quả dứa và 3 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả dứa và cà rốt:\r\n\r\nDứa: Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan\r\nCÔNG DỤNG CHUNG\r\nDứa có rất nhiều vitamin khoáng chất, cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chúa bromelain, hợp chất thực vật. Hợp chất này rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viên, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.\r\n\r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\nCÔNG DỤNG CHUNG\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, khó tiêu hoá, phụ nữ da khô. ', 1),
-(13, 1, 'Táo Cà Rốt', 'assets/image/juice bottle/tao ca rot.PNG', 'Tương đương với 2 quả táo và 3 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả táo và cà rốt:\r\n\r\nTáo: Chỉ số dinh dưỡng nổi bật: Vitamin C, Vitamin K, Kali\r\nCÔNG DỤNG CHUNG\r\nTáo chứa ít chất béo bão hòa, cholesterol, natri và rất tốt cho tim mạch và hệ tiêu hóa.\r\nMột số tác dụng khác của táo: giảm rối loạn đường ruột, viêm túi thừa. Ngoài ra, táo có nhiều kali, đem lại một trái tim khỏe mạnh!\r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\nCÔNG DỤNG CHUNG\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, phụ nữ da khô. ', 1),
-(14, 1, 'Nước Ép Mix', 'assets/image/juice bottle/nuoc ep mix.PNG', 'Bạn có thể chọn tối đa 3 loại rau, quả để ép cùng nhau.', NULL, 1),
-(15, 1, 'Cam Dứa', 'assets/image/juice bottle/cam dua.jpg', 'Tương đương với 1.5 quả cam và 0.5 quả dứa.', 'Vị thơm ngon tự nhiên với tác dụng của cả cam dứa:\r\n\r\nDứa: Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan\r\nCÔNG DỤNG CHUNG\r\nDứa có rất nhiều vitamin khoáng chất, cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chúa bromelain, hợp chất thực vật. Hợp chất này rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viên, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.\r\n\r\nCam: Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali\r\nCÔNG DỤNG CHUNG\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.', 1),
-(16, 1, 'Cam Cà Rốt', 'assets/image/juice bottle/cam ca rot.png', 'Tương đương với 1.5 quả cam và 1 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả cam và cà rốt:\r\n\r\nCam: Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali\r\nCÔNG DỤNG CHUNG\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.\r\n\r\n \r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\n\r\nCÔNG DỤNG CHUNG\r\n\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, khó tiêu hoá, phụ nữ da khô. ', 1),
-(17, 1, 'Lựu', 'assets/image/juice bottle/luu.png', 'Tương đương với 2 quả lựu.', NULL, 1),
-(18, 2, 'Popeye\'s Juice', 'assets/image/juice bottle/Popeye Juice.png', 'Táo, Rau Chân vịt, Cần tây.', NULL, 1),
-(19, 2, 'Green Glow', 'assets/image/juice bottle/green glow.jpg', 'Súp lơ xanh, Cần tây, Táo, Lá Bạc hà.', NULL, 1),
-(20, 2, 'The Digestive', 'assets/image/juice bottle/the digestive.jpg', 'Táo, Rau Chân vịt, Dưa chuột.', NULL, 1),
-(21, 1, 'Táo Củ Dền', 'assets/image/juice bottle/tao cu den.png', 'Táo, Củ dền.', NULL, 1),
-(22, 1, 'Cam Táo', 'assets/image/juice bottle/cam tao.jpg', 'Cam, Táo.', NULL, 1),
-(23, 2, 'Green Power', 'assets/image/juice bottle/Green Power.jpg', 'Súp lơ xanh, Rau Chân vịt, Táo, Dưa chuột.', NULL, 1),
-(24, 2, 'The Reset', 'assets/image/juice bottle/The Reset.jpg', 'Súp lơ xanh, Táo, Dứa, Cải xoăn.', NULL, 1),
-(25, 3, 'Combo Detox', 'assets/image/juice bottle/combo detox.jpg', 'Liệu trình Thải độc / Giảm cân\r\n', 'Combo Detox mới nhất của Juice Bazar với nguồn Vitamin phong phú và chất khoáng dồi dào từ nhiều loại rau, củ, quả tươi sẽ mang đến cho bạn 1 trải nghiệm mới về thanh lọc cơ thể và chăm sóc sức khoẻ hàng ngày!', 1),
-(26, 3, 'Combo Đẹp Da', 'assets/image/juice bottle/combo dep da.jpg', 'Liệu trình Đẹp da', NULL, 1),
-(27, 3, 'Digestion Helper', 'assets/image/juice bottle/combo detox.jpg', 'Liệu trình Hỗ trợ tiêu hóa', NULL, 1),
-(28, 3, 'Immune System Boost', 'assets/image/juice bottle/combo detox.jpg', 'Liệu trình Tăng cường đề kháng', NULL, 1),
+(1, 1, 'Quýt', 'assets/image/juice bottle/quyt.jpg', 'Tương đương với  7 quả quýt.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, B1, Kali.</p><p><u>CÔNG DỤNG CHUNG:</u>\r\nQuýt là loại quả chứa rất ít chất béo bão hòa, cholesterol và natri nên rất tốt cho tim mạch. Quýt cũng cung cấp cho cơ thể hàm lượng xơ cao và các vitamin như Vitamin A và Vitamin C. Một số công dụng nổi bật của họ nhà quýt: chữa gàu hói, nhức đầu; chữa ho, trị viêm tuyến sữa, trị say xe, và tạo cảm giác ngon miệng.</p>', 1),
+(2, 1, 'Táo', 'assets/image/juice bottle/tao.jpg', 'Tương đương với 4 quả táo.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, Vitamin K, Kali\r\n\r\n\r\nCÔNG DỤNG CHUNG\r\nTáo chứa ít chất béo bão hòa, cholesterol, natri và rất tốt cho tim mạch, hệ tiêu hóa.\r\nMột số tác dụng khác của táo: giảm rối loạn đường ruột, viêm túi thừa. Ngoài ra, táo có nhiều kali, đem lại một trái tim khỏe mạnh.', 1),
+(3, 1, 'Thanh Long Đỏ', 'assets/image/juice bottle/thanh-long-do.jpg', 'Tương đương với 1.5 quả thanh long đỏ.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, Fe, các loại Vitamin B\r\n\r\nCÔNG DỤNG CHUNG\r\nThanh long có thể giúp cải thiện sức khỏe tim mạch bằng cách giảm mức cholesterol xấu và bổ sung thêm cholesterol tốt. Một số công dụng khác: hỗ trợ tiêu hóa, ngừa tiểu đường và giảm viêm khớp.', 1),
+(4, 1, 'Nho', 'assets/image/juice bottle/nho.jpg', 'Tương đương với 1 chùm nho.', 'Chỉ số dinh dưỡng nổi bật: Vitamin C, B1, B2.\r\n\r\nCÔNG DỤNG CHUNG\r\nNho chứa ít chất béo bảo hòa, Cholesterol và natri, rất tốt cho tim mạch. Trong nho chứa một hàm lượng Vitamin C và Vvitamin K dồi dào. Một số công dụng khác của nho: chữa bệnh đau nửa đầu, khó tiêu, sỏi thận, mỡ máu, thoái hóa điểm vàng.', 1),
+(5, 1, 'Ổi', 'assets/image/juice bottle/oi.jpg', 'Tương đương với 2 quả ổi.', 'Chỉ số dinh dưỡng nổi bật: Vitmain A, C, B1, Folate, Kali\r\n\r\nCÔNG DỤNG CHUNG:\r\nTrái ổi rất tốt cho sức khỏe bởi chứa nhiều vitamin và khoáng chất như vitamin A, folate, kali, đồng và magan; vì thế là một nguồn năng lượng tự nhiên rất tốt cho chế độ ăn nhiều xơ và vitamin C. Ngoài ra, ổi còn rất tốt cho tim mạch, cải thiện chức năng nội tiết, làm đẹp da và chống lão hóa.', 1),
+(6, 1, 'Xoài Tượng', 'assets/image/juice bottle/xoai-tuong.jpg', 'Tương đương với 1.5 quả xoài tượng.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, B1, B6, Đồng.</p><p><u>CÔNG DỤNG CHUNG:</u>&nbsp;Xoài là loại trái cây giàu dinh dưỡng, có tác dụng làm sạch da từ bên trong, có ít chất béo bão hòa, cholesterol và natri. Đây là loại hoa quả rất giàu vitamin A,C và B6. Xoài hỗ trợ làm sạch da, rất tốt cho mắt, giảm lượng cholesterol, cải thiện hệ tiêu hóa và tăng cường hệ miễn dịch.</p>', 1),
+(7, 1, 'Dưa Vàng', 'assets/image/juice bottle/dua-vang.jpg', 'Tương đương với 1/4 quả dưa vàng.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamn C, Folate, B6, K.</p><p><u>CÔNG DỤNG CHUNG:</u>\r\nDưa vàng có lượng enzyme tiêu hóa lớn nhất trong các nhóm hoa quả. Một số công dụng của dưa vàng: cân bằng lượng đường huyết, giúp da mịn màng tươi trẻ, chống lại viêm khớp và tăng cường hệ miễn dịch.</p>', 1),
+(8, 1, 'Cam', 'assets/image/juice bottle/cam.jpg', 'Tương đương với  2.5 quả cam.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali.</p><p><u>CÔNG DỤNG CHUNG:</u>\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.</p>', 1),
+(9, 1, 'Dứa', 'assets/image/juice bottle/dua.jpg', 'Tương đương với 1 quả dứa.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan.</p><p><u>CÔNG DỤNG CHUNG:</u> Dứa có rất nhiều vitamin, khoáng chất; cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chứa bromelain. Đây là một hợp chất thực vật rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viêm, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.</p>', 1),
+(10, 1, 'Bưởi', 'assets/image/juice bottle/10-buoi.jpg', 'Tương đương với 3/4 quả bưởi.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin A, C, B6, Kali.</p><p><u>CÔNG DỤNG CHUNG:</u> Bưởi góp phần bổ sung một lượng Vitamin C tuyệt vời và làm tăng sức đề kháng của cơ thể. Bưởi còn là một quả chống oxy hóa, giúp cơ thể chống lại stress và các bệnh liên quan đến hen suyễn và viêm khớp. Ngoài ra, bưởi giúp còn giúp làm đẹp da (trị các vấn đề da khô, mụn trứng cá, nếp nhăn hay vẩy nến), giảm cân, giảm lượng cholesterol trong máu.</p>', 1),
+(11, 1, 'Dưa Hấu', 'assets/image/juice bottle/dua-hau.jpg', 'Tương đương với 1/4 quả dưa hấu.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin A, Vitamin C, Protein.</p><p><u>CÔNG DỤNG KHÁC</u>:\r\nDưa hấu chứa rất nhiều Vitamin A và C, với lượng chất béo bão hòa, cholesterol và natri rất thấp. Dưa hấu chính là loại hoa rất tốt để giữ nước cho cơ thể, đặc biệt vào mùa hè; giúp sáng da với lượng đường cao nhưng lại có calo thấp.\r\nMột số tác dụng khác của dưa hấu: bảo vệ da khỏi tia UV, hỗ trợ thị lực, tránh nhiễm trùng và bảo vệ tim mạch.</p>', 1),
+(12, 1, 'Dứa Cà Rốt', 'assets/image/juice bottle/dua-ca-rot.jpg', 'Tương đương với 0.5 quả dứa và 3 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả dứa và cà rốt:\r\n\r\nDứa: Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan\r\nCÔNG DỤNG CHUNG\r\nDứa có rất nhiều vitamin khoáng chất, cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chúa bromelain, hợp chất thực vật. Hợp chất này rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viên, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.\r\n\r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\nCÔNG DỤNG CHUNG\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, khó tiêu hoá, phụ nữ da khô. ', 1),
+(13, 1, 'Táo Cà Rốt', 'assets/image/juice bottle/tao-ca-rot.jpg', 'Tương đương với 2 quả táo và 3 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả táo và cà rốt:\r\n\r\nTáo: Chỉ số dinh dưỡng nổi bật: Vitamin C, Vitamin K, Kali\r\nCÔNG DỤNG CHUNG\r\nTáo chứa ít chất béo bão hòa, cholesterol, natri và rất tốt cho tim mạch và hệ tiêu hóa.\r\nMột số tác dụng khác của táo: giảm rối loạn đường ruột, viêm túi thừa. Ngoài ra, táo có nhiều kali, đem lại một trái tim khỏe mạnh!\r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\nCÔNG DỤNG CHUNG\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, phụ nữ da khô. ', 1),
+(14, 1, 'Nước Ép Mix', 'assets/image/juice bottle/mixed-juice.jpg', 'Bạn có thể chọn tối đa 3 loại rau, quả để ép cùng nhau.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(15, 1, 'Cam Dứa', 'assets/image/juice bottle/cam-dua.jpg', 'Tương đương với 1.5 quả cam và 0.5 quả dứa.', 'Vị thơm ngon tự nhiên với tác dụng của cả cam dứa:\r\n\r\nDứa: Chỉ số dinh dưỡng nổi bật: Vitamin C, B6, Mangan\r\nCÔNG DỤNG CHUNG\r\nDứa có rất nhiều vitamin khoáng chất, cần được sử dụng thường xuyên để duy trì cơ thể khỏe mạnh, bởi đây là trái cây duy nhất chúa bromelain, hợp chất thực vật. Hợp chất này rất tốt để cải thiện chức năng miễn dịch, thúc đẩy vết thương mau liền và tăng cường tiêu hóa. Một số tác dụng khác: phá vỡ protein trong máu, qua đó giảm viên, đau, cũng như bảo vệ xương khỏi các tác hại bên ngoài.\r\n\r\nCam: Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali\r\nCÔNG DỤNG CHUNG\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.', 1),
+(16, 1, 'Cam Cà Rốt', 'assets/image/juice bottle/cam-ca-rot.jpg', 'Tương đương với 1.5 quả cam và 1 củ cà rốt.', 'Vị thơm ngon tự nhiên với tác dụng của cả cam và cà rốt:\r\n\r\nCam: Chỉ số dinh dưỡng nổi bật: Vitamin C, Folate, B1, Kali\r\nCÔNG DỤNG CHUNG\r\nCam là loại quả giàu các chất dinh dưỡng như: vitamin C, chất xơ, folate, chất chống oxy hóa nhưng rất ít calo và đường. Vì vậy, cam chính là nguồn dinh dưỡng nuôi dưỡng tóc và da rất tốt; có thể cải thiện thị lực, tăng hàm lượng chất xơ cho cơ thể. Một số công dụng khác của Cam: chữa táo bón, tăng cường chức năng não bộ, cải thiện các bệnh về thận, tim mạch.\r\n\r\n \r\n\r\nCà rốt: Chỉ số dinh dưỡng nổi bật: Vitamin A, vitamin K, Folate, Kali\r\n\r\nCÔNG DỤNG CHUNG\r\n\r\nCà rốt rất tốt cho tim mạch, với tỉ lệ chất xơ cao, đặc biệt dành cho những người bị cao huyết áp, viêm thận, tiểu đường, khó tiêu hoá, phụ nữ da khô. ', 1),
+(17, 1, 'Lựu', 'assets/image/juice bottle/luu.jpg', 'Tương đương với 2 quả lựu.', 'Cung cấp nhiều loại vitamin khác nhau đến từ trái lựu. Đặc biệt là có rất nhiều hoạt chất chống oxy hóa.', 1),
+(18, 2, 'Popeye\'s Juice', 'assets/image/juice bottle/popeye.jpg', 'Táo, Rau Chân vịt, Cần tây.', 'Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.', 1),
+(19, 2, 'Green Glow', 'assets/image/juice bottle/green-glow.jpg', 'Súp lơ xanh, Cần tây, Táo, Lá Bạc hà.', '<p><span style=\"color: rgb(33, 37, 41); font-size: medium; background-color: rgba(0, 0, 0, 0.075);\">Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.</span><br></p>', 1),
+(20, 2, 'The Digestive', 'assets/image/juice bottle/the-digestive.jpg', 'Táo, Rau Chân vịt, Dưa chuột.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(21, 1, 'Táo Củ Dền', 'assets/image/juice bottle/21-tao-cu-den.jpg', 'Táo, Củ dền.', '<p>Chỉ số dinh dưỡng nổi bật: Vitamin C, Fe, các loại Vitamin B.</p><p><u> CÔNG DỤNG CHUNG:</u> Củ dền có thể giúp cải thiện sức khỏe tim mạch bằng cách giảm mức cholesterol xấu và bổ sung thêm cholesterol tốt. Một số công dụng khác: hỗ trợ tiêu hóa, ngừa tiểu đường và giảm viêm khớp.</p>', 1),
+(22, 1, 'Cam Táo', 'assets/image/juice bottle/cam-tao.jpg', 'Cam, Táo.', '<p>Nhiều vitamin A và C.</p>', 1),
+(23, 2, 'Green Power', 'assets/image/juice bottle/green-power.jpg', 'Súp lơ xanh, Rau Chân vịt, Táo, Dưa chuột.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(24, 2, 'The Reset', 'assets/image/juice bottle/the-reset.jpg', 'Súp lơ xanh, Táo, Dứa, Cải xoăn.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(25, 3, 'Combo Detox', 'assets/image/juice bottle/combo-detox.jpg', 'Liệu trình Thải độc / Giảm cân\r\n', 'Combo Detox mới nhất của Juice Bazar với nguồn Vitamin phong phú và chất khoáng dồi dào từ nhiều loại rau, củ, quả tươi sẽ mang đến cho bạn 1 trải nghiệm mới về thanh lọc cơ thể và chăm sóc sức khoẻ hàng ngày!', 1),
+(26, 3, 'Combo Skin Care', 'assets/image/juice bottle/combo-dep-da.jpg', 'Liệu trình Đẹp da', '<p><span style=\"color: rgb(33, 37, 41); font-size: medium; background-color: rgba(0, 0, 0, 0.075);\">Combo Đẹp Da mới nhất của Juice Bazar với nguồn Vitamin phong phú và chất khoáng dồi dào từ nhiều loại rau, củ, quả tươi sẽ mang đến cho bạn 1 trải nghiệm mới về thanh lọc cơ thể và chăm sóc sức khoẻ hàng ngày!</span><br></p>', 1),
+(27, 3, 'Combo Digestion Helper', 'assets/image/juice bottle/combo-tieu-hoa.jpg', 'Liệu trình Hỗ trợ tiêu hóa', '<p><span style=\"color: rgb(33, 37, 41); font-size: medium; background-color: rgba(0, 0, 0, 0.075);\">Combo </span>Hỗ trợ tiêu hóa <span style=\"color: rgb(33, 37, 41); font-size: medium; background-color: rgba(0, 0, 0, 0.075);\">mới nhất của Juice Bazar với nguồn Vitamin phong phú và chất khoáng dồi dào từ nhiều loại rau, củ, quả tươi sẽ mang đến cho bạn 1 trải nghiệm mới về thanh lọc cơ thể và chăm sóc sức khoẻ hàng ngày!</span><br></p>', 1),
+(28, 3, 'Combo Immune System Boost', 'assets/image/juice bottle/combo-de-khang.jpg', 'Liệu trình Tăng cường đề kháng', '<p>Liệu trình Tăng cường đề kháng<br></p>', 1),
 (32, 5, 'Vietnamese Black Coffee', NULL, 'Cà phê đen.', NULL, 0),
 (33, 5, 'Vietnamese Milk Coffee', NULL, 'Cà phê nâu.', NULL, 0),
 (34, 4, 'Super Berries Tea', NULL, 'Trà Dâu, Mâm xôi, Việt quất.', NULL, 0),
@@ -399,14 +402,13 @@ INSERT INTO `product` (`ProductId`, `TypeId`, `Name`, `Image`, `Description`, `N
 (40, 1, 'Lê', NULL, 'Lê.', NULL, 0),
 (42, 1, 'Táo Lựu', NULL, 'Táo, Lựu.', NULL, 0),
 (43, 1, 'Xoài xanh Ổi', NULL, 'Xoài xanh, Ổi.', NULL, 0),
-(44, 2, 'Balance', 'assets/image/juice bottle/Balance.jpg', 'Táo, Cà Rốt, Rau Chân vịt, Chanh.', '<p>123</p>', 1),
-(45, 2, 'Ring The Bell', 'assets/image/juice bottle/Ring The Bell.jpg', 'Táo, Rau Chân vịt, Ớt chuông xanh.', NULL, 1),
-(46, 2, 'Power Up', 'assets/image/juice bottle/Power Up.jpg', 'Táo, Dứa, Dưa Chuột, Rau Chân vịt, Lá Bạc hà, Gừng.', NULL, 1),
-(47, 2, 'Super Veggies', 'assets/image/juice bottle/Super Veggies.jpg', 'Cam, Táo, Củ dền, Rau Cần tây, Cà rốt, Dưa chuột.', NULL, 1),
-(48, 2, 'Refresh', 'assets/image/juice bottle/Refresh.jpg', 'Táo, Dứa, Dưa chuột, Rau Chân vịt, Chanh, Lá Bạc hà, Mật ong.', NULL, 1),
-(49, 2, 'Happy Greens', 'assets/image/juice bottle/Happy Greens.jpg', 'Cam, Táo, Rau Chân vịt, Rau Cần tây.', NULL, 1),
-(51, 2, 'Kale Me Maybe', 'assets/image/juice bottle/Kale Me Maybe.jpg', 'Táo, Cam, Rau Chân vịt, Rau Cải xoăn.', NULL, 1),
-(64, 1, '123123123', 'assets/image/juice bottle/swd01_15793_kylo_darrentan03.jpg', '<p>123</p>', '', 0);
+(44, 2, 'Balance', 'assets/image/juice bottle/44-balance.jpg', 'Táo, Cà Rốt, Rau Chân vịt, Chanh.', '<p>Nhiều chất dinh dưỡng, vitamin A và C từ cả rau củ và hoa quả.</p>', 1),
+(45, 2, 'Ring The Bell', 'assets/image/juice bottle/ring-the-bell.jpg', 'Táo, Rau Chân vịt, Ớt chuông xanh.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(46, 2, 'Power Up', 'assets/image/juice bottle/power-up.jpg', 'Táo, Dứa, Dưa Chuột, Rau Chân vịt, Lá Bạc hà, Gừng.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(47, 2, 'Super Veggies', 'assets/image/juice bottle/super-veggies.jpg', 'Cam, Táo, Củ dền, Rau Cần tây, Cà rốt, Dưa chuột.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(48, 2, 'Refresh', 'assets/image/juice bottle/refresh.jpg', 'Táo, Dứa, Dưa chuột, Rau Chân vịt, Chanh, Lá Bạc hà, Mật ong.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(49, 2, 'Happy Greens', 'assets/image/juice bottle/happy-greens.jpg', 'Cam, Táo, Rau Chân vịt, Rau Cần tây.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1),
+(51, 2, 'Kale Me Maybe', 'assets/image/juice bottle/kale-me-maybe.jpg', 'Táo, Cam, Rau Chân vịt, Rau Cải xoăn.', '<p>Nhiều chất dinh dưỡng, vitamin và khoáng chất từ cả rau củ và hoa quả.<br></p>', 1);
 
 -- --------------------------------------------------------
 
@@ -440,7 +442,7 @@ INSERT INTO `productdetail` (`ProductDetailId`, `ProductId`, `CapacityId`, `Pric
 (10, 5, 2, 45000, 34000, 30),
 (11, 6, 1, 55000, 43000, 20),
 (12, 6, 2, 65000, 51000, 20),
-(13, 7, 1, 50000, 370000, 25),
+(13, 7, 1, 50000, 37000, 25),
 (14, 7, 2, 60000, 48000, 25),
 (15, 8, 1, 55000, 43000, 20),
 (16, 8, 2, 65000, 51000, 20),
@@ -505,9 +507,7 @@ INSERT INTO `productdetail` (`ProductDetailId`, `ProductId`, `CapacityId`, `Pric
 (75, 49, 1, 50000, 40000, 45),
 (76, 49, 2, 60000, 47000, 40),
 (77, 51, 1, 50000, 38000, 30),
-(78, 51, 2, 60000, 48000, 40),
-(95, 64, 1, 4000, 3000, 0),
-(96, 64, 2, 3500, 1500, 0);
+(78, 51, 2, 60000, 48000, 40);
 
 -- --------------------------------------------------------
 
@@ -550,7 +550,7 @@ CREATE TABLE `type` (
 INSERT INTO `type` (`TypeId`, `Type`, `TypeStatus`) VALUES
 (1, 'Fruits', 1),
 (2, 'Greens', 1),
-(3, 'Combos', 1),
+(3, 'Combo', 1),
 (4, 'Hot Teas', 0),
 (5, 'Coffees', 0),
 (6, 'Other Drinks', 0);
@@ -648,19 +648,19 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `productdetail`
 --
 ALTER TABLE `productdetail`
-  MODIFY `ProductDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `ProductDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `promotion`
