@@ -226,17 +226,15 @@ $row = mysqli_fetch_array($rs);
                                             case 4:
                                                 echo '4.Đơn đã hủy';
                                         } ?>
-                                </td>
-                                <td>
-                                    <form method="POST" action="">
+                                        <form method="POST" action="">
 
-                                        <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
-                                        <input type="hidden" name="OrderId" value="<?= $key ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm text-white" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
-                                            Hủy Đơn
-                                        </button>
+                                            <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
+                                            <input type="hidden" name="OrderId" value="<?= $key ?>">
+                                            <button type="submit" class="btn btn-danger btn-sm text-white" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
+                                                Hủy Đơn
+                                            </button>
 
-                                    </form>
+                                        </form>
                                 </td>
                             </tr>
                             <?php foreach ($order['OrderDetail'] as $item) : ?>
