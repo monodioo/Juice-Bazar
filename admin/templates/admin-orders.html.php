@@ -82,9 +82,9 @@
                                 <input type="hidden" name="OrderId" value="<?= $order['OrderId'] ?>">
                                 <button type="submit" class="btn btn-warning btn-sm text-white mb-1" name="OrderStatusBtn" id="OrderStatusBtn" <?= $order['Status'] >= 3 ? 'disabled' : '' ?>>Apply</button>
                             </form>
-                            <a class="btn btn-danger btn-sm text-white delete-product <?= ($order['Status'] != 4) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-element-id="<?= $order['OrderId'] ?>" data-element-name="<?= $order['OrderId'] ?>">
+                            <!-- <a class="btn btn-danger btn-sm text-white delete-product <?= ($order['Status'] != 4) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-element-id="<?= $order['OrderId'] ?>" data-element-name="<?= $order['OrderId'] ?>">
                                 Delete
-                            </a>
+                            </a> -->
 
                         </td>
                     </tr>

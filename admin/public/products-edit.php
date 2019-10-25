@@ -48,6 +48,8 @@ if (!empty($_SESSION['admin'])) {
                     $_SESSION['productEditMsg'] = 'Sorry, only JPG, JPEG, PNG files are allowed';
                     header('location: products-edit.php');
                 } else {
+                    $oldImg = __DIR__ . "/../../" . $_POST['ImageCheck'];
+                    unlink($oldImg);
                     move_uploaded_file($_FILES['Image']['tmp_name'], $path);
 
                     $record =  [

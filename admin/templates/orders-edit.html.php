@@ -174,10 +174,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form method="post" action="orders-delete.php">
+                        <!-- <form method="post" action="orders-delete.php">
                             <input class="form-control" type="hidden" name="deleteOrder" id="deleteElement" value="">
                             <button type="submit" name="deleteOrderBtn" class="btn btn-danger">Delete</button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
