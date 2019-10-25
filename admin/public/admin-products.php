@@ -6,6 +6,11 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
+    if (isset($_SESSION['flashMessage'])) {
+        echo "<script>alert('$_SESSION[flashMessage]')</script>";
+        unset($_SESSION['flashMessage']);
+    }
+
     try {
         $title = "Juice Bazar - Admin - Products";
 

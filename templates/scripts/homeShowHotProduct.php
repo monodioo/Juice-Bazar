@@ -40,7 +40,7 @@ while ($rowHotProductId = mysqli_fetch_array($hotProductId)) {
                                     <div data-toggle="collapse" href="#collapseNutrition" role="button" aria-expanded="false" aria-controls="collapseNutrition" class="font-weight-bold">
                                         Giá trị dinh dưỡng<i class="fas fa-chevron-down ml-2"></i>
                                     </div>
-                                    <div class="collapse show" id="collapseNutrition">
+                                    <div class="collapse" id="collapseNutrition">
                                         <?php echo $row['Nutrition'] ?>
                                     </div>
                                     <div data-toggle="collapse" href="#collapseProperties" role="button" aria-expanded="false" aria-controls="collapseProperties" class="font-weight-bold">

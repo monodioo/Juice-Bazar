@@ -8,9 +8,9 @@ if (!empty($_SESSION['admin'])) {
     include_once __DIR__ . '/../include/DatabaseConnection.php';
     include_once __DIR__ . '/../include/DatabaseFunctions.php';
 
-    if (isset($_SESSION['productEditMsg'])) {
-        echo "<script>alert('$_SESSION[productEditMsg]')</script>";
-        unset($_SESSION['productEditMsg']);
+    if (isset($_SESSION['flashMessage'])) {
+        echo "<script>alert('$_SESSION[flashMessage]')</script>";
+        unset($_SESSION['flashMessage']);
     }
 
     try {
@@ -18,7 +18,7 @@ if (!empty($_SESSION['admin'])) {
 
             $folder = __DIR__ . "/../../assets/image/juice bottle/";
 
-            $image = $_FILES['Image']['name'];
+            $image =  $_POST['ProductId'] . '-' . $_FILES['Image']['name'];
 
             $path = $folder . $image;
 
@@ -31,32 +31,27 @@ if (!empty($_SESSION['admin'])) {
 
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
-            //get previous location to go back in case of error
-            $previous = "javascript:history.go(-1)";
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                $previous = $_SERVER['HTTP_REFERER'];
-            }
-
             if (($_POST['EntryPrice1'] > $_POST['Price1']) || ($_POST['EntryPrice2'] > $_POST['Price2'])) {
-                $_SESSION['productEditMsg'] = 'Sorry, Entry Price should not be higher than SalePrice';
-                header('location: products-edit.php');
+                $_SESSION['flashMessage'] = 'Sorry, Entry Price should not be higher than SalePrice';
+                header('location: products-edit.php' . empty($_POST['ProductId']) ? "" : '?id=' . $_POST['ProductId']);
             } else {
 
                 if (!in_array($ext, $allowed) && empty($_POST['ImageCheck'])) {
-                    // $title = 'Error';
-                    // $output = "Sorry, only JPG, JPEG, PNG files are allowed. Please go &nbsp; <a href=" . $previous . ">back</a> &nbsp; to edit. ";;
-                    $_SESSION['productEditMsg'] = 'Sorry, only JPG, JPEG, PNG files are allowed';
-                    header('location: products-edit.php');
+                    $_SESSION['flashMessage'] = 'Sorry, only JPG, JPEG, PNG files are allowed';
+                    header('location: products-edit.php' . empty($_POST['ProductId']) ? "" : '?id=' . $_POST['ProductId']);
                 } else {
-                    $oldImg = __DIR__ . "/../../" . $_POST['ImageCheck'];
-                    unlink($oldImg);
-                    move_uploaded_file($_FILES['Image']['tmp_name'], $path);
+                    //if the new imageis not empty >> delete old image
+                    if (!empty($_FILES['Image']['name'])) {
+                        $oldImg = __DIR__ . "/../../" . $_POST['ImageCheck'];
+                        unlink($oldImg);
+                        move_uploaded_file($_FILES['Image']['tmp_name'], $path);
+                    }
 
                     $record =  [
                         'ProductId' => $_POST['ProductId'],
                         'TypeId' => $_POST['TypeId'],
                         'Name' => $_POST['Name'],
-                        'Image' => !empty($_FILES['Image']['name']) ? ('assets/image/juice bottle/' . $_FILES['Image']['name'] . '') : ($_POST['ImageCheck']),
+                        'Image' => !empty($_FILES['Image']['name']) ? ('assets/image/juice bottle/' . $_POST['ProductId'] . '-' . $_FILES['Image']['name']) : ($_POST['ImageCheck']),
                         'Description' => $_POST['Description'],
                         'Nutrition' => $_POST['Nutrition'],
                         'Status' => $_POST['Status'],
