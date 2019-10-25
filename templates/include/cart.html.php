@@ -5,7 +5,7 @@
   </ol>
 </div>
 
-<div class="row ">
+<div class="row">
   <div class="page-section card col-12 py-5 px-5">
     <div class="row">
       <div class="section-title col-12 pt-0" id='giohang'>Giỏ hàng</div>
@@ -27,6 +27,9 @@
         </div>
       </div>
     </div>
+    <div class='row mb-3  border-bottom '>
+      <div class='py-3 font-weight-bold text-uppercase' id="cart-empty" style="display:<?= empty($_SESSION['cart']) ? '' : 'none' ?>">Đơn hàng trống</div>
+    </div>
     <?php include "templates/scripts/cartShowList.php" ?>
 
     <div class="row">
@@ -41,14 +44,14 @@
             <form name="couponForm" method="post">
               <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
               <div class="input-group">
-                <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?= (isset($_SESSION['promoname'])) ? $_SESSION['promoname'] : "" ?>">
+                <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?= (isset($_SESSION['promoname'])) ? $_SESSION['promoname'] : '' ?>">
                 <div class="input-group-append">
                   <button class="btn btn-outline-warning btn-sm" type="button" id="couponBtn" name="couponBtn">Áp dụng</button>
                 </div>
               </div>
             </form>
           </div>
-          <div class="col-12 text-danger font-italic mt-1" id="stCoupon" style="font-size: 12px"></div>
+          <div class="col-12 font-italic mt-1" id="stCoupon" style="font-size: 12px"></div>
         </div>
       </div>
       <div class="col-md-6 mt-3 mt-md-0">
@@ -73,8 +76,8 @@
                 <span class="">Giảm giá</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong><span id="promovalue"><?php if (isset($_SESSION['promovalue'])) echo $_SESSION['promovalue'] * 100;
-                                              else echo '0'; ?></span><span> %</span></strong>
+                <strong><span id="promovalue"><?php if (empty($_SESSION['promovalue'])) echo '0';
+                                              else echo $_SESSION['promovalue'] * 100; ?></span><span> %</span></strong>
               </div>
             </div>
             <div class="row mb-3">

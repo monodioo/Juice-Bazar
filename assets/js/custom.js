@@ -266,11 +266,11 @@ jQuery(document).ready(function($) {
   $("#changeForm").validate({
     rules: {
       passwordChange: {
-        required: true,
+        // required: true,
         minlength: 6
       },
       password2Change: {
-        required: true,
+        // required: true,
         minlength: 6,
         equalTo: "#passwordChange"
       },
@@ -288,11 +288,11 @@ jQuery(document).ready(function($) {
     },
     messages: {
       passwordChange: {
-        required: "Xin điền lại mật khẩu",
+        // required: "Xin điền lại mật khẩu",
         minlength: "Mật khẩu có tối thiểu 6 ký tự"
       },
       password2Change: {
-        required: "Xin điền lại mật khẩu",
+        // required: "Xin điền lại mật khẩu",
         minlength: "Mật khẩu có tối thiểu 6 ký tự",
         equalTo: "Mật khẩu không trùng"
       },
@@ -333,9 +333,36 @@ jQuery(document).ready(function($) {
     }
   });
 
-
-
-
+  $("#checkoutForm").validate({
+    rules: {
+      c_name: {
+        required: true,
+        minlength: 2
+      },
+      c_address: {
+        required: true,
+        minlength: 10
+      },
+      c_phone: {
+        required: true,
+        minlength: 10
+      }
+    },
+    messages: {
+      c_name: {
+        required: "Xin điền tên của bạn",
+        minlength: "Xin điền tên dài hơn"
+      },
+      c_address: {
+        required: "Xin nhập địa chỉ",
+        minlength: "Xin nhập địa chỉ chi tiết hơn"
+      },
+      c_phone: {
+        required: "Xin điền số điện thoại của bạn",
+        minlength: "Số điện thoại phải có 10 số"
+      }
+    }
+  });
 
   //end of document ready
 });

@@ -1,4 +1,6 @@
 <?php
+include "templates/scripts/testForm.php";
+include "templates/scripts/profile.php";
 $memberId = $_SESSION['memberId'];
 $sql = "SELECT * FROM Member WHERE MemberId = $memberId";
 $rs = mysqli_query($con, $sql);
@@ -9,7 +11,7 @@ $row = mysqli_fetch_array($rs);
     <div class="page-section card col-12 p-5">
         <div class="section-title">Quản lý tài khoản</div>
         <div class="h4 mb-3 textBazar">Thông tin tài khoản</div>
-        <div class="row mb-4">
+        <div class="row">
             <div class="col-12 col-md-6">
                 <div class="mb-1">
                     <span>Họ tên:&nbsp;</span>
@@ -19,18 +21,31 @@ $row = mysqli_fetch_array($rs);
                     <span>Email:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Email'] ?></span>
                 </div>
-                <div class="mb-1">
+                <!-- <div class="mb-1">
                     <span>Mật khẩu:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Pass'] ?></span>
+                </div> -->
+                <div class="mb-1">
+                    <span>Giới tính:&nbsp;</span>
+                    <span class="font-weight-bold"><?php switch ($row['Gender']) {
+                                                        case 1:
+                                                            echo 'Nam';
+                                                            break;
+                                                        case 2:
+                                                            echo 'Nữ';
+                                                            break;
+                                                        default:
+                                                            echo 'Khác';
+                                                    } ?>
+                    </span>
                 </div>
-                <!-- <div class="mb-1">
-        <span>Giới tính:&nbsp;</span>
-        <span class="font-weight-bold">Nam</span>
-        </div>
-        <div class="mb-1">
-        <span>Ngày sinh:&nbsp;</span>
-        <span class="font-weight-bold">31/12/1990 </span>
-        </div> -->
+                <div class="mb-1">
+                    <span>Ngày sinh:&nbsp;</span>
+                    <span class="font-weight-bold"><?= isset($row['Birthday']) ? date('d/m/Y', strtotime($row['Birthday'])) : '' ?></span>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 align-top">
                 <div class="mb-1">
                     <span>Số điện thoại:&nbsp;</span>
                     <span class="font-weight-bold"><?= $row['Phone'] ?></span>
@@ -40,8 +55,11 @@ $row = mysqli_fetch_array($rs);
                     <span class="font-weight-bold"><?= $row['Address'] ?></span>
                 </div>
             </div>
-            <div class="col-12 col-md-6 align-top">
-                <button type="button" class="btn btn-cart text-white mt-3 mt-md-0" data-toggle="modal" data-target="#changeProfile">
+        </div>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <button type="button" class="btn btn-cart text-white" data-toggle="modal" data-target="#changeProfile">
                     Thay đổi thông tin
                 </button>
                 <!-- Modal -->
@@ -71,53 +89,25 @@ $row = mysqli_fetch_array($rs);
                                         </label>
                                         <input type="password" class="form-control" name="password2Change" id="password2Change" placeholder="Nhập lại Mật khẩu mới" />
                                     </div>
-                                    <!-- <div class="form-group">
-                    <label class="mr-2">Giới tính: </label>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender1"
-                        value="male"
-                    />
-                    <label class="form-check-label" for="radioGender1"
-                        >Nam</label
-                    >
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender2"
-                        value="female"
-                    />
-                    <label class="form-check-label" for="radioGender2"
-                        >Nữ</label
-                    >
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="genderChange"
-                        id="radioGender3"
-                        value="other"
-                    />
-                    <label class="form-check-label" for="radioGender3"
-                        >Khác</label
-                    >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="birthdayChange" class="">Ngày sinh:</label>
-                    <input
-                    type="date"
-                    name="birthdayChange"
-                    class="form-control"
-                    />
-                </div> -->
+                                    <div class="form-group">
+                                        <label class="mr-2">Giới tính: </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender1" value="1" <?= ($row['Gender'] == 1) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label" for="radioGender1">Nam</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender2" value="2" <?= ($row['Gender'] == 2) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label" for="radioGender2">Nữ</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="genderChange" id="radioGender3" value="0" <?= ($row['Gender'] == 0) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label" for="radioGender3">Khác</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdayChange" class="">Ngày sinh:</label>
+                                        <input type="date" name="birthdayChange" class="form-control" value="<?= $row['Birthday'] ?>" />
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="telChange" class="">Số điện thoại<span class="text-danger"> * </span>:</label>
@@ -127,11 +117,11 @@ $row = mysqli_fetch_array($rs);
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="addChange" class="">Địa chỉ:</label>
-                                            <input type="text" class="form-control" id="addSignup" name="addSignup" placeholder="Số nhà, Tên đường, Xã / Phường, Quận" value="<?= $row['Address'] ?>" />
+                                            <input type="text" class="form-control" id="addChange" name="addChange" placeholder="Số nhà, Tên đường, Xã / Phường, Quận" value="<?= $row['Address'] ?>" />
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-cart mt-1">Thay đổi</button>
+                                    <button class="btn btn-cart mt-1" name="profile_update">Thay đổi</button>
                                 </form>
                             </div>
                         </div>
@@ -142,10 +132,42 @@ $row = mysqli_fetch_array($rs);
         </div>
 
         <?php
-        $sqlOrder = "SELECT * FROM Orders "
+        $orders = array();
+        $sqlOrder = "SELECT * FROM Orders LEFT JOIN Promotion ON Orders.PromoId = Promotion.PromoId WHERE MemberId =" . $_SESSION['memberId'];
+        $rsOrder = mysqli_query($con, $sqlOrder);
+        while ($rowOrder = mysqli_fetch_array($rsOrder)) {
+            $orders[$rowOrder['OrderId']]['PurchaseDate'] = $rowOrder['PurchaseDate'];
+            $orders[$rowOrder['OrderId']]['DeliveryDate'] = $rowOrder['DeliveryDate'];
+
+            $orders[$rowOrder['OrderId']]['OrderDetail'] = array();
+            $sqlDetail = "SELECT * FROM OrderDetail
+                                    JOIN ProductDetail ON OrderDetail.ProductDetailId = ProductDetail.ProductDetailId
+                                    JOIN Product       ON ProductDetail.ProductId = Product.ProductId
+                                    JOIN Capacity      ON ProductDetail.CapacityId = Capacity.CapacityId
+                            WHERE OrderId = " . $rowOrder['OrderId'];
+            $rsDetail = mysqli_query($con, $sqlDetail);
+            $subTotalValue = 0;
+            while ($rowDetail = mysqli_fetch_array($rsDetail)) {
+                $OrderDetail[] = array(
+                    'ProductId' => $rowDetail['ProductId'],
+                    'Name'      => $rowDetail['Name'] . '(' . $rowDetail['Capacity'] . 'ml)',
+                    'Quantity'  => $rowDetail['Quantity'],
+                    'SalePrice' => $rowDetail['SalePrice']
+                );
+
+                $subTotalValue += $rowDetail['Quantity'] * $rowDetail['SalePrice'];
+            }
+            $orders[$rowOrder['OrderId']]['OrderDetail'] = $OrderDetail;
+            $orders[$rowOrder['OrderId']]['totalPrice'] = $subTotalValue;
+            $orders[$rowOrder['OrderId']]['PromoName'] = $rowOrder['PromoName'];
+            $orders[$rowOrder['OrderId']]['PromoValue'] = $rowOrder['PromoValue'];
+            $orders[$rowOrder['OrderId']]['LastPrice'] = $subTotalValue * (1 - $rowOrder['PromoValue']);
+            $orders[$rowOrder['OrderId']]['Note'] = $rowOrder['Note'];
+            $orders[$rowOrder['OrderId']]['Status'] = $rowOrder['Status'];
+        }
         ?>
         <div class="">
-            <div class="h4 textBazar mb-3">Quản lý đơn hàng</div>
+            <div class="h4 textBazar my-3">Quản lý đơn hàng</div>
             <div class="table-wrapper">
                 <table class="table table-hover table-sm tablesorter" id='profileTable'>
                     <thead>
@@ -166,9 +188,9 @@ $row = mysqli_fetch_array($rs);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($orders as $order) : ?>
+                        <?php foreach ($orders as $key => $order) : ?>
                             <tr>
-                                <td><?= $order['OrderId'] ?></td>
+                                <td><?= $key ?></td>
                                 <td><?= date_format(date_create($order['PurchaseDate']), 'M-d-Y H:i') ?></td>
                                 <td><?php if (($order['Status'] == 4)) {
                                             echo '<i>Đơn đã hủy</i>';
@@ -182,57 +204,54 @@ $row = mysqli_fetch_array($rs);
                                         Bấm để xem
                                     </a>
                                 </td>
-                                <td><?= number_format($order['subTotalValue']) ?> ₫</td>
+                                <td><?= number_format($order['totalPrice'], 0, '.', '.') ?> ₫</td>
                                 <td><?= empty($order['PromoName']) ?  'N/A' : $order['PromoName'] ?></td>
                                 <td><?= $order['PromoValue'] * 100 ?>%</td>
-                                <td><?= number_format($order['subTotalValue'] * (1 - $order['PromoValue'])) ?> ₫</td>
+                                <td><?= number_format($order['totalPrice'], 0, '.', '.') ?> ₫</td>
                                 <td><?= $order['Note'] ?></td>
                                 <td>
                                     <?php switch ($order['Status']) {
                                             case 0:
-                                                echo '0.Not processed';
+                                                echo '0.Chưa xử lý';
                                                 break;
                                             case 1:
-                                                echo '1.Processing';
+                                                echo '1.Đang xử lý';
                                                 break;
                                             case 2:
-                                                echo '2.Shipping';
+                                                echo '2.Đang vận chuyển';
                                                 break;
                                             case 3:
-                                                echo '3.Completed';
+                                                echo '3.Thành công';
                                                 break;
                                             case 4:
-                                                echo '4.Cancelled';
-                                                break;
+                                                echo '4.Đơn đã hủy';
                                         } ?>
                                 </td>
                                 <td>
                                     <form method="POST" action="">
 
                                         <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
-                                        <input type="hidden" name="OrderId" value="<?= $order['OrderId'] ?>">
-                                        <a class="btn btn-danger btn-sm text-white <?= ($order['Status'] != 4) ? 'disabled' : ''; ?>">
+                                        <input type="hidden" name="OrderId" value="<?= $key ?>">
+                                        <button type="submit" class="btn btn-danger btn-sm text-white" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
                                             Hủy Đơn
-                                        </a>
+                                        </button>
 
                                     </form>
                                 </td>
                             </tr>
-                            <?php foreach ($order['Items'] as $item) : ?>
+                            <?php foreach ($order['OrderDetail'] as $item) : ?>
                                 <tr class="tablesorter-childRow bg-light">
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <a href="products-edit.php?id=<?= $item['ProductId'] ?>">
+                                        <a href="?section=shop&typeid=0&id=<?= $item['ProductId'] ?>">
                                             <?= $item['Name'] ?>
-                                            &nbsp;
-                                            (<?= $item['CapacityId'] - 1 ? "330ml" : "250ml" ?>)
                                         </a>
                                     </td>
                                     <td><?= $item['Quantity']; ?></td>
-                                    <td><?= number_format($item['SalePrice']) ?> ₫</td>
-                                    <td><?= number_format($item['SalePrice'] * $item['Quantity']) ?> ₫</td>
+                                    <td><?= number_format($item['SalePrice'], 0, '.', '.') ?> ₫</td>
+                                    <td><?= number_format($item['SalePrice'] * $item['Quantity'], 0, '.', '.') ?> ₫</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -245,7 +264,7 @@ $row = mysqli_fetch_array($rs);
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="14" class="ts-pager">
+                            <th colspan="13" class="ts-pager">
                                 <div class="form-inline">
                                     <div class="btn-group btn-group-sm mx-1" role="group">
                                         <button type="button" class="btn btn-secondary first" title="first">⇤</button>

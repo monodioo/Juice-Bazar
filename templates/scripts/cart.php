@@ -50,8 +50,10 @@ if (isset($_POST['action'])) {
         $promoValue = 0;
         $promoName = '';
         $stCoupon = '';
+        $stColor = '';
         if (empty($_SESSION["memberId"])) {
             $stCoupon = "Chỉ thành viên mới được sử dụng mã khuyến mại!";
+            $stColor = 'text-danger';
             $_SESSION['promoname'] = $_POST["c_code"];
             $_SESSION['promovalue'] = 0;
         } else {
@@ -59,26 +61,31 @@ if (isset($_POST['action'])) {
             $rsCoupon = mysqli_query($con, $sqlCheckCouponCode);
             if (mysqli_num_rows($rsCoupon) < 1) {
                 $stCoupon = 'Mã khuyến mại không chính xác!';
+                $stColor = 'text-danger';
                 $_SESSION['promoname'] = $_POST["c_code"];
                 $_SESSION['promovalue'] = 0;
             } else {
                 $rowCoupon = mysqli_fetch_array($rsCoupon);
                 if ($rowCoupon['PromoStatus'] == 0) {
                     $stCoupon = 'Mã khuyến mại đã hết hạn';
+                    $stColor = 'text-danger';
                     $_SESSION['promoname'] = $_POST["c_code"];
                     $_SESSION['promovalue'] = 0;
                 } else {
                     $sqlCheckUsedCoupon = "SELECT * FROM Orders JOIN Promotion ON Orders.PromoId = Promotion.PromoId
-                                            WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'";
+                                            WHERE MemberId = " . $_SESSION["memberId"] . " AND PromoName = '" . $_POST["c_code"] . "'AND Status != 4";
                     $rsCheckUsed = mysqli_query($con, $sqlCheckUsedCoupon);
                     if (mysqli_num_rows($rsCheckUsed)) {
                         $stCoupon = 'Bạn đã sử dụng mã này rồi';
+                        $stColor = 'text-danger';
                         $_SESSION['promoname'] = $_POST["c_code"];
                         $_SESSION['promovalue'] = 0;
                     } else {
                         $_SESSION['promoname'] = $rowCoupon['PromoName'];
                         $_SESSION['promovalue'] = $rowCoupon['PromoValue'];
+                        $_SESSION['promoid'] = $rowCoupon['PromoId'];
                         $stCoupon = 'Nhập mã thành công';
+                        $stColor = 'text-success';
                     }
                 }
             }
@@ -88,6 +95,7 @@ if (isset($_POST['action'])) {
         $lastPrice = empty($_SESSION['promovalue']) ? $_SESSION['totalPrice'] : ($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']));
 
         $result = array(
+            'stColor' => $stColor,
             'stCoupon' => $stCoupon,
             'promoName' => $promoName,
             'promoValue' => $promoValue,

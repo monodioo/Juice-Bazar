@@ -105,6 +105,7 @@ $(document).ready(function() {
     });
   });
 
+  //Cart Update: Delete Cart.
   $(document).on("click", "#js-cart-deleteAll", function() {
     $.ajax({
       url: "templates/scripts/cart.php",
@@ -125,6 +126,8 @@ $(document).ready(function() {
 
   //Cart Update: Add Coupon
   $(document).on("click", "#couponBtn", function() {
+    $("#stCoupon").removeClass("text-danger");
+    $("#stCoupon").removeClass("text-success");
     $.ajax({
       url: "templates/scripts/cart.php",
       type: "post",
@@ -134,6 +137,7 @@ $(document).ready(function() {
         action: "add_coupon"
       },
       success: function(result) {
+        $("#stCoupon").addClass(result.stColor);
         $("#stCoupon").html(result.stCoupon);
         $("#c_code").val(result.promoName);
         $("#promovalue").html(result.promoValue * 100);
@@ -150,7 +154,7 @@ $(document).ready(function() {
       '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
   });
 
-  //Profile table sorter
+  // //Profile table sorter
 
   var $profileTable = $("#profileTable");
 
