@@ -41,7 +41,7 @@ $row = mysqli_fetch_array($rs);
                 </div>
                 <div class="mb-1">
                     <span>Ngày sinh:&nbsp;</span>
-                    <span class="font-weight-bold"><?= date('d/m/Y', strtotime($row['Birthday'])) ?></span>
+                    <span class="font-weight-bold"><?= isset($row['Birthday']) ? date('d/m/Y', strtotime($row['Birthday'])) : '' ?></span>
                 </div>
 
             </div>
