@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $addChange = test_input($_POST["addChange"]);
             $fnameChange = standardizedData($fnameChange);
             $addChange = standardizedData($addChange);
-            if (empty($_POST['pass'])) {
+            if (empty($_POST['passwordChange'])) {
                 $sqlUpdateMember = "UPDATE Member SET Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
             } else {
                 $passwordChange = test_input($_POST["passwordChange"]);
