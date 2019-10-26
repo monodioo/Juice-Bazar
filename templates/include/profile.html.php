@@ -62,8 +62,8 @@ $row = mysqli_fetch_array($rs);
         </div>
 
         <div class="row px-3 px-md-5">
-            <div class="col-6"></div>
-            <div class="col-6">
+            <div class="col-0 col-md-6"></div>
+            <div class="col-12 col-md-6">
                 <button type="button" class="btn btn-cart text-white" data-toggle="modal" data-target="#changeProfile">
                     Thay đổi thông tin
                 </button>
@@ -239,29 +239,27 @@ $row = mysqli_fetch_array($rs);
                                         } ?>
                                         <form method="POST" action="">
                                             <button type="button" class="btn btn-danger btn-sm text-white mt-3" data-toggle="modal" data-target="#deleteModal<?= $key ?>" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
-                                                Hủy Đơn
+                                                Hủy Đơn
                                             </button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="deleteModal<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title text-info" id="deleteModalLabel">HỦY ĐƠN</h5>
+                                                            <h5 class="modal-title" id="deleteModalLabel">Hủy đơn</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <span> </span>
-                                                            <span class="modal-text font-weight-bold">Bạn có chắc chắn muốn hủy đơn?</span>
-                                                            <span></span>
+                                                            <div class="modal-text font-weight-bold">Bạn có chắc chắn muốn hủy đơn?</div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form method="post" action="" class="m-0">
                                                                 <input type="hidden" name="OrderId" value="<?= $key ?>">
-                                                                <button type="submit" name="cancel-order" class="btn btn-danger">Yes</button>
+                                                                <button type="submit" name="cancel-order" class="btn btn-danger">Hủy đơn</button>
                                                             </form>
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -6,9 +6,9 @@
 </div>
 
 <div class="row">
-  <div class="page-section card col-12 py-5 px-5">
+  <div class="page-section card col-12 p-2 p-md-3 p-lg-5">
     <div class="row">
-      <div class="section-title col-12 pt-0" id='giohang'>Giỏ hàng</div>
+      <div class="section-title col-12 py-3 pt-lg-0 pb-lg-5" id='giohang'>Giỏ hàng</div>
     </div>
 
     <div class="row">
