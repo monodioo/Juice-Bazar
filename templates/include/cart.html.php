@@ -44,10 +44,7 @@
             <form name="couponForm" method="post">
               <label for="c_code" class="text-black mb-3">Nhập mã khuyến mại của bạn</label>
               <div class="input-group">
-                <input type="text" style="text-transform: uppercase;" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?= (isset($_SESSION['promoname'])) ? $_SESSION['promoname'] : '' ?>">
-                <!-- <div class="input-group-append" <?= (empty($_SESSION['promoname'])) ? 'hidden' : '' ?>>
-                  <button class="btn btn-outline-secondary btn-sm px-2" type="button" id="cancelCouponBtn" name="cancelCouponBtn">Hủy</button>
-                </div> -->
+                <input type="text" class="form-control" id="c_code" name="c_code" placeholder="Mã khuyến mại" aria-label="Mã khuyến mại" aria-describedby="couponBtn" value="<?= (isset($_SESSION['promoname'])) ? $_SESSION['promoname'] : '' ?>">
                 <div class="input-group-append">
                   <button class="btn btn-outline-warning btn-sm" type="button" id="couponBtn" name="couponBtn">Áp dụng</button>
                 </div>
@@ -70,26 +67,17 @@
                 <span class="">Tổng giá sản phẩm</span>
               </div>
               <div class="col-md-6 text-right">
-                <span id="totalPrice" class="font-weight-bold">
-                  <?= (isset($_SESSION['totalPrice'])) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?>
-                  &nbsp;₫
-                </span>
+                <strong class=""><span id="totalPrice"><?php if (isset($_SESSION['totalPrice'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                                                        else echo '0' ?></span><span> ₫</span></strong>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
                 <span class="">Giảm giá</span>
-                <span id="promovalue" class="font-weight-bold text-success">
-                  (
-                  <?= (empty($_SESSION['promovalue'])) ? '0' : $_SESSION['promovalue'] * 100 ?>
-                  %)
-                </span>
               </div>
               <div class="col-md-6 text-right">
-                <span>-
-                  <?= (empty($_SESSION['promovalue'])) ? '0' : number_format($_SESSION['totalPrice'] * ($_SESSION['promovalue']), 0, '.', '.') ?>
-                  &nbsp;₫
-                  <span>
+                <strong><span id="promovalue"><?php if (empty($_SESSION['promovalue'])) echo '0';
+                                              else echo $_SESSION['promovalue'] * 100; ?></span><span> %</span></strong>
               </div>
             </div>
             <div class="row mb-3">
@@ -97,13 +85,14 @@
                 <span class="">Tổng tiền</span>
               </div>
               <div class="col-md-6 text-right">
-                <span id="lastPrice" class="font-weight-bold">
-                  <?php
-                  if (empty($_SESSION['totalPrice'])) echo '0';
-                  else if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
-                  else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
-                  ?>
-                  &nbsp;₫</span>
+                <strong class="">
+                  <span id="lastPrice">
+                    <?php
+                    if (empty($_SESSION['totalPrice'])) echo '0';
+                    else  if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                    else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
+                    ?></span><span> ₫</span>
+                </strong>
               </div>
             </div>
 

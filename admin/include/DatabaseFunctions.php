@@ -84,7 +84,7 @@ function adminLogin($pdo, $adminName, $adminPass)
 function getProducts($pdo, $id = '')
 {
     if ($id == '') {
-        $sql = 'SELECT * FROM `product` p ORDER BY p.`TypeId`, p.`Name`';
+        $sql = 'SELECT * FROM `product` p ORDER BY p.`Name`';
         $query = query($pdo, $sql);
         $results = $query->fetchAll();
     } else {
