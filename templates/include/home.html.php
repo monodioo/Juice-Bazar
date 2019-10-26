@@ -9,27 +9,27 @@
       <div class="carousel-item active">
         <img src="assets/image/home_carousel_01.png" class="d-block w-100" alt="Carousel Image 01" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Sản phẩm rau, quả</h1>
-          <p>
-            Sạch, xanh, ngon
+          <h1 style="text-shadow: 3px 3px #f74c02;">Nhiều loại rau, quả</h1>
+          <p style="text-shadow: 3px 3px #f74c02;">
+            Sạch, xanh, ngon
           </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="assets/image/home_carousel_02.png" class="d-block w-100" alt="Carousel Image 02" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Công nghệ Cold-Pressed</h1>
-          <p>
-            Giữ nguyên vị và chất
+          <h1 style="text-shadow: 3px 3px #f74c02;">Công nghệ Cold-Pressed</h1>
+          <p style="text-shadow: 3px 3px #f74c02;">
+            Giữ nguyên vị và chất
           </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="assets/image/home_carousel_03.png" class="d-block w-100" alt="Carousel Image 03" />
         <div class="carousel-caption d-none d-md-block">
-          <h1>Giao hàng tận nơi</h1>
-          <p>
-            Thưởng thức tại nhà
+          <h1 style="text-shadow: 3px 3px #f74c02;">Giao hàng tận nơi</h1>
+          <p style="text-shadow: 3px 3px #f74c02;">
+            Thưởng thức ngay tại nhà
           </p>
         </div>
       </div>
