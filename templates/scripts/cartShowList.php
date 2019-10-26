@@ -21,7 +21,7 @@ if (isset($_SESSION['cart'])) {
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="h-100 d-flex flex-column">
                             <div class="cart-juice-name mt-n2" style="font-size: 1.3rem"><?php echo $row['Name'] ?></div>
-                            <span class="cart-juice-volume"><?php echo $row['Capacity'] ?> ml</span>
+                            <span class="cart-juice-volume"><?php echo $row['Capacity'] ?>ml</span>
                         </div>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 mt-3 mt-md-0 d-flex justify-content-between" style="line-height: 38px; font-size: 1.2rem">
@@ -36,7 +36,7 @@ if (isset($_SESSION['cart'])) {
                                         <i class="fas fa-minus-circle"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control text-center juice-qty-input px-1 js-change-quantity" id="<?= 'quantity' . $key ?>" data-productDetailId="<?= $key ?>" value="<?php echo $value['quantity'] ?>" name="quantity" aria-label="Quantity" style="width: 60px; background-color: transparent">
+                                <input type="text" class="form-control text-center juice-qty-input px-1 js-change-quantity js-change-quantity-cart" id="<?= 'quantity' . $key ?>" data-productDetailId="<?= $key ?>" value="<?php echo $value['quantity'] ?>" name="quantity" aria-label="Quantity" style="width: 60px; background-color: transparent">
                                 <div class="input-group-append">
                                     <button class="js-btn-plus js-btn-quantity" type="button" data-productDetailId="<?= $key ?>">
                                         <i class="fas fa-plus-circle"></i>

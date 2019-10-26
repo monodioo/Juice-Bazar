@@ -20,7 +20,7 @@
           <div class="col-12 col-md-4 col-lg-3 text-center font-weight-bold h5 ">Sản phẩm</div>
           <div class="col-md-4 col-lg-3 d-none d-md-block text-center font-weight-bold h5 ">Đơn giá</div>
           <div class="col-md-4 col-lg-3 d-none d-md-block text-center font-weight-bold h5 ">Số lượng</div>
-          <div class="col-lg-3 d-none d-lg-block text-center font-weight-bold h5 ">Tổng</div>
+          <div class="col-lg-3 d-none d-lg-block text-center font-weight-bold h5 ">Tạm tính</div>
           <!-- <div class="col-12 col-md-1 col-lg-2 mb-2 text-right">
             <button type="button" class="btn textBazar p-0" id="js-cart-deleteAll">Xóa hết</i></button>
           </div> -->
@@ -69,41 +69,30 @@
               <div class="col-md-6">
                 <span class="">Tổng giá sản phẩm</span>
               </div>
-              <div class="col-md-6 text-right">
-                <span id="totalPrice" class="font-weight-bold">
-                  <?= (isset($_SESSION['totalPrice'])) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?>
-                  &nbsp;₫
-                </span>
+              <div class="col-md-6 text-right font-weight-bold">
+                <span id="totalPrice" class=""><?= (isset($_SESSION['totalPrice'])) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?></span><span>₫</span>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
-                <span class="">Giảm giá</span>
-                <span id="promovalue" class="font-weight-bold text-success">
-                  (
-                  <?= (empty($_SESSION['promovalue'])) ? '0' : $_SESSION['promovalue'] * 100 ?>
-                  %)
+                <span class="">Giảm giá </span><span class="font-weight-bold text-success">(<span id="promovalue"><?= (empty($_SESSION['promovalue'])) ? '0' : $_SESSION['promovalue'] * 100 ?></span>%)
                 </span>
               </div>
-              <div class="col-md-6 text-right">
-                <span>-
-                  <?= (empty($_SESSION['promovalue'])) ? '0' : number_format($_SESSION['totalPrice'] * ($_SESSION['promovalue']), 0, '.', '.') ?>
-                  &nbsp;₫
-                  <span>
+              <div class="col-md-6 text-right font-weight-bold text-success">
+                <span>-</span>
+                <span id="promovalue2" class=""><?= (empty($_SESSION['promovalue'])) ? '0' : number_format($_SESSION['totalPrice'] * ($_SESSION['promovalue']), 0, '.', '.') ?></span><span>₫</span>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
                 <span class="">Tổng tiền</span>
               </div>
-              <div class="col-md-6 text-right">
-                <span id="lastPrice" class="font-weight-bold">
-                  <?php
-                  if (empty($_SESSION['totalPrice'])) echo '0';
-                  else if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
-                  else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
-                  ?>
-                  &nbsp;₫</span>
+              <div class="col-md-6 text-right font-weight-bold">
+                <span id="lastPrice"><?php
+                                      if (empty($_SESSION['totalPrice'])) echo '0';
+                                      else if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
+                                      else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
+                                      ?></span><span>₫</span>
               </div>
             </div>
 

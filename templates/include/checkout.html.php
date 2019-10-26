@@ -69,8 +69,8 @@
                   <td class="text-right"><strong><?= isset($_SESSION['totalPrice']) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?>₫</strong> </td>
                 </tr>
                 <tr>
-                  <td class="font-weight-bold"><strong>Giảm giá</strong></td>
-                  <td class="text-right text-success font-weight-bold"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '(0%)0' : '(' . ($_SESSION['promovalue'] * 100) . '%)' . number_format($_SESSION['promovalue'] * $_SESSION['totalPrice'], 0, '.', '.') ?>₫</td>
+                  <td class="font-weight-bold"><strong>Giảm giá <span class="text-success"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '(0%)' : '(' . ($_SESSION['promovalue'] * 100) . '%)' ?></span></strong></td>
+                  <td class="text-right text-success font-weight-bold"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '0' : '- ' . number_format($_SESSION['promovalue'] * $_SESSION['totalPrice'], 0, '.', '.') ?>₫</td>
                 </tr>
                 <tr>
                   <td class="font-weight-bold"><strong>Tổng tiền</strong></td>

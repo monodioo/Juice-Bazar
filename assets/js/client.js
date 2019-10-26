@@ -62,8 +62,14 @@ $(document).ready(function() {
     });
   });
 
-  $(document).on("change", ".js-change-quantity", function() {
+  $(document).on("blur", ".js-change-quantity", function() {
     if ($(this).val() <= 0) $(this).val(parseInt(1));
+    if (!$.isNumeric($(this).val())) $(this).val(parseInt(1));
+  });
+
+  $(document).on("change", ".js-change-quantity-cart", function() {
+    if ($(this).val() <= 0) $(this).val(parseInt(1));
+    if (!$.isNumeric($(this).val())) $(this).val(parseInt(1));
     let index_cart = $(this).attr("data-productDetailId");
     $.ajax({
       url: "templates/scripts/cart.php",
@@ -98,6 +104,7 @@ $(document).ready(function() {
         $("#" + result.productDetailId).hide();
         if (result.cartCount == 0) $("#cart-empty").show();
         $("#totalPrice").html(result.totalPrice);
+        $("#promovalue2").html(result.promoValue2);
         $("#lastPrice").html(result.lastPrice);
         $("#cart-sum").html(result.totalPrice);
         $("#cart-count").html(result.cartCount);
@@ -141,6 +148,7 @@ $(document).ready(function() {
         $("#stCoupon").html(result.stCoupon);
         $("#c_code").val(result.promoName);
         $("#promovalue").html(result.promoValue * 100);
+        $("#promovalue2").html(result.promoValue2);
         $("#lastPrice").html(result.lastPrice);
       }
     });

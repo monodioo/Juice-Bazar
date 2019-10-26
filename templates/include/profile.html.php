@@ -150,13 +150,14 @@ $row = mysqli_fetch_array($rs);
             $orders[$rowOrder['OrderId']]['DeliveryDate'] = $rowOrder['DeliveryDate'];
 
             $orders[$rowOrder['OrderId']]['OrderDetail'] = array();
-            $sqlDetail = "SELECT * FROM OrderDetail
+            $sqlDetail = "SELECT Product.ProductId, Capacity, Name, SalePrice, OrderDetail.Quantity FROM OrderDetail
                                         JOIN ProductDetail ON OrderDetail.ProductDetailId = ProductDetail.ProductDetailId
                                         JOIN Product       ON ProductDetail.ProductId = Product.ProductId
                                         JOIN Capacity      ON ProductDetail.CapacityId = Capacity.CapacityId
                                 WHERE OrderId = " . $rowOrder['OrderId'];
             $rsDetail = mysqli_query($con, $sqlDetail);
             $subTotalValue = 0;
+            unset($OrderDetail);
             while ($rowDetail = mysqli_fetch_array($rsDetail)) {
                 $OrderDetail[] = array(
                     'ProductId' => $rowDetail['ProductId'],
@@ -169,6 +170,7 @@ $row = mysqli_fetch_array($rs);
             }
             $orders[$rowOrder['OrderId']]['OrderDetail'] = $OrderDetail;
             $orders[$rowOrder['OrderId']]['totalPrice'] = $subTotalValue;
+            $orders[$rowOrder['OrderId']]['PromoId'] = $rowOrder['PromoId'];
             $orders[$rowOrder['OrderId']]['PromoName'] = $rowOrder['PromoName'];
             $orders[$rowOrder['OrderId']]['PromoValue'] = $rowOrder['PromoValue'];
             $orders[$rowOrder['OrderId']]['LastPrice'] = $subTotalValue * (1 - $rowOrder['PromoValue']);
@@ -205,7 +207,7 @@ $row = mysqli_fetch_array($rs);
                                             echo date_format(date_create($order['DeliveryDate']), 'M-d-Y H:i');
                                         } ?></td>
                                 <td class="text-center">
-                                    <a href="#" class="toggle admin-link d-block" style="height: 120px">
+                                    <a href="<?= '#' . $key ?>" class="toggle admin-link d-block" style="height: 120px">
                                         Bấm để xem
                                     </a>
                                 </td>
@@ -218,7 +220,7 @@ $row = mysqli_fetch_array($rs);
                                         <?= $order['PromoValue'] * 100 ?>%
                                     </span>
                                 </td>
-                                <td><?= number_format($order['totalPrice'], 0, '.', '.') ?> ₫</td>
+                                <td><?= empty($order['PromoValue']) ? number_format($order['totalPrice'], 0, '.', '.') : number_format($order['totalPrice'] * (1 - $order['PromoValue']), 0, '.', '.') ?> ₫</td>
                                 <td><?= $order['Note'] ?></td>
                                 <td>
                                     <?php switch ($order['Status']) {
@@ -259,6 +261,7 @@ $row = mysqli_fetch_array($rs);
                                                         <div class="modal-footer">
                                                             <form method="post" action="" class="m-0">
                                                                 <input type="hidden" name="OrderId" value="<?= $key ?>">
+
                                                                 <button type="submit" name="cancel-order" class="btn btn-danger">Yes</button>
                                                             </form>
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

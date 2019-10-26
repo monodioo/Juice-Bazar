@@ -73,7 +73,7 @@ while ($rowHotProductId = mysqli_fetch_array($hotProductId)) {
                                                         <i class="fas fa-minus-circle"></i>
                                                     </button>
                                                 </div>
-                                                <input type="text" class="form-control text-center juice-qty-input px-1" value="1" id="<?= 'quantity' . $row['ProductId'] ?>" aria-label="Quantity">
+                                                <input type="text" class="form-control text-center juice-qty-input px-1 js-change-quantity" value="1" id="<?= 'quantity' . $row['ProductId'] ?>" aria-label="Quantity">
                                                 <div class="input-group-append">
                                                     <button class="js-btn-plus" type="button">
                                                         <i class="fas fa-plus-circle"></i>
