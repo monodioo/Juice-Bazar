@@ -49,7 +49,7 @@
         </div>
         <div class="d-inline-block d-md-none ml-2">
           <?php if (isset($_SESSION['memberId'])) : ?>
-            <a id="profileBtn" class="" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
+            <a id="profileMobileBtn" class="" tabindex="0" role="button" data-toggle="popover" title='Xin chào <span><i> <?= $_SESSION['memberName'] ?></i></span>' data-content='<div class="mb-2"><a href="index.php?section=profile" class="text-dark" ><i class="fas fa-user-cog mr-2"></i>Quản lý tài khoản</a></div><div><a href="?action=logout" id="logoutBtn" class="text-dark"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></div>'>
               <i class="fas fa-user-circle nav-icon textBazar"></i>
             </a>
           <?php else : ?>
