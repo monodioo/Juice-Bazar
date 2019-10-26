@@ -98,7 +98,8 @@
               </div>
               <div class="col-md-6 text-right">
                 <span id="lastPrice" class="font-weight-bold">
-                  <?= (empty($_SESSION['totalPrice'])) ? '0': 
+                  <?php
+                  if (empty($_SESSION['totalPrice'])) echo '0';
                   else if (empty($_SESSION['promovalue'])) echo number_format($_SESSION['totalPrice'], 0, '.', '.');
                   else echo number_format($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']), 0, '.', '.');
                   ?>
