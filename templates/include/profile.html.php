@@ -238,13 +238,35 @@ $row = mysqli_fetch_array($rs);
                                                 echo 'Đơn đã hủy';
                                         } ?>
                                         <form method="POST" action="">
-
-                                            <input type="hidden" name="oldStatus" value="<?= $order['Status'] ?>">
-                                            <input type="hidden" name="OrderId" value="<?= $key ?>">
-                                            <button type="submit" class="btn btn-danger btn-sm text-white mt-3" id="cancel-order" name="cancel-order" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
+                                            <button type="button" class="btn btn-danger btn-sm text-white mt-3" data-toggle="modal" data-target="#deleteModal<?= $key ?>" <?= ($order['Status'] == 0 || $order['Status'] == 1) ? '' : 'disabled'; ?>>
                                                 Hủy Đơn
                                             </button>
-
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="deleteModal<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-info" id="deleteModalLabel">HỦY ĐƠN</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <span> </span>
+                                                            <span class="modal-text font-weight-bold">Bạn có chắc chắn muốn hủy đơn?</span>
+                                                            <span></span>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" action="" class="m-0">
+                                                                <input type="hidden" name="OrderId" value="<?= $key ?>">
+                                                                <button type="submit" name="cancel-order" class="btn btn-danger">Yes</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Modal -->
                                         </form>
                                 </td>
                             </tr>
@@ -300,7 +322,6 @@ $row = mysqli_fetch_array($rs);
                         </tr>
                     </tfoot>
                 </table>
-
             </div>
         </div>
 
