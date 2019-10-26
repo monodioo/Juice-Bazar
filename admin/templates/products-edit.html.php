@@ -154,7 +154,7 @@
                         <td scope="col">Action</td>
                         <td colspan=3>
                             <button class="btn btn-warning text-white" type="submit" name="SubmitProductBtn">Save</button>
-                            <a class="btn btn-danger text-white delete-product <?= ($products[0]['Existed'] > 0) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-product-id="<?= $products[0]['ProductId'] ?>" data-product-name="<?= $products[0]['Name'] ?>">
+                            <a class="btn btn-danger text-white delete-product <?= ($products[0]['Existed'] > 0 || empty($products[0]['ProductId'])) ? 'disabled' : ''; ?>" data-toggle="modal" data-target="#deleteModal" data-element-id="<?= $products[0]['ProductId'] ?>" data-element-name="<?= $products[0]['Name'] ?>">
                                 Delete
                             </a>
                         </td>
@@ -186,9 +186,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <form method="post" action="products-delete.php">
-                                <input class="form-control" type="hidden" name="deleteProduct" id="deleteProduct" value="">
-                                <button type="submit" name="deleteProductBtn" class="btn btn-danger">Delete</button>
+                            <form method="post" action="../include/snippets/products-delete.php">
+                                <input class="form-control" type="hidden" name="deleteElement" id="deleteElement" value="">
+                                <button type="submit" name="deleteElementBtn" class="btn btn-danger">Delete</button>
                             </form>
                         </div>
                     </div>

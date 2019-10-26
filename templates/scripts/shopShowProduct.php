@@ -27,7 +27,7 @@ $tableProduct = mysqli_query($con, $sqlShowProduct);
                                 <div class="container p-4">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name']; ?>" class="w-100 rounded" />
+                                            <img src="<?php echo ($row['Image']) ?>" alt="<?php echo $row['Name']; ?>" class="w-100 rounded" />
                                         </div>
                                         <div class="col-8">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -41,14 +41,14 @@ $tableProduct = mysqli_query($con, $sqlShowProduct);
                                                 <div data-toggle="collapse" href="#collapseNutrition" role="button" aria-expanded="false" aria-controls="collapseNutrition" class="font-weight-bold">
                                                     Giá trị dinh dưỡng<i class="fas fa-chevron-down ml-2"></i>
                                                 </div>
-                                                <div class="collapse show" id="collapseNutrition">
-                                                    <?php echo $row['Nutrition'] ?>
+                                                <div class="collapse" id="collapseNutrition">
+                                                    <?php echo ($row['Nutrition']) ?>
                                                 </div>
                                                 <div data-toggle="collapse" href="#collapseProperties" role="button" aria-expanded="false" aria-controls="collapseProperties" class="font-weight-bold">
                                                     Thành phần<i class="fas fa-chevron-down ml-2"></i>
                                                 </div>
                                                 <div class="collapse" id="collapseProperties">
-                                                    <?php echo $row['Description'] ?>
+                                                    <?php echo ($row['Description']) ?>
                                                 </div>
                                                 <div class="mt-2">
                                                     <strong>Giao hàng miễn phí</strong> tới 4 quận: Hoàn Kiếm, Hai

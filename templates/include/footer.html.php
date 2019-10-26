@@ -1,19 +1,20 @@
 <div class="row px-0">
   <div class="page-section newsletter-section col py-3">
     <div class="section-body row row-eq-height newsletter-text">
-      <div class="col-12 col-md-7 d-flex flex-column justify-content-center pl-0 pr-4 pl-lg-0">
-        <h5 class="text-uppercase font-weight-bold">
-          Cập nhật thông tin từ Juice Bazar
+      <div class="col-12 col-md-7 d-flex flex-column justify-content-center px-3 px-md-0">
+        <h5 class="text-uppercase font-weight-bold mt-2">
+          <?= !isset($_SESSION['memberId']) ? 'Cập nhật thông tin từ Juice Bazar' : ' Cùng nâng cao sức khỏe với các thức uống dinh dưỡng từ Juice Bazar!' ?>
+
         </h5>
         <p class="mb-0">
-          Đăng ký ngay để nhận các thông báo mới nhất về dinh dưỡng và khuyến mãi
-          từ chúng tôi!
+          <?= !isset($_SESSION['memberId']) ? 'Đăng ký ngay để nhận các thông báo mới nhất về dinh dưỡng và khuyến mãi
+          từ chúng tôi!' : ' ' ?>
         </p>
       </div>
       <div class="col-12 col-md-5 d-flex flex-column justify-content-center mt-3 mt-lg-0">
         <!-- <form class="newsletter-input-wrap d-flex flex-row"> -->
         <!-- <input type="text" class="form-control py-1 mr-n4" placeholder="email@domain.com" aria-label="Newsletter email" aria-describedby="sendEmailBtn" /> -->
-        <a class="btn btn-light btn-lg btn-link text-decoration-none" href="index.php?section=signup" id="sendEmailBtn" <?= isset($_SESSION['memberId']) ? 'hidden' : '' ?>>
+        <a class="btn btn-cart btn-lg btn-link text-decoration-none" href="index.php?section=signup" id="sendEmailBtn" <?= isset($_SESSION['memberId']) ? 'hidden' : '' ?>>
           Đăng ký
           <i class="fas fa-paper-plane" aria-hidden="true"></i>
         </a>
@@ -24,7 +25,7 @@
 </div>
 <!-- end of row -->
 <div class="row footer">
-  <div class="page-section col pt-5 px-3 px-md-2 px-lg-0 mb-4">
+  <div class="page-section col pt-5 px-3 px-md-0 mb-4">
     <div class="row">
       <div class="col-6 col-lg-8">
         <div class="row">

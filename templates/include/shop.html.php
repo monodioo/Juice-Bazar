@@ -1,10 +1,10 @@
       <div class="row">
-        <div class="page-section">
-          <ul class="nav shop-nav mt-2 mt-lg-5 mw-100">
-
+        <div class="page-section my-3 ml-3 ml-md-0 col-12 col-lg-8 col-xl-6">
+          <div class="nav shop-nav row">
+            <!-- mb-0 mb-md-3 mb-lg-5 mt-2 mt-lg-5 px-3 px-md-0 -->
             <?php include "templates/scripts/shopShowTypeProduct.php"; ?>
 
-          </ul>
+          </div>
         </div>
       </div>
       <div class="row px-0">
