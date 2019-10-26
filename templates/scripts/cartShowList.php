@@ -12,7 +12,7 @@ if (isset($_SESSION['cart'])) {
         $subPrice = $value['price'] * $value['quantity'];
         ?>
 
-        <div class="row mb-3 border-bottom list-cart" id="<?= $key ?>">
+        <div class="row mb-3 pb-3 border-bottom list-cart" id="<?= $key ?>">
             <div class="col-4 col-md-2">
                 <a href="#!"><img src="<?php echo $row['Image'] ?>" alt="<?php echo $row['Name'] ?>" class="img-fluid rounded"></a>
             </div>
