@@ -19,7 +19,7 @@ include "templates/include/header.html.php";
             } else {
                 $search_input = $_REQUEST['searchInput'];
                 $sqlShowProduct = "SELECT * FROM Product JOIN Productdetail ON Product.ProductId = Productdetail.ProductId
-                                WHERE CapacityId = 1 AND Status = 1 AND (Name LIKE N'%$search_input%' OR Description LIKE N'%$search_input%' OR Nutrition LIKE N'%$search_input%')
+                                WHERE CapacityId = 1 AND Status = 1 AND (Name LIKE N'%$search_input%' OR Description LIKE N'%$search_input%')
                                 ORDER BY Name";
             }
             $tableProduct = mysqli_query($con, $sqlShowProduct);
