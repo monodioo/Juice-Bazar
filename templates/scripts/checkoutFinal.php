@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 unset($_SESSION['promoname']);
                 unset($_SESSION['promoid']);
                 unset($_SESSION['totalPrice']);
-                echo "<script>alert('Đã xác nhận đơn hàng!!');location='?section=checkoutfinal'</script>";
+                echo "<script>location='?section=checkoutfinal'</script>";
             } else {
                 mysqli_query($con, "DELETE FROM Ordes WHERE OrderId = $order_id");
                 echo "<script>alert('Xác nhận đơn hàng thất bại!')</script>";

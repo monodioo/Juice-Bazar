@@ -2,7 +2,7 @@
 if ($_REQUEST["typeid"] == '0') {
     $sqlShowProduct = "SELECT * FROM Product JOIN Productdetail ON Product.ProductId = Productdetail.ProductId
                                 WHERE CapacityId = 1 AND Status = 1
-                                ORDER BY Name";
+                                ORDER BY TypeId, Name";
 } else {
     $typeid = $_REQUEST['typeid'];
     $sqlShowProduct = "SELECT * FROM Product  JOIN Productdetail ON Product.ProductId = Productdetail.ProductId

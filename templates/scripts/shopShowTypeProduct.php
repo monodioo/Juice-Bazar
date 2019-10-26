@@ -2,7 +2,7 @@
     <a class="nav-link nav-hover <?php if ($_REQUEST['typeid'] == '0') echo 'nav-hover-active'; ?>" id="shopAll" href="?section=shop&typeid=0">Toàn bộ</a>
 </div>
 <?php
-$sqlType = "SELECT * FROM Type WHERE TypeStatus = 1";
+$sqlType = "SELECT * FROM Type WHERE TypeStatus = 1 ORDER BY TypeId";
 $rsType = mysqli_query($con, $sqlType);
 while ($rowType = mysqli_fetch_array($rsType)) {
     ?>
