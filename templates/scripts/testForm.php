@@ -23,54 +23,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST["signupBtn"])) {
-        $signup = validate_signup_form($_POST['emailSignup'], $_POST['fnameSignup'], $_POST['passwordSignup'], $_POST['password2Signup'], $_POST['telSignup']);
-        if ($signup) {
-            $sqlMember = "SELECT * FROM Member WHERE Email = '" . $_POST["emailSignup"] . "'";
-            $resultMember = mysqli_query($con, $sqlMember);
-            if (mysqli_num_rows($resultMember)) {
-                echo "<script>alert('Email đã tồn tại');</script>";
-            } else {
-                $emailSignup = test_input($_POST['emailSignup']);
-                $fnameSignup = test_input($_POST["fnameSignup"]);
-                $passwordSignup = test_input($_POST["passwordSignup"]);
-                $genderSigup = $_POST['genderSignup'];
-                $birthdaySignup = isset($_POST['birthdaySignup']) ? $_POST['birthdaySignup'] : 'NULL';
-                $addSignup = isset($_POST["addSignup"]) ? $_POST["addSignup"] : 'NULL';
-                $telSignup = test_input($_POST["telSignup"]);
-                $addSignup = test_input($_POST["addSignup"]);
-                $fnameSignup = standardizedData($fnameSignup);
-                $addSignup = standardizedData($addSignup);
-                $sqlInsertMember = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
-                $rs = mysqli_query($con, $sqlInsertMember);
-                if ($rs) {
-                    echo "<script>alert('Bạn đã đăng ký thành công. Xin mời đăng nhập.');location='?section=login';</script>";
-                } else echo "<script>alert('Đăng ký thất bại!');</script>";
-            }
-        } else echo "<script>alert('Nhập dữ liệu sai!');</script>";
+        // $signup = validate_signup_form($_POST['emailSignup'], $_POST['fnameSignup'], $_POST['passwordSignup'], $_POST['password2Signup'], $_POST['telSignup']);
+        // if ($signup) {
+        $sqlMember = "SELECT * FROM Member WHERE Email = '" . $_POST["emailSignup"] . "'";
+        $resultMember = mysqli_query($con, $sqlMember);
+        if (mysqli_num_rows($resultMember)) {
+            echo "<script>alert('Email đã tồn tại');</script>";
+        } else {
+            $emailSignup = test_input($_POST['emailSignup']);
+            $fnameSignup = test_input($_POST["fnameSignup"]);
+            $passwordSignup = test_input($_POST["passwordSignup"]);
+            $genderSigup = $_POST['genderSignup'];
+            $birthdaySignup = isset($_POST['birthdaySignup']) ? $_POST['birthdaySignup'] : 'NULL';
+            $addSignup = isset($_POST["addSignup"]) ? $_POST["addSignup"] : 'NULL';
+            $telSignup = test_input($_POST["telSignup"]);
+            $addSignup = test_input($_POST["addSignup"]);
+            $fnameSignup = standardizedData($fnameSignup);
+            $addSignup = standardizedData($addSignup);
+            $sqlInsertMember = "INSERT INTO Member(Email,Pass,Name,Phone,Address) VALUES('$emailSignup','$passwordSignup','$fnameSignup','$telSignup','$addSignup')";
+            $rs = mysqli_query($con, $sqlInsertMember);
+            if ($rs) {
+                echo "<script>alert('Bạn đã đăng ký thành công. Xin mời đăng nhập.');location='?section=login';</script>";
+            } else echo "<script>alert('Đăng ký thất bại!');</script>";
+        }
+        // } else echo "<script>alert('Nhập dữ liệu sai!');</script>";
     }
 
     if (isset($_POST['profile_update'])) {
-        $change = validate_change_form($_POST['fnameChange'], $_POST['telChange']);
-        if ($change) {
-            $birthdayChange = isset($_POST['birthdayChange']) ? $_POST['birthdayChange'] : 'NULL';
-            $addChange = isset($_POST['addChange']) ? $_POST['addChange'] : 'NULL';
-            $genderChange = (int) $_POST['genderChange'];
-            $fnameChange = test_input($_POST["fnameChange"]);
-            $telChange = test_input($_POST["telChange"]);
-            $addChange = test_input($_POST["addChange"]);
-            $fnameChange = standardizedData($fnameChange);
-            $addChange = standardizedData($addChange);
-            if (empty($_POST['passwordChange'])) {
-                $sqlUpdateMember = "UPDATE Member SET Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
-            } else {
-                $passwordChange = test_input($_POST["passwordChange"]);
-                $sqlUpdateMember = "UPDATE Member SET Pass='$passwordChange',Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
-            }
-            $rs = mysqli_query($con, $sqlUpdateMember);
-            if ($rs) {
-                echo "<script>alert('Cập nhật thông tin thành công!');location='index.php?section=profile';</script>";
-            } else echo "<script>alert('Cập nhật thông tin thất bại!');</script>";
+        // $change = validate_change_form($_POST['fnameChange'], $_POST['telChange']);
+        // if ($change) {
+        $birthdayChange = isset($_POST['birthdayChange']) ? $_POST['birthdayChange'] : 'NULL';
+        $addChange = isset($_POST['addChange']) ? $_POST['addChange'] : 'NULL';
+        $genderChange = (int) $_POST['genderChange'];
+        $fnameChange = test_input($_POST["fnameChange"]);
+        $telChange = test_input($_POST["telChange"]);
+        $addChange = test_input($_POST["addChange"]);
+        $fnameChange = standardizedData($fnameChange);
+        $addChange = standardizedData($addChange);
+        if (empty($_POST['passwordChange'])) {
+            $sqlUpdateMember = "UPDATE Member SET Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
+        } else {
+            $passwordChange = test_input($_POST["passwordChange"]);
+            $sqlUpdateMember = "UPDATE Member SET Pass='$passwordChange',Name='$fnameChange',Birthday='$birthdayChange',Gender=$genderChange,Phone= '$telChange', Address = '$addChange' WHERE MemberId = " . $_SESSION['memberId'];
         }
+        $rs = mysqli_query($con, $sqlUpdateMember);
+        if ($rs) {
+            echo "<script>alert('Cập nhật thông tin thành công!');location='index.php?section=profile';</script>";
+        } else echo "<script>alert('Cập nhật thông tin thất bại!');</script>";
+        // }
     }
 }
 

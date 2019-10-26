@@ -55,8 +55,8 @@
 
           <h2 class="h3 mb-3">Đơn hàng của bạn</h2>
           <div class="p-3 p-lg-5 border">
-            <table class="table site-block-order-table mb-4">
-              <thead>
+            <table class="table site-block-order-table table-borderless mb-4">
+              <thead class="border-bottom">
                 <th>Sản phẩm</th>
                 <th class="text-right">Tổng</th>
               </thead>
@@ -64,15 +64,15 @@
 
                 <?php include "templates/scripts/checkoutShowList.php" ?>
 
-                <tr>
+                <tr class="border-top">
                   <td class="font-weight-bold"><strong>Tổng giá sản phẩm</strong></td>
                   <td class="text-right"><strong><?= isset($_SESSION['totalPrice']) ? number_format($_SESSION['totalPrice'], 0, '.', '.') : '0' ?>₫</strong> </td>
                 </tr>
                 <tr>
-                  <td class="font-weight-bold"><strong>Giảm giá</strong></td>
-                  <td class="text-right text-success font-weight-bold"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '(0%)0' : '(' . ($_SESSION['promovalue'] * 100) . '%)' . number_format($_SESSION['promovalue'] * $_SESSION['totalPrice'], 0, '.', '.') ?>₫</td>
+                  <td class="font-weight-bold"><strong>Giảm giá <span class="text-success"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '(0%)' : '(' . ($_SESSION['promovalue'] * 100) . '%)' ?></span></strong></td>
+                  <td class="text-right text-success font-weight-bold"><?= (empty($_SESSION['memberId']) || empty($_SESSION['promovalue'])) ? '0' : '- ' . number_format($_SESSION['promovalue'] * $_SESSION['totalPrice'], 0, '.', '.') ?>₫</td>
                 </tr>
-                <tr>
+                <tr class="border-top">
                   <td class="font-weight-bold"><strong>Tổng tiền</strong></td>
                   <td class="font-weight-bold text-right"><strong>
                       <?php if (empty($_SESSION['totalPrice'])) echo '0';
@@ -85,15 +85,15 @@
             </table>
 
             <div class="mb-4">
-              <div class="font-weight-bold mb-2">
-                Hình thức thanh toán
+              <div class="font-weight-normal mb-2">
+                Thanh toán khi nhận hàng
               </div>
-              <div class="form-check mb-2">
+              <!-- <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod_cash" value="cash" checked>
                 <label class="form-check-label" for="paymentMethod_cash">
                   Thanh toán khi nhận hàng
                 </label>
-              </div>
+              </div> -->
 
 
               <div class="form-group">

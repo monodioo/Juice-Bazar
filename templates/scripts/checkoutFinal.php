@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $cart = $_SESSION['cart'];
         $memberId = isset($_SESSION['memberId']) ? $_SESSION['memberId'] : 0;
         $promoId = isset($_SESSION['promoid']) ? $_SESSION['promoid'] : 'NULL';
-        $note = isset($_REQUEST['c_order_notes']) ? $_REQUEST['c_order_notes'] : $_REQUEST['c_phone'];
+        $note = isset($_SESSION['memberId']) ? $_REQUEST['c_order_notes'] : 'Tên: ' . $_REQUEST['c_name'] . '- Địa chỉ: ' . $_REQUEST['c_address'] . '- SĐT: ' . $_REQUEST['c_phone'] . '- Note: ' . $_REQUEST['c_order_notes'];
 
         $sql = "INSERT INTO Orders(MemberId,PromoId,Note) VALUES ($memberId,$promoId,'" . $note . "')";
         if (mysqli_query($con, $sql)) {

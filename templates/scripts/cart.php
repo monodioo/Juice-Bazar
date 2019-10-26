@@ -29,12 +29,15 @@ if (isset($_POST['action'])) {
         $_SESSION['totalPrice'] -= $deletePrice;
         $totalPrice = $_SESSION['totalPrice'];
         $promoValue = isset($_SESSION['promovalue']) ? $_SESSION['promovalue'] : 0;
+        $promoValue2 = empty($_SESSION['totalPrice']) ? 0 : $promoValue * $totalPrice;
         $lastPrice = $totalPrice * (1 - $promoValue);
         $cartCount = count($_SESSION['cart']);
+        $cartEmpty = empty($_SESSION['cart']) ? true : false;
 
         $result = array(
             'productDetailId' => $indexCart,
             'totalPrice' => number_format($totalPrice, 0, '.', '.'),
+            'promoValue2' => number_format($promoValue2, 0, '.', '.'),
             'lastPrice' => number_format($lastPrice, 0, '.', '.'),
             'cartCount' => $cartCount
         );
@@ -93,12 +96,13 @@ if (isset($_POST['action'])) {
         $promoName = $_SESSION['promoname'];
         $promoValue = $_SESSION['promovalue'];
         $lastPrice = empty($_SESSION['promovalue']) ? $_SESSION['totalPrice'] : ($_SESSION['totalPrice'] * (1 - $_SESSION['promovalue']));
-
+        $promoValue2 = empty($_SESSION['totalPrice']) ? 0 : $_SESSION['totalPrice'] * $promoValue;
         $result = array(
             'stColor' => $stColor,
             'stCoupon' => $stCoupon,
             'promoName' => $promoName,
             'promoValue' => $promoValue,
+            'promoValue2' => number_format($promoValue2, 0, '.', '.'),
             'lastPrice' => number_format($lastPrice, 0, '.', '.')
         );
         echo json_encode($result);

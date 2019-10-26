@@ -35,7 +35,7 @@ $tableProduct = mysqli_query($con, $sqlShowProduct);
                                             </button>
                                             <div class="juice-modal-title"><?php echo $row['Name']; ?></div>
                                             <div class="juice-modal-price mb-3">
-                                                <span id="<?= 'priceCapacity' . $row['ProductId'] ?>"><?= number_format($row['Price'], 0, '.', '.') ?></span> <span> ₫</span>
+                                                <span id="<?= 'priceCapacity' . $row['ProductId'] ?>"><?= number_format($row['Price'], 0, '.', '.') ?></span><span>₫</span>
                                             </div>
                                             <div class="juice-modal-description">
                                                 <div data-toggle="collapse" href="#collapseNutrition" role="button" aria-expanded="false" aria-controls="collapseNutrition" class="font-weight-bold">
@@ -50,9 +50,8 @@ $tableProduct = mysqli_query($con, $sqlShowProduct);
                                                 <div class="collapse" id="collapseProperties">
                                                     <?php echo ($row['Description']) ?>
                                                 </div>
-                                                <div class="mt-2">
-                                                    <strong>Giao hàng miễn phí</strong> tới 4 quận: Hoàn Kiếm, Hai
-                                                    Bà Trưng, Ba Đình, Đống Đa.
+                                                <div class="mt-2 text-success">
+                                                    <strong>Giao hàng miễn phí trong Hà nội</strong>
                                                 </div>
                                             </div>
                                             <form class="juice-modal-options mt-3 pl-3 py-0" name="formModal" method="post">
@@ -74,7 +73,7 @@ $tableProduct = mysqli_query($con, $sqlShowProduct);
                                                                     <i class="fas fa-minus-circle"></i>
                                                                 </button>
                                                             </div>
-                                                            <input type="text" class="form-control text-center juice-qty-input px-1" value="1" id="<?= 'quantity' . $row['ProductId'] ?>" aria-label="Quantity">
+                                                            <input type="text" class="form-control text-center juice-qty-input px-1 js-change-quantity" value="1" id="<?= 'quantity' . $row['ProductId'] ?>" aria-label="Quantity">
                                                             <div class="input-group-append">
                                                                 <button class="js-btn-plus" type="button">
                                                                     <i class="fas fa-plus-circle"></i>

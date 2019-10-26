@@ -14,7 +14,7 @@
       <div class="col-12 col-md-5 d-flex flex-column justify-content-center mt-3 mt-lg-0">
         <!-- <form class="newsletter-input-wrap d-flex flex-row"> -->
         <!-- <input type="text" class="form-control py-1 mr-n4" placeholder="email@domain.com" aria-label="Newsletter email" aria-describedby="sendEmailBtn" /> -->
-        <a class="btn btn-cart btn-lg btn-link text-decoration-none" href="index.php?section=signup" id="sendEmailBtn" <?= isset($_SESSION['memberId']) ? 'hidden' : '' ?>>
+        <a class="btn btn-light btn-lg text-decoration-none" href="index.php?section=signup" id="sendEmailBtn" <?= empty($_SESSION['memberId']) ? '' : 'hidden' ?>>
           Đăng ký
           <i class="fas fa-paper-plane" aria-hidden="true"></i>
         </a>
